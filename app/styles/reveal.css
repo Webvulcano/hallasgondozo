@@ -1,0 +1,19 @@
+/* Scroll reveal animations */
+
+.reveal{
+  opacity:0;transform:translateY(26px);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in{opacity:1;transform:none;}
+
+.reveal-l{
+  opacity:0;transform:translateX(-32px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal-l.in{opacity:1;transform:none;}
+
+.reveal-r{
+  opacity:0;transform:translateX(32px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal-r.in{opacity:1;transform:none;}

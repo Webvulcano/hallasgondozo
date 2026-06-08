@@ -1,0 +1,27 @@
+/* Button variants — minden CTA */
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:56px;padding:0 28px;border-radius:14px;
+  font-family:var(--font-source-sans),"Source Sans 3",sans-serif;
+  font-size:18px;font-weight:700;
+  cursor:pointer;border:2px solid transparent;
+  transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+  text-align:center;line-height:1.15;
+}
+.btn .ic{flex:0 0 auto;}
+
+.btn-gold{background:var(--gold);color:#2a1a00;}
+.btn-gold:hover{background:var(--gold-deep);transform:translateY(-2px);}
+
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(121,185,68,.28);}
+.btn-teal:hover{background:var(--teal-deep);transform:translateY(-2px);}
+
+.btn-outline{background:transparent;color:var(--teal-deep);border-color:var(--teal-deep);}
+.btn-outline:hover{background:var(--teal-deep);color:#fff;transform:translateY(-2px);}
+
+.btn-ghost-light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.55);}
+.btn-ghost-light:hover{background:#fff;color:var(--teal-deep);transform:translateY(-2px);}
+
+.btn-white{background:#fff;color:var(--teal-deep);box-shadow:var(--shadow-md);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}

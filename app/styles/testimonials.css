@@ -1,0 +1,29 @@
+/* Testimonials szekció */
+
+.testi{background:#fff;}
+.testi .cards{grid-template-columns:repeat(3,1fr);}
+.qcard{
+  background:var(--cream);border:1px solid var(--line);border-radius:var(--r);
+  padding:32px 30px;display:flex;flex-direction:column;
+}
+.stars{color:var(--gold);font-size:20px;letter-spacing:3px;margin-bottom:16px;}
+.qcard blockquote{
+  margin:0;font-size:18.5px;line-height:1.55;color:var(--ink);
+  flex:1;text-wrap:pretty;
+}
+.qcard blockquote::before{
+  content:"\201E";
+  font-family:var(--font-playfair),"Playfair Display",serif;
+  color:var(--gold);font-size:30px;line-height:0;
+  vertical-align:-6px;margin-right:2px;
+}
+.qmeta{display:flex;align-items:center;gap:13px;margin-top:22px;}
+.qmeta .av{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--teal-soft);color:var(--teal-deep);
+  display:grid;place-items:center;
+  font-weight:700;font-family:var(--font-playfair),"Playfair Display",serif;
+  font-size:19px;flex:0 0 auto;
+}
+.qmeta b{font-size:17px;}
+.qmeta span{display:block;font-size:14.5px;color:var(--ink-soft);}

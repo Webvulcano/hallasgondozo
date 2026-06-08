@@ -1,0 +1,31 @@
+/* Footer */
+
+footer{background:#182d09;color:rgba(255,255,255,.78);padding:64px 0 0;}
+.foot-grid{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:48px;
+}
+footer h5{
+  font-family:var(--font-playfair),"Playfair Display",serif;
+  color:#fff;font-size:19px;font-weight:600;margin:0 0 16px;
+}
+footer .logo-text b{color:#fff;}
+footer .logo-text span{color:rgba(255,255,255,.6);}
+footer a:hover{color:var(--gold);}
+
+.foot-logo{margin-bottom:16px;}
+.foot-address{font-size:16.5px;line-height:1.6;}
+
+.foot-list{list-style:none;padding:0;margin:0;display:grid;gap:11px;font-size:16.5px;}
+.foot-list li{display:flex;align-items:center;gap:10px;}
+.foot-list .ic{color:var(--gold);flex:0 0 auto;}
+
+.foot-cta{display:grid;gap:14px;}
+.foot-hours{font-size:16px;color:rgba(255,255,255,.7);}
+.foot-hours-mt{margin-top:18px;}
+
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.12);padding:22px 0;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-size:14.5px;color:rgba(255,255,255,.55);
+}
+.foot-bottom a:hover{color:var(--gold);}

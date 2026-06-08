@@ -1,0 +1,54 @@
+/* Offer band — Phonak Sphere */
+
+.offer{
+  background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
+  color:#fff;position:relative;overflow:hidden;
+}
+.offer::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(700px 460px at 92% 0%,rgba(245,195,0,.10),transparent 62%);
+  pointer-events:none;
+}
+.offer-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center;
+}
+.offer .tag{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--gold);color:#3a1c00;font-weight:700;
+  font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px 16px;border-radius:999px;
+}
+.offer h2{color:#fff;font-size:clamp(30px,3.3vw,46px);margin-top:22px;}
+.offer .lead{
+  font-size:20px;margin-top:20px;
+  color:rgba(255,255,255,.92);max-width:620px;text-wrap:pretty;
+}
+
+.price{font-family:var(--font-playfair),"Playfair Display",serif;font-weight:700;color:var(--gold);}
+
+.offer-list{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:13px;}
+.offer-list li{display:flex;align-items:flex-start;gap:13px;font-size:18px;color:#fff;}
+.offer-list .check{background:var(--gold);}
+.offer-list .check svg{stroke:#3a1c00;}
+
+.offer-note{
+  margin-top:26px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:14px;padding:16px 20px;font-size:17px;
+}
+.offer-note b{color:var(--gold);}
+
+.offer-card{
+  background:#fff;border-radius:22px;padding:34px;
+  color:var(--ink);box-shadow:var(--shadow-lg);text-align:center;
+}
+.offer-card .ph{aspect-ratio:4/3;margin-bottom:22px;}
+.offer-card .was{color:var(--ink-soft);text-decoration:line-through;font-size:18px;}
+.offer-card .now{
+  font-family:var(--font-playfair),"Playfair Display",serif;
+  font-size:42px;font-weight:700;color:var(--teal-deep);
+  line-height:1;margin:4px 0 2px;
+}
+.offer-card .unit{color:var(--ink-soft);font-size:16px;margin-bottom:22px;}
+.offer-card .btn{width:100%;}

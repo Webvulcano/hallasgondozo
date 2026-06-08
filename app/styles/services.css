@@ -1,0 +1,23 @@
+/* Services szekció — kártyák */
+
+.services{background:var(--white);}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px 30px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:#e0d8c9;}
+
+.ic-badge{
+  width:62px;height:62px;border-radius:16px;display:grid;place-items:center;
+  margin-bottom:22px;background:var(--teal-soft);color:var(--teal-deep);
+}
+.ic-badge svg{width:32px;height:32px;}
+.card.featured .ic-badge{background:#FBF1D8;color:var(--gold-deep);}
+.card h3{font-size:23px;margin-bottom:10px;}
+.card p{color:var(--ink-soft);font-size:17px;}
+.card .pill{
+  display:inline-block;margin-bottom:14px;
+  font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--gold-deep);background:#FBF1D8;padding:5px 12px;border-radius:999px;
+}

@@ -1,0 +1,53 @@
+/* Booking szekció — form + online */
+
+.booking{background:linear-gradient(160deg,var(--teal-deep),#1a3e0a);color:#fff;}
+.booking .sec-head h2{color:#fff;}
+.booking .sec-head p{color:rgba(255,255,255,.9);}
+
+.book-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;
+  align-items:stretch;max-width:980px;margin:0 auto;
+}
+.book-panel{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;padding:34px;
+}
+.book-panel h3{color:#fff;font-size:24px;margin-bottom:8px;}
+.book-panel p.small{color:rgba(255,255,255,.82);font-size:16.5px;margin-bottom:24px;}
+.book-btns{display:grid;gap:14px;}
+
+.or-split{
+  display:flex;align-items:center;gap:16px;
+  color:rgba(255,255,255,.6);font-weight:700;letter-spacing:.1em;margin:30px 0;
+}
+.or-split::before,.or-split::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.25);}
+
+/* Form */
+form .field{margin-bottom:16px;}
+form label{display:block;font-weight:600;font-size:15.5px;margin-bottom:7px;color:#fff;}
+form input,form textarea{
+  width:100%;padding:14px 16px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.95);color:var(--ink);
+  font-family:inherit;font-size:17px;min-height:52px;
+}
+form textarea{min-height:88px;resize:vertical;}
+form input:focus,form textarea:focus{outline:3px solid var(--gold);outline-offset:1px;}
+
+/* Honeypot — bot mező, képernyőről eltüntetve */
+.honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+
+/* Hibaüzenetek */
+.field-error{color:#ffd1d1;font-size:14px;margin-top:6px;}
+.form-error{color:#ffb4b4;margin-bottom:12px;}
+
+/* Success state */
+.form-success{
+  display:none;
+  background:rgba(255,255,255,.95);color:var(--teal-deep);
+  border-radius:14px;padding:22px;text-align:center;
+  font-size:18px;font-weight:600;
+  align-items:center;justify-content:center;flex-direction:column;gap:10px;
+}
+.form-success .check{width:40px;height:40px;margin-bottom:4px;}
+.form-success.show{display:flex;}

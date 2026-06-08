@@ -1,0 +1,21 @@
+/* Team szekció */
+
+.team{background:var(--cream);}
+.team .cards{grid-template-columns:repeat(3,1fr);}
+.tcard{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.tcard .ph{
+  border-radius:0;border:none;border-bottom:1px solid var(--line);
+  aspect-ratio:4/3.4;box-shadow:none;
+}
+.tcard .body{padding:26px 28px 30px;}
+.tcard h3{font-size:23px;}
+.tcard .role{
+  color:var(--gold-deep);font-weight:700;font-size:15.5px;
+  margin:6px 0 14px;text-transform:uppercase;letter-spacing:.04em;
+}
+.tcard p{color:var(--ink-soft);font-size:17px;}

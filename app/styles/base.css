@@ -1,0 +1,58 @@
+/* Base — reset, typography, layout primitives */
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-source-sans),"Source Sans 3",system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.6;
+  color:var(--ink);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:var(--font-playfair),"Playfair Display",Georgia,serif;
+  font-weight:600;line-height:1.12;margin:0;
+  color:var(--teal-deep);letter-spacing:-.01em;
+}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.eyebrow{
+  font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-deep);margin-bottom:16px;
+}
+
+/* Utility classes */
+.btn-full{width:100%;}
+
+/* Section primitives */
+section.block{padding:88px 0;}
+.sec-head{text-align:center;max-width:720px;margin:0 auto 54px;}
+.sec-head h2{font-size:clamp(30px,3.2vw,44px);}
+.sec-head p{font-size:20px;color:var(--ink-soft);margin-top:16px;text-wrap:pretty;}
+
+/* Cards grid (közös) */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+
+/* Image placeholder (közös: hero, offer, team) */
+.ph{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:repeating-linear-gradient(135deg,#EFE9E0 0 14px,#E7E0D5 14px 28px);
+  border:1px solid var(--line);box-shadow:var(--shadow-md);
+  display:grid;place-items:center;text-align:center;color:#9a9384;
+}
+.ph .ph-label{
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13.5px;
+  background:rgba(255,255,255,.82);border:1px dashed #c9c0b0;border-radius:10px;
+  padding:10px 16px;max-width:80%;line-height:1.45;color:#80796a;
+}
+
+/* Check circle (közös: hero trust, offer features) */
+.check{
+  width:26px;height:26px;border-radius:50%;background:var(--teal);flex:0 0 auto;
+  display:grid;place-items:center;
+}
+.check svg{width:14px;height:14px;}

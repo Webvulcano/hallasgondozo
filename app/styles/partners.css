@@ -1,0 +1,28 @@
+/* Partners marquee */
+
+.partners{
+  padding:30px 0;background:#fff;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.partners h4{
+  text-align:center;
+  font-family:var(--font-source-sans),"Source Sans 3",sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 20px;
+}
+
+.marquee{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+.marquee-track{display:flex;gap:18px;width:max-content;animation:scroll 38s linear infinite;}
+.partners:hover .marquee-track{animation-play-state:paused;}
+@keyframes scroll{to{transform:translateX(-50%);}}
+
+.pbadge{
+  display:flex;align-items:center;gap:10px;white-space:nowrap;
+  padding:12px 22px;border:1px solid var(--line);border-radius:12px;background:var(--cream);
+  font-weight:600;color:#6f6a61;font-size:16px;
+}
+.pbadge .pd{width:9px;height:9px;border-radius:50%;background:var(--teal);opacity:.55;}

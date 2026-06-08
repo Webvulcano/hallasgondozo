@@ -1,0 +1,16 @@
+{
+  "name": "erted-hallasgondozo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^16.2.7",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  }
+}

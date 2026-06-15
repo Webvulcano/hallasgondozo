@@ -36,10 +36,13 @@ export default function Hero() {
           </div>
         </Reveal>
         <Reveal direction="right">
-          <div className="ph hero-ph">
-            <span className="ph-label">
-              [ KÉP: Boldog idős pár,<br />aki újra önfeledten kommunikál ]
-            </span>
+          <div className="hero-img-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/pic/hero.jpg"
+              alt="Boldog idős pár, aki újra önfeledten kommunikál"
+              className="hero-img"
+            />
             <div className="hero-badge">
               <span className="big">15</span>
               <span className="lbl">napos ingyenes<br />próbahordás</span>

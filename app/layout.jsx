@@ -8,7 +8,7 @@ const playfair = Playfair_Display({
   style: ['normal', 'italic'],
   variable: '--font-playfair',
   display: 'swap',
-})
+}) 
 
 const sourceSans = Source_Sans_3({
   subsets: ['latin', 'latin-ext'],

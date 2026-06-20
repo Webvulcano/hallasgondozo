@@ -50,8 +50,8 @@ export const metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/pic/logo.png',
+    icon: '/pic/tiny_logo.png',
+    apple: '/pic/tiny_logo.png',
   },
 }
 

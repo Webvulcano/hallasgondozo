@@ -46,6 +46,11 @@ export default function Offer() {
             <Button variant="gold" href={BOOKING_URL} fullWidth>
               {offer.cta}
             </Button>
+            {/* Másodlagos — a teljes készülék-/termékkínálat aloldala */}
+            <Button variant="outline" fullWidth className="offer-secondary" href="/keszulekek">
+              {offer.ctaSecondary}
+            </Button>
+            <p className="offer-secondary-note">{offer.ctaSecondaryNote}</p>
           </div>
         </Reveal>
       </div>

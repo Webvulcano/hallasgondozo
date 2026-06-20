@@ -1,0 +1,61 @@
+/* /keszulekek oldal — page-specifikus elemek.
+   A kategória-grid a meglévő .card / .cards / .ic-badge mintát használja (services.css). */
+
+/* Page-hero */
+.kpage-hero{text-align:center;padding-bottom:48px;}
+.kpage-hero .back{
+  display:inline-block;margin-bottom:18px;
+  color:var(--teal-deep);font-weight:600;
+}
+.kpage-hero h1{
+  font-size:clamp(32px,4vw,50px);color:var(--teal-deep);
+  text-wrap:balance;margin-bottom:18px;
+}
+.kpage-hero .lead{
+  font-size:20px;color:var(--ink-soft);
+  max-width:680px;margin:0 auto 28px;text-wrap:pretty;
+}
+
+/* Kiemelt Phonak Sphere — Offer-szerű sötét-teal sáv */
+.ksphere{
+  position:relative;overflow:hidden;border-radius:22px;
+  background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
+  color:#fff;box-shadow:var(--shadow-lg);
+}
+.ksphere::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(700px 460px at 92% 0%,rgba(245,195,0,.10),transparent 62%);
+}
+.ksphere-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding:40px;
+}
+.ksphere .tag{
+  display:inline-flex;align-items:center;
+  background:var(--gold);color:#3a1c00;font-weight:700;
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 15px;border-radius:999px;
+}
+.ksphere h2,
+.ksphere h3{color:#fff;font-size:clamp(24px,2.5vw,36px);margin:14px 0 13px;}
+.ksphere p{color:rgba(255,255,255,.92);font-size:18px;margin-bottom:20px;text-wrap:pretty;}
+.ksphere-list{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:11px;}
+.ksphere-list li{display:flex;align-items:flex-start;gap:11px;font-size:16.5px;color:#fff;}
+.ksphere-list .check{background:var(--gold);}
+.ksphere-list .check svg{stroke:#3a1c00;}
+.ksphere .ph{aspect-ratio:4/3;}
+
+/* Forgalmazott márkák — egymás alatti termék-boxok */
+.kbrandbox + .kbrandbox{margin-top:28px;}
+
+/* Záró CTA sáv */
+.kcta{
+  text-align:center;color:#fff;
+  background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
+}
+.kcta h2{color:#fff;font-size:clamp(28px,3vw,42px);margin-bottom:14px;}
+.kcta p{color:rgba(255,255,255,.92);font-size:19px;max-width:620px;margin:0 auto 26px;text-wrap:pretty;}
+
+@media (max-width:900px){
+  .ksphere-grid{grid-template-columns:1fr;gap:26px;padding:28px;}
+}

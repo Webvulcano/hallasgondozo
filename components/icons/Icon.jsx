@@ -13,10 +13,14 @@ import EarAid from './EarAid'
 import Shield from './Shield'
 import Home from './Home'
 import Child from './Child'
+import Battery from './Battery'
+import Droplet from './Droplet'
+import Accessory from './Accessory'
 
 const REGISTRY = {
   Check, Phone, Calendar, Email, Facebook, Instagram,
   Ear, Doctor, EarAid, Shield, Home, Child,
+  Battery, Droplet, Accessory,
 }
 
 export default function Icon({ name, ...props }) {

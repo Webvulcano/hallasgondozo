@@ -1,4 +1,6 @@
 import { testimonials } from '../lib/content/testimonials'
+import { GOOGLE_REVIEWS_URL } from '../lib/constants'
+import Button from './Button'
 import Reveal from './Reveal'
 
 export default function Testimonials() {
@@ -18,12 +20,16 @@ export default function Testimonials() {
                 <span className="av">{t.initials}</span>
                 <span>
                   <b>{t.name}</b>
-                  <span>{t.location}</span>
                 </span>
               </div>
             </Reveal>
           ))}
         </div>
+        <Reveal className="testi-cta">
+          <Button variant="outline" href={GOOGLE_REVIEWS_URL}>
+            Nézze meg az összes értékelést a Google-ön
+          </Button>
+        </Reveal>
       </div>
     </section>
   )

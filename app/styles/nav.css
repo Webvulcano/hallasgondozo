@@ -30,6 +30,9 @@ header.nav.scrolled{
   color:var(--ink-soft);font-weight:600;margin-top:3px;
 }
 
+/* Nav CTA felirat — mobilon rövid */
+.cta-short{display:none;}
+
 /* Nav menu */
 .nav-menu{display:flex;align-items:center;gap:30px;}
 .nav-link{
@@ -57,4 +60,54 @@ header.nav.scrolled{
 .nav-phone small{
   display:block;font-size:12px;font-weight:600;letter-spacing:.04em;
   color:var(--ink-soft);text-transform:uppercase;
+}
+
+/* Hamburger — desktopon rejtett */
+.nav-burger{display:none;}
+
+/* Lenyíló mobil panel + backdrop (a header.nav sticky → pozícionált ős) */
+.nav-mobile-panel{
+  position:absolute;top:100%;left:0;right:0;z-index:55;
+  background:rgba(250,248,245,.97);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);box-shadow:var(--shadow-md);
+  padding:12px 18px 18px;display:flex;flex-direction:column;gap:4px;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .22s ease,transform .22s ease,visibility .22s ease;
+}
+.nav-mobile-panel.open{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-mlink{
+  padding:14px 12px;font-weight:700;font-size:17px;color:var(--teal-deep);
+  border-radius:10px;transition:background .15s ease;
+}
+.nav-mlink:hover{background:var(--teal-soft);}
+.nav-mcta{margin-top:8px;width:100%;justify-content:center;}
+
+.nav-backdrop{
+  position:absolute;top:100%;left:0;right:0;height:100vh;z-index:54;
+  background:rgba(20,30,10,.18);
+  opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;
+}
+.nav-backdrop.open{opacity:1;visibility:visible;}
+
+@media (max-width:900px){
+  .nav-right{display:none;}
+  .nav-burger{
+    display:inline-block;position:relative;
+    width:44px;height:44px;padding:0;background:none;border:none;cursor:pointer;
+  }
+  /* Abszolút sávok — szekvenciált átmenet (előbb csúszás, utána forgás), nincs keresztezés */
+  .nav-burger span{
+    position:absolute;left:10px;right:10px;height:2.5px;border-radius:2px;
+    background:var(--teal-deep);
+    transition:top .2s ease .2s,transform .2s ease,opacity .15s ease;
+  }
+  .nav-burger span:nth-child(1){top:15px;}
+  .nav-burger span:nth-child(2){top:21px;}
+  .nav-burger span:nth-child(3){top:27px;}
+  .nav-burger.open span{
+    transition:top .2s ease,transform .2s ease .2s,opacity .15s ease;
+  }
+  .nav-burger.open span:nth-child(1){top:21px;transform:rotate(45deg);}
+  .nav-burger.open span:nth-child(2){opacity:0;}
+  .nav-burger.open span:nth-child(3){top:21px;transform:rotate(-45deg);}
 }

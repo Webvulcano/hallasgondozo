@@ -1,6 +1,5 @@
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
-import MobileBar from '../../components/MobileBar'
 import Reveal from '../../components/Reveal'
 import Button from '../../components/Button'
 import { Icon, Check } from '../../components/icons'
@@ -104,7 +103,6 @@ export default function DevicesPage() {
         </section>
       </main>
       <Footer />
-      <MobileBar />
     </>
   )
 }

@@ -1,9 +1,11 @@
 /* Responsive breakpoints + a11y reduced motion */
 
 @media (max-width:900px){
-  body{font-size:17px;padding-bottom:60px;}
+  body{font-size:17px;}
   .hero-grid,.offer-grid,.book-grid{grid-template-columns:1fr;}
-  .hero-grid{gap:36px;}
+  .hero-grid{gap:32px;}
+  .hero-img-wrap{aspect-ratio:4/3;}
+  .hero-img{object-position:center;}
   .offer-grid{gap:36px;}
   .cards,.team .cards,.testi .cards{grid-template-columns:1fr;}
   .nav-menu{display:none;}
@@ -11,32 +13,54 @@
   .nav-phone .num{display:none;}
   .nav-right{gap:12px;}
   section.block{padding:64px 0;}
-  .hero{padding:40px 0 56px;}
+  .hero{padding:20px 0 56px;}
   .book-grid{gap:18px;}
   .foot-grid{grid-template-columns:1fr;gap:34px;}
 
-  .mobile-bar{
-    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:0;
-    box-shadow:0 -6px 20px rgba(0,0,0,.12);
-  }
-  .mobile-bar a{
-    flex:1;min-height:60px;
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    font-weight:700;font-size:17px;
-  }
-  .mobile-bar .m-call{background:#fff;color:var(--teal-deep);border-top:1px solid var(--line);}
-  .mobile-bar .m-book{background:var(--gold);color:#3a1c00;}
 }
 
 @media (max-width:560px){
   .wrap{padding:0 18px;}
   .nav-phone .ic{display:none;}
-  .hero-cta .btn{width:100%;}
-  .reassure{font-size:15.5px;}
+
+  /* Nav CTA rövid felirat */
+  .nav .cta-full{display:none;}
+  .nav .cta-short{display:inline;}
+
+  /* Hero letisztult újrarendezés: flatten + order, kép a szöveg és a CTA közé */
+  .hero-grid{display:flex;flex-direction:column;gap:18px;}
+  .hero-grid > .reveal-l,
+  .hero-grid > .hero-right{display:contents;}
+  .hero h1{order:1;font-size:clamp(27px,7.6vw,33px);line-height:1.18;}
+  .hero .sub{order:2;font-size:16.5px;margin-top:8px;}
+  .hero-img-wrap{order:3;}
+  .hero-img{object-position:calc(50% - 100px) center;}
+  .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
+  .hero-google{order:5;}
+
+  /* Másodlagos elemek el mobilon — trust-jel a Google-pill */
+  .reassure{display:none;}
+  .trust-row{display:none;}
+
+  .hero-cta .btn-gold{width:100%;}
+
+  .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
+  .hero-badge .big{font-size:26px;}
+
+  /* Offer (Nyári különajánlat) — kevesebb szöveg telefonon */
+  .offer h2{font-size:clamp(26px,7vw,32px);margin-top:16px;}
+  .offer .lead{display:none;}
+  .offer-list{margin-top:20px;gap:11px;}
+  .offer-list li{font-size:16px;}
+  .offer-list li:nth-child(2),
+  .offer-list li:nth-child(3){display:none;}
+  .offer-note{display:none;}
+  .offer-card{padding:24px;}
+  .offer-card .now{font-size:36px;}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .marquee-track{animation:none;}
+  .marquee-track,.testi-track{animation:none;}
   .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none;}
   .faq-a-wrap{transition:none;}
   html{scroll-behavior:auto;}

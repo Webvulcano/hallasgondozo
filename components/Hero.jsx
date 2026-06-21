@@ -1,8 +1,8 @@
-import { BOOKING_URL, PHONE, GOOGLE_REVIEWS_URL } from '../lib/constants'
+import { BOOKING_URL, GOOGLE_REVIEWS_URL } from '../lib/constants'
 import { trustItems } from '../lib/content/trustItems'
 import Button from './Button'
 import Reveal from './Reveal'
-import { Check, Calendar, Phone, Google } from './icons'
+import { Check, Calendar, Google } from './icons'
 
 export default function Hero() {
   return (
@@ -21,9 +21,6 @@ export default function Hero() {
           <div className="hero-cta">
             <Button variant="gold" href={BOOKING_URL} icon={<Calendar size={20} stroke="#3a1c00" />}>
               Ingyenes vizsgálatot foglalok
-            </Button>
-            <Button variant="outline" href={PHONE.href} icon={<Phone size={19} />}>
-              Felhívom: {PHONE.display}
             </Button>
           </div>
           <div className="trust-row">

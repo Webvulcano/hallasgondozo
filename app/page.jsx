@@ -8,7 +8,6 @@ import Testimonials from '../components/Testimonials'
 import Booking from '../components/Booking'
 import Faq from '../components/Faq'
 import Footer from '../components/Footer'
-import MobileBar from '../components/MobileBar'
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
       <Booking />
       <Faq />
       <Footer />
-      <MobileBar />
     </>
   )
 }

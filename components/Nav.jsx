@@ -4,6 +4,7 @@ import { BOOKING_URL, COMPANY } from '../lib/constants'
 import Button from './Button'
 import PhoneLink from './PhoneLink'
 import ScrollEffect from './nav/ScrollEffect'
+import MobileMenu from './nav/MobileMenu'
 
 export default function Nav() {
   return (
@@ -25,9 +26,11 @@ export default function Nav() {
           <div className="nav-right">
             <PhoneLink variant="nav" />
             <Button variant="gold" href={BOOKING_URL}>
-              Ingyenes vizsgálatot foglalok
+              <span className="cta-full">Ingyenes vizsgálatot foglalok</span>
+              <span className="cta-short">Időpont foglalás</span>
             </Button>
           </div>
+          <MobileMenu />
         </div>
       </header>
       <ScrollEffect targetId="nav" />

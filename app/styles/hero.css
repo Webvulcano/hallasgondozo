@@ -1,6 +1,6 @@
 /* Hero section */
 
-.hero{padding:64px 0 76px;position:relative;overflow:hidden;}
+.hero{padding:40px 0 76px;position:relative;overflow:hidden;}
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
   background:

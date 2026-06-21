@@ -6,6 +6,7 @@ import Offer from '../components/Offer'
 import Team from '../components/Team'
 import Testimonials from '../components/Testimonials'
 import Booking from '../components/Booking'
+import Faq from '../components/Faq'
 import Footer from '../components/Footer'
 import MobileBar from '../components/MobileBar'
 
@@ -21,6 +22,7 @@ export default function Home() {
       <Team />
       <Testimonials />
       <Booking />
+      <Faq />
       <Footer />
       <MobileBar />
     </>

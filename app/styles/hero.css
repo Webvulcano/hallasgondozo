@@ -42,3 +42,20 @@
   font-size:30px;font-weight:700;color:var(--teal-deep);line-height:1;
 }
 .hero-badge .lbl{font-size:14px;color:var(--ink-soft);font-weight:600;line-height:1.25;}
+
+/* Kép + Google-értékelés blokk egymás alatt */
+.hero-right{display:flex;flex-direction:column;gap:16px;}
+
+/* Google értékelés — egysoros kattintható pill: G · csillagok · 250+ értékelés */
+.hero-google{
+  display:inline-flex;align-items:center;gap:10px;align-self:center;
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;box-shadow:var(--shadow-sm);
+  text-decoration:none;color:var(--ink);
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+.hero-google:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.hero-google-logo{flex:0 0 auto;}
+.hero-google-stars{color:var(--gold);font-size:16px;letter-spacing:2px;}
+.hero-google-meta{font-size:15px;color:var(--ink-soft);font-weight:600;white-space:nowrap;}
+.hero-google-meta b{color:var(--teal-deep);font-weight:800;}

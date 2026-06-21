@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import MobileBar from '../../components/MobileBar'
@@ -25,10 +24,6 @@ export default function DevicesPage() {
         <section className="block kpage-hero">
           <div className="wrap">
             <Reveal>
-              <Link href="/" className="back">
-                ← Vissza a főoldalra
-              </Link>
-              <div className="eyebrow">Készülékek és termékek</div>
               <h1>Hallókészülékek és termékek</h1>
             </Reveal>
           </div>
@@ -37,33 +32,33 @@ export default function DevicesPage() {
         {/* Forgalmazott márkák — termék-boxok */}
         <section className="block kbrands" id="markak" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            {brandBoxes.map((b) => (
-              <div className="ksphere kbrandbox" key={b.name}>
-                <div className="ksphere-grid">
-                  <Reveal direction="left">
-                    {b.tag && <span className="tag">{b.tag}</span>}
-                    <h3>{b.title}</h3>
-                    <p>{b.desc}</p>
-                    <ul className="ksphere-list">
-                      {b.features.map((f, i) => (
-                        <li key={i}>
-                          <span className="check"><Check size={14} stroke="#3a1c00" /></span>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button variant="gold" href={b.cta.href}>
-                      {b.cta.label}
-                    </Button>
-                  </Reveal>
-                  <Reveal direction="right">
-                    <div className="ph">
-                      <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
-                    </div>
-                  </Reveal>
+            {brandBoxes.map((b, idx) => {
+              const alt = idx % 2 === 1
+              return (
+                <div className={`ksphere kbrandbox${alt ? ' kbrandbox--alt' : ''}`} key={b.name}>
+                  <div className="ksphere-grid">
+                    <Reveal direction={alt ? 'right' : 'left'} className="ksphere-text">
+                      {b.tag && <span className="tag">{b.tag}</span>}
+                      <h3>{b.title}</h3>
+                      <p>{b.desc}</p>
+                      <ul className="ksphere-list">
+                        {b.features.map((f, i) => (
+                          <li key={i}>
+                            <span className="check"><Check size={14} stroke="#3a1c00" /></span>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    </Reveal>
+                    <Reveal direction={alt ? 'left' : 'right'} className="ksphere-media">
+                      <div className="ph">
+                        <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
+                      </div>
+                    </Reveal>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 

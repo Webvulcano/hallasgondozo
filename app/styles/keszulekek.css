@@ -48,6 +48,12 @@
 /* Forgalmazott márkák — egymás alatti termék-boxok */
 .kbrandbox + .kbrandbox{margin-top:28px;}
 
+/* Cikkcakk — páros kártyáknál kép balra, szöveg jobbra.
+   DOM-ban a szöveg marad elöl (SEO/a11y), csak vizuálisan cserélünk. */
+.kbrandbox--alt .ksphere-grid{grid-template-columns:.95fr 1.05fr;}
+.kbrandbox--alt .ksphere-text{order:2;}
+.kbrandbox--alt .ksphere-media{order:1;}
+
 /* Záró CTA sáv */
 .kcta{
   text-align:center;color:#fff;
@@ -58,4 +64,7 @@
 
 @media (max-width:900px){
   .ksphere-grid{grid-template-columns:1fr;gap:26px;padding:28px;}
+  .kbrandbox--alt .ksphere-grid{grid-template-columns:1fr;}
+  .kbrandbox--alt .ksphere-text{order:1;}
+  .kbrandbox--alt .ksphere-media{order:2;}
 }

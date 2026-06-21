@@ -30,6 +30,20 @@ header.nav.scrolled{
   color:var(--ink-soft);font-weight:600;margin-top:3px;
 }
 
+/* Nav menu */
+.nav-menu{display:flex;align-items:center;gap:30px;}
+.nav-link{
+  font-weight:600;font-size:16px;color:var(--teal-deep);
+  position:relative;padding:4px 0;transition:color .18s ease;
+}
+.nav-link::after{
+  content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.nav-link:hover{color:var(--teal);}
+.nav-link:hover::after{transform:scaleX(1);}
+
 /* Nav right */
 .nav-right{display:flex;align-items:center;gap:22px;}
 .nav-phone{

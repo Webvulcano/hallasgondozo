@@ -1,0 +1,47 @@
+/* Gyakori kérdések — kontrollált accordion, sima magasság-animáció (grid-rows) */
+
+.faq .wrap{max-width:820px;}
+.faq .sec-head p{font-size:17px;max-width:600px;margin:16px auto 0;}
+.faq-list{margin-top:8px;}
+
+.faq-item{
+  border:1px solid var(--line);border-radius:14px;background:#fff;
+  margin-bottom:14px;box-shadow:var(--shadow-sm);overflow:hidden;
+  transition:border-color .2s ease;
+}
+.faq-item:hover{border-color:var(--teal);}
+
+/* Kérdés-sor — button, reset + meglévő look */
+.faq-q{
+  width:100%;background:none;border:none;text-align:left;font:inherit;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  cursor:pointer;
+  padding:20px 24px;font-weight:700;font-size:18px;color:var(--teal-deep);
+}
+
+.faq-ic{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--teal-soft);color:var(--teal-deep);
+  display:grid;place-items:center;font-size:22px;line-height:1;flex:0 0 auto;
+  transition:transform .25s ease;
+}
+.faq-item.open .faq-ic{transform:rotate(45deg);}
+
+/* Sima lenyílás: grid 0fr -> 1fr animálja a magasságot mindkét irányban */
+.faq-a-wrap{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .35s cubic-bezier(.22,.61,.36,1);
+}
+.faq-item.open .faq-a-wrap{grid-template-rows:1fr;}
+
+.faq-a{overflow:hidden;min-height:0;padding:0 24px;}
+.faq-item.open .faq-a{padding-bottom:22px;}
+.faq-a p{
+  margin:0;color:var(--ink-soft);font-size:16.5px;line-height:1.6;text-wrap:pretty;
+}
+
+@media (max-width:560px){
+  .faq-q{font-size:16.5px;padding:16px 18px;}
+  .faq-a{padding:0 18px;}
+  .faq-item.open .faq-a{padding-bottom:18px;}
+}

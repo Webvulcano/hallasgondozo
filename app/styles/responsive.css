@@ -6,6 +6,7 @@
   .hero-grid{gap:36px;}
   .offer-grid{gap:36px;}
   .cards,.team .cards,.testi .cards{grid-template-columns:1fr;}
+  .nav-menu{display:none;}
   .nav-phone small{display:none;}
   .nav-phone .num{display:none;}
   .nav-right{gap:12px;}
@@ -37,5 +38,6 @@
 @media (prefers-reduced-motion:reduce){
   .marquee-track{animation:none;}
   .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none;}
+  .faq-a-wrap{transition:none;}
   html{scroll-behavior:auto;}
 }

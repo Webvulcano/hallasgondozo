@@ -1,8 +1,8 @@
-import { BOOKING_URL, PHONE } from '../lib/constants'
+import { BOOKING_URL, PHONE, GOOGLE_REVIEWS_URL } from '../lib/constants'
 import { trustItems } from '../lib/content/trustItems'
 import Button from './Button'
 import Reveal from './Reveal'
-import { Check, Calendar, Phone } from './icons'
+import { Check, Calendar, Phone, Google } from './icons'
 
 export default function Hero() {
   return (
@@ -35,7 +35,7 @@ export default function Hero() {
             ))}
           </div>
         </Reveal>
-        <Reveal direction="right">
+        <Reveal direction="right" className="hero-right">
           <div className="hero-img-wrap">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -48,6 +48,17 @@ export default function Hero() {
               <span className="lbl">napos ingyenes<br />próbahordás</span>
             </div>
           </div>
+          <a
+            className="hero-google"
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="250+ ötcsillagos Google értékelés — megnézem a Google-ön"
+          >
+            <Google size={22} className="hero-google-logo" />
+            <span className="hero-google-stars" aria-hidden="true">★★★★★</span>
+            <span className="hero-google-meta"><b>250+</b> értékelés</span>
+          </a>
         </Reveal>
       </div>
     </section>

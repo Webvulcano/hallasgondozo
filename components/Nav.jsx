@@ -5,6 +5,7 @@ import Button from './Button'
 import PhoneLink from './PhoneLink'
 import ScrollEffect from './nav/ScrollEffect'
 import MobileMenu from './nav/MobileMenu'
+import NavLinks from './nav/NavLinks'
 
 export default function Nav() {
   return (
@@ -19,10 +20,7 @@ export default function Nav() {
               <span>{COMPANY.brandSub}</span>
             </span>
           </Link>
-          <nav className="nav-menu" aria-label="Fő menü">
-            <Link href="/" className="nav-link">Főoldal</Link>
-            <Link href="/keszulekek" className="nav-link">Termékek</Link>
-          </nav>
+          <NavLinks />
           <div className="nav-right">
             <PhoneLink variant="nav" />
             <Button variant="gold" href={BOOKING_URL}>

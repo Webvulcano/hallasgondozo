@@ -1,12 +1,16 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { BOOKING_URL } from '../../lib/constants'
 
 // Hamburger-menü ≤900px-en — Főoldal, Termékek, Időpont foglalás (CTA)
 export default function MobileMenu() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const isProducts = pathname.startsWith('/keszulekek')
 
   useEffect(() => {
     if (!open) return
@@ -44,11 +48,26 @@ export default function MobileMenu() {
         role="menu"
         aria-hidden={!open}
       >
-        <Link href="/" className="nav-mlink" role="menuitem" onClick={close}>
+        <Link
+          href="/"
+          className={`nav-mlink${isHome ? ' active' : ''}`}
+          role="menuitem"
+          aria-current={isHome ? 'page' : undefined}
+          onClick={close}
+        >
           Főoldal
         </Link>
-        <Link href="/keszulekek" className="nav-mlink" role="menuitem" onClick={close}>
+        <Link
+          href="/keszulekek"
+          className={`nav-mlink${isProducts ? ' active' : ''}`}
+          role="menuitem"
+          aria-current={isProducts ? 'page' : undefined}
+          onClick={close}
+        >
           Termékek
+        </Link>
+        <Link href="/#idopont" className="nav-mlink" role="menuitem" onClick={close}>
+          Kapcsolat
         </Link>
         <a
           href={BOOKING_URL}

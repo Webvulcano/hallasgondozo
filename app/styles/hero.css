@@ -46,6 +46,19 @@
 /* Kép + Google-értékelés blokk egymás alatt */
 .hero-right{display:flex;flex-direction:column;gap:16px;}
 
+/* Desktop: nav (78px) + hero = max. 100vh — a hero pontosan a maradék foldot
+   tölti, align-items center függőlegesen középre, a kép max-height-je és az
+   overflow:hidden megakadályozza hogy túlnyúljon a képernyőn. */
+@media (min-width:1001px){
+  .hero{
+    height:calc(100svh - 78px);
+    display:flex;align-items:center;
+    padding:40px 0;
+  }
+  .hero > .wrap{width:100%;}
+  .hero-img-wrap{max-height:calc(100svh - 78px - 80px);}
+}
+
 /* Google értékelés - egysoros kattintható pill: G · csillagok · 250+ értékelés */
 .hero-google{
   display:inline-flex;align-items:center;gap:10px;align-self:center;

@@ -1,7 +1,6 @@
 import { testimonials } from '../lib/content/testimonials'
 import { GOOGLE_REVIEWS_URL } from '../lib/constants'
 import Button from './Button'
-import Reveal from './Reveal'
 import TestiTicker from './TestiTicker'
 
 // Egy vélemény-kártya (a rács és a mobil-ticker is ezt használja)
@@ -35,13 +34,13 @@ export default function Testimonials() {
   return (
     <section className="block testi" id="velemenyek">
       <div className="wrap">
-        <Reveal className="sec-head">
+        <div className="sec-head">
           <div className="eyebrow">Győri páciensek - valódi tapasztalatok</div>
           <h2>Valódi életek, tisztább hangokkal</h2>
-        </Reveal>
+        </div>
         <div className="cards">
           {testimonials.map((t) => (
-            <Reveal key={t.name} className="qcard" as="div">
+            <div key={t.name} className="qcard">
               <div className="stars" aria-label="5 csillagos értékelés">★★★★★</div>
               <blockquote>{t.quote}</blockquote>
               <div className="qmeta">
@@ -50,7 +49,7 @@ export default function Testimonials() {
                   <b>{t.name}</b>
                 </span>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
@@ -62,11 +61,11 @@ export default function Testimonials() {
       </div>
 
       <div className="wrap">
-        <Reveal className="testi-cta">
+        <div className="testi-cta">
           <Button variant="outline" href={GOOGLE_REVIEWS_URL}>
             Nézze meg az összes értékelést a Google-ön
           </Button>
-        </Reveal>
+        </div>
       </div>
     </section>
   )

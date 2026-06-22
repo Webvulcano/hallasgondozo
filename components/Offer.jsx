@@ -1,7 +1,6 @@
 import { BOOKING_URL } from '../lib/constants'
 import { offer, offerFeatures } from '../lib/content/offer'
 import Button from './Button'
-import Reveal from './Reveal'
 import { Check } from './icons'
 
 export default function Offer() {
@@ -10,7 +9,7 @@ export default function Offer() {
   return (
     <section className="block offer" id="ajanlat">
       <div className="wrap offer-grid">
-        <Reveal direction="left">
+        <div>
           <span className="tag">{offer.tag}</span>
           <h2>{offer.title}</h2>
           <p className="lead">
@@ -34,8 +33,8 @@ export default function Offer() {
             ))}
           </ul>
           <div className="offer-note">{offer.note}</div>
-        </Reveal>
-        <Reveal direction="right">
+        </div>
+        <div>
           <div className="offer-card">
             <div className="ph">
               <span className="ph-label">[ KÉP: {offer.imageAlt} ]</span>
@@ -52,7 +51,7 @@ export default function Offer() {
             </Button>
             <p className="offer-secondary-note">{offer.ctaSecondaryNote}</p>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   )

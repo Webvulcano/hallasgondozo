@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { journeySteps } from '../lib/content/journey'
-import Reveal from './Reveal'
 import Button from './Button'
 
 // HowTo JSON-LD — AEO / AI-keresők (seo-geo-aeo-fokusz.md 🟡).
@@ -31,20 +30,20 @@ export default function Journey() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       <div className="wrap">
-        <Reveal className="sec-head">
+        <div className="sec-head">
           <div className="eyebrow">Lépésről lépésre</div>
           <h2>Így jut el a megfelelő hallókészülékig</h2>
           <p>
             A hallásgondozás nálunk nem egyetlen alkalom, hanem egy átlátható, végigkísért út —
             az időpontfoglalástól a hosszú távú gondozásig.
           </p>
-        </Reveal>
+        </div>
 
         <ol className="journey-timeline">
           {journeySteps.map((s, i) => {
             const open = openIdx === i
             return (
-              <Reveal as="li" key={s.n} className="jstep">
+              <li key={s.n} className="jstep">
                 <div className="jstep-rail" aria-hidden="true">
                   <div className="jstep-node">{s.n}</div>
                 </div>
@@ -78,16 +77,16 @@ export default function Journey() {
                     </div>
                   </div>
                 </div>
-              </Reveal>
+              </li>
             )
           })}
         </ol>
 
-        <Reveal className="journey-cta">
+        <div className="journey-cta">
           <Button variant="gold" href="#idopont">
             Foglaljon ingyenes hallásvizsgálatot
           </Button>
-        </Reveal>
+        </div>
       </div>
     </section>
   )

@@ -19,6 +19,45 @@
 
 }
 
+@media (max-width:1000px){
+  /* Hero mobil-elrendezés: flatten + order, kép a szöveg és a CTA közé */
+  .hero{padding:20px 0 56px;}
+  .hero-grid{display:flex;flex-direction:column;gap:18px;}
+  .hero-grid > .reveal-l,
+  .hero-grid > .hero-right{display:contents;}
+  /* Alacsonyabb képarány, hogy ne legyen óriási magas a kép tablet-szélességen */
+  .hero-img-wrap{aspect-ratio:4/3;}
+
+  /* Hero beúszás: a display:contents flatten miatt a wrapper-box eltűnik,
+     ezért a levél-elemeket animáljuk (staggered load fade-up). */
+  .hero h1,
+  .hero .sub,
+  .hero-img-wrap,
+  .hero-cta,
+  .hero-google{animation:heroIn .6s ease both;}
+  .hero h1{animation-delay:.05s;}
+  .hero .sub{animation-delay:.12s;}
+  .hero-img-wrap{animation-delay:.18s;}
+  .hero-cta{animation-delay:.26s;}
+  .hero-google{animation-delay:.34s;}
+
+  .hero h1{order:1;font-size:clamp(27px,7.6vw,33px);line-height:1.18;}
+  .hero .sub{order:2;font-size:16.5px;margin-top:8px;}
+  .hero-img-wrap{order:3;}
+  .hero-img{object-position:calc(50% - 100px) center;}
+  .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
+  .hero-google{order:5;}
+
+  /* Másodlagos elemek el - trust-jel a Google-pill */
+  .reassure{display:none;}
+  .trust-row{display:none;}
+
+  .hero-cta .btn-gold{width:100%;}
+
+  .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
+  .hero-badge .big{font-size:26px;}
+}
+
 @media (max-width:560px){
   .wrap{padding:0 18px;}
   .nav-phone .ic{display:none;}
@@ -29,26 +68,6 @@
   /* Nav CTA rövid felirat */
   .nav .cta-full{display:none;}
   .nav .cta-short{display:inline;}
-
-  /* Hero letisztult újrarendezés: flatten + order, kép a szöveg és a CTA közé */
-  .hero-grid{display:flex;flex-direction:column;gap:18px;}
-  .hero-grid > .reveal-l,
-  .hero-grid > .hero-right{display:contents;}
-  .hero h1{order:1;font-size:clamp(27px,7.6vw,33px);line-height:1.18;}
-  .hero .sub{order:2;font-size:16.5px;margin-top:8px;}
-  .hero-img-wrap{order:3;}
-  .hero-img{object-position:calc(50% - 100px) center;}
-  .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
-  .hero-google{order:5;}
-
-  /* Másodlagos elemek el mobilon - trust-jel a Google-pill */
-  .reassure{display:none;}
-  .trust-row{display:none;}
-
-  .hero-cta .btn-gold{width:100%;}
-
-  .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
-  .hero-badge .big{font-size:26px;}
 
   /* Offer (Nyári különajánlat) - kevesebb szöveg telefonon */
   .offer h2{font-size:clamp(26px,7vw,32px);margin-top:16px;}
@@ -62,9 +81,15 @@
   .offer-card .now{font-size:36px;}
 }
 
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:none;}
+}
+
 @media (prefers-reduced-motion:reduce){
   .marquee-track,.testi-track{animation:none;}
   .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none;}
+  .hero h1,.hero .sub,.hero-img-wrap,.hero-cta,.hero-google{animation:none;}
   .faq-a-wrap{transition:none;}
   html{scroll-behavior:auto;}
 }

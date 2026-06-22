@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { faqs } from '../lib/content/faq'
-import Reveal from './Reveal'
 
 // FAQPage JSON-LD - ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
 const faqSchema = {
@@ -24,15 +23,15 @@ export default function Faq() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="wrap">
-        <Reveal className="sec-head">
+        <div className="sec-head">
           <div className="eyebrow">GYIK</div>
           <h2>Gyakori kérdések</h2>
           <p>
             Ha úgy érzi, hogy Ön vagy hozzátartozója nehezebben hall, ne halogassa a kivizsgálást -
             tegye meg az első lépést a tisztább beszédértés és a magabiztosabb mindennapok felé.
           </p>
-        </Reveal>
-        <Reveal className="faq-list">
+        </div>
+        <div className="faq-list">
           {faqs.map((item, i) => {
             const open = openIdx === i
             return (
@@ -55,7 +54,7 @@ export default function Faq() {
               </div>
             )
           })}
-        </Reveal>
+        </div>
       </div>
     </section>
   )

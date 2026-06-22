@@ -1,21 +1,20 @@
 import { team } from '../lib/content/team'
-import Reveal from './Reveal'
 
 export default function Team() {
   return (
     <section className="block team" id="csapat">
       <div className="wrap">
-        <Reveal className="sec-head">
+        <div className="sec-head">
           <div className="eyebrow">Akikre rábízhatja magát</div>
           <h2>Orvos, audiológus, hallásakusztikus - egy csapatban</h2>
           <p>
             Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően -
             orvosi szakzsargon nélkül - kapja meg a választ.
           </p>
-        </Reveal>
+        </div>
         <div className="cards">
           {team.map((m) => (
-            <Reveal key={m.name} className="tcard">
+            <div key={m.name} className="tcard">
               <div className="ph">
                 <span className="ph-label">[ KÉP: {m.imgAlt} ]</span>
               </div>
@@ -24,7 +23,7 @@ export default function Team() {
                 <div className="role">{m.role}</div>
                 <p>{m.desc}</p>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

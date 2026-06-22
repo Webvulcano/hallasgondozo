@@ -34,9 +34,13 @@ export default function DevicesPage() {
             {brandBoxes.map((b, idx) => {
               const alt = idx % 2 === 1
               return (
-                <div className={`ksphere kbrandbox${alt ? ' kbrandbox--alt' : ''}`} key={b.name}>
+                <Reveal
+                  key={b.name}
+                  direction={alt ? 'right' : 'left'}
+                  className={`ksphere kbrandbox${alt ? ' kbrandbox--alt' : ''}`}
+                >
                   <div className="ksphere-grid">
-                    <Reveal direction={alt ? 'right' : 'left'} className="ksphere-text">
+                    <div className="ksphere-text">
                       {b.tag && <span className="tag">{b.tag}</span>}
                       <h3>{b.title}</h3>
                       <p>{b.desc}</p>
@@ -48,14 +52,14 @@ export default function DevicesPage() {
                           </li>
                         ))}
                       </ul>
-                    </Reveal>
-                    <Reveal direction={alt ? 'left' : 'right'} className="ksphere-media">
+                    </div>
+                    <div className="ksphere-media">
                       <div className="ph">
                         <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
                       </div>
-                    </Reveal>
+                    </div>
                   </div>
-                </div>
+                </Reveal>
               )
             })}
           </div>

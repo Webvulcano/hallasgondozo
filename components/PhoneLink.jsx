@@ -1,13 +1,13 @@
-// Telefon link variánsok — Nav, Footer és inline használat
+// Telefon link variánsok - Nav, Footer és inline használat
 
 import { PHONE } from '../lib/constants'
 import { Phone as PhoneIcon } from './icons'
 
 /**
  * Variants:
- * - "nav"    — kerek ikon háttér + kis label ("Hívjon most") + szám
- * - "inline" — sima telefonszám szöveg (display)
- * - "plain"  — csak a megadott children-t rendereli href-fel
+ * - "nav"    - kerek ikon háttér + kis label ("Hívjon most") + szám
+ * - "inline" - sima telefonszám szöveg (display)
+ * - "plain"  - csak a megadott children-t rendereli href-fel
  */
 export default function PhoneLink({
   variant = 'inline',

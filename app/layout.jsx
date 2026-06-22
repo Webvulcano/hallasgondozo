@@ -1,6 +1,7 @@
 import './globals.css'
 import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
 import { SITE, COMPANY, PHONE, EMAIL, SOCIAL } from '../lib/constants'
+import ScrollReset from '../components/ScrollReset'
 
 const playfair = Playfair_Display({
   subsets: ['latin', 'latin-ext'],
@@ -95,6 +96,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ScrollReset />
         {children}
       </body>
     </html>

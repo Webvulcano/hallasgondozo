@@ -10,7 +10,7 @@ export default function CallbackPanel() {
   return (
     <Reveal direction="right" className="book-panel">
       <h3>Inkább felhívjuk Önt</h3>
-      <p className="small">Adja meg telefonszámát — kollégánk munkaidőben 2 órán belül visszahívja.</p>
+      <p className="small">Adja meg telefonszámát - kollégánk munkaidőben 2 órán belül visszahívja.</p>
 
       {submitted ? (
         <div className="form-success show" role="status" aria-live="polite">

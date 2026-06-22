@@ -5,6 +5,7 @@ import Services from '../components/Services'
 import Offer from '../components/Offer'
 import Team from '../components/Team'
 import Testimonials from '../components/Testimonials'
+import Journey from '../components/Journey'
 import Booking from '../components/Booking'
 import Faq from '../components/Faq'
 import Footer from '../components/Footer'
@@ -20,6 +21,7 @@ export default function Home() {
       <Offer />
       <Team />
       <Testimonials />
+      <Journey />
       <Booking />
       <Faq />
       <Footer />

@@ -1,4 +1,4 @@
-// Közös SVG wrapper — minden ikon ezt használja
+// Közös SVG wrapper - minden ikon ezt használja
 
 export default function IconBase({
   size = 24,

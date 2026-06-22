@@ -1,6 +1,6 @@
 import IconBase from './_base'
 
-// Check inside circle — guarantee / trial
+// Check inside circle - guarantee / trial
 export default function Shield(props) {
   return (
     <IconBase {...props}>

@@ -11,12 +11,12 @@ export default function Hero() {
         <Reveal direction="left">
           <h1>„Hallja újra tisztán szerettei hangját"</h1>
           <p className="sub">
-            Derítse ki 30 perc alatt, mi akadályozza a tiszta hallásban — és kapjon személyre szabott
+            Derítse ki 30 perc alatt, mi akadályozza a tiszta hallásban - és kapjon személyre szabott
             megoldást, kötelezettség nélkül.
           </p>
           <div className="reassure">
             <span className="dot" aria-hidden="true" />
-            Az első hallásvizsgálat ingyenes — beutaló és kötelezettség nélkül.
+            Az első hallásvizsgálat ingyenes - beutaló és kötelezettség nélkül.
           </div>
           <div className="hero-cta">
             <Button variant="gold" href={BOOKING_URL} icon={<Calendar size={20} stroke="#3a1c00" />}>
@@ -50,7 +50,7 @@ export default function Hero() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="250+ ötcsillagos Google értékelés — megnézem a Google-ön"
+            aria-label="250+ ötcsillagos Google értékelés - megnézem a Google-ön"
           >
             <Google size={22} className="hero-google-logo" />
             <span className="hero-google-stars" aria-hidden="true">★★★★★</span>

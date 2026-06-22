@@ -7,10 +7,10 @@ export default function Team() {
       <div className="wrap">
         <Reveal className="sec-head">
           <div className="eyebrow">Akikre rábízhatja magát</div>
-          <h2>Orvos, audiológus, hallásakusztikus — egy csapatban</h2>
+          <h2>Orvos, audiológus, hallásakusztikus - egy csapatban</h2>
           <p>
-            Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően —
-            orvosi szakzsargon nélkül — kapja meg a választ.
+            Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően -
+            orvosi szakzsargon nélkül - kapja meg a választ.
           </p>
         </Reveal>
         <div className="cards">

@@ -1,4 +1,4 @@
-/* Gyakori kérdések — kontrollált accordion, sima magasság-animáció (grid-rows) */
+/* Gyakori kérdések - kontrollált accordion, sima magasság-animáció (grid-rows) */
 
 .faq .wrap{max-width:820px;}
 .faq .sec-head p{font-size:17px;max-width:600px;margin:16px auto 0;}
@@ -11,7 +11,7 @@
 }
 .faq-item:hover{border-color:var(--teal);}
 
-/* Kérdés-sor — button, reset + meglévő look */
+/* Kérdés-sor - button, reset + meglévő look */
 .faq-q{
   width:100%;background:none;border:none;text-align:left;font:inherit;
   display:flex;justify-content:space-between;align-items:center;gap:16px;

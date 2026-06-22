@@ -36,7 +36,7 @@ export default function Testimonials() {
     <section className="block testi" id="velemenyek">
       <div className="wrap">
         <Reveal className="sec-head">
-          <div className="eyebrow">Győri páciensek — valódi tapasztalatok</div>
+          <div className="eyebrow">Győri páciensek - valódi tapasztalatok</div>
           <h2>Valódi életek, tisztább hangokkal</h2>
         </Reveal>
         <div className="cards">
@@ -55,7 +55,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Mobil-ticker — csak ≤560px-en látszik (CSS); auto-görgő + dragolható */}
+      {/* Mobil-ticker - csak ≤560px-en látszik (CSS); auto-görgő + dragolható */}
       <div className="testi-marquees">
         <TestiTicker dir="left">{dupCards(top)}</TestiTicker>
         <TestiTicker dir="right">{dupCards(bottom)}</TestiTicker>

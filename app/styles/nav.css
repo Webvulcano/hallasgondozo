@@ -30,7 +30,7 @@ header.nav.scrolled{
   color:var(--ink-soft);font-weight:600;margin-top:3px;
 }
 
-/* Nav CTA felirat — mobilon rövid */
+/* Nav CTA felirat - mobilon rövid */
 .cta-short{display:none;}
 
 /* Nav menu */
@@ -62,7 +62,7 @@ header.nav.scrolled{
   color:var(--ink-soft);text-transform:uppercase;
 }
 
-/* Hamburger — desktopon rejtett */
+/* Hamburger - desktopon rejtett */
 .nav-burger{display:none;}
 
 /* Lenyíló mobil panel + backdrop (a header.nav sticky → pozícionált ős) */
@@ -76,11 +76,17 @@ header.nav.scrolled{
 }
 .nav-mobile-panel.open{opacity:1;visibility:visible;transform:translateY(0);}
 .nav-mlink{
-  padding:14px 12px;font-weight:700;font-size:17px;color:var(--teal-deep);
-  border-radius:10px;transition:background .15s ease;
+  align-self:center;position:relative;
+  padding:14px 6px;font-weight:700;font-size:17px;color:var(--teal-deep);
+  text-align:center;
 }
-.nav-mlink:hover,
-.nav-mlink.active{background:var(--teal-soft);}
+.nav-mlink::after{
+  content:"";position:absolute;left:6px;right:6px;bottom:8px;height:2px;
+  background:var(--teal-deep);transform:scaleX(0);transform-origin:center;
+  transition:transform .2s ease;
+}
+.nav-mlink:hover::after,
+.nav-mlink.active::after{transform:scaleX(1);}
 .nav-mcta{margin-top:8px;width:100%;justify-content:center;}
 
 .nav-backdrop{
@@ -96,7 +102,7 @@ header.nav.scrolled{
     display:inline-block;position:relative;
     width:44px;height:44px;padding:0;background:none;border:none;cursor:pointer;
   }
-  /* Abszolút sávok — szekvenciált átmenet (előbb csúszás, utána forgás), nincs keresztezés */
+  /* Abszolút sávok - szekvenciált átmenet (előbb csúszás, utána forgás), nincs keresztezés */
   .nav-burger span{
     position:absolute;left:10px;right:10px;height:2.5px;border-radius:2px;
     background:var(--teal-deep);

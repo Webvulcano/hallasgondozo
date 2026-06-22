@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { faqs } from '../lib/content/faq'
 import Reveal from './Reveal'
 
-// FAQPage JSON-LD — ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
+// FAQPage JSON-LD - ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -28,7 +28,7 @@ export default function Faq() {
           <div className="eyebrow">GYIK</div>
           <h2>Gyakori kérdések</h2>
           <p>
-            Ha úgy érzi, hogy Ön vagy hozzátartozója nehezebben hall, ne halogassa a kivizsgálást —
+            Ha úgy érzi, hogy Ön vagy hozzátartozója nehezebben hall, ne halogassa a kivizsgálást -
             tegye meg az első lépést a tisztább beszédértés és a magabiztosabb mindennapok felé.
           </p>
         </Reveal>

@@ -1,4 +1,4 @@
-// Központi gomb komponens — minden CTA, link és form gomb ezt használja
+// Központi gomb komponens - minden CTA, link és form gomb ezt használja
 
 const VARIANTS = {
   gold: 'btn-gold',

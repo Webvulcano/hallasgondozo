@@ -1,8 +1,7 @@
-// Server component — SSR HTML rendereli
+// Server component - SSR HTML rendereli
 import Link from 'next/link'
 import { BOOKING_URL, COMPANY } from '../lib/constants'
 import Button from './Button'
-import PhoneLink from './PhoneLink'
 import ScrollEffect from './nav/ScrollEffect'
 import MobileMenu from './nav/MobileMenu'
 import NavLinks from './nav/NavLinks'
@@ -22,7 +21,6 @@ export default function Nav() {
           </Link>
           <NavLinks />
           <div className="nav-right">
-            <PhoneLink variant="nav" />
             <Button variant="gold" href={BOOKING_URL}>
               <span className="cta-full">Ingyenes vizsgálatot foglalok</span>
               <span className="cta-short">Időpont foglalás</span>

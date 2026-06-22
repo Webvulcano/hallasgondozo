@@ -1,4 +1,4 @@
-/* Globális stíluskönyv — csak import-okat tartalmaz.
+/* Globális stíluskönyv - csak import-okat tartalmaz.
    Sorrend számít: tokens → base → utilities → komponensek → responsive (utolsónak). */
 
 @import './styles/tokens.css';
@@ -16,8 +16,9 @@
 @import './styles/faq.css';
 @import './styles/footer.css';
 @import './styles/keszulekek.css';
+@import './styles/journey.css';
 
 @import './styles/reveal.css';
 
-/* Responsive overrides — utolsónak, hogy max-width media queryk felülírjanak */
+/* Responsive overrides - utolsónak, hogy max-width media queryk felülírjanak */
 @import './styles/responsive.css';

@@ -1,8 +1,8 @@
-/* /keszulekek oldal — page-specifikus elemek.
+/* /keszulekek oldal - page-specifikus elemek.
    A kategória-grid a meglévő .card / .cards / .ic-badge mintát használja (services.css). */
 
 /* Page-hero */
-.kpage-hero{text-align:center;padding-bottom:48px;}
+.kpage-hero.block{text-align:center;padding-top:16px;padding-bottom:40px;}
 .kpage-hero .back{
   display:inline-block;margin-bottom:18px;
   color:var(--teal-deep);font-weight:600;
@@ -16,7 +16,7 @@
   max-width:680px;margin:0 auto 28px;text-wrap:pretty;
 }
 
-/* Kiemelt Phonak Sphere — Offer-szerű sötét-teal sáv */
+/* Kiemelt Phonak Sphere - Offer-szerű sötét-teal sáv */
 .ksphere{
   position:relative;overflow:hidden;border-radius:22px;
   background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
@@ -45,10 +45,10 @@
 .ksphere-list .check svg{stroke:#3a1c00;}
 .ksphere .ph{aspect-ratio:4/3;}
 
-/* Forgalmazott márkák — egymás alatti termék-boxok */
+/* Forgalmazott márkák - egymás alatti termék-boxok */
 .kbrandbox + .kbrandbox{margin-top:28px;}
 
-/* Cikkcakk — páros kártyáknál kép balra, szöveg jobbra.
+/* Cikkcakk - páros kártyáknál kép balra, szöveg jobbra.
    DOM-ban a szöveg marad elöl (SEO/a11y), csak vizuálisan cserélünk. */
 .kbrandbox--alt .ksphere-grid{grid-template-columns:.95fr 1.05fr;}
 .kbrandbox--alt .ksphere-text{order:2;}

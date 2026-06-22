@@ -1,4 +1,4 @@
-// Központi ikon barrel export — minden komponens innen importál
+// Központi ikon barrel export - minden komponens innen importál
 export { default as Icon } from './Icon'
 export { default as Check } from './Check'
 export { default as Phone } from './Phone'

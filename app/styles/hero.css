@@ -46,7 +46,7 @@
 /* Kép + Google-értékelés blokk egymás alatt */
 .hero-right{display:flex;flex-direction:column;gap:16px;}
 
-/* Google értékelés — egysoros kattintható pill: G · csillagok · 250+ értékelés */
+/* Google értékelés - egysoros kattintható pill: G · csillagok · 250+ értékelés */
 .hero-google{
   display:inline-flex;align-items:center;gap:10px;align-self:center;
   background:#fff;border:1px solid var(--line);border-radius:999px;

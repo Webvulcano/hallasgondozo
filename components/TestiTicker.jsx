@@ -1,9 +1,10 @@
 'use client'
 import { useEffect, useRef } from 'react'
 
-// Auto-görgő, megfogható (drag) vélemény-sor. dir: 'left' | 'right'.
+// Auto-görgő, megfogható (drag) sor. dir: 'left' | 'right'.
 // A tartalom duplázott (a hívó adja), így a felezőpontnál loopol.
-export default function TestiTicker({ dir = 'left', children }) {
+// cls: alap class-prefix ('testi' → testi-row/testi-track). Több helyen újrahasznosítható.
+export default function TestiTicker({ dir = 'left', cls = 'testi', children }) {
   const trackRef = useRef(null)
 
   useEffect(() => {
@@ -80,8 +81,8 @@ export default function TestiTicker({ dir = 'left', children }) {
   }, [dir])
 
   return (
-    <div className={`testi-row testi-row--${dir}`}>
-      <div className="testi-track" ref={trackRef}>
+    <div className={`${cls}-row ${cls}-row--${dir}`}>
+      <div className={`${cls}-track`} ref={trackRef}>
         {children}
       </div>
     </div>

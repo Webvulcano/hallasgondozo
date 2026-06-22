@@ -23,6 +23,9 @@
   .wrap{padding:0 18px;}
   .nav-phone .ic{display:none;}
 
+  /* Booking: kisebb rés a cím és az első panel (Válasszon időpontot online) közt */
+  .booking .sec-head{margin-bottom:24px;}
+
   /* Nav CTA rövid felirat */
   .nav .cta-full{display:none;}
   .nav .cta-short{display:inline;}
@@ -38,7 +41,7 @@
   .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
   .hero-google{order:5;}
 
-  /* Másodlagos elemek el mobilon — trust-jel a Google-pill */
+  /* Másodlagos elemek el mobilon - trust-jel a Google-pill */
   .reassure{display:none;}
   .trust-row{display:none;}
 
@@ -47,7 +50,7 @@
   .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
   .hero-badge .big{font-size:26px;}
 
-  /* Offer (Nyári különajánlat) — kevesebb szöveg telefonon */
+  /* Offer (Nyári különajánlat) - kevesebb szöveg telefonon */
   .offer h2{font-size:clamp(26px,7vw,32px);margin-top:16px;}
   .offer .lead{display:none;}
   .offer-list{margin-top:20px;gap:11px;}

@@ -20,7 +20,7 @@ export async function submitCallback(formData) {
 
   if (!result.ok) {
     if (result.errors._bot) {
-      // Csendben sikert szimulálunk — bot ne kapjon visszajelzést
+      // Csendben sikert szimulálunk - bot ne kapjon visszajelzést
       return { ok: true }
     }
     return { ok: false, errors: result.errors }
@@ -28,13 +28,13 @@ export async function submitCallback(formData) {
 
   const { name, phone, note } = result.data
 
-  // Email küldés — fejlesztés alatt csak log
+  // Email küldés - fejlesztés alatt csak log
   const apiKey = process.env.RESEND_API_KEY
   const notifyEmail = process.env.NOTIFY_EMAIL
   const fromEmail = process.env.FROM_EMAIL
 
   if (!apiKey || !notifyEmail || !fromEmail) {
-    console.warn('[submitCallback] Hiányzó env változó — email küldés kihagyva')
+    console.warn('[submitCallback] Hiányzó env változó - email küldés kihagyva')
     console.log('[submitCallback] Új visszahívás kérés:', { name, phone, note })
     return { ok: true }
   }
@@ -49,7 +49,7 @@ export async function submitCallback(formData) {
       body: JSON.stringify({
         from: fromEmail,
         to: notifyEmail,
-        subject: `Új visszahívás kérés — ${name}`,
+        subject: `Új visszahívás kérés - ${name}`,
         html: `
           <h2>Új visszahívás kérés</h2>
           <p><strong>Név:</strong> ${escapeHtml(name)}</p>

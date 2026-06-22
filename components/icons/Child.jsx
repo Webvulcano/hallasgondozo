@@ -1,6 +1,6 @@
 import IconBase from './_base'
 
-// Child face — pediatric audiology
+// Child face - pediatric audiology
 export default function Child(props) {
   return (
     <IconBase {...props}>

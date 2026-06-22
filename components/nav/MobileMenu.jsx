@@ -4,13 +4,43 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { BOOKING_URL } from '../../lib/constants'
 
-// Hamburger-menü ≤900px-en — Főoldal, Termékek, Időpont foglalás (CTA)
+// Hamburger-menü ≤900px-en - Főoldal, Termékek, Időpont foglalás (CTA)
 export default function MobileMenu() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
   const isProducts = pathname.startsWith('/keszulekek')
+
+  // Scroll-spy a főoldalon (mint desktopon): a Kapcsolat (#idopont) a nézet közepén van-e
+  const [spy, setSpy] = useState('fooldal') // 'fooldal' | 'kapcsolat'
+
+  useEffect(() => {
+    if (!isHome) return
+    const el = document.getElementById('idopont')
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => setSpy(entry.isIntersecting ? 'kapcsolat' : 'fooldal'),
+      { rootMargin: '-45% 0px -45% 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [isHome])
+
+  const homeActive = isHome && spy === 'fooldal'
+  const kapcsolatActive = isHome && spy === 'kapcsolat'
+
+  // Kapcsolat: a főoldalon görgessünk a szekcióra (a hash-Link itt nem ugrik); máshonnan a Link navigál
+  const onKapcsolat = (e) => {
+    if (isHome) {
+      const el = document.getElementById('idopont')
+      if (el) {
+        e.preventDefault()
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    close()
+  }
 
   useEffect(() => {
     if (!open) return
@@ -50,10 +80,10 @@ export default function MobileMenu() {
       >
         <Link
           href="/"
-          className={`nav-mlink${isHome ? ' active' : ''}`}
+          className={`nav-mlink${homeActive ? ' active' : ''}`}
           role="menuitem"
-          aria-current={isHome ? 'page' : undefined}
-          onClick={close}
+          aria-current={homeActive ? 'page' : undefined}
+          onClick={() => { if (isHome) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
         >
           Főoldal
         </Link>
@@ -62,11 +92,17 @@ export default function MobileMenu() {
           className={`nav-mlink${isProducts ? ' active' : ''}`}
           role="menuitem"
           aria-current={isProducts ? 'page' : undefined}
-          onClick={close}
+          onClick={() => { if (isProducts) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
         >
           Termékek
         </Link>
-        <Link href="/#idopont" className="nav-mlink" role="menuitem" onClick={close}>
+        <Link
+          href="/#idopont"
+          className={`nav-mlink${kapcsolatActive ? ' active' : ''}`}
+          role="menuitem"
+          aria-current={kapcsolatActive ? 'page' : undefined}
+          onClick={onKapcsolat}
+        >
           Kapcsolat
         </Link>
         <a

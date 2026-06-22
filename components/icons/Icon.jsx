@@ -1,4 +1,4 @@
-// Dinamikus ikon lookup — adat-vezérelt komponensek számára
+// Dinamikus ikon lookup - adat-vezérelt komponensek számára
 // Használat: <Icon name="Ear" size={32} />
 
 import Check from './Check'

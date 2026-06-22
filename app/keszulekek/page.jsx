@@ -28,7 +28,7 @@ export default function DevicesPage() {
           </div>
         </section>
 
-        {/* Forgalmazott márkák — termék-boxok */}
+        {/* Forgalmazott márkák - termék-boxok */}
         <section className="block kbrands" id="markak" style={{ paddingTop: 0 }}>
           <div className="wrap">
             {brandBoxes.map((b, idx) => {
@@ -61,14 +61,14 @@ export default function DevicesPage() {
           </div>
         </section>
 
-        {/* Termékkínálat — kategóriák */}
+        {/* Termékkínálat - kategóriák */}
         <section className="block services" id="kategoriak">
           <div className="wrap">
             <div className="sec-head">
               <div className="eyebrow">Termékkínálat</div>
               <h2>Minden, amire a tiszta halláshoz szükség lehet</h2>
               <p>
-                A vizsgálattól a kész megoldásig — készülékek, illesztékek és tartozékok egy helyen,
+                A vizsgálattól a kész megoldásig - készülékek, illesztékek és tartozékok egy helyen,
                 szakértői beállítással.
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function DevicesPage() {
               <h2>Nem tudja, melyik készülék való Önnek?</h2>
               <p>
                 Kezdje egy ingyenes, kötelezettségmentes hallásvizsgálattal. 30 perc alatt kiderül,
-                mi a helyzet — és melyik megoldás illik Önhöz a legjobban.
+                mi a helyzet - és melyik megoldás illik Önhöz a legjobban.
               </p>
               <Button variant="gold" href={BOOKING_URL}>
                 Ingyenes hallásvizsgálatot foglalok

@@ -23,9 +23,11 @@ export default function NavLinks() {
     return () => io.disconnect()
   }, [onHome])
 
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+
   const links = [
-    { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal' },
-    { href: '/keszulekek', label: 'Termékek', active: onProducts },
+    { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
+    { href: '/keszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
     { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat' },
   ]
 
@@ -37,6 +39,7 @@ export default function NavLinks() {
           href={l.href}
           className={`nav-link${l.active ? ' active' : ''}`}
           aria-current={l.active ? 'page' : undefined}
+          onClick={l.onClick}
         >
           {l.label}
         </Link>

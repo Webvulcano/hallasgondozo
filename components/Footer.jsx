@@ -16,7 +16,7 @@ export default function Footer() {
     <footer>
       <div className="wrap">
         <div className="foot-grid">
-          {/* Col 1 — Brand */}
+          {/* Col 1 - Brand */}
           <div>
             <div className="logo foot-logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -38,7 +38,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Col 2 — Contact */}
+          {/* Col 2 - Contact */}
           <div>
             <h5>Elérhetőség</h5>
             <ul className="foot-list">
@@ -57,7 +57,7 @@ export default function Footer() {
             <p className="foot-hours foot-hours-mt">Nyitvatartás: {COMPANY.hours}</p>
           </div>
 
-          {/* Col 3 — CTA */}
+          {/* Col 3 - CTA */}
           <div>
             <h5>Foglaljon időpontot</h5>
             <div className="foot-cta">
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
 
         <div className="foot-bottom">
-          <span>© {year} {COMPANY.legalName} — Minden jog fenntartva.</span>
+          <span>© {year} {COMPANY.legalName} - Minden jog fenntartva.</span>
           {/* TEMP: Adatvédelmi Szabályzat gomb ideiglenesen elrejtve */}
           {/* <a href="/adatvedelem">Adatvédelmi Szabályzat</a> */}
         </div>

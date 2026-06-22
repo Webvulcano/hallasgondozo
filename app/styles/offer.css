@@ -1,4 +1,4 @@
-/* Offer band — Phonak Sphere */
+/* Offer band - Phonak Sphere */
 
 .offer{
   background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
@@ -53,7 +53,7 @@
 .offer-card .unit{color:var(--ink-soft);font-size:16px;margin-bottom:22px;}
 .offer-card .btn{width:100%;}
 
-/* Másodlagos CTA — zöld gomb (btn-teal), kapu a teljes kínálat felé */
+/* Másodlagos CTA - zöld gomb (btn-teal), kapu a teljes kínálat felé */
 .offer-card .offer-secondary{margin-top:12px;}
 .offer-secondary-note{
   margin-top:10px;font-size:14px;color:var(--ink-soft);text-align:center;

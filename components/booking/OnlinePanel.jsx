@@ -7,7 +7,7 @@ export default function OnlinePanel() {
   return (
     <Reveal direction="left" className="book-panel">
       <h3>Válasszon időpontot online</h3>
-      <p className="small">Azonnal visszajelzést kap a szabad időpontokról — kötelezettség nélkül.</p>
+      <p className="small">Azonnal visszajelzést kap a szabad időpontokról - kötelezettség nélkül.</p>
       <div className="book-btns">
         <Button variant="gold" href={BOOKING_URL} icon={<Calendar size={20} stroke="#3a1c00" />}>
           Felnőtt hallásvizsgálat

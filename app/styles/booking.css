@@ -1,6 +1,8 @@
-/* Booking szekció — form + online */
+/* Booking szekció - form + online */
 
 .booking{background:linear-gradient(160deg,var(--teal-deep),#1a3e0a);color:#fff;}
+/* Sticky nav offset anchor-ugrásnál (#idopont) */
+#idopont{scroll-margin-top:30px;}
 .booking .sec-head h2{color:#fff;}
 .booking .sec-head p{color:rgba(255,255,255,.9);}
 
@@ -34,7 +36,7 @@ form input,form textarea{
 form textarea{min-height:88px;resize:vertical;}
 form input:focus,form textarea:focus{outline:3px solid var(--gold);outline-offset:1px;}
 
-/* Honeypot — bot mező, képernyőről eltüntetve */
+/* Honeypot - bot mező, képernyőről eltüntetve */
 .honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
 
 /* Hibaüzenetek */

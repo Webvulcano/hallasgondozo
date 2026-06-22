@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 
-// Scroll reveal wrapper — minden komponens explicit használja.
+// Scroll reveal wrapper - minden komponens explicit használja.
 // Direction: 'up' (default) | 'left' | 'right'
 
 const CLASS_MAP = {

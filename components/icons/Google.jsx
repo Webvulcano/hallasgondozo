@@ -1,4 +1,4 @@
-// Hivatalos színes Google „G" — önálló SVG (nem _base, az stroke-only/monokróm)
+// Hivatalos színes Google „G" - önálló SVG (nem _base, az stroke-only/monokróm)
 
 export default function Google({ size = 22, className, ...rest }) {
   return (

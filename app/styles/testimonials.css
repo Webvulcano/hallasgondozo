@@ -30,7 +30,7 @@
 
 .testi-cta{text-align:center;margin-top:44px;}
 
-/* Mobil-ticker — desktopon rejtett */
+/* Mobil-ticker - desktopon rejtett */
 .testi-marquees{display:none;}
 
 @media (max-width:560px){

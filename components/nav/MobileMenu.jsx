@@ -11,6 +11,7 @@ export default function MobileMenu() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const isProducts = pathname.startsWith('/keszulekek')
+  const isBlog = pathname.startsWith('/blog')
 
   // Scroll-spy a főoldalon (mint desktopon): a Kapcsolat (#idopont) a nézet közepén van-e
   const [spy, setSpy] = useState('fooldal') // 'fooldal' | 'kapcsolat'
@@ -104,6 +105,15 @@ export default function MobileMenu() {
           onClick={onKapcsolat}
         >
           Kapcsolat
+        </Link>
+        <Link
+          href="/blog"
+          className={`nav-mlink${isBlog ? ' active' : ''}`}
+          role="menuitem"
+          aria-current={isBlog ? 'page' : undefined}
+          onClick={() => { if (isBlog) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
+        >
+          Blog
         </Link>
         <a
           href={BOOKING_URL}

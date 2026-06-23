@@ -7,6 +7,7 @@ export default function NavLinks() {
   const pathname = usePathname()
   const onHome = pathname === '/'
   const onProducts = pathname.startsWith('/keszulekek')
+  const onBlog = pathname.startsWith('/blog')
 
   // Scroll-spy a főoldalon: a Kapcsolat (#idopont) szekció a nézet közepén van-e
   const [spy, setSpy] = useState('fooldal') // 'fooldal' | 'kapcsolat'
@@ -29,6 +30,7 @@ export default function NavLinks() {
     { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
     { href: '/keszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
     { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat' },
+    { href: '/blog', label: 'Blog', active: onBlog, onClick: onBlog ? scrollTop : undefined },
   ]
 
   return (

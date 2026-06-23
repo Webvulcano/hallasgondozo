@@ -1,6 +1,6 @@
-import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL } from '../lib/constants'
+import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL } from '../lib/constants'
 import Button from './Button'
-import { Phone, Email, Facebook, Instagram } from './icons'
+import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
 const contactLinks = [
   { icon: <Phone size={17} />, href: PHONE.href, label: PHONE.display, external: false },
@@ -34,7 +34,16 @@ export default function Footer() {
             <p className="foot-address">
               {COMPANY.fullName}<br />
               {COMPANY.legalName}<br />
-              {COMPANY.address}
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="foot-address-link"
+                aria-label={`${COMPANY.address} megnyitása a Google Térképen`}
+              >
+                <MapPin size={16} className="foot-address-ic" />
+                {COMPANY.address}
+              </a>
             </p>
           </div>
 

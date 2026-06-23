@@ -2,6 +2,7 @@
 export { default as Icon } from './Icon'
 export { default as Check } from './Check'
 export { default as Phone } from './Phone'
+export { default as MapPin } from './MapPin'
 export { default as Calendar } from './Calendar'
 export { default as Email } from './Email'
 export { default as Facebook } from './Facebook'

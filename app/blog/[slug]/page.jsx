@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Nav from '../../../components/Nav'
 import Footer from '../../../components/Footer'
 import Button from '../../../components/Button'
+import SkeletonImage from '../../../components/SkeletonImage'
 import { getAllPosts, getPost, formatHuDate } from '../../../lib/content/posts'
 import { SITE, COMPANY, PHONE, EMAIL, SOCIAL, BOOKING_URL } from '../../../lib/constants'
 
@@ -137,8 +138,7 @@ export default async function BlogPostPage({ params }) {
           </header>
 
           <div className="article-media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={post.image} alt={post.imageAlt} />
+            <SkeletonImage src={post.image} alt={post.imageAlt} />
           </div>
 
           <article className="prose">

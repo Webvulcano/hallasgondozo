@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatHuDate } from '../../lib/content/posts'
+import SkeletonImage from '../SkeletonImage'
 
 // Blog lista-kártya: cím, kivonat, dátum → cikk-oldal.
 export default function PostCard({ post }) {
@@ -7,8 +8,7 @@ export default function PostCard({ post }) {
   return (
     <article className="postcard">
       <div className="postcard-media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={post.image} alt={post.imageAlt} loading="lazy" />
+        <SkeletonImage src={post.image} alt={post.imageAlt} loading="lazy" />
       </div>
       <div className="postcard-body">
         <time className="postcard-date" dateTime={post.datePublished}>

@@ -1,4 +1,5 @@
-/* Páciens-út — "Lépésről lépésre" függőleges timeline, lenyitható lépésekkel */
+/* Páciens-út — "Lépésről lépésre" függőleges timeline.
+   A lenyíló mechanika az accordion.css-ben; itt csak a timeline-egyedi vizuál. */
 
 .journey { background: var(--cream); }
 
@@ -59,32 +60,15 @@
   z-index: 1;
 }
 
+/* A kártya (acc-item bázison): a rail melletti rugalmas oszlop + 18px radius */
 .jstep-body {
   flex: 1;
   min-width: 0;
-  background: #fff;
-  border: 1px solid var(--line);
   border-radius: var(--r);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: border-color .2s ease;
 }
-.jstep-body:hover { border-color: var(--teal); }
 
-/* Fejléc-sor — kattintható gomb (reset + look) */
-.jstep-q {
-  width: 100%;
-  background: none;
-  border: none;
-  text-align: left;
-  font: inherit;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  padding: 18px 24px;
-}
+/* Fejléc — Journey-egyedi padding, nagyobb cím, badge mellé */
+.journey .acc-q { padding: 18px 24px; }
 .jstep-title {
   display: flex;
   align-items: center;
@@ -94,21 +78,6 @@
   font-weight: 700;
   color: var(--teal-deep);
 }
-
-.jstep-ic {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--teal-soft);
-  color: var(--teal-deep);
-  display: grid;
-  place-items: center;
-  font-size: 22px;
-  line-height: 1;
-  flex: 0 0 auto;
-  transition: transform .25s ease;
-}
-.jstep-body.open .jstep-ic { transform: rotate(45deg); }
 
 .jstep-badge {
   display: inline-flex;
@@ -123,23 +92,7 @@
   white-space: nowrap;
 }
 
-/* Sima lenyílás: grid 0fr -> 1fr animálja a magasságot (mint a GYIK) */
-.jstep-a-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows .35s cubic-bezier(.22,.61,.36,1);
-}
-.jstep-body.open .jstep-a-wrap { grid-template-rows: 1fr; }
-
-.jstep-a { overflow: hidden; min-height: 0; padding: 0 24px; }
-.jstep-body.open .jstep-a { padding-bottom: 22px; }
-.jstep-a > p {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 16.5px;
-  line-height: 1.55;
-  text-wrap: pretty;
-}
+.journey .acc-a > p { line-height: 1.55; }
 
 /* Al-lépések (a 2. lépés négy pontja) */
 .jsub {
@@ -178,10 +131,8 @@
   .jstep-node {
     width: 36px; height: 36px; font-size: 16px;
   }
-  .jstep-q { padding: 15px 18px; }
+  .journey .acc-q { padding: 15px 18px; }
   .jstep-title { font-size: 18px; }
-  .jstep-a { padding: 0 18px; }
-  .jstep-body.open .jstep-a { padding-bottom: 18px; }
-  .jstep-a > p { font-size: 15.5px; }
+  .journey .acc-a > p { font-size: 15.5px; }
   .journey-cta { margin-top: 24px; }
 }

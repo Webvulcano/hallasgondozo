@@ -13,6 +13,7 @@
 @import './styles/team.css';
 @import './styles/testimonials.css';
 @import './styles/booking.css';
+@import './styles/accordion.css';
 @import './styles/faq.css';
 @import './styles/footer.css';
 @import './styles/keszulekek.css';
@@ -20,6 +21,7 @@
 @import './styles/journey.css';
 
 @import './styles/reveal.css';
+@import './styles/skeleton.css';
 
 /* Responsive overrides - utolsónak, hogy max-width media queryk felülírjanak */
 @import './styles/responsive.css';

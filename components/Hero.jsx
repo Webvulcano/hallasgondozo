@@ -2,6 +2,7 @@ import { BOOKING_URL, GOOGLE_REVIEWS_URL } from '../lib/constants'
 import { trustItems } from '../lib/content/trustItems'
 import Button from './Button'
 import Reveal from './Reveal'
+import SkeletonImage from './SkeletonImage'
 import { Check, Calendar, Google } from './icons'
 
 export default function Hero() {
@@ -34,8 +35,7 @@ export default function Hero() {
         </Reveal>
         <Reveal direction="right" className="hero-right">
           <div className="hero-img-wrap">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <SkeletonImage
               src="/pic/hero.jpg"
               alt="Boldog idős pár, aki újra önfeledten kommunikál"
               className="hero-img"

@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react'
 import { faqs } from '../lib/content/faq'
+import { Accordion, AccordionItem } from './Accordion'
 
 // FAQPage JSON-LD - ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
 const faqSchema = {
@@ -14,8 +14,6 @@ const faqSchema = {
 }
 
 export default function Faq() {
-  const [openIdx, setOpenIdx] = useState(0)
-
   return (
     <section className="block faq" id="gyik">
       <script
@@ -31,30 +29,23 @@ export default function Faq() {
             tegye meg az első lépést a tisztább beszédértés és a magabiztosabb mindennapok felé.
           </p>
         </div>
-        <div className="faq-list">
-          {faqs.map((item, i) => {
-            const open = openIdx === i
-            return (
-              <div className={`faq-item${open ? ' open' : ''}`} key={item.q}>
-                <button
-                  type="button"
-                  className="faq-q"
-                  aria-expanded={open}
-                  aria-controls={`faq-a-${i}`}
-                  onClick={() => setOpenIdx(open ? -1 : i)}
+        <Accordion defaultOpenIndex={0}>
+          {({ isOpen, toggle }) => (
+            <div className="faq-list">
+              {faqs.map((item, i) => (
+                <AccordionItem
+                  key={item.q}
+                  id={`faq-a-${i}`}
+                  open={isOpen(i)}
+                  onToggle={() => toggle(i)}
+                  title={<span>{item.q}</span>}
                 >
-                  <span>{item.q}</span>
-                  <span className="faq-ic" aria-hidden="true">+</span>
-                </button>
-                <div className="faq-a-wrap" id={`faq-a-${i}`} role="region">
-                  <div className="faq-a">
-                    <p>{item.a}</p>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+                  <p>{item.a}</p>
+                </AccordionItem>
+              ))}
+            </div>
+          )}
+        </Accordion>
       </div>
     </section>
   )

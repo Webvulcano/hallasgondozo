@@ -1,0 +1,31 @@
+/* Kép-skeleton (tartalom-váz) - amíg a kép betölt, pulzáló váz a helyén.
+   A .skimg display:contents, így a meglévő kép-CSS érvényben marad; a shimmer
+   a befoglaló konténerhez (position:relative + overflow:hidden) igazodik. */
+
+.skimg{display:contents;}
+
+.skimg-shimmer{
+  position:absolute;inset:0;z-index:1;
+  background-color:var(--teal-soft);
+  background-image:linear-gradient(100deg,
+    transparent 0%,
+    rgba(255,255,255,.55) 50%,
+    transparent 100%);
+  background-size:220% 100%;
+  background-repeat:no-repeat;
+  animation:skimg-sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes skimg-sweep{
+  0%{background-position:-120% 0;}
+  100%{background-position:120% 0;}
+}
+
+/* Kép finom fade-in betöltéskor */
+.skimg img{opacity:0;transition:opacity .35s ease;}
+.skimg.is-loaded img{opacity:1;}
+
+@media (prefers-reduced-motion:reduce){
+  .skimg-shimmer{animation:none;}
+  .skimg img{transition:none;}
+}

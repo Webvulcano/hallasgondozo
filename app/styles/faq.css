@@ -1,13 +1,14 @@
 /* Gyakori kérdések — csak a GYIK-egyedi vizuál; a lenyíló mechanika az accordion.css-ben. */
 
 .faq .wrap { max-width: 820px; }
-.faq .sec-head p { font-size: 17px; max-width: 600px; margin: 16px auto 0; }
+/* méret most a közös .sec-head p-ből (--fs-base), itt csak szélesség/margó */
+.faq .sec-head p { max-width: 600px; margin: 16px auto 0; }
 .faq-list { margin-top: 8px; }
 
 /* Elemköz + kérdés betűméret (a bázis acc-* fölé írva) */
 .faq-list .acc-item { margin-bottom: 14px; }
-.faq .acc-q { font-size: 18px; }
+.faq .acc-q { font-size: var(--fs-lg); }
 
 @media (max-width: 560px) {
-  .faq .acc-q { font-size: 16.5px; }
+  .faq .acc-q { font-size: var(--fs-base); }
 }

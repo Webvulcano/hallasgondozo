@@ -7,7 +7,7 @@
 .partners h4{
   text-align:center;
   font-family:var(--font-source-sans),"Source Sans 3",sans-serif;
-  font-size:14px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  font-size:var(--fs-sm);font-weight:700;letter-spacing:.13em;text-transform:uppercase;
   color:var(--ink-soft);margin:0 0 20px;
 }
 
@@ -26,6 +26,6 @@
 .pbadge{
   display:flex;align-items:center;gap:10px;white-space:nowrap;
   padding:12px 22px;border:1px solid var(--line);border-radius:12px;background:var(--cream);
-  font-weight:600;color:#6f6a61;font-size:16px;
+  font-weight:600;color:#6f6a61;font-size:var(--fs-base);
 }
 .pbadge .pd{width:9px;height:9px;border-radius:50%;background:var(--teal);opacity:.55;}

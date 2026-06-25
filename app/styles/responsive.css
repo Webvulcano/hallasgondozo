@@ -1,7 +1,6 @@
 /* Responsive breakpoints + a11y reduced motion */
 
 @media (max-width:900px){
-  body{font-size:17px;}
   .hero-grid,.offer-grid,.book-grid{grid-template-columns:1fr;}
   .hero-grid{gap:32px;}
   .hero-img-wrap{aspect-ratio:4/3;}
@@ -41,8 +40,8 @@
   .hero-cta{animation-delay:.26s;}
   .hero-google{animation-delay:.34s;}
 
-  .hero h1{order:1;font-size:clamp(27px,7.6vw,33px);line-height:1.18;}
-  .hero .sub{order:2;font-size:16.5px;margin-top:8px;}
+  .hero h1{order:1;font-size:var(--fs-hero-mobile);line-height:1.18;}
+  .hero .sub{order:2;margin-top:8px;}
   .hero-img-wrap{order:3;}
   .hero-img{object-position:calc(50% - 100px) center;}
   .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
@@ -55,7 +54,6 @@
   .hero-cta .btn-gold{width:100%;}
 
   .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
-  .hero-badge .big{font-size:26px;}
 }
 
 @media (max-width:560px){
@@ -70,15 +68,13 @@
   .nav .cta-short{display:inline;}
 
   /* Offer (Nyári különajánlat) - kevesebb szöveg telefonon */
-  .offer h2{font-size:clamp(26px,7vw,32px);margin-top:16px;}
+  .offer h2{margin-top:16px;}
   .offer .lead{display:none;}
   .offer-list{margin-top:20px;gap:11px;}
-  .offer-list li{font-size:16px;}
   .offer-list li:nth-child(2),
   .offer-list li:nth-child(3){display:none;}
   .offer-note{display:none;}
   .offer-card{padding:24px;}
-  .offer-card .now{font-size:36px;}
 }
 
 @keyframes heroIn{

@@ -53,7 +53,7 @@
   display: grid;
   place-items: center;
   font-family: var(--font-playfair), "Playfair Display", serif;
-  font-size: 20px;
+  font-size: var(--fs-xl);
   font-weight: 700;
   box-shadow: var(--shadow-sm);
   position: relative;
@@ -74,7 +74,8 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  font-size: 21px;
+  /* Accordion-kérdés szint — a FAQ-kérdéssel EGY méret, ne legyen nagyobb. */
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--teal-deep);
 }
@@ -86,13 +87,15 @@
   border-radius: 999px;
   background: var(--teal-soft);
   color: var(--teal-deep);
-  font-size: 13px;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: .02em;
   white-space: nowrap;
 }
 
-.journey .acc-a > p { line-height: 1.55; }
+/* Törzsszöveg: explicit a kártya-szint (17), KÜLÖNBEN a body 18-at örökölné
+   → a Journey nagyobbnak tűnt mint a többi szekció. */
+.journey .acc-a > p { font-size: var(--fs-base); line-height: 1.55; }
 
 /* Al-lépések (a 2. lépés négy pontja) */
 .jsub {
@@ -107,13 +110,13 @@
 }
 .jsub b {
   display: block;
-  font-size: 15.5px;
+  font-size: var(--fs-md);
   color: var(--ink);
   margin-bottom: 2px;
 }
 .jsub span {
   display: block;
-  font-size: 15px;
+  font-size: var(--fs-md);
   line-height: 1.5;
   color: var(--ink-soft);
 }
@@ -129,10 +132,10 @@
   .jstep-rail { flex: 0 0 36px; }
   .jstep-rail::before { bottom: -12px; }
   .jstep-node {
-    width: 36px; height: 36px; font-size: 16px;
+    width: 36px; height: 36px; font-size: var(--fs-base);
   }
   .journey .acc-q { padding: 15px 18px; }
-  .jstep-title { font-size: 18px; }
-  .journey .acc-a > p { font-size: 15.5px; }
+  .jstep-title { font-size: var(--fs-base); }
+  .journey .acc-a > p { font-size: var(--fs-md); }
   .journey-cta { margin-top: 24px; }
 }

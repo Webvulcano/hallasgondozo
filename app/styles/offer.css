@@ -16,26 +16,26 @@
 .offer .tag{
   display:inline-flex;align-items:center;gap:9px;
   background:var(--gold);color:#3a1c00;font-weight:700;
-  font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  font-size:var(--fs-sm);letter-spacing:.06em;text-transform:uppercase;
   padding:8px 16px;border-radius:999px;
 }
-.offer h2{color:#fff;font-size:clamp(30px,3.3vw,46px);margin-top:22px;}
+.offer h2{color:#fff;font-size:var(--fs-section);margin-top:22px;}
 .offer .lead{
-  font-size:20px;margin-top:20px;
+  font-size:var(--fs-xl);margin-top:20px;
   color:rgba(255,255,255,.92);max-width:620px;text-wrap:pretty;
 }
 
 .price{font-family:var(--font-playfair),"Playfair Display",serif;font-weight:700;color:var(--gold);}
 
 .offer-list{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:13px;}
-.offer-list li{display:flex;align-items:flex-start;gap:13px;font-size:18px;color:#fff;}
+.offer-list li{display:flex;align-items:flex-start;gap:13px;font-size:var(--fs-lg);color:#fff;}
 .offer-list .check{background:var(--gold);}
 .offer-list .check svg{stroke:#3a1c00;}
 
 .offer-note{
   margin-top:26px;
   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
-  border-radius:14px;padding:16px 20px;font-size:17px;
+  border-radius:14px;padding:16px 20px;font-size:var(--fs-base);
 }
 .offer-note b{color:var(--gold);}
 
@@ -44,17 +44,17 @@
   color:var(--ink);box-shadow:var(--shadow-lg);text-align:center;
 }
 .offer-card .ph{aspect-ratio:4/3;margin-bottom:22px;}
-.offer-card .was{color:var(--ink-soft);text-decoration:line-through;font-size:18px;}
+.offer-card .was{color:var(--ink-soft);text-decoration:line-through;font-size:var(--fs-lg);}
 .offer-card .now{
   font-family:var(--font-playfair),"Playfair Display",serif;
-  font-size:42px;font-weight:700;color:var(--teal-deep);
+  font-size:var(--fs-display-num);font-weight:700;color:var(--teal-deep);
   line-height:1;margin:4px 0 2px;
 }
-.offer-card .unit{color:var(--ink-soft);font-size:16px;margin-bottom:22px;}
+.offer-card .unit{color:var(--ink-soft);font-size:var(--fs-base);margin-bottom:22px;}
 .offer-card .btn{width:100%;}
 
 /* Másodlagos CTA - zöld gomb (btn-teal), kapu a teljes kínálat felé */
 .offer-card .offer-secondary{margin-top:12px;}
 .offer-secondary-note{
-  margin-top:10px;font-size:14px;color:var(--ink-soft);text-align:center;
+  margin-top:10px;font-size:var(--fs-sm);color:var(--ink-soft);text-align:center;
 }

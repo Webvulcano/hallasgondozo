@@ -13,9 +13,9 @@
   aspect-ratio:4/3.4;box-shadow:none;
 }
 .tcard .body{padding:26px 28px 30px;}
-.tcard h3{font-size:23px;}
+.tcard h3{font-size:var(--fs-2xl);}
 .tcard .role{
-  color:var(--gold-deep);font-weight:700;font-size:15.5px;
+  color:var(--gold-deep);font-weight:700;font-size:var(--fs-md);
   margin:6px 0 14px;text-transform:uppercase;letter-spacing:.04em;
 }
-.tcard p{color:var(--ink-soft);font-size:17px;}
+.tcard p{color:var(--ink-soft);font-size:var(--fs-base);}

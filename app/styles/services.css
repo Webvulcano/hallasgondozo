@@ -14,10 +14,10 @@
 }
 .ic-badge svg{width:32px;height:32px;}
 .card.featured .ic-badge{background:#FBF1D8;color:var(--gold-deep);}
-.card h3{font-size:23px;margin-bottom:10px;}
-.card p{color:var(--ink-soft);font-size:17px;}
+.card h3{font-size:var(--fs-2xl);margin-bottom:10px;}
+.card p{color:var(--ink-soft);font-size:var(--fs-base);}
 .card .pill{
   display:inline-block;margin-bottom:14px;
-  font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  font-size:var(--fs-xs);font-weight:700;letter-spacing:.05em;text-transform:uppercase;
   color:var(--gold-deep);background:#FBF1D8;padding:5px 12px;border-radius:999px;
 }

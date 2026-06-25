@@ -1,20 +1,20 @@
 /* Base - reset, typography, layout primitives */
 
-*{box-sizing:border-box;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;overflow-x:clip;}
 body{
   margin:0;
   overflow-x:clip;
   font-family:var(--font-source-sans),"Source Sans 3",system-ui,sans-serif;
-  font-size:18px;
-  line-height:1.6;
+  font-size:var(--fs-lg);
+  line-height:var(--lh-base);
   color:var(--ink);
   background:var(--cream);
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3{
   font-family:var(--font-playfair),"Playfair Display",Georgia,serif;
-  font-weight:600;line-height:1.12;margin:0;
+  font-weight:600;line-height:var(--lh-tight);margin:0;
   color:var(--teal-deep);letter-spacing:-.01em;
 }
 p{margin:0;}
@@ -22,7 +22,7 @@ a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
 .eyebrow{
-  font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  font-size:var(--fs-sm);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--gold-deep);margin-bottom:16px;
 }
 
@@ -32,8 +32,8 @@ img{max-width:100%;display:block;}
 /* Section primitives */
 section.block{padding:88px 0;}
 .sec-head{text-align:center;max-width:720px;margin:0 auto 54px;}
-.sec-head h2{font-size:clamp(30px,3.2vw,44px);}
-.sec-head p{font-size:20px;color:var(--ink-soft);margin-top:16px;text-wrap:pretty;}
+.sec-head h2{font-size:var(--fs-section);}
+.sec-head p{font-size:var(--fs-base);color:var(--ink-soft);margin-top:16px;text-wrap:pretty;}
 
 /* Cards grid (közös) */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -46,7 +46,7 @@ section.block{padding:88px 0;}
   display:grid;place-items:center;text-align:center;color:#9a9384;
 }
 .ph .ph-label{
-  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13.5px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:var(--fs-sm);
   background:rgba(255,255,255,.82);border:1px dashed #c9c0b0;border-radius:10px;
   padding:10px 16px;max-width:80%;line-height:1.45;color:#80796a;
 }

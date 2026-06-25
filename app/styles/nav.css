@@ -23,10 +23,10 @@ header.nav.scrolled{
 .logo-text{display:flex;flex-direction:column;line-height:1;}
 .logo-text b{
   font-family:var(--font-playfair),"Playfair Display",serif;
-  font-size:23px;font-weight:700;color:var(--teal-deep);letter-spacing:.02em;
+  font-size:var(--fs-2xl);font-weight:700;color:var(--teal-deep);letter-spacing:.02em;
 }
 .logo-text span{
-  font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
+  font-size:var(--fs-2xs);letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-soft);font-weight:600;margin-top:3px;
 }
 
@@ -36,7 +36,7 @@ header.nav.scrolled{
 /* Nav menu */
 .nav-menu{display:flex;align-items:center;gap:30px;}
 .nav-link{
-  font-weight:600;font-size:16px;color:var(--teal-deep);
+  font-weight:600;font-size:var(--fs-base);color:var(--teal-deep);
   position:relative;padding:4px 0;transition:color .18s ease;
 }
 .nav-link::after{
@@ -51,14 +51,14 @@ header.nav.scrolled{
 .nav-right{display:flex;align-items:center;gap:22px;}
 .nav-phone{
   display:flex;align-items:center;gap:10px;
-  font-weight:700;font-size:19px;color:var(--teal-deep);white-space:nowrap;
+  font-weight:700;font-size:var(--fs-xl);color:var(--teal-deep);white-space:nowrap;
 }
 .nav-phone .ic{
   width:34px;height:34px;border-radius:50%;background:var(--teal-soft);
   display:grid;place-items:center;
 }
 .nav-phone small{
-  display:block;font-size:12px;font-weight:600;letter-spacing:.04em;
+  display:block;font-size:var(--fs-2xs);font-weight:600;letter-spacing:.04em;
   color:var(--ink-soft);text-transform:uppercase;
 }
 
@@ -77,7 +77,7 @@ header.nav.scrolled{
 .nav-mobile-panel.open{opacity:1;visibility:visible;transform:translateY(0);}
 .nav-mlink{
   align-self:center;position:relative;
-  padding:14px 6px;font-weight:700;font-size:17px;color:var(--teal-deep);
+  padding:14px 6px;font-weight:700;font-size:var(--fs-base);color:var(--teal-deep);
   text-align:center;
 }
 .nav-mlink::after{

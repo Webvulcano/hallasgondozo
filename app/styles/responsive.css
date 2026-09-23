@@ -1,5 +1,19 @@
 /* Responsive breakpoints + a11y reduced motion */
 
+/* Fejléc-skála mobil-lépcsője — a tokens.css statikus (desktop) fejléc-értékeit
+   írja felül itt, egyetlen custom-property-szinten. Nem kell hozzá komponens-CSS
+   módosítás: minden var(--fs-page-title) stb. hivatkozás automatikusan a kisebb,
+   ugyancsak arányos-skála-lépcsőt kapja ≤1000px alatt. */
+@media (max-width:1000px){
+  :root{
+    --fs-page-title:  1.953rem;  /* 31.25px (desktop: 3.052rem / 48.83px) */
+    --fs-section:     1.5625rem; /* 25px    (desktop: 2.441rem / 39.06px) */
+    --fs-subsection:  1.25rem;   /* 20px    (desktop: 1.953rem / 31.25px) */
+    --fs-stat:        1.5625rem; /* 25px    (desktop: 1.953rem / 31.25px) */
+    --fs-display-num: 1.953rem;  /* 31.25px (desktop: 2.441rem / 39.06px) */
+  }
+}
+
 @media (max-width:900px){
   .hero-grid,.offer-grid,.book-grid{grid-template-columns:1fr;}
   .hero-grid{gap:32px;}
@@ -47,9 +61,10 @@
   .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
   .hero-google{order:5;}
 
-  /* Másodlagos elemek el - trust-jel a Google-pill */
+  /* Másodlagos elemek el - trust-jel a Google-pill (csak a hero-ban;
+     a .services .trust-row — a 2 pipa — minden nézetben látszódjon). */
   .reassure{display:none;}
-  .trust-row{display:none;}
+  .hero .trust-row{display:none;}
 
   .hero-cta .btn-gold{width:100%;}
 
@@ -77,6 +92,34 @@
   .offer-card{padding:24px;}
 }
 
+/* Csapat-kártyák — a ≤900px 1-oszlopos (fenti) állapotot rögtön felülírja
+   ez, hogy ne legyen "köztes" (desktop 3 vs mobil 2 közti) állapot: a
+   szekció mindig vagy a desktop 3-oszlopos, vagy ez a kompakt 2-oszlopos
+   nézet, sosem az 1-oszlopos átmenet. */
+@media (max-width:900px){
+  .team .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  /* Dr. Vasvári (2. gyerek) egyedül az 1. sorban, középen; a másik kettő
+     a 2. sorba kerül (2/sor). A kártya szélessége = egy oszlop szélessége
+     (pontosan egyezik a testvér-kártyákkal), KIVÉVE ha ez kisebb lenne
+     mint 200px (nagyon szűk mobilon) — akkor a 200px-es minimum tartja
+     meg a névnek szükséges helyet. max(): a nagyobb érték nyer, így
+     széles nézetben egységes méret, szűkön nem törik a név. */
+  .tcard:nth-child(2){
+    grid-column:1/-1;order:-1;justify-self:center;
+    width:max(calc(50% - 5px), 200px);
+  }
+  /* Vasvári neve ne törjön sorba. Mivel a kártyának most explicit
+     szélessége van (nem fit-content), a fotó/role nem tudja azt
+     "szélesre nyújtani" — nincs szükség a role/ph max-width trükkökre. */
+  .tcard:nth-child(2) h3{white-space:nowrap;}
+  .tcard:nth-child(2) .ph{width:100%;}
+  .tcard .ph{aspect-ratio:1/1;}
+  .tcard .body{padding:10px 8px 12px;}
+  .tcard h3{font-size:var(--fs-base);line-height:1.25;}
+  .tcard .role{font-size:var(--fs-sm);margin:3px 0 0;letter-spacing:.01em;}
+  .tcard p{display:none;}
+}
+
 @keyframes heroIn{
   from{opacity:0;transform:translateY(16px);}
   to{opacity:1;transform:none;}
@@ -87,5 +130,6 @@
   .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none;}
   .hero h1,.hero .sub,.hero-img-wrap,.hero-cta,.hero-google{animation:none;}
   .faq-a-wrap{transition:none;}
+  .jcard,.jcard-panel-wrap,.jcard-panel,.jcard-plus,.jcard-text,.jcard-media{transition:none;}
   html{scroll-behavior:auto;}
 }

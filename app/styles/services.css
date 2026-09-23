@@ -21,3 +21,35 @@
   font-size:var(--fs-xs);font-weight:700;letter-spacing:.05em;text-transform:uppercase;
   color:var(--gold-deep);background:#FBF1D8;padding:5px 12px;border-radius:999px;
 }
+
+/* Services-specifikus könnyítés - csak ezt a szekciót érinti, a /keszulekek
+   kategória-grid és egyéb .card/.ic-badge felhasználók az eredeti méretet kapják */
+.services .cards{grid-template-columns:repeat(4,1fr);}
+.services .card{
+  padding:24px 22px;box-shadow:none;
+}
+/* Nincs hover/tap-effekt ezeknél a kártyáknál (a base .card:hover felugró
+   translateY + árnyék itt nem kell — érintőn tap-re is "beragadt" hoverként
+   jelent meg). */
+.services .card:hover{transform:none;box-shadow:none;border-color:var(--line);}
+.services .ic-badge{width:56px;height:56px;border-radius:15px;margin-bottom:18px;}
+.services .ic-badge svg{width:28px;height:28px;}
+.services .card h3{margin-bottom:8px;}
+.services .card p{font-size:var(--fs-base);}
+.services .trust-row{justify-content:center;margin-top:36px;}
+
+@media (max-width:1080px){
+  .services .cards{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:640px){
+  .services .sec-head p{display:none;}
+  /* minmax(0,1fr): sima 1fr a hosszú szó/szöveg miatt túlnyújtaná az
+     oszlopot a viewporton túlra (grid alap-min automatikusan max-content) */
+  .services .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .services .card{padding:16px 14px;}
+  .services .ic-badge{width:44px;height:44px;border-radius:12px;margin-bottom:12px;}
+  .services .ic-badge svg{width:22px;height:22px;}
+  /* Alap méret (--fs-base, mint a leírás-szöveg) — nem a normál --fs-2xl
+     cím (túl nagy 2 oszlopban), de nem is kisebb mint a törzsszöveg. */
+  .services .card h3{font-size:var(--fs-base);margin-bottom:6px;}
+}

@@ -6,7 +6,7 @@ body{
   margin:0;
   overflow-x:clip;
   font-family:var(--font-source-sans),"Source Sans 3",system-ui,sans-serif;
-  font-size:var(--fs-lg);
+  font-size:var(--fs-base);
   line-height:var(--lh-base);
   color:var(--ink);
   background:var(--cream);

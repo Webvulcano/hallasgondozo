@@ -3,6 +3,7 @@ import Footer from '../../components/Footer'
 import Reveal from '../../components/Reveal'
 import Button from '../../components/Button'
 import { Icon, Check } from '../../components/icons'
+import SkeletonImage from '../../components/SkeletonImage'
 import { categories, brandBoxes } from '../../lib/content/devices'
 import { BOOKING_URL } from '../../lib/constants'
 
@@ -55,7 +56,11 @@ export default function DevicesPage() {
                     </div>
                     <div className="ksphere-media">
                       <div className="ph">
-                        <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
+                        {b.image ? (
+                          <SkeletonImage src={b.image} alt={b.imageAlt} className="ksphere-img" />
+                        ) : (
+                          <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
+                        )}
                       </div>
                     </div>
                   </div>

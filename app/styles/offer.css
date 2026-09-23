@@ -43,7 +43,8 @@
   background:#fff;border-radius:22px;padding:34px;
   color:var(--ink);box-shadow:var(--shadow-lg);text-align:center;
 }
-.offer-card .ph{aspect-ratio:4/3;margin-bottom:22px;}
+.offer-card .ph{aspect-ratio:4/3;margin-bottom:22px;display:block;}
+.offer-img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;}
 .offer-card .was{color:var(--ink-soft);text-decoration:line-through;font-size:var(--fs-lg);}
 .offer-card .now{
   font-family:var(--font-playfair),"Playfair Display",serif;

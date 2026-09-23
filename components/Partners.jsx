@@ -22,7 +22,7 @@ export default function Partners() {
   return (
     <Reveal as="div" className="partners">
       <div className="wrap">
-        <h4>Egészségpénztárral is elszámolható - ezekkel is:</h4>
+        <h4>Egészségpénztárral is elszámolható:</h4>
       </div>
       <div className="pmarquee-wrap">
         <TestiTicker cls="pmarquee">{allBadges}</TestiTicker>

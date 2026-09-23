@@ -1,7 +1,216 @@
-/* Páciens-út — "Lépésről lépésre" függőleges timeline.
-   A lenyíló mechanika az accordion.css-ben; itt csak a timeline-egyedi vizuál. */
+/* Páciens-út — "Lépésről lépésre" stacked-card deck.
+   Csak kattintásra nyit/zár — NINCS scroll-hijacking/sticky, a lap simán görgethető.
+   Régi (accordion-timeline, kép nélküli) verzió kikommentezve a fájl alján. */
 
-.journey { background: var(--cream); }
+.journey { background: #fff; }
+
+.jdeck {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+/* A kártya egyetlen lapként néz ki: border/radius/shadow MOST a külső .jcard-on
+   van, .jcard-band és .jcard-panel csak sima, szín nélküli/keret nélküli
+   téglalapok belül — az overflow:hidden vágja őket a li lekerekített formájára,
+   így a színes fejléc és a fehér tartalom varrat/rés nélkül folyik egymásba. */
+.jcard {
+  position: relative;
+  scroll-margin-top: 90px; /* kattintásra ide scrollozunk — sticky nav alá */
+  margin-top: -14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: margin .35s cubic-bezier(.22,.61,.36,1);
+}
+.jcard:first-child { margin-top: 0; }
+.jcard.is-open { margin: 10px 0; z-index: 5; }
+
+/* Becsukott sáv — mindig látszik, ez a kattintás-célpont */
+.jcard-band {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  border: none;
+  background: var(--journey-1);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+.jcard-1 .jcard-band { background: var(--journey-1); }
+.jcard-2 .jcard-band { background: var(--journey-2); }
+.jcard-3 .jcard-band { background: var(--journey-3); }
+.jcard-4 .jcard-band { background: var(--journey-4); }
+.jcard-5 .jcard-band { background: var(--journey-5); color: #fff; }
+
+.jcard-num {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.6);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-weight: 700;
+  font-size: var(--fs-base);
+  color: var(--teal-deep);
+}
+.jcard-5 .jcard-num { background: rgba(255,255,255,.18); color: #fff; }
+
+.jcard-title {
+  flex: 1;
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  color: var(--teal-deep);
+}
+.jcard-5 .jcard-title { color: #fff; }
+
+/* Csak mobilon (≤500px) kényszerít sortörést a badge elé — ld. lent. */
+.jcard-break { flex-basis: 0; width: 0; height: 0; }
+
+.jcard-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+.jcard-plus {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.6);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-2xl);
+  line-height: 1;
+  color: var(--teal-deep);
+  transition: transform .25s ease;
+}
+.jcard-5 .jcard-plus { background: rgba(255,255,255,.18); color: #fff; }
+.jcard.is-open .jcard-plus { transform: rotate(90deg); }
+
+/* Kibontott tartalom — grid 0fr -> 1fr trükk, ez adja a legördülés/becsukódás
+   animációt kattintásra. */
+.jcard-panel-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .35s cubic-bezier(.22,.61,.36,1);
+}
+.jcard.is-open .jcard-panel-wrap { grid-template-rows: 1fr; }
+
+/* A padding NEM animál (csak a magasság, ld. fent) — a szöveg/kép opacity-je
+   is azonnal (0s) vált, így nincs "oldalsó behúzás" (padding-mozgás) érzet,
+   csak a doboz nő/zsugorodik. Se border, se radius, se saját shadow: azt a
+   külső .jcard adja, így a fejléc és a tartalom egyetlen lapként folyik egybe. */
+.jcard-panel {
+  overflow: hidden;
+  min-height: 0;
+  padding: 24px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.jcard:not(.is-open) .jcard-panel {
+  padding: 0;
+}
+
+/* Szöveg/kép nincs animálva — csukott állapotban azonnal eltűnik (a doboz
+   magassága/paddingje továbbra is animál, csak a tartalom-fade nem kell). */
+.jcard:not(.is-open) .jcard-text,
+.jcard:not(.is-open) .jcard-media {
+  opacity: 0;
+}
+
+.jcard-text > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* display:block felülírja a base.css .ph "display:grid;place-items:center"-jét,
+   különben a kép height:100%-a nem érvényesül (ld. Team/Offer .ph override). */
+.jcard-media .ph { aspect-ratio: 4/3; display: block; }
+.jcard-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.jcard-1 .jcard-img { object-position: center 40%; }
+.jcard-3 .jcard-img { object-position: center 48%; }
+.jcard-5 .jcard-img { object-position: center 10%; }
+
+/* Al-lépések (a 2. lépés négy pontja) */
+.jsub {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.jsub li { padding-left: 0; }
+.jsub b {
+  display: block;
+  font-size: var(--fs-md);
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.jsub span {
+  display: block;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.journey-cta {
+  text-align: center;
+  margin-top: 36px;
+}
+
+/* Mobil */
+@media (max-width: 500px) {
+  .jcard { margin-top: -10px; }
+  .jcard-band { gap: 10px; padding: 13px 16px; flex-wrap: wrap; }
+  .jcard-num { width: 28px; height: 28px; font-size: var(--fs-sm); order: 1; }
+  .jcard-title { font-size: var(--fs-base); order: 2; }
+  .jcard-plus { order: 3; }
+  /* Kényszerített sortörés a plusz és a badge közt: flex-basis:100% mindig
+     a saját sorára tolja a badge-et, FÜGGETLENÜL attól hogy elférne-e még
+     a plusz mellett (ez volt a hiba: néha befért, és a "+" a cím és a
+     badge közé csúszott, nem a jobb szélére). */
+  .jcard-break { order: 4; flex-basis: 100%; height: 0; }
+  /* A badge (pl. "Min. 15 nap, ingyenes") a cím alá kerül, saját sorba
+     törve — de csak a felirat szélességét foglalja el (flex:0 0 auto). */
+  .jcard-badge { order: 5; flex: 0 0 auto; margin: 6px 0 0 38px; }
+  /* Kép a szöveg alá kerül (nagy kép), csak ≤500px alatt — fölötte a
+     szöveg+kép egymás mellett (kicsi kép), ld. journey.css alap szabálya. */
+  .jcard-panel { padding: 18px; grid-template-columns: 1fr; gap: 20px; }
+  .jcard-media { order: 2; }
+  .jcard-text { order: 1; }
+  .jcard-text > p { font-size: var(--fs-md); }
+  .journey-cta { margin-top: 24px; }
+}
+
+/* ============================================================
+   RÉGI VERZIÓ (accordion-timeline, kép nélkül) — megőrizve,
+   ha vissza kéne állítani (a hozzá tartozó JSX is kikommentezve
+   a Journey.jsx fájl alján).
+   ============================================================
 
 .journey-timeline {
   position: relative;
@@ -19,8 +228,6 @@
 }
 .jstep:last-child { padding-bottom: 0; }
 
-/* Rail-oszlop: a node a kártya FÜGGŐLEGES KÖZEPÉRE igazítva,
-   az összekötő vonal a node mögött, a lépések közti rést is áthidalva. */
 .jstep-rail {
   position: relative;
   flex: 0 0 46px;
@@ -35,11 +242,10 @@
   transform: translateX(-50%);
   width: 2px;
   top: 0;
-  bottom: -16px; /* áthidalja a .jstep padding-bottom rést a következő node-ig */
+  bottom: -16px;
   background: var(--line);
   z-index: 0;
 }
-/* Első node felett nincs vonal, az utolsó (5.) node alatt sincs */
 .jstep:first-child .jstep-rail::before { top: 50%; }
 .jstep:last-child .jstep-rail::before { bottom: 50%; }
 
@@ -60,21 +266,18 @@
   z-index: 1;
 }
 
-/* A kártya (acc-item bázison): a rail melletti rugalmas oszlop + 18px radius */
 .jstep-body {
   flex: 1;
   min-width: 0;
   border-radius: var(--r);
 }
 
-/* Fejléc — Journey-egyedi padding, nagyobb cím, badge mellé */
 .journey .acc-q { padding: 18px 24px; }
 .jstep-title {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  /* Accordion-kérdés szint — a FAQ-kérdéssel EGY méret, ne legyen nagyobb. */
   font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--teal-deep);
@@ -93,40 +296,8 @@
   white-space: nowrap;
 }
 
-/* Törzsszöveg: explicit a kártya-szint (17), KÜLÖNBEN a body 18-at örökölné
-   → a Journey nagyobbnak tűnt mint a többi szekció. */
 .journey .acc-a > p { font-size: var(--fs-base); line-height: 1.55; }
 
-/* Al-lépések (a 2. lépés négy pontja) */
-.jsub {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 12px;
-}
-.jsub li {
-  padding-left: 0;
-}
-.jsub b {
-  display: block;
-  font-size: var(--fs-md);
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.jsub span {
-  display: block;
-  font-size: var(--fs-md);
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.journey-cta {
-  text-align: center;
-  margin-top: 36px;
-}
-
-/* Mobil */
 @media (max-width: 560px) {
   .jstep { gap: 14px; padding-bottom: 12px; }
   .jstep-rail { flex: 0 0 36px; }
@@ -137,5 +308,6 @@
   .journey .acc-q { padding: 15px 18px; }
   .jstep-title { font-size: var(--fs-base); }
   .journey .acc-a > p { font-size: var(--fs-md); }
-  .journey-cta { margin-top: 24px; }
 }
+
+============================================================ */

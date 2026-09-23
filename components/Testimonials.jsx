@@ -28,8 +28,11 @@ function dupCards(items) {
 }
 
 export default function Testimonials() {
-  const top = testimonials.slice(0, 3)
-  const bottom = testimonials.slice(3, 6)
+  // Két sorra osztva, de MINDEN vélemény szerepeljen (korábban a 7.-et,
+  // "László Dénes"-t, kihagyta a fix slice(0,3)+slice(3,6)).
+  const half = Math.ceil(testimonials.length / 2)
+  const top = testimonials.slice(0, half)
+  const bottom = testimonials.slice(half)
 
   return (
     <section className="block testi" id="velemenyek">
@@ -54,7 +57,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Mobil-ticker - csak ≤560px-en látszik (CSS); auto-görgő + dragolható */}
+      {/* Mobil-ticker - csak ≤1000px-en látszik (CSS); auto-görgő + dragolható */}
       <div className="testi-marquees">
         <TestiTicker dir="left">{dupCards(top)}</TestiTicker>
         <TestiTicker dir="right">{dupCards(bottom)}</TestiTicker>

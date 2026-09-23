@@ -43,7 +43,8 @@
 .ksphere-list li{display:flex;align-items:flex-start;gap:11px;font-size:var(--fs-base);color:#fff;}
 .ksphere-list .check{background:var(--gold);}
 .ksphere-list .check svg{stroke:#3a1c00;}
-.ksphere .ph{aspect-ratio:4/3;}
+.ksphere .ph{aspect-ratio:4/3;display:block;}
+.ksphere-img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
 
 /* Forgalmazott márkák - egymás alatti termék-boxok */
 .kbrandbox + .kbrandbox{margin-top:28px;}

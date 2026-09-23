@@ -5,7 +5,7 @@ import createMDX from '@next/mdx'
 const nextConfig = {
   // .mdx oldal-/komponens-kiterjesztés is renderelhető
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
-  allowedDevOrigins: ['192.168.0.151'],
+  allowedDevOrigins: ['192.168.0.150', '192.168.0.151'],
   // /admin → átirányít a központi analytics-dashboard erted-tenantjára.
   // Redirect (nem proxy) → a dashboard a saját domainjén nyílik meg, így a
   // Google login tisztán működik. Csak ha DASHBOARD_URL be van állítva

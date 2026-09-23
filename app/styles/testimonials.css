@@ -1,14 +1,15 @@
 /* Testimonials szekció */
 
-.testi{background:#fff;}
+.testi{background:var(--cream);}
 .testi .cards{grid-template-columns:repeat(3,1fr);}
 .qcard{
-  background:var(--cream);border:1px solid var(--line);border-radius:var(--r);
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow-sm);
   padding:32px 30px;display:flex;flex-direction:column;
 }
 .stars{color:var(--gold);font-size:var(--fs-xl);letter-spacing:3px;margin-bottom:16px;}
 .qcard blockquote{
-  margin:0;font-size:var(--fs-lg);line-height:1.55;color:var(--ink);
+  margin:0;font-size:var(--fs-base);line-height:1.55;color:var(--ink);
   flex:1;text-wrap:pretty;
 }
 .qcard blockquote::before{
@@ -33,7 +34,7 @@
 /* Mobil-ticker - desktopon rejtett */
 .testi-marquees{display:none;}
 
-@media (max-width:560px){
+@media (max-width:1000px){
   .testi{max-height:100dvh;overflow:hidden;padding:40px 0;}
   .testi .cards{display:none;}
   .testi .sec-head{margin-bottom:22px;}

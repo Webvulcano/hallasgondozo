@@ -1,4 +1,5 @@
 import { team } from '../lib/content/team'
+import SkeletonImage from './SkeletonImage'
 
 export default function Team() {
   return (
@@ -7,16 +8,16 @@ export default function Team() {
         <div className="sec-head">
           <div className="eyebrow">Akikre rábízhatja magát</div>
           <h2>Orvos, audiológus, hallásakusztikus - egy csapatban</h2>
-          <p>
+          {/*<p>
             Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően -
             orvosi szakzsargon nélkül - kapja meg a választ.
-          </p>
+          </p>*/}
         </div>
         <div className="cards">
           {team.map((m) => (
             <div key={m.name} className="tcard">
               <div className="ph">
-                <span className="ph-label">[ KÉP: {m.imgAlt} ]</span>
+                <SkeletonImage src={m.img} alt={m.imgAlt} className="tcard-img" />
               </div>
               <div className="body">
                 <h3>{m.name}</h3>

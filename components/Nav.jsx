@@ -6,10 +6,10 @@ import ScrollEffect from './nav/ScrollEffect'
 import MobileMenu from './nav/MobileMenu'
 import NavLinks from './nav/NavLinks'
 
-export default function Nav() {
+export default function Nav({ overlay = false }) {
   return (
     <>
-      <header className="nav" id="nav">
+      <header className={`nav${overlay ? ' nav-overlay' : ''}`} id="nav">
         <div className="wrap nav-inner">
           <Link href="/" className="logo" aria-label={`${COMPANY.brand} ${COMPANY.brandSub} főoldal`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

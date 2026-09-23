@@ -1,5 +1,7 @@
+import Splash from '../components/Splash'
 import Nav from '../components/Nav'
 import Hero from '../components/Hero'
+import HeroVideo from '../components/HeroVideo'
 import Partners from '../components/Partners'
 import Services from '../components/Services'
 import Offer from '../components/Offer'
@@ -13,15 +15,17 @@ import Footer from '../components/Footer'
 export default function Home() {
   return (
     <>
-      <Nav />
+      <Splash />
+      <Nav overlay />
       <span id="top" />
-      <Hero />
+      {/* <Hero /> — régi hero kikommentezve, ideiglenes videó-hero fut helyette */}
+      <HeroVideo />
       <Partners />
       <Services />
-      <Offer />
+      {/* <Offer /> — nyári ajánlat kikommentezve */}
       <Team />
-      <Testimonials />
       <Journey />
+      <Testimonials />
       <Booking />
       <Faq />
       <Footer />

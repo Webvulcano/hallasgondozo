@@ -2,6 +2,7 @@ import { BOOKING_URL } from '../lib/constants'
 import { offer, offerFeatures } from '../lib/content/offer'
 import Button from './Button'
 import { Check } from './icons'
+import SkeletonImage from './SkeletonImage'
 
 export default function Offer() {
   const leadParts = offer.lead.split('{price}')
@@ -37,7 +38,7 @@ export default function Offer() {
         <div>
           <div className="offer-card">
             <div className="ph">
-              <span className="ph-label">[ KÉP: {offer.imageAlt} ]</span>
+              <SkeletonImage src={offer.image} alt={offer.imageAlt} className="offer-img" />
             </div>
             <div className="was">{offer.priceListLabel}</div>
             <div className="now">{offer.price}</div>

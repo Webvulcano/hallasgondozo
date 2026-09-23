@@ -1,5 +1,5 @@
-import { services } from '../lib/content/services'
-import { Icon } from './icons'
+import { services, servicesTrust } from '../lib/content/services'
+import { Icon, Check } from './icons'
 
 export default function Services() {
   return (
@@ -15,13 +15,20 @@ export default function Services() {
         </div>
         <div className="cards">
           {services.map((s) => (
-            <div key={s.title} className={`card${s.featured ? ' featured' : ''}`}>
-              {s.pill && <span className="pill">{s.pill}</span>}
+            <div key={s.title} className="card">
               <div className="ic-badge">
-                <Icon name={s.iconName} size={32} />
+                <Icon name={s.iconName} size={24} />
               </div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="trust-row">
+          {servicesTrust.map((item) => (
+            <div key={item} className="trust-item">
+              <span className="check"><Check size={14} stroke="#fff" /></span>
+              {item}
             </div>
           ))}
         </div>

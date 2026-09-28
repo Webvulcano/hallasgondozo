@@ -96,6 +96,7 @@ header.nav.nav-overlay.scrolled{
 .nav-mlink:hover::after,
 .nav-mlink.active::after{transform:scaleX(1);}
 .nav-mcta{margin-top:8px;width:100%;justify-content:center;}
+.nav-mphone{margin-top:8px;width:100%;justify-content:center;}
 
 .nav-backdrop{
   position:absolute;top:100%;left:0;right:0;height:100vh;z-index:54;

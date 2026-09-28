@@ -1,4 +1,4 @@
-import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL } from '../lib/constants'
+import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL, WEEK_HOURS } from '../lib/constants'
 import Button from './Button'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
@@ -11,13 +11,14 @@ const contactLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const today = new Date().getDay()
 
   return (
     <footer>
       <div className="wrap">
         <div className="foot-grid">
           {/* Col 1 - Brand */}
-          <div>
+          <div className="foot-col-brand">
             <div className="logo foot-logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -48,7 +49,7 @@ export default function Footer() {
           </div>
 
           {/* Col 2 - Contact */}
-          <div>
+          <div className="foot-col-contact">
             <h5>Elérhetőség</h5>
             <ul className="foot-list">
               {contactLinks.map((l) => (
@@ -63,11 +64,26 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="foot-hours foot-hours-mt">Nyitvatartás: {COMPANY.hours}</p>
           </div>
 
-          {/* Col 3 - CTA */}
-          <div>
+          {/* Col 3 - Nyitvatartás */}
+          <div className="foot-col-hours">
+            <h5>Nyitvatartás</h5>
+            <ul className="foot-hours-list">
+              {WEEK_HOURS.map((d) => {
+                const isToday = d.day === today
+                return (
+                  <li key={d.day} className={isToday ? 'is-today' : undefined}>
+                    <span>{isToday ? 'Ma' : d.label}</span>
+                    <span>{d.open ? `${d.open} - ${d.close}` : 'Zárva'}</span>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          {/* Col 4 - CTA */}
+          <div className="foot-col-cta">
             <h5>Foglaljon időpontot</h5>
             <div className="foot-cta">
               <Button variant="gold" href={BOOKING_URL}>

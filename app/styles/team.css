@@ -5,9 +5,7 @@
 .tcard{
   background:#fff;border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;box-shadow:var(--shadow-sm);
-  transition:transform .2s ease,box-shadow .2s ease;
 }
-.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
 .tcard .ph{
   border-radius:0;border:none;border-bottom:1px solid var(--line);
   aspect-ratio:4/3.4;box-shadow:none;display:block;

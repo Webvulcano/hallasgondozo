@@ -33,21 +33,50 @@ export default function PrivacyPage() {
           Az adatokat kizárólag a kérelmező visszahívása céljából használjuk fel.
         </p>
 
-        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>3. Adatkezelés célja</h2>
-        <p>Visszahívás kezdeményezése, időpontfoglalás egyeztetése.</p>
+        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>3. Adatkezelés célja és jogalapja</h2>
+        <p>
+          Visszahívás kezdeményezése, időpontfoglalás egyeztetése. Az adatkezelés jogalapja az
+          Ön önkéntes hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), amelyet az űrlap
+          elküldésével, a jelölőnégyzet bejelölésével ad meg.
+        </p>
 
-        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Adatkezelés időtartama</h2>
-        <p>Az adatokat a kapcsolatfelvétel lezárását követő 30 napon belül töröljük.</p>
+        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Adatfeldolgozók</h2>
+        <p>
+          Az űrlapon megadott adatokat az alábbi adatfeldolgozók közreműködésével kezeljük:
+        </p>
+        <ul style={{ paddingLeft: '20px', marginBottom: '12px' }}>
+          <li>
+            <strong>Airtable</strong> (Formagrid Inc., USA) — az adatok átmeneti tárolására,
+            az EU Standard Contractual Clauses (SCC) alapján, amely biztosítja a GDPR-nak
+            megfelelő adattovábbítást az Európai Unión kívülre.
+          </li>
+          <li>
+            <strong>Google (Gmail)</strong> — az Airtable-hez kapcsolt automatizáció az új
+            visszahívás-kérésekről értesítő e-mailt Gmailen keresztül továbbítja a weboldal
+            üzemeltetőjének.
+          </li>
+        </ul>
+        <p>
+          Az adatokat weboldal-üzemeltető partnerünk Airtable-fiókján keresztül dolgozzuk fel,
+          vele adatfeldolgozási megállapodás van érvényben.
+        </p>
 
-        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Érintetti jogok</h2>
+        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Adatkezelés időtartama</h2>
+        <p>
+          Az űrlapkitöltés beérkezésétől számított 30 napon belül az adatokat (név,
+          telefonszám, megjegyzés) automatikusan töröljük.
+        </p>
+
+        <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>6. Érintetti jogok</h2>
         <p>
           Ön bármikor kérheti adatainak helyesbítését, törlését vagy az adatkezelés korlátozását
-          a fenti e-mail címen.
+          a fenti e-mail címen, valamint panasszal élhet a Nemzeti Adatvédelmi és
+          Információszabadság Hatóságnál (NAIH, naih.hu).
         </p>
 
         <p style={{ marginTop: '40px', padding: '20px', background: 'var(--teal-soft)', borderRadius: '12px', color: 'var(--teal-deep)' }}>
-          <strong>Megjegyzés:</strong> Ez egy placeholder szöveg. Jogi szakember által véglegesített
-          szabályzat szükséges éles használathoz.
+          <strong>Megjegyzés:</strong> Jogi szakember általi ellenjegyzés javasolt éles
+          használat előtt.
         </p>
       </div>
     </main>

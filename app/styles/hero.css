@@ -85,6 +85,7 @@
   position:relative;
   width:100%;
   aspect-ratio:16/9;
+  min-height:60svh;
   max-height:calc(100svh - 88px);
   border-radius:28px;
   overflow:hidden;
@@ -127,6 +128,18 @@
 }
 .hero-logo-corner.is-visible{opacity:1;}
 .hero-logo-corner-img{height:76px;width:auto;display:block;}
+
+@media (max-width:1200px){
+  .hero-video-title{font-size:var(--fs-hero-mobile);}
+}
+
+@media (max-width:900px){
+  .hero-logo-corner-img{height:58px;}
+}
+
+@media (max-width:667px){
+  .hero-video-phone-btn{display:none;}
+}
 
 @media (max-width:640px){
   .hero-video{padding:12px;}

@@ -35,7 +35,7 @@
 .testi-marquees{display:none;}
 
 @media (max-width:1000px){
-  .testi{max-height:100dvh;overflow:hidden;padding:40px 0;}
+  .testi{padding:40px 0;}
   .testi .cards{display:none;}
   .testi .sec-head{margin-bottom:22px;}
   .testi-cta{margin-top:22px;}

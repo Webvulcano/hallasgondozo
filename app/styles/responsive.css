@@ -28,8 +28,19 @@
   section.block{padding:64px 0;}
   .hero{padding:20px 0 56px;}
   .book-grid{gap:18px;}
-  .foot-grid{grid-template-columns:1fr;gap:34px;}
 
+  /* Tablet: Elérhetőség + Nyitvatartás egymás mellett, Brand/CTA teljes szélességben */
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px;}
+  .foot-col-brand,.foot-col-cta{grid-column:1 / -1;}
+}
+
+@media (max-width:640px){
+  .foot-grid{grid-template-columns:1fr;}
+  .foot-col-brand,.foot-col-cta{grid-column:auto;}
+}
+
+@media (max-width:1200px){
+  .hero h1{font-size:var(--fs-hero-mobile);line-height:1.18;}
 }
 
 @media (max-width:1000px){

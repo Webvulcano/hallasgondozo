@@ -2,7 +2,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BOOKING_URL } from '../../lib/constants'
+import { BOOKING_URL, PHONE } from '../../lib/constants'
+import Button from '../Button'
+import { Phone } from '../icons'
 
 // Hamburger-menü ≤900px-en - Főoldal, Termékek, Időpont foglalás (CTA)
 export default function MobileMenu() {
@@ -125,6 +127,15 @@ export default function MobileMenu() {
         >
           Időpont foglalás
         </a>
+        <Button
+          variant="outline"
+          href={PHONE.href}
+          icon={<Phone size={17} />}
+          className="nav-mphone"
+          onClick={close}
+        >
+          {PHONE.display}
+        </Button>
       </div>
     </>
   )

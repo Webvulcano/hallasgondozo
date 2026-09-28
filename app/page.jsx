@@ -20,10 +20,10 @@ export default function Home() {
       <span id="top" />
       {/* <Hero /> — régi hero kikommentezve, ideiglenes videó-hero fut helyette */}
       <HeroVideo />
-      <Partners />
       <Services />
       {/* <Offer /> — nyári ajánlat kikommentezve */}
       <Team />
+      <Partners />
       <Journey />
       <Testimonials />
       <Booking />

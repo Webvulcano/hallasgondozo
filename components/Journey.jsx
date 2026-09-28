@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { journeySteps } from '../lib/content/journey'
 import Button from './Button'
 import SkeletonImage from './SkeletonImage'
@@ -27,10 +27,31 @@ const STEP_IMG_FILE = { 1: '1', 2: '2', 3: '3A', 4: '4A', 5: '5' }
 const stepImg = (n) => `/pic/lepesrol_lepesre/${STEP_IMG_FILE[n]}.JPG`
 
 export default function Journey() {
-  // 1. lépés alapból nyitva; a sorrend 1→5 (fent 1, lent 5).
-  const [openStep, setOpenStep] = useState(1)
+  // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a
+  // felhasználó a szekció közepéig görget (IntersectionObserver, lent).
+  const [openStep, setOpenStep] = useState(-1)
   const isOpen = (n) => openStep === n
   const cardRefs = useRef({})
+  const bottomRef = useRef(null)
+  const autoOpened = useRef(false)
+
+  useEffect(() => {
+    const el = bottomRef.current
+    if (!el) return
+    // Akkor nyíljon az 1. lépés, amikor a nézet leér a szekció aljára
+    // (egy őrszem-elem a szekció végén ér be a viewportba).
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !autoOpened.current) {
+          autoOpened.current = true
+          setOpenStep(1)
+        }
+      },
+      { threshold: 0 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   const toggle = (n) => {
     const willOpen = openStep !== n
     setOpenStep((cur) => (cur === n ? -1 : n))
@@ -121,6 +142,7 @@ export default function Journey() {
             Foglaljon ingyenes hallásvizsgálatot
           </Button>
         </div>
+        <div ref={bottomRef} className="journey-bottom-sentinel" aria-hidden="true" />
       </div>
     </section>
   )

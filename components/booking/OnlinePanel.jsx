@@ -18,7 +18,7 @@ export default function OnlinePanel() {
       </div>
       <div className="or-split">VAGY</div>
       <Button variant="ghost-light" href={PHONE.href} fullWidth icon={<Phone size={19} />}>
-        Inkább telefonálok: {PHONE.display}
+        Inkább telefonálok: <span style={{ whiteSpace: 'nowrap' }}>{PHONE.display}</span>
       </Button>
     </Reveal>
   )

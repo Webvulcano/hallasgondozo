@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useCallbackForm } from '../../lib/hooks/useCallbackForm'
 import Button from '../Button'
 import Reveal from '../Reveal'
@@ -10,12 +11,12 @@ export default function CallbackPanel() {
   return (
     <Reveal direction="right" className="book-panel">
       <h3>Inkább felhívjuk Önt</h3>
-      <p className="small">Adja meg telefonszámát - kollégánk munkaidőben 2 órán belül visszahívja.</p>
+      <p className="small">Adja meg telefonszámát - kollégánk munkaidőben hamarosan visszahívja.</p>
 
       {submitted ? (
         <div className="form-success show" role="status" aria-live="polite">
           <span className="check"><Check size={22} stroke="#fff" /></span>
-          Köszönjük! Kollégánk munkaidőben 2 órán belül hívja Önt.
+          Köszönjük! Kollégánk munkaidőben hamarosan hívja Önt.
         </div>
       ) : (
         <form noValidate onSubmit={handleSubmit}>
@@ -64,6 +65,24 @@ export default function CallbackPanel() {
             className="honeypot"
             aria-hidden="true"
           />
+          <div className="field field-checkbox">
+            <label htmlFor="cf-consent" className="checkbox-label">
+              <input
+                id="cf-consent"
+                name="consent"
+                type="checkbox"
+                required
+                aria-invalid={!!fieldErrors.consent}
+              />
+              <span>
+                Elolvastam és elfogadom az{' '}
+                <Link href="/adatvedelem" target="_blank" rel="noopener noreferrer">
+                  Adatvédelmi Szabályzatot
+                </Link>.
+              </span>
+            </label>
+            {fieldErrors.consent && <p className="field-error">{fieldErrors.consent}</p>}
+          </div>
           {error && <p className="form-error" role="alert">{error}</p>}
           <Button variant="gold" type="submit" fullWidth disabled={submitting}>
             {submitting ? 'Küldés…' : 'Visszahívást kérek'}

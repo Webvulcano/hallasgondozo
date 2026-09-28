@@ -26,10 +26,19 @@ export default function NavLinks() {
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
+  // Kapcsolat: a főoldalon görgessünk a szekcióra (a hash-Link itt nem ugrik)
+  const onKapcsolat = (e) => {
+    if (!onHome) return
+    const el = document.getElementById('idopont')
+    if (!el) return
+    e.preventDefault()
+    el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const links = [
     { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
     { href: '/keszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
-    { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat' },
+    { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat', onClick: onKapcsolat },
     { href: '/blog', label: 'Blog', active: onBlog, onClick: onBlog ? scrollTop : undefined },
   ]
 

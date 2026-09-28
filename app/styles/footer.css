@@ -2,7 +2,7 @@
 
 footer{background:#182d09;color:rgba(255,255,255,.78);padding:64px 0 0;}
 .foot-grid{
-  display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:48px;
+  display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;
 }
 footer h5{
   font-family:var(--font-playfair),"Playfair Display",serif;
@@ -26,8 +26,14 @@ footer a:hover{color:var(--gold);}
 .foot-list .ic{color:var(--gold);flex:0 0 auto;}
 
 .foot-cta{display:grid;gap:14px;}
-.foot-hours{font-size:var(--fs-base);color:rgba(255,255,255,.7);}
-.foot-hours-mt{margin-top:18px;}
+
+.foot-hours-list{
+  list-style:none;padding:0;margin:0;display:grid;gap:11px;
+  font-size:var(--fs-base);color:rgba(255,255,255,.62);
+  max-width:280px;
+}
+.foot-hours-list li{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.foot-hours-list li.is-today{color:#fff;font-weight:700;}
 
 .foot-bottom{
   border-top:1px solid rgba(255,255,255,.12);padding:22px 0;

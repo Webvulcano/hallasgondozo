@@ -1,11 +1,9 @@
 'use server'
 
 import { validateCallback } from '../../lib/validation'
-import { COMPANY } from '../../lib/constants'
 
 // Visszahívás form server action
-// Resend API-t használ az email küldéshez (https://resend.com)
-// Setup: töltsd ki .env.local-t a .env.example alapján
+// Az adatok Airtable-be mentődnek; az értesítő emailt Airtable automation küldi Gmailen keresztül.
 
 export async function submitCallback(formData) {
   // FormData → object
@@ -14,6 +12,7 @@ export async function submitCallback(formData) {
     phone: formData.get('phone'),
     note: formData.get('note'),
     website: formData.get('website'), // honeypot
+    consent: formData.get('consent'),
   }
 
   const result = validateCallback(data)
@@ -28,57 +27,55 @@ export async function submitCallback(formData) {
 
   const { name, phone, note } = result.data
 
-  // Email küldés - fejlesztés alatt csak log
-  const apiKey = process.env.RESEND_API_KEY
-  const notifyEmail = process.env.NOTIFY_EMAIL
-  const fromEmail = process.env.FROM_EMAIL
+  const saved = await saveToAirtable({ name, phone, note })
 
-  if (!apiKey || !notifyEmail || !fromEmail) {
-    console.warn('[submitCallback] Hiányzó env változó - email küldés kihagyva')
+  if (!saved) {
+    return { ok: false, errors: { _server: 'Sikertelen küldés. Kérjük hívjon minket telefonon.' } }
+  }
+
+  return { ok: true }
+}
+
+// Airtable - "Hallasgondozó" base, "űrlap - weboldal" tábla
+const AIRTABLE_BASE_ID = 'appyWkgf1zGGSUCGa'
+const AIRTABLE_TABLE_ID = 'tbla3a7TBqiEHzxun'
+
+async function saveToAirtable({ name, phone, note }) {
+  const apiKey = process.env.AIRTABLE_API_KEY
+  if (!apiKey) {
+    console.warn('[submitCallback] Hiányzó AIRTABLE_API_KEY - Airtable mentés kihagyva')
     console.log('[submitCallback] Új visszahívás kérés:', { name, phone, note })
-    return { ok: true }
+    return true
   }
 
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: notifyEmail,
-        subject: `Új visszahívás kérés - ${name}`,
-        html: `
-          <h2>Új visszahívás kérés</h2>
-          <p><strong>Név:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Telefon:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></p>
-          ${note ? `<p><strong>Megjegyzés:</strong><br>${escapeHtml(note).replace(/\n/g, '<br>')}</p>` : ''}
-          <hr>
-          <p style="font-size:12px;color:#666;">Küldve: ${COMPANY.brand} ${COMPANY.brandSub} weboldalról</p>
-        `,
-      }),
-    })
+    const res = await fetch(
+      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: {
+            Név: name,
+            Telefonszám: phone,
+            Megjegyzés: note || '',
+          },
+        }),
+      }
+    )
 
     if (!res.ok) {
       const errText = await res.text()
-      console.error('[submitCallback] Resend hiba:', res.status, errText)
-      return { ok: false, errors: { _server: 'Sikertelen küldés. Kérjük hívjon minket telefonon.' } }
+      console.error('[submitCallback] Airtable hiba:', res.status, errText)
+      return false
     }
 
-    return { ok: true }
+    return true
   } catch (err) {
-    console.error('[submitCallback] Hiba:', err)
-    return { ok: false, errors: { _server: 'Sikertelen küldés. Kérjük hívjon minket telefonon.' } }
+    console.error('[submitCallback] Airtable hiba:', err)
+    return false
   }
-}
-
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
 }

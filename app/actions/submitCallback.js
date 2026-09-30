@@ -46,7 +46,7 @@ async function sendToSimplyForms({ name, phone, note }) {
 
   // A kulcsok nevei jelennek meg az értesítő emailben
   const body = new FormData()
-  body.append('subject', `ŰRLAPKITÖLTÉS - vissza kell hívni: ${name}`) // email tárgya
+  body.append('subject', `ŰRLAPKITÖLTÉS - visszahívást kér: ${name}`) // email tárgya
   body.append('Név', name)
   body.append('Telefonszám', phone)
   body.append('Megjegyzés', note || '')

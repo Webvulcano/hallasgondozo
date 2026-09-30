@@ -36,6 +36,7 @@
   font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;
   padding:7px 15px;border-radius:999px;
 }
+.ksphere h1,
 .ksphere h2,
 .ksphere h3{color:#fff;font-size:var(--fs-subsection);margin:14px 0 13px;}
 .ksphere p{color:rgba(255,255,255,.92);font-size:var(--fs-lg);margin-bottom:20px;text-wrap:pretty;}
@@ -46,19 +47,33 @@
 .ksphere .ph{aspect-ratio:4/3;display:block;}
 .ksphere-img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
 
-/* Forgalmazott márkák - egymás alatti termék-boxok */
-.kbrandbox + .kbrandbox{margin-top:28px;}
+/* Forgalmazott márkák - egy sorban, kép + név kártyák */
+.kbrand-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.kbrand-card-wrap{display:block;height:100%;}
+.kbrand-card{
+  display:flex;flex-direction:column;height:100%;
+  background:#fff;border-radius:18px;overflow:hidden;
+  box-shadow:var(--shadow-md,0 4px 18px rgba(0,0,0,.08));
+  text-decoration:none;color:inherit;
+}
+.kbrand-card--link{transition:transform .2s ease,box-shadow .2s ease;}
+.kbrand-card--link:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg,0 10px 28px rgba(0,0,0,.14));}
+.kbrand-card-ph{aspect-ratio:1/1;display:block;background:#f3f1ea;}
+.kbrand-card-img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;}
+.kbrand-card-name{padding:14px 16px;text-align:center;font-weight:700;color:var(--teal-deep);font-size:var(--fs-base);}
 
-/* Termékképek egyedi pozíciója dobozonként: 1. feljebb, 2. lejjebb, 3. feljebb */
-.kbrandbox:nth-of-type(1) .ksphere-img{object-position:center 10%;}
-.kbrandbox:nth-of-type(2) .ksphere-img{object-position:center 55%;}
-.kbrandbox:nth-of-type(3) .ksphere-img{object-position:center 10%;}
+@media (max-width:640px){
+  .kbrand-row{grid-template-columns:repeat(2,1fr);}
+}
 
-/* Cikkcakk - páros kártyáknál kép balra, szöveg jobbra.
-   DOM-ban a szöveg marad elöl (SEO/a11y), csak vizuálisan cserélünk. */
-.kbrandbox--alt .ksphere-grid{grid-template-columns:.95fr 1.05fr;}
-.kbrandbox--alt .ksphere-text{order:2;}
-.kbrandbox--alt .ksphere-media{order:1;}
+/* Egyedi termékoldal (pl. /keszulekek/phonak-audeo-sphere) - egy darab
+   kiemelt doboz, a lista-oldalról ismert .ksphere stílust újrahasznosítja. */
+.kdetail-back{
+  display:inline-block;margin-bottom:18px;color:var(--teal-deep);font-weight:600;
+}
+.kdetail-img{object-position:center 10%;}
 
 /* Záró CTA sáv */
 .kcta{
@@ -70,16 +85,6 @@
 
 @media (max-width:900px){
   .ksphere-grid{grid-template-columns:1fr;gap:26px;padding:28px;}
-  .kbrandbox--alt .ksphere-grid{grid-template-columns:1fr;}
-  .kbrandbox--alt .ksphere-text{order:1;}
-  .kbrandbox--alt .ksphere-media{order:2;}
-}
-
-/* Telefonon a márka-boxokból kimarad a leíró bekezdés - csak a cím + a pipás
-   lista marad, hogy ne legyen hosszú a görgetés. Desktopon/tableten változatlan. */
-@media (max-width:640px){
-  .kbrandbox .ksphere-text > p{display:none;}
-  .kbrandbox .ksphere h3{margin-bottom:18px;}
 }
 
 /* Kategória-grid: 5 kártya 3+2 elosztásban, a 2. sor középre igazítva.

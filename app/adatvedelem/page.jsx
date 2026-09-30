@@ -46,25 +46,24 @@ export default function PrivacyPage() {
         </p>
         <ul style={{ paddingLeft: '20px', marginBottom: '12px' }}>
           <li>
-            <strong>Airtable</strong> (Formagrid Inc., USA) — az adatok átmeneti tárolására,
-            az EU Standard Contractual Clauses (SCC) alapján, amely biztosítja a GDPR-nak
-            megfelelő adattovábbítást az Európai Unión kívülre.
-          </li>
-          <li>
-            <strong>Google (Gmail)</strong> — az Airtable-hez kapcsolt automatizáció az új
-            visszahívás-kérésekről értesítő e-mailt Gmailen keresztül továbbítja a weboldal
-            üzemeltetőjének.
+            <strong>SimplyForms</strong> (üzemeltető: Adam Todt, Csehország, simplyforms.app) —
+            az űrlapon megadott adatok fogadására és e-mailben történő továbbítására
+            részünkre. A szolgáltatás szerverei az Európai Unióban (Németország) találhatók,
+            az adatok nem kerülnek továbbításra az EU-n kívülre. Az űrlap tartalmát (név,
+            telefonszám, megjegyzés) a SimplyForms nem tárolja: az e-mail kézbesítése után
+            törli. A beküldéshez kapcsolódó technikai adatokat (IP-cím, böngésző típusa,
+            hivatkozó oldal) legfeljebb 90 napig őrzi meg.
           </li>
         </ul>
-        <p>
-          Az adatokat weboldal-üzemeltető partnerünk Airtable-fiókján keresztül dolgozzuk fel,
-          vele adatfeldolgozási megállapodás van érvényben.
-        </p>
 
         <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Adatkezelés időtartama</h2>
         <p>
-          Az űrlapkitöltés beérkezésétől számított 30 napon belül az adatokat (név,
-          telefonszám, megjegyzés) automatikusan töröljük.
+          Az űrlapon megadott adatok (név, telefonszám, megjegyzés) e-mailben érkeznek
+          hozzánk. Ezeket a beérkezéstől számított legfeljebb 1 évig őrizzük meg, hogy
+          sikertelen elérés vagy későbbi érdeklődés esetén fel tudjuk venni Önnel a
+          kapcsolatot; ezt követően töröljük. Hozzájárulását bármikor visszavonhatja,
+          ebben az esetben adatait haladéktalanul töröljük. A SimplyForms által kezelt technikai adatok
+          legfeljebb 90 napig maradnak meg (lásd 4. pont).
         </p>
 
         <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>6. Érintetti jogok</h2>

@@ -3,7 +3,7 @@
 import { validateCallback } from '../../lib/validation'
 
 // Visszahívás form server action
-// Az adatok Airtable-be mentődnek; az értesítő emailt Airtable automation küldi Gmailen keresztül.
+// Az adatokat SimplyForms fogadja, ő küldi az értesítő emailt.
 
 export async function submitCallback(formData) {
   // FormData → object
@@ -27,7 +27,7 @@ export async function submitCallback(formData) {
 
   const { name, phone, note } = result.data
 
-  const saved = await saveToAirtable({ name, phone, note })
+  const saved = await sendToSimplyForms({ name, phone, note })
 
   if (!saved) {
     return { ok: false, errors: { _server: 'Sikertelen küldés. Kérjük hívjon minket telefonon.' } }
@@ -36,46 +36,32 @@ export async function submitCallback(formData) {
   return { ok: true }
 }
 
-// Airtable - "Hallasgondozó" base, "űrlap - weboldal" tábla
-const AIRTABLE_BASE_ID = 'appyWkgf1zGGSUCGa'
-const AIRTABLE_TABLE_ID = 'tbla3a7TBqiEHzxun'
-
-async function saveToAirtable({ name, phone, note }) {
-  const apiKey = process.env.AIRTABLE_API_KEY
-  if (!apiKey) {
-    console.warn('[submitCallback] Hiányzó AIRTABLE_API_KEY - Airtable mentés kihagyva')
-    console.log('[submitCallback] Új visszahívás kérés:', { name, phone, note })
-    return true
+// SimplyForms - a form ID publikus, API key nem kell (SIMPLYFORMS_FORM_ID env var)
+async function sendToSimplyForms({ name, phone, note }) {
+  const formId = process.env.SIMPLYFORMS_FORM_ID
+  if (!formId) {
+    console.error('[submitCallback] Hiányzó SIMPLYFORMS_FORM_ID')
+    return false
   }
 
+  // A kulcsok nevei jelennek meg az értesítő emailben
+  const body = new FormData()
+  body.append('Név', name)
+  body.append('Telefonszám', phone)
+  body.append('Megjegyzés', note || '')
+
   try {
-    const res = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fields: {
-            Név: name,
-            Telefonszám: phone,
-            Megjegyzés: note || '',
-          },
-        }),
-      }
-    )
+    const res = await fetch(`https://api.simplyforms.app/v1/forms/${formId}`, { method: 'POST', body })
 
     if (!res.ok) {
       const errText = await res.text()
-      console.error('[submitCallback] Airtable hiba:', res.status, errText)
+      console.error('[submitCallback] SimplyForms hiba:', res.status, errText)
       return false
     }
 
     return true
   } catch (err) {
-    console.error('[submitCallback] Airtable hiba:', err)
+    console.error('[submitCallback] SimplyForms hiba:', err)
     return false
   }
 }

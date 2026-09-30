@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import Reveal from '../../components/Reveal'
 import Button from '../../components/Button'
-import { Icon, Check } from '../../components/icons'
+import { Icon } from '../../components/icons'
 import SkeletonImage from '../../components/SkeletonImage'
 import { categories, brandBoxes } from '../../lib/content/devices'
 import { BOOKING_URL } from '../../lib/constants'
@@ -29,44 +30,36 @@ export default function DevicesPage() {
           </div>
         </section>
 
-        {/* Forgalmazott márkák - termék-boxok */}
+        {/* Forgalmazott márkák - egy sorban, kép + név */}
         <section className="block kbrands" id="markak" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            {brandBoxes.map((b, idx) => {
-              const alt = idx % 2 === 1
-              return (
-                <Reveal
-                  key={b.name}
-                  direction={alt ? 'right' : 'left'}
-                  className={`ksphere kbrandbox${alt ? ' kbrandbox--alt' : ''}`}
-                >
-                  <div className="ksphere-grid">
-                    <div className="ksphere-text">
-                      {b.tag && <span className="tag">{b.tag}</span>}
-                      <h3>{b.title}</h3>
-                      <p>{b.desc}</p>
-                      <ul className="ksphere-list">
-                        {b.features.map((f, i) => (
-                          <li key={i}>
-                            <span className="check"><Check size={14} stroke="#3a1c00" /></span>
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
+            <div className="kbrand-row">
+              {brandBoxes.map((b) => {
+                const card = (
+                  <>
+                    <div className="kbrand-card-ph">
+                      {b.image ? (
+                        <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" />
+                      ) : (
+                        <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
+                      )}
                     </div>
-                    <div className="ksphere-media">
-                      <div className="ph">
-                        {b.image ? (
-                          <SkeletonImage src={b.image} alt={b.imageAlt} className="ksphere-img" />
-                        ) : (
-                          <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              )
-            })}
+                    <div className="kbrand-card-name">{b.name}</div>
+                  </>
+                )
+                return (
+                  <Reveal key={b.name} className="kbrand-card-wrap">
+                    {b.slug ? (
+                      <Link href={`/keszulekek/${b.slug}`} className="kbrand-card kbrand-card--link">
+                        {card}
+                      </Link>
+                    ) : (
+                      <div className="kbrand-card">{card}</div>
+                    )}
+                  </Reveal>
+                )
+              })}
+            </div>
           </div>
         </section>
 

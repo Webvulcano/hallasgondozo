@@ -13,7 +13,7 @@ export default function OnlinePanel() {
           Felnőtt hallásvizsgálat
         </Button>
         <Button variant="white" href={BOOKING_URL_CHILD} icon={<Child size={20} stroke="#2d5e12" />}>
-          Gyermek audiológia
+          Gyermek hallásvizsgálat
         </Button>
       </div>
       <div className="or-split">VAGY</div>

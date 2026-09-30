@@ -78,7 +78,8 @@ export default function CallbackPanel() {
                 Elolvastam és elfogadom az{' '}
                 <Link href="/adatvedelem" target="_blank" rel="noopener noreferrer">
                   Adatvédelmi Szabályzatot
-                </Link>.
+                </Link>
+                , beleértve hogy a megjegyzés mezőben esetlegesen megadott egészségügyi jellegű adatot is kezelhetjük.
               </span>
             </label>
             {fieldErrors.consent && <p className="field-error">{fieldErrors.consent}</p>}

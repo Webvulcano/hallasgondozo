@@ -45,6 +45,7 @@ export default function DevicesPage() {
                       )}
                     </div>
                     <div className="kbrand-card-name">{b.name}</div>
+                    {b.slug && <div className="kbrand-card-more">Részletek →</div>}
                   </>
                 )
                 return (

@@ -60,9 +60,10 @@
 }
 .kbrand-card--link{transition:transform .2s ease,box-shadow .2s ease;}
 .kbrand-card--link:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg,0 10px 28px rgba(0,0,0,.14));}
-.kbrand-card-ph{aspect-ratio:1/1;display:block;background:#f3f1ea;}
+.kbrand-card-ph{aspect-ratio:1/1;display:block;background:#f3f1ea;position:relative;overflow:hidden;min-height:0;}
 .kbrand-card-img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;}
 .kbrand-card-name{padding:14px 16px;text-align:center;font-weight:700;color:var(--teal-deep);font-size:var(--fs-base);}
+.kbrand-card-more{margin-top:-8px;padding:0 16px 14px;text-align:center;font-size:var(--fs-sm);font-weight:600;color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
 
 @media (max-width:640px){
   .kbrand-row{grid-template-columns:repeat(2,1fr);}

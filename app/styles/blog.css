@@ -76,3 +76,10 @@
   .bloglist-grid{grid-template-columns:1fr;}
   .article-faq,.article-cta{padding:26px;}
 }
+
+/* Mobilon a --fs-subsection 20px-re esik, a h3 (--fs-2xl, 25px) fölé nőne a h2-nek →
+   hierarchia: h2 = szekciócím-méret (25px), h3 = 20px. (Ár-oldal + h3-as cikkek.) */
+@media (max-width:1000px){
+  .prose h2{font-size:var(--fs-section);}
+  .prose h3{font-size:var(--fs-xl);}
+}

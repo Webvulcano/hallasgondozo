@@ -47,7 +47,7 @@ export default function Offer() {
               {offer.cta}
             </Button>
             {/* Másodlagos - a teljes készülék-/termékkínálat aloldala */}
-            <Button variant="outline" fullWidth className="offer-secondary" href="/keszulekek">
+            <Button variant="outline" fullWidth className="offer-secondary" href="/hallokeszulekek">
               {offer.ctaSecondary}
             </Button>
             <p className="offer-secondary-note">{offer.ctaSecondaryNote}</p>

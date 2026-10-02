@@ -1,6 +1,8 @@
 'use client'
-import { faqs } from '../lib/content/faq'
+import { useState } from 'react'
+import { faqs, FAQ_VISIBLE } from '../lib/content/faq'
 import { Accordion, AccordionItem } from './Accordion'
+import Button from './Button'
 
 // FAQPage JSON-LD - ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
 const faqSchema = {
@@ -14,6 +16,10 @@ const faqSchema = {
 }
 
 export default function Faq() {
+  // A rejtett kérdések a DOM-ban maradnak (csak CSS rejti) → SEO-ban indexelhetők.
+  const [expanded, setExpanded] = useState(false)
+  const hiddenCount = faqs.length - FAQ_VISIBLE
+
   return (
     <section className="block faq" id="gyik">
       <script
@@ -23,7 +29,7 @@ export default function Faq() {
       <div className="wrap">
         <div className="sec-head">
           <div className="eyebrow">GYIK</div>
-          <h2>Gyakori kérdések</h2>
+          <h2>Gyakori kérdések a hallásvizsgálatról és a hallókészülékekről</h2>
           <p>
             Ha úgy érzi, hogy Ön vagy hozzátartozója nehezebben hall, ne halogassa a kivizsgálást -
             tegye meg az első lépést a tisztább beszédértés és a magabiztosabb mindennapok felé.
@@ -31,7 +37,7 @@ export default function Faq() {
         </div>
         <Accordion defaultOpenIndex={0}>
           {({ isOpen, toggle }) => (
-            <div className="faq-list">
+            <div className={`faq-list${expanded ? ' is-expanded' : ''}`} id="faq-list">
               {faqs.map((item, i) => (
                 <AccordionItem
                   key={item.q}
@@ -39,6 +45,7 @@ export default function Faq() {
                   open={isOpen(i)}
                   onToggle={() => toggle(i)}
                   title={<span>{item.q}</span>}
+                  className={i >= FAQ_VISIBLE ? 'faq-extra' : ''}
                 >
                   <p>{item.a}</p>
                 </AccordionItem>
@@ -46,6 +53,18 @@ export default function Faq() {
             </div>
           )}
         </Accordion>
+        {!expanded && hiddenCount > 0 && (
+          <div className="faq-more">
+            <Button
+              variant="outline"
+              onClick={() => setExpanded(true)}
+              aria-expanded={expanded}
+              aria-controls="faq-list"
+            >
+              További kérdések ({hiddenCount})
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )

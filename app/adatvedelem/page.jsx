@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { COMPANY, EMAIL, PHONE } from '../../lib/constants'
 
 export const metadata = {
-  title: 'Adatvédelmi Szabályzat | ÉRTED Hallásgondozó',
+  title: { absolute: 'Adatvédelmi Szabályzat | ÉRTED Hallásgondozó' },
   description: 'ÉRTED Hallásgondozó adatvédelmi szabályzata és cookie tájékoztatója.',
+  alternates: { canonical: '/adatvedelem' },
   robots: { index: true, follow: true },
 }
 

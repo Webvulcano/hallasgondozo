@@ -6,13 +6,14 @@ import { BOOKING_URL, PHONE } from '../../lib/constants'
 import Button from '../Button'
 import { Phone } from '../icons'
 
-// Hamburger-menü ≤900px-en - Főoldal, Termékek, Időpont foglalás (CTA)
+// Hamburger-menü ≤900px-en - Főoldal, Termékek, Árak, Időpont foglalás (CTA)
 export default function MobileMenu() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const isProducts = pathname.startsWith('/keszulekek')
+  const isPrices = pathname.startsWith('/hallokeszulekek/arak')
+  const isProducts = pathname.startsWith('/hallokeszulekek') && !isPrices
   const isBlog = pathname.startsWith('/blog')
 
   // Scroll-spy a főoldalon (mint desktopon): a Kapcsolat (#idopont) a nézet közepén van-e
@@ -91,13 +92,22 @@ export default function MobileMenu() {
           Főoldal
         </Link>
         <Link
-          href="/keszulekek"
+          href="/hallokeszulekek"
           className={`nav-mlink${isProducts ? ' active' : ''}`}
           role="menuitem"
           aria-current={isProducts ? 'page' : undefined}
           onClick={() => { if (isProducts) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
         >
           Termékek
+        </Link>
+        <Link
+          href="/hallokeszulekek/arak"
+          className={`nav-mlink${isPrices ? ' active' : ''}`}
+          role="menuitem"
+          aria-current={isPrices ? 'page' : undefined}
+          onClick={() => { if (isPrices) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
+        >
+          Árak
         </Link>
         <Link
           href="/#idopont"

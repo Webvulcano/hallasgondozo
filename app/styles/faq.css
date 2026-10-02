@@ -9,6 +9,10 @@
 .faq-list .acc-item { margin-bottom: 14px; }
 .faq .acc-q { font-size: var(--fs-lg); }
 
+/* „További kérdések" - a FAQ_VISIBLE utáni elemek csak CSS-sel rejtve (DOM-ban + schemában bent) */
+.faq-list:not(.is-expanded) .faq-extra { display: none; }
+.faq-more { display: flex; justify-content: center; margin-top: 10px; }
+
 @media (max-width: 560px) {
   .faq .acc-q { font-size: var(--fs-base); }
 }

@@ -1,0 +1,159 @@
+/* Egyedi termékoldal - /hallokeszulekek/[slug]
+   Szerkezet: galéria + infó-oszlop (tabok, vélemény, következő termék) → ikonsor →
+   kapcsolódó márkák (.kbrand-card újrahasznosítva) → GYIK (.faq) → .kcta.
+   Csak tokenek (tokens.css) - új font-size érték nincs. */
+
+/* ---------- Hero ---------- */
+.kp-hero.block{padding-top:16px;padding-bottom:64px;}
+.kp-hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:start;
+}
+.kp-hero-media{position:sticky;top:102px;}
+
+/* Galéria: fő kép + függőleges thumb-oszlop */
+.kp-gallery{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:6px;}
+.kp-gallery-main{
+  position:relative;overflow:hidden;aspect-ratio:4/5;
+  border-radius:6px;background:#f3f1ea;
+}
+.kp-gallery-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.kp-thumbs{display:grid;grid-template-rows:repeat(4,1fr);gap:6px;}
+.kp-thumb{
+  position:relative;overflow:hidden;padding:0;cursor:pointer;
+  border:2px solid transparent;border-radius:4px;background:#f3f1ea;
+  opacity:.72;transition:opacity .2s ease,border-color .2s ease;
+}
+.kp-thumb:hover{opacity:1;}
+.kp-thumb.is-active{opacity:1;border-color:var(--teal);}
+.kp-thumb:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+.kp-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* Infó-oszlop */
+.kp-brand{margin:0 0 8px;}
+.kp-info h1{font-size:var(--fs-page-title);margin-bottom:18px;text-wrap:balance;}
+.kp-lead{font-size:var(--fs-base);color:var(--ink-soft);margin:14px 0 28px;text-wrap:pretty;}
+
+/* Tabok - pill-szegmens */
+.kp-tablist{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:4px;
+  background:var(--teal-soft);padding:5px;border-radius:999px;
+}
+.kp-tab{
+  min-height:46px;border:0;border-radius:999px;background:transparent;cursor:pointer;
+  font:inherit;font-size:var(--fs-base);font-weight:600;color:var(--ink-soft);
+  transition:background .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.kp-tab:hover{color:var(--teal-deep);}
+.kp-tab.is-active{background:#fff;color:var(--teal-deep);box-shadow:var(--shadow-sm);}
+.kp-tab:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+.kp-panel{padding:24px 4px 0;}
+.kp-checklist{list-style:none;padding:0;margin:0;display:grid;gap:13px;}
+.kp-checklist li{display:flex;align-items:flex-start;gap:12px;font-size:var(--fs-base);line-height:var(--lh-snug);}
+.kp-checklist .check{width:24px;height:24px;}
+.kp-desc p{color:var(--ink-soft);margin-bottom:12px;text-wrap:pretty;}
+.kp-desc p:last-child{margin-bottom:0;}
+
+/* Vélemény-doboz */
+.kp-review{
+  margin-top:32px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+  background:var(--teal-soft);border-radius:var(--r);padding:22px 22px 22px 26px;
+}
+.kp-review-mark{
+  font-family:var(--font-playfair),"Playfair Display",serif;font-weight:700;
+  font-size:var(--fs-hero);line-height:.8;color:var(--gold-deep);align-self:start;
+}
+.kp-review-body{margin:0;min-height:96px;}
+.kp-review-body blockquote{
+  margin:0;font-size:var(--fs-base);color:var(--ink);line-height:var(--lh-snug);
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.kp-review-body figcaption{margin-top:8px;font-size:var(--fs-sm);color:var(--ink-soft);font-weight:600;}
+.kp-review-body figcaption a{text-decoration:underline;text-underline-offset:3px;font-weight:400;}
+.kp-review-nav{display:flex;gap:8px;}
+.kp-review-nav button{
+  width:44px;height:44px;border-radius:50%;cursor:pointer;
+  border:1.5px solid var(--teal-deep);background:transparent;color:var(--teal-deep);
+  font-size:var(--fs-xl);line-height:1;display:grid;place-items:center;
+  transition:background .2s ease,color .2s ease;
+}
+.kp-review-nav button:hover{background:var(--teal-deep);color:#fff;}
+
+/* Következő termék (a referencia "Pairs well with" helyén) */
+.kp-next{margin-top:28px;}
+.kp-next-label{font-size:var(--fs-sm);font-weight:700;color:var(--ink);margin-bottom:10px;}
+.kp-next-card{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px 12px 12px;
+  transition:box-shadow .2s ease,border-color .2s ease;
+}
+.kp-next-card:hover{box-shadow:var(--shadow-sm);border-color:var(--teal);}
+.kp-next-img{
+  position:relative;overflow:hidden;flex:0 0 64px;width:64px;height:64px;
+  border-radius:4px;background:#f3f1ea;
+}
+.kp-next-img img{width:100%;height:100%;object-fit:cover;}
+.kp-next-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.kp-next-text strong{color:var(--teal-deep);font-size:var(--fs-base);}
+.kp-next-text small{
+  font-size:var(--fs-sm);color:var(--ink-soft);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.kp-next-more{
+  flex:0 0 auto;font-size:var(--fs-sm);font-weight:600;color:var(--teal);
+  text-decoration:underline;text-underline-offset:3px;
+}
+
+/* ---------- Ikonsor ---------- */
+.kp-trust{padding:8px 0 72px;}
+.kp-trust-row{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(5,1fr);
+}
+.kp-trust-row li{
+  display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
+  padding:4px 16px;font-size:var(--fs-base);color:var(--ink);line-height:var(--lh-snug);
+}
+.kp-trust-row li + li{border-left:1px solid var(--line);}
+.kp-trust-ic{
+  width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  background:var(--teal-soft);color:var(--teal-deep);
+}
+
+/* ---------- Kapcsolódó márkák ---------- */
+.kp-related-row{grid-template-columns:repeat(3,1fr);}
+.kp-related-row .kbrand-card-ph{aspect-ratio:4/3;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1000px){
+  .kp-hero-grid{gap:40px;}
+  .kp-trust-row{grid-template-columns:repeat(3,1fr);row-gap:28px;}
+  .kp-trust-row li + li{border-left:0;}
+}
+
+@media (max-width:900px){
+  .kp-hero-grid{grid-template-columns:minmax(0,1fr);}
+  .kp-hero-media{position:static;}
+}
+
+@media (max-width:640px){
+  .kp-hero.block{padding-bottom:48px;}
+  .kp-gallery{grid-template-columns:minmax(0,1fr);}
+  .kp-gallery-main{aspect-ratio:1/1;}
+  .kp-thumbs{grid-template-rows:none;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .kp-thumb{aspect-ratio:1/1;}
+  .kp-tab{padding:0 6px;line-height:1.15;}
+  .kp-review{grid-template-columns:auto 1fr;padding:20px;}
+  .kp-review-nav{grid-column:1 / -1;justify-content:flex-end;}
+  .kp-next-more{display:none;}
+  .kp-trust-row{grid-template-columns:repeat(2,1fr);}
+  .kp-trust-row li:last-child{grid-column:1 / -1;}
+
+  /* Kapcsolódó márkák: vízszintes kártya (kép balra, név jobbra) */
+  .kp-related-row{grid-template-columns:1fr;gap:14px;}
+  .kp-related-row .kbrand-card{
+    display:grid;grid-template-columns:96px 1fr;grid-template-rows:1fr auto auto 1fr;
+  }
+  .kp-related-row .kbrand-card-ph{grid-row:1 / -1;aspect-ratio:1/1;}
+  .kp-related-row .kbrand-card-name{grid-row:2;text-align:left;padding:0 16px;}
+  .kp-related-row .kbrand-card-more{grid-row:3;text-align:left;margin-top:4px;padding:0 16px;}
+}

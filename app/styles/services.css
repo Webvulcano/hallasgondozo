@@ -22,7 +22,7 @@
   color:var(--gold-deep);background:#FBF1D8;padding:5px 12px;border-radius:999px;
 }
 
-/* Services-specifikus könnyítés - csak ezt a szekciót érinti, a /keszulekek
+/* Services-specifikus könnyítés - csak ezt a szekciót érinti, a /hallokeszulekek
    kategória-grid és egyéb .card/.ic-badge felhasználók az eredeti méretet kapják */
 .services .cards{grid-template-columns:repeat(4,1fr);}
 .services .card{

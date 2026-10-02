@@ -1,6 +1,6 @@
 import './globals.css'
 import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
-import { SITE, COMPANY, PHONE, EMAIL, SOCIAL } from '../lib/constants'
+import { SITE, COMPANY, PHONE, EMAIL, SOCIAL, MAPS_URL, DOCTOR_URL, GEO } from '../lib/constants'
 import ScrollReset from '../components/ScrollReset'
 
 const playfair = Playfair_Display({
@@ -25,7 +25,7 @@ export const metadata = {
     template: `%s | ${COMPANY.brand} ${COMPANY.brandSub}`,
   },
   description: SITE.description,
-  keywords: ['hallásvizsgálat', 'Győr', 'hallókészülék', 'audiológus', 'fül-orr-gégész', 'TB-szerződött', 'Phonak'],
+  keywords: ['hallókészülék Győr', 'hallásvizsgálat Győr', 'ingyenes hallásvizsgálat', 'audiológus Győr', 'fül-orr-gégész', 'gyermek hallásvizsgálat', 'TB-támogatás', 'Phonak', 'Signia', 'Oticon', 'Starkey'],
   authors: [{ name: COMPANY.legalName }],
   creator: COMPANY.legalName,
   publisher: COMPANY.legalName,
@@ -83,9 +83,25 @@ const jsonLd = {
       closes: '17:00',
     },
   ],
+  geo: { '@type': 'GeoCoordinates', latitude: GEO.lat, longitude: GEO.lng },
+  hasMap: MAPS_URL,
+  areaServed: { '@type': 'City', name: 'Győr' },
   sameAs: [SOCIAL.facebook, SOCIAL.instagram],
   priceRange: '$$',
   medicalSpecialty: ['Otolaryngology', 'Audiology'],
+  knowsAbout: ['hallókészülék', 'hallásvizsgálat', 'gyermek hallásvizsgálat', 'audiológia', 'fül-orr-gégészet'],
+  availableService: [
+    { '@type': 'MedicalTest', name: 'Ingyenes hallásvizsgálat' },
+    { '@type': 'MedicalTest', name: 'Gyermek hallásvizsgálat' },
+    { '@type': 'MedicalTherapy', name: 'Hallókészülék-ellátás és -beállítás' },
+  ],
+  // E-E-A-T: a hallókészülék-ellátást végző szakorvos, a saját oldalára mutatva
+  employee: {
+    '@type': 'Person',
+    name: 'Dr. Vasvári Gergely Pál',
+    jobTitle: 'Fül-orr-gégész, audiológus szakorvos',
+    url: DOCTOR_URL,
+  },
 }
 
 export default function RootLayout({ children }) {

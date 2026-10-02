@@ -18,3 +18,10 @@
   margin:6px 0 14px;text-transform:uppercase;letter-spacing:.04em;
 }
 .tcard p{color:var(--ink-soft);font-size:var(--fs-base);}
+
+/* Szakorvos saját oldala (E-E-A-T kereszt-link) */
+.tcard-link{
+  display:inline-block;margin-top:14px;font-weight:600;font-size:var(--fs-base);
+  color:var(--teal-deep);text-decoration:underline;text-underline-offset:3px;
+}
+.tcard-link:hover{color:var(--gold-deep);}

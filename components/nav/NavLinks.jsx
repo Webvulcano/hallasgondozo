@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation'
 export default function NavLinks() {
   const pathname = usePathname()
   const onHome = pathname === '/'
-  const onProducts = pathname.startsWith('/keszulekek')
+  const onPrices = pathname.startsWith('/hallokeszulekek/arak')
+  const onProducts = pathname.startsWith('/hallokeszulekek') && !onPrices
   const onBlog = pathname.startsWith('/blog')
 
   // Scroll-spy a főoldalon: a Kapcsolat (#idopont) szekció a nézet közepén van-e
@@ -37,7 +38,8 @@ export default function NavLinks() {
 
   const links = [
     { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
-    { href: '/keszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
+    { href: '/hallokeszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
+    { href: '/hallokeszulekek/arak', label: 'Árak', active: onPrices, onClick: onPrices ? scrollTop : undefined },
     { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat', onClick: onKapcsolat },
     { href: '/blog', label: 'Blog', active: onBlog, onClick: onBlog ? scrollTop : undefined },
   ]

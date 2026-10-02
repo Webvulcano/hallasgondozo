@@ -9,9 +9,12 @@ import { categories, brandBoxes } from '../../lib/content/devices'
 import { BOOKING_URL } from '../../lib/constants'
 
 export const metadata = {
-  title: 'Hallókészülékek és termékek | ÉRTED Hallásgondozó Győr',
+  // absolute: a layout template („%s | ÉRTED Hallásgondozó") ne fűzze hozzá még egyszer
+  title: { absolute: 'Hallókészülék Győr: Phonak, Signia, Oticon, Starkey | ÉRTED' },
   description:
     'Teljes hallókészülék- és termékkínálat Győrben: Phonak, Signia, Oticon, Starkey. Hallókészülékek minden fokú halláscsökkenésre, vízálló és tölthető kivitel, egyedi fülillesztékek. Ingyenes hallásvizsgálat.',
+  // saját canonical - különben a layout '/' canonical-ját örökölné (főoldalnak hinné a Google)
+  alternates: { canonical: '/hallokeszulekek' },
   robots: { index: true, follow: true },
 }
 
@@ -25,7 +28,8 @@ export default function DevicesPage() {
         <section className="block kpage-hero">
           <div className="wrap">
             <Reveal>
-              <h1>Hallókészülékek és termékek</h1>
+              <div className="eyebrow">Forgalmazott termékeink</div>
+              <h1>Hallókészülékek Győrben</h1>
             </Reveal>
           </div>
         </section>
@@ -51,7 +55,7 @@ export default function DevicesPage() {
                 return (
                   <Reveal key={b.name} className="kbrand-card-wrap">
                     {b.slug ? (
-                      <Link href={`/keszulekek/${b.slug}`} className="kbrand-card kbrand-card--link">
+                      <Link href={`/hallokeszulekek/${b.slug}`} className="kbrand-card kbrand-card--link">
                         {card}
                       </Link>
                     ) : (

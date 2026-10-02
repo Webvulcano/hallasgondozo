@@ -1,5 +1,5 @@
 import { testimonials } from '../lib/content/testimonials'
-import { GOOGLE_REVIEWS_URL } from '../lib/constants'
+import { GOOGLE_REVIEWS_URL, GOOGLE_RATING } from '../lib/constants'
 import Button from './Button'
 import TestiTicker from './TestiTicker'
 
@@ -40,6 +40,10 @@ export default function Testimonials() {
         <div className="sec-head">
           <div className="eyebrow">Győri páciensek - valódi tapasztalatok</div>
           <h2>Valódi életek, tisztább hangokkal</h2>
+          <p>
+            {GOOGLE_RATING.count} db {GOOGLE_RATING.score} csillagos Google-értékelés - Győr egyik
+            legjobban értékelt hallásgondozója.
+          </p>
         </div>
         <div className="cards">
           {testimonials.map((t) => (

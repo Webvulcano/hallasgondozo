@@ -41,6 +41,7 @@ export default function DevicesPage() {
               {brandBoxes.map((b) => {
                 const card = (
                   <>
+                    <div className="kbrand-card-name">{b.name}</div>
                     <div className="kbrand-card-ph">
                       {b.image ? (
                         <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" />
@@ -48,8 +49,11 @@ export default function DevicesPage() {
                         <span className="ph-label">[ KÉP: {b.imageAlt} ]</span>
                       )}
                     </div>
-                    <div className="kbrand-card-name">{b.name}</div>
-                    {b.slug && <div className="kbrand-card-more">Részletek →</div>}
+                    {b.slug && (
+                      <div className="kbrand-card-foot">
+                        <span className="btn btn-outline btn-full kbrand-card-btn">Megnézem →</span>
+                      </div>
+                    )}
                   </>
                 )
                 return (

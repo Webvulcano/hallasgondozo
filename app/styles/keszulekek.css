@@ -20,20 +20,22 @@
 .kbrand-row{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;
 }
-.kbrand-card-wrap{display:block;height:100%;}
+.kbrand-card-wrap{display:block;height:100%;min-width:0;}
 .kbrand-card{
   display:flex;flex-direction:column;height:100%;
   background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
   box-shadow:var(--shadow-md,0 4px 18px rgba(0,0,0,.08));
   text-decoration:none;color:inherit;
 }
-.kbrand-card--link{cursor:pointer;transition:box-shadow .2s ease;}
-.kbrand-card--link:hover{box-shadow:var(--shadow-lg,0 10px 28px rgba(0,0,0,.14));}
+.kbrand-card--link{cursor:pointer;}
 .kbrand-card-ph{aspect-ratio:1/1;display:block;background:#fff;position:relative;overflow:hidden;min-height:0;}
 .kbrand-card-img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;}
-.kbrand-card-name{padding:16px 16px 6px;text-align:center;font-weight:700;color:var(--teal-deep);font-size:var(--fs-base);}
+.kbrand-card-name{padding:18px 18px 4px;text-align:left;font-weight:700;color:var(--teal-deep);font-size:var(--fs-xl);line-height:var(--lh-snug);}
 .kbrand-card-desc{margin:0;padding:0 18px 12px;text-align:center;font-size:var(--fs-sm);line-height:1.5;color:var(--ink-soft,#5b5b5b);flex:1;}
-.kbrand-card-more{margin-top:auto;padding:0 16px 18px;text-align:center;font-size:var(--fs-sm);font-weight:600;color:var(--teal);text-decoration:underline;text-underline-offset:3px;}
+/* Alsó gomb: a teljes kártya a link, a gomb csak vizuális (span) - kártya-hoverre töltődik ki */
+.kbrand-card-foot{margin-top:auto;padding:14px 12px 12px;}
+.kbrand-card-btn{min-height:48px;}
+.kbrand-card--link:hover .kbrand-card-btn{background:var(--teal-deep);color:#fff;}
 
 /* Termékfotós márkakártya: fehér panel, a fehér hátterű fotó multiply-jal beleolvad */
 .kbrand-card-ph:has(.kbrand-card-img[src*="-termek."]){margin:12px 12px 0;border-radius:12px;background:#fff;}

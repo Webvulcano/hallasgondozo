@@ -143,11 +143,13 @@ export default async function ProductPage({ params }) {
               {related.map((b) => (
                 <Reveal key={b.slug} className="kbrand-card-wrap">
                   <Link href={`/hallokeszulekek/${b.slug}`} className="kbrand-card kbrand-card--link">
+                    <div className="kbrand-card-name">{b.productName}</div>
                     <div className="kbrand-card-ph">
                       <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" loading="lazy" />
                     </div>
-                    <div className="kbrand-card-name">{b.productName}</div>
-                    <div className="kbrand-card-more">Részletek →</div>
+                    <div className="kbrand-card-foot">
+                      <span className="btn btn-outline btn-full kbrand-card-btn">Megnézem →</span>
+                    </div>
                   </Link>
                 </Reveal>
               ))}

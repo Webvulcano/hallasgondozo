@@ -120,7 +120,7 @@
 }
 
 /* ---------- Kapcsolódó márkák ---------- */
-.kp-related-row{grid-template-columns:repeat(3,1fr);}
+.kp-related-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:960px;margin-inline:auto;}
 .kp-related-row .kbrand-card-ph{aspect-ratio:4/3;}
 
 /* ---------- Responsive ---------- */
@@ -153,7 +153,8 @@
   .kp-related-row .kbrand-card{
     display:grid;grid-template-columns:96px 1fr;grid-template-rows:1fr auto auto 1fr;
   }
-  .kp-related-row .kbrand-card-ph{grid-row:1 / -1;aspect-ratio:1/1;}
-  .kp-related-row .kbrand-card-name{grid-row:2;text-align:left;padding:0 16px;}
-  .kp-related-row .kbrand-card-more{grid-row:3;text-align:left;margin-top:4px;padding:0 16px;}
+  .kp-related-row .kbrand-card-ph{grid-column:1;grid-row:1 / -1;aspect-ratio:1/1;}
+  .kp-related-row .kbrand-card-name{grid-column:2;grid-row:2;padding:0 16px;font-size:var(--fs-base);}
+  .kp-related-row .kbrand-card-foot{grid-column:2;grid-row:3;margin-top:0;padding:8px 16px 0;}
+  .kp-related-row .kbrand-card-btn{min-height:40px;width:auto;padding:0 16px;}
 }

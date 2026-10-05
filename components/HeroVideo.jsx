@@ -6,9 +6,6 @@ import { Calendar, Phone } from './icons'
 export default function HeroVideo() {
   return (
     <section className="hero-video">
-      {/* LCP-poszter előtöltése magas prioritással — a React 19 a <link>-et a <head>-be emeli.
-          Csak a főoldalon (ott van HeroVideo). */}
-      <link rel="preload" as="image" href="/pic/hero/hero_poster.webp" fetchPriority="high" />
       <div className="hero-video-frame">
         {/* Videó: HeroVideoPlayer (késleltetve, az oldal betöltése után indul).
             Poszter: <img> a videó MÖGÖTT — a HTML-ben azonnal felfedezhető, fetchPriority=high,
@@ -45,7 +42,7 @@ export default function HeroVideo() {
         </div>
         <div className="hero-logo-corner" id="hero-logo-target">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/pic/logo/logo_felirattal_black.webp" alt="ÉRTED Hallásgondozó" className="hero-logo-corner-img" />
+          <img src="/pic/logo/logo_felirattal_black.webp" alt="ÉRTED Hallásgondozó" className="hero-logo-corner-img" width="480" height="157" />
         </div>
       </div>
     </section>

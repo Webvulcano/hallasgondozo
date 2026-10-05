@@ -28,8 +28,9 @@ export default function Footer() {
                 src="/pic/logo/logo_felirattal_black.webp"
                 alt={`${COMPANY.brand} ${COMPANY.brandSub}`}
                 className="foot-logo-img"
-                width="1600"
-                height="523"
+                width="480"
+                height="157"
+                loading="lazy"
               />
             </div>
             <p className="foot-address">

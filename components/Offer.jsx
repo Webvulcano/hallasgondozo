@@ -38,7 +38,7 @@ export default function Offer() {
         <div>
           <div className="offer-card">
             <div className="ph">
-              <SkeletonImage src={offer.image} alt={offer.imageAlt} className="offer-img" />
+              <SkeletonImage src={offer.image} alt={offer.imageAlt} className="offer-img" loading="lazy" />
             </div>
             <div className="was">{offer.priceListLabel}</div>
             <div className="now">{offer.price}</div>

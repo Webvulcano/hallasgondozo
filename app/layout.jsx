@@ -3,13 +3,15 @@ import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
 import { SITE, COMPANY, PHONE, EMAIL, SOCIAL, MAPS_URL, DOCTOR_URL, GEO } from '../lib/constants'
 import ScrollReset from '../components/ScrollReset'
 
+// Teljesítmény (PageSpeed mobil): a dőlt stílus nincs használva → nem kérjük le; a Playfair
+// (csak címek) nincs előtöltve, így nem versenyez az LCP-poszterrel — swap-pel érkezik.
 const playfair = Playfair_Display({
   subsets: ['latin', 'latin-ext'],
   weight: ['500', '600', '700'],
-  style: ['normal', 'italic'],
   variable: '--font-playfair',
   display: 'swap',
-}) 
+  preload: false,
+})
 
 const sourceSans = Source_Sans_3({
   subsets: ['latin', 'latin-ext'],

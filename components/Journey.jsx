@@ -127,7 +127,7 @@ export default function Journey() {
                     </div>
                     <div className="jcard-media">
                       <div className="ph">
-                        <SkeletonImage src={stepImg(s.n)} alt={s.title} className="jcard-img" />
+                        <SkeletonImage src={stepImg(s.n)} alt={s.title} className="jcard-img" loading="lazy" />
                       </div>
                     </div>
                   </div>

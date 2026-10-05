@@ -17,7 +17,7 @@ export default function Team() {
           {team.map((m) => (
             <div key={m.name} className="tcard">
               <div className="ph">
-                <SkeletonImage src={m.img} alt={m.imgAlt} className="tcard-img" />
+                <SkeletonImage src={m.img} alt={m.imgAlt} className="tcard-img" loading="lazy" />
               </div>
               <div className="body">
                 <h3>{m.name}</h3>

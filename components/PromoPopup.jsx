@@ -60,7 +60,7 @@ export default function PromoPopup() {
           ×
         </button>
         <div className="promo-media">
-          <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-img" />
+          <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-img" loading="lazy" />
         </div>
         <div className="promo-body">
           <span className="promo-tag">{promo.tag}</span>

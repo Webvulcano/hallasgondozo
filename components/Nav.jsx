@@ -19,8 +19,8 @@ export default function Nav({ overlay = false }) {
               alt=""
               aria-hidden="true"
               className="logo-img logo-img--wordmark"
-              width="597"
-              height="180"
+              width="420"
+              height="127"
             />
           </Link>
           <NavLinks />

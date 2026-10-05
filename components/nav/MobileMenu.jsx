@@ -100,6 +100,7 @@ export default function MobileMenu() {
         >
           Termékek
         </Link>
+        {/* ár-oldal kikapcsolva (2026-10-04) - visszakapcsoláshoz vedd ki a kommentből
         <Link
           href="/hallokeszulekek/arak"
           className={`nav-mlink${isPrices ? ' active' : ''}`}
@@ -109,6 +110,7 @@ export default function MobileMenu() {
         >
           Árak
         </Link>
+        */}
         <Link
           href="/#idopont"
           className={`nav-mlink${kapcsolatActive ? ' active' : ''}`}

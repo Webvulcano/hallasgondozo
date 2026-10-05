@@ -1,12 +1,12 @@
 # ÉRTED Hallásgondozó - Next.js
 
-Győri hallásgondozó landing page Next.js App Router-rel.
+Az ÉRTED Hallásgondozó (Győr) weboldala - Next.js App Router, statikus generálás (SSG), Vercel deploy.
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env.local   # töltsd ki Resend API kulccsal
+echo "SIMPLYFORMS_FORM_ID=<form-id>" > .env.local   # visszahívás-form (ld. Form backend)
 npm run dev
 ```
 
@@ -23,73 +23,35 @@ Megnyitás: http://localhost:3000
 
 ```
 app/
-├── globals.css            - csak @import-ok (styles/* fájlokat fűzi össze)
-├── styles/                - szétbontott CSS modulok
-│   ├── tokens.css         - :root változók (színek, árnyékok)
-│   ├── base.css           - reset, typo, layout primitives
-│   ├── buttons.css        - .btn, .btn-*
-│   ├── nav.css            - sticky fejléc
-│   ├── hero.css           - főszekció
-│   ├── partners.css       - egészségpénztár marquee
-│   ├── services.css       - szolgáltatás kártyák
-│   ├── offer.css          - Phonak Sphere ajánlat
-│   ├── team.css           - csapat kártyák
-│   ├── testimonials.css   - vélemények
-│   ├── booking.css        - időpont + form
-│   ├── footer.css
-│   ├── mobile-bar.css     - mobil sticky bar
-│   ├── reveal.css         - scroll reveal animációk
-│   └── responsive.css     - media query-k (UTOLSÓ az import sorrendben)
-├── layout.jsx             - root layout, metadata, fontok, JSON-LD
+├── layout.jsx             - root layout, metadata, fontok, MedicalBusiness JSON-LD
 ├── page.jsx               - főoldal
-├── adatvedelem/page.jsx   - adatvédelmi szabályzat
-├── not-found.jsx          - 404
-├── sitemap.js             - sitemap.xml generálás
-├── robots.js              - robots.txt
-└── actions/
-    └── submitCallback.js  - visszahívás form server action
+├── globals.css            - csak @import-ok (styles/* sorrendben; responsive.css UTOLSÓ)
+├── styles/                - szekciónkénti CSS (tokens, base, buttons, nav, hero, services,
+│                            team, journey, testimonials, booking, faq, footer, keszulekek,
+│                            product, blog, promo, offer, partners, reveal, skeleton, splash…)
+├── hallokeszulekek/       - márkák (page.jsx), [slug] márkaoldalak, arak/ ár-oldal
+├── blog/                  - lista + [slug] cikk (MDX)
+├── adatvedelem/           - adatvédelmi szabályzat
+├── actions/submitCallback.js - visszahívás form (SimplyForms)
+├── sitemap.js, robots.js, not-found.jsx
 
 components/
-├── Button.jsx             - központi CTA komponens (variant)
-├── PhoneLink.jsx          - telefon link variánsok
-├── Reveal.jsx             - scroll reveal wrapper
-├── Nav.jsx                - server komponens
-├── nav/
-│   └── ScrollEffect.jsx   - client: scroll listener
-├── Hero.jsx
-├── Partners.jsx
-├── Services.jsx
-├── Offer.jsx
-├── Team.jsx
-├── Testimonials.jsx
-├── Booking.jsx            - server wrapper
-├── booking/
-│   ├── OnlinePanel.jsx
-│   └── CallbackPanel.jsx  - client: form state
-├── Footer.jsx
-├── MobileBar.jsx
-└── icons/                 - SVG ikon komponensek
-    ├── _base.jsx          - közös SVG wrapper
-    ├── Icon.jsx           - name szerinti dinamikus lookup
-    └── Check, Phone, Calendar, Email, Facebook, Instagram,
-        Ear, Doctor, EarAid, Shield, Home, Child
+├── Button, PhoneLink, Reveal, SkeletonImage, Accordion - primitívek
+├── Nav (+ nav/: NavLinks, MobileMenu, ScrollEffect), Footer, Splash, PromoPopup
+├── HeroVideo (aktív) / Hero (régi, kikommentezve), Services, Team, Partners,
+│   Journey, Testimonials, TestiTicker, Booking (+ booking/), Faq, Offer (kikapcsolva)
+├── product/               - márkaoldal: galéria, tabok, vélemény-slider, GYIK, ikonsor
+├── blog/                  - PostCard
+└── icons/                 - SVG ikonok (Icon = név szerinti lookup)
 
 lib/
-├── constants.js           - BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, SITE
-├── validation.js          - form validátor
-├── content/               - szekciók adatai (szöveg)
-│   ├── services.js
-│   ├── team.js
-│   ├── testimonials.js
-│   ├── partners.js
-│   ├── trustItems.js
-│   └── offer.js
-└── hooks/
-    └── useCallbackForm.js - form state hook
+├── constants.js           - BOOKING_URL, PHONE, EMAIL, COMPANY, SITE, GOOGLE_RATING, GEO…
+├── content/               - minden szöveg adatként (faq, services, team, devices, prices,
+│                            posts, journey, testimonials, partners, offer, promo…)
+├── validation.js, hooks/useCallbackForm.js
 
-public/
-└── pic/
-    └── logo.png
+content/blog/*.mdx         - blogcikkek
+public/pic/                - képek (arak/, hallokeszulekek/, munkatarsak/, lepesrol_lepesre/, blog/, hero/)
 ```
 
 ## Architektúra elvek
@@ -101,17 +63,32 @@ public/
 
 ## Form backend
 
-A visszahívás form Server Action-t használ ([Resend](https://resend.com)-en keresztül).
-Beállításhoz töltsd ki `.env.local`-t. Ha hiányzik, form csak `console.log`-ol (fejlesztés).
+A visszahívás form Server Action-t használ (`app/actions/submitCallback.js`), az adatokat
+a [SimplyForms](https://simplyforms.app) fogadja és küldi tovább értesítő emailként.
+Env: `SIMPLYFORMS_FORM_ID` (`.env.local` + Vercel projektbeállítás). Ha hiányzik, a form hibát logol és nem küld.
 
 Honeypot mező a botok kiszűrésére.
 
+## Oldalak
+
+| Útvonal | Tartalom |
+|---|---|
+| `/` | főoldal (szolgáltatások, csapat, folyamat, vélemények, időpont, GYIK) |
+| `/hallokeszulekek` | márkák + termékkategóriák |
+| `/hallokeszulekek/[slug]` | márkaoldalak (Phonak, Signia, Oticon, Starkey) - adat: `lib/content/devices.js` |
+| `/hallokeszulekek/arak` | árak és TB-támogatás - adat: `lib/content/prices.js` |
+| `/blog`, `/blog/[slug]` | MDX cikkek (`content/blog/`) |
+| `/adatvedelem` | adatvédelmi szabályzat |
+
+Régi (Apache-os) hallasgondozo.hu URL-ek → 308 átirányítás a `next.config.mjs`-ben.
+
 ## SEO
 
-- Open Graph + Twitter Card meta a `layout.jsx`-ben
-- LocalBusiness + MedicalBusiness JSON-LD schema (Google rich results)
+- Title/meta a `lib/constants.js` (`SITE`) + oldalankénti `metadata`
+- MedicalBusiness (layout), FAQPage, HowTo, BreadcrumbList, Product JSON-LD
 - Automatikus `sitemap.xml` és `robots.txt`
-- Canonical URL minden oldalon
+- Saját canonical minden aloldalon (a layout `/` canonical-ját NEM szabad örökölni)
+- Kulcsszó-háttér és checklist: `../../seo-geo-aeo-fokusz.md`
 
 ## Deployment
 

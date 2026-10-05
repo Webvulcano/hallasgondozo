@@ -9,7 +9,7 @@ export default function sitemap() {
   return [
     { url: SITE.url, lastModified, changeFrequency: 'monthly', priority: 1 },
     { url: `${SITE.url}/hallokeszulekek`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE.url}/hallokeszulekek/arak`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
+    // ár-oldal kikapcsolva (2026-10-04): { url: `${SITE.url}/hallokeszulekek/arak`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     ...brandBoxes.map((b) => ({
       url: `${SITE.url}/hallokeszulekek/${b.slug}`,
       lastModified,

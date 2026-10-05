@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import Nav from '../../../components/Nav'
 import Footer from '../../../components/Footer'
 import Reveal from '../../../components/Reveal'
@@ -29,6 +30,11 @@ export const metadata = {
 }
 
 export default function PricesPage() {
+  // ⛔ KIKAPCSOLVA (Lehel, 2026-10-04): az ár-oldal egyelőre NEM élő → 404.
+  // Visszakapcsolás: töröld a notFound() sort + vedd vissza a sitemap- és menü-bejegyzést
+  // (app/sitemap.js, components/nav/NavLinks.jsx, components/nav/MobileMenu.jsx).
+  notFound()
+
   const url = `${SITE.url}${PATH}`
 
   // SEO/AEO: Breadcrumb + FAQPage (az Amplifon ár-oldalán nincs FAQPage - itt előny)

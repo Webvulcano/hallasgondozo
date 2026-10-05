@@ -39,7 +39,7 @@ export default function NavLinks() {
   const links = [
     { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
     { href: '/hallokeszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
-    { href: '/hallokeszulekek/arak', label: 'Árak', active: onPrices, onClick: onPrices ? scrollTop : undefined },
+    // ár-oldal kikapcsolva (2026-10-04): { href: '/hallokeszulekek/arak', label: 'Árak', active: onPrices, onClick: onPrices ? scrollTop : undefined },
     { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat', onClick: onKapcsolat },
     { href: '/blog', label: 'Blog', active: onBlog, onClick: onBlog ? scrollTop : undefined },
   ]

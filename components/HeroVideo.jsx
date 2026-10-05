@@ -6,17 +6,19 @@ import { Calendar, Phone } from './icons'
 export default function HeroVideo() {
   return (
     <section className="hero-video">
+      {/* LCP-poszter előtöltése magas prioritással — a React 19 a <link>-et a <head>-be emeli.
+          Csak a főoldalon (ott van HeroVideo). */}
+      <link rel="preload" as="image" href="/pic/hero/hero_poster.webp" fetchPriority="high" />
       <div className="hero-video-frame">
         {/* Videó: HeroVideoPlayer (késleltetve, az oldal betöltése után indul).
-            Poszter: <img> a videó MÖGÖTT (nem a video poster-attribútuma, mert az nem tud
-            srcset-et) — a HTML-ben azonnal felfedezhető, fetchPriority=high, mobilon 960px,
-            desktopon 1920px. LCP-elemként mérhető; a betöltött videó eltakarja. */}
+            Poszter: <img> a videó MÖGÖTT — a HTML-ben azonnal felfedezhető, fetchPriority=high,
+            LCP-elem. Mobilon is 1920px SZÁNDÉKOSAN (nincs srcset): kisebb poszternél a Chrome a
+            felnagyított képet „kisebbnek" számolja, és a később induló 1920px-es videó első
+            kockája lenne az LCP (PageSpeed mobil: 4,3 mp). */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="hero-video-poster"
           src="/pic/hero/hero_poster.webp"
-          srcSet="/pic/hero/hero_poster_960.webp 960w, /pic/hero/hero_poster.webp 1920w"
-          sizes="100vw"
           width="1920"
           height="1079"
           alt=""

@@ -1,4 +1,5 @@
-/* Button variants - minden CTA */
+/* Button variants - minden CTA (components/Button.jsx).
+   Hover egységesen: csak színváltás (nincs emelés / hover-árnyék). */
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -6,22 +7,32 @@
   font-family:var(--font-source-sans),"Source Sans 3",sans-serif;
   font-size:var(--fs-base);font-weight:700;
   cursor:pointer;border:2px solid transparent;
-  transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
   text-align:center;line-height:1.15;
 }
 .btn .ic{flex:0 0 auto;}
 
+/* Méret + szélesség módosítók */
+.btn-sm{min-height:44px;padding:0 18px;}
+.btn-full{width:100%;}
+
+/* Állapotok */
+.btn:focus-visible{outline:2px solid var(--teal-deep);outline-offset:3px;}
+.btn-ghost-light:focus-visible,.btn-white:focus-visible{outline-color:#fff;}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.6;cursor:not-allowed;}
+
+/* Variánsok */
 .btn-gold{background:var(--gold);color:#2a1a00;}
-.btn-gold:hover{background:var(--gold-deep);}
+.btn-gold:not(:disabled):hover{background:var(--gold-deep);}
 
 .btn-teal{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(121,185,68,.28);}
-.btn-teal:hover{background:var(--teal-deep);}
+.btn-teal:not(:disabled):hover{background:var(--teal-deep);}
 
 .btn-outline{background:transparent;color:var(--teal-deep);border-color:var(--teal-deep);}
-.btn-outline:hover{background:var(--teal-deep);color:#fff;}
+.btn-outline:not(:disabled):hover{background:var(--teal-deep);color:#fff;}
 
 .btn-ghost-light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.55);}
-.btn-ghost-light:hover{background:#fff;color:var(--teal-deep);}
+.btn-ghost-light:not(:disabled):hover{background:#fff;color:var(--teal-deep);}
 
 .btn-white{background:#fff;color:var(--teal-deep);box-shadow:var(--shadow-md);}
-.btn-white:hover{box-shadow:var(--shadow-lg);}
+.btn-white:not(:disabled):hover{background:var(--teal-soft);}

@@ -13,7 +13,7 @@ export default function Nav({ overlay = false }) {
         <div className="wrap nav-inner">
           <Link href="/" className="logo" aria-label={`${COMPANY.brand} ${COMPANY.brandSub} főoldal`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/pic/logo.png" alt="" aria-hidden="true" className="logo-img" />
+            <img src="/pic/logo.webp" alt="" aria-hidden="true" className="logo-img" />
             <span className="logo-text">
               <b>{COMPANY.brand}</b>
               <span>{COMPANY.brandSub}</span>

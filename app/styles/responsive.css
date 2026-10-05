@@ -15,10 +15,7 @@
 }
 
 @media (max-width:900px){
-  .hero-grid,.offer-grid,.book-grid{grid-template-columns:1fr;}
-  .hero-grid{gap:32px;}
-  .hero-img-wrap{aspect-ratio:4/3;}
-  .hero-img{object-position:center;}
+  .offer-grid,.book-grid{grid-template-columns:1fr;}
   .offer-grid{gap:36px;}
   .cards,.team .cards,.testi .cards{grid-template-columns:1fr;}
   .nav-menu{display:none;}
@@ -26,7 +23,6 @@
   .nav-phone .num{display:none;}
   .nav-right{gap:12px;}
   section.block{padding:64px 0;}
-  .hero{padding:20px 0 56px;}
   .book-grid{gap:18px;}
 
   /* Tablet: Elérhetőség + Nyitvatartás egymás mellett, Brand/CTA teljes szélességben */
@@ -37,49 +33,6 @@
 @media (max-width:640px){
   .foot-grid{grid-template-columns:1fr;}
   .foot-col-brand,.foot-col-cta{grid-column:auto;}
-}
-
-@media (max-width:1200px){
-  .hero h1{font-size:var(--fs-hero-mobile);line-height:1.18;}
-}
-
-@media (max-width:1000px){
-  /* Hero mobil-elrendezés: flatten + order, kép a szöveg és a CTA közé */
-  .hero{padding:20px 0 56px;}
-  .hero-grid{display:flex;flex-direction:column;gap:18px;}
-  .hero-grid > .reveal-l,
-  .hero-grid > .hero-right{display:contents;}
-  /* Alacsonyabb képarány, hogy ne legyen óriási magas a kép tablet-szélességen */
-  .hero-img-wrap{aspect-ratio:4/3;}
-
-  /* Hero beúszás: a display:contents flatten miatt a wrapper-box eltűnik,
-     ezért a levél-elemeket animáljuk (staggered load fade-up). */
-  .hero h1,
-  .hero .sub,
-  .hero-img-wrap,
-  .hero-cta,
-  .hero-google{animation:heroIn .6s ease both;}
-  .hero h1{animation-delay:.05s;}
-  .hero .sub{animation-delay:.12s;}
-  .hero-img-wrap{animation-delay:.18s;}
-  .hero-cta{animation-delay:.26s;}
-  .hero-google{animation-delay:.34s;}
-
-  .hero h1{order:1;font-size:var(--fs-hero-mobile);line-height:1.18;}
-  .hero .sub{order:2;margin-top:8px;}
-  .hero-img-wrap{order:3;}
-  .hero-img{object-position:calc(50% - 100px) center;}
-  .hero-cta{order:4;flex-direction:column;align-items:stretch;gap:10px;margin-top:4px;}
-  .hero-google{order:5;}
-
-  /* Másodlagos elemek el - trust-jel a Google-pill (csak a hero-ban;
-     a .services .trust-row — a 2 pipa — minden nézetben látszódjon). */
-  .reassure{display:none;}
-  .hero .trust-row{display:none;}
-
-  .hero-cta .btn-gold{width:100%;}
-
-  .hero-badge{left:14px;bottom:14px;padding:11px 14px;gap:10px;}
 }
 
 @media (max-width:560px){
@@ -131,15 +84,9 @@
   .tcard p{display:none;}
 }
 
-@keyframes heroIn{
-  from{opacity:0;transform:translateY(16px);}
-  to{opacity:1;transform:none;}
-}
-
 @media (prefers-reduced-motion:reduce){
   .marquee-track,.testi-track{animation:none;}
   .reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none;}
-  .hero h1,.hero .sub,.hero-img-wrap,.hero-cta,.hero-google{animation:none;}
   .faq-a-wrap{transition:none;}
   .jcard,.jcard-panel-wrap,.jcard-panel,.jcard-plus,.jcard-text,.jcard-media{transition:none;}
   html{scroll-behavior:auto;}

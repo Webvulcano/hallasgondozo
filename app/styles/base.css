@@ -26,9 +26,6 @@ img{max-width:100%;display:block;}
   color:var(--gold-deep);margin-bottom:16px;
 }
 
-/* Utility classes */
-.btn-full{width:100%;}
-
 /* Section primitives */
 section.block{padding:88px 0;}
 .sec-head{text-align:center;max-width:720px;margin:0 auto 54px;}

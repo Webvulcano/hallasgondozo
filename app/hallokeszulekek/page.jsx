@@ -51,7 +51,7 @@ export default function DevicesPage() {
                     </div>
                     {b.slug && (
                       <div className="kbrand-card-foot">
-                        <span className="btn btn-outline btn-full kbrand-card-btn">Megnézem →</span>
+                        <span className="btn btn-outline btn-sm btn-full kbrand-card-btn">Megnézem →</span>
                       </div>
                     )}
                   </>

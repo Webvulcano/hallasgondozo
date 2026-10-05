@@ -94,11 +94,11 @@ export default async function ProductPage({ params }) {
               ← Vissza a termékekhez
             </Link>
             <div className="kp-hero-grid">
-              <Reveal direction="left" className="kp-hero-media">
+              <div className="kp-hero-media">
                 <ProductGallery images={p.gallery} />
                 {/* Vélemények a képnézegető alatt (sticky oszloppal együtt mozog) */}
                 <ReviewSlider />
-              </Reveal>
+              </div>
 
               <div className="kp-info">
                 <div className="eyebrow kp-brand">{p.name}</div>
@@ -148,7 +148,7 @@ export default async function ProductPage({ params }) {
                       <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" loading="lazy" />
                     </div>
                     <div className="kbrand-card-foot">
-                      <span className="btn btn-outline btn-full kbrand-card-btn">Megnézem →</span>
+                      <span className="btn btn-outline btn-sm btn-full kbrand-card-btn">Megnézem →</span>
                     </div>
                   </Link>
                 </Reveal>

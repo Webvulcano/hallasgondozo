@@ -34,7 +34,6 @@
 .kbrand-card-desc{margin:0;padding:0 18px 12px;text-align:center;font-size:var(--fs-sm);line-height:1.5;color:var(--ink-soft,#5b5b5b);flex:1;}
 /* Alsó gomb: a teljes kártya a link, a gomb csak vizuális (span) - kártya-hoverre töltődik ki */
 .kbrand-card-foot{margin-top:auto;padding:14px 12px 12px;}
-.kbrand-card-btn{min-height:48px;}
 .kbrand-card--link:hover .kbrand-card-btn{background:var(--teal-deep);color:#fff;}
 
 /* Termékfotós márkakártya: fehér panel, a fehér hátterű fotó multiply-jal beleolvad */

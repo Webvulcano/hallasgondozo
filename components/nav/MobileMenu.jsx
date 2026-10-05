@@ -129,19 +129,20 @@ export default function MobileMenu() {
         >
           Blog
         </Link>
-        <a
+        <Button
+          variant="gold"
           href={BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-gold nav-mcta"
+          fullWidth
+          className="nav-mcta"
           role="menuitem"
           onClick={close}
         >
           Időpont foglalás
-        </a>
+        </Button>
         <Button
           variant="outline"
           href={PHONE.href}
+          fullWidth
           icon={<Phone size={17} />}
           className="nav-mphone"
           onClick={close}

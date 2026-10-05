@@ -1,5 +1,10 @@
 // Központi gomb komponens - minden CTA, link és form gomb ezt használja
 
+const SIZES = {
+  md: '',
+  sm: 'btn-sm',
+}
+
 const VARIANTS = {
   gold: 'btn-gold',
   teal: 'btn-teal',
@@ -15,6 +20,7 @@ function isExternal(href) {
 
 export default function Button({
   variant = 'gold',
+  size = 'md',
   href,
   type = 'button',
   icon,
@@ -24,8 +30,15 @@ export default function Button({
   external,
   ...rest
 }) {
-  const cls = `btn ${VARIANTS[variant] || VARIANTS.gold} ${className}`.trim()
-  const style = fullWidth ? { width: '100%', ...rest.style } : rest.style
+  const cls = [
+    'btn',
+    VARIANTS[variant] || VARIANTS.gold,
+    SIZES[size],
+    fullWidth && 'btn-full',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   const inner = (
     <>
@@ -41,7 +54,6 @@ export default function Button({
       <a
         href={href}
         className={cls}
-        style={style}
         {...(ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...rest}
       >
@@ -52,7 +64,7 @@ export default function Button({
 
   // Button
   return (
-    <button type={type} className={cls} style={style} {...rest}>
+    <button type={type} className={cls} {...rest}>
       {inner}
     </button>
   )

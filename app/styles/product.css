@@ -156,5 +156,5 @@
   .kp-related-row .kbrand-card-ph{grid-column:1;grid-row:1 / -1;aspect-ratio:1/1;}
   .kp-related-row .kbrand-card-name{grid-column:2;grid-row:2;padding:0 16px;font-size:var(--fs-base);}
   .kp-related-row .kbrand-card-foot{grid-column:2;grid-row:3;margin-top:0;padding:8px 16px 0;}
-  .kp-related-row .kbrand-card-btn{min-height:40px;width:auto;padding:0 16px;}
+  .kp-related-row .kbrand-card-btn{width:auto;}
 }

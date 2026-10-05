@@ -24,7 +24,7 @@ const howToSchema = {
 
 // 2-nek nincs "A" verziója, marad a sima számozott fájl.
 const STEP_IMG_FILE = { 1: '1', 2: '2', 3: '3A', 4: '4A', 5: '5' }
-const stepImg = (n) => `/pic/lepesrol_lepesre/${STEP_IMG_FILE[n]}.JPG`
+const stepImg = (n) => `/pic/lepesrol_lepesre/${STEP_IMG_FILE[n]}.webp`
 
 export default function Journey() {
   // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Button from '../components/Button'
 
 export const metadata = {
   title: '404 - Oldal nem található | ÉRTED Hallásgondozó',
@@ -12,7 +12,7 @@ export default function NotFound() {
         <p style={{ fontSize: 'var(--fs-xl)', marginBottom: '28px', color: 'var(--ink-soft)' }}>
           A keresett oldal nem található.
         </p>
-        <Link href="/" className="btn btn-gold">Vissza a főoldalra</Link>
+        <Button variant="gold" href="/">Vissza a főoldalra</Button>
       </div>
     </main>
   )

@@ -28,13 +28,17 @@ export async function generateMetadata({ params }) {
       publishedTime: post.datePublished,
       modifiedTime: post.dateModified || post.datePublished,
       authors: [post.author],
-      images: [{ url: post.image, alt: post.imageAlt }],
+      images: [
+        post.ogImage
+          ? { url: post.ogImage, width: 1200, height: 630, alt: post.imageAlt }
+          : { url: post.image, alt: post.imageAlt },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [post.image],
+      images: [post.ogImage ?? post.image],
     },
     robots: { index: true, follow: true },
   }
@@ -54,7 +58,7 @@ export default async function BlogPostPage({ params }) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
-    image: `${SITE.url}${post.image}`,
+    image: `${SITE.url}${post.ogImage ?? post.image}`,
     datePublished: post.datePublished,
     dateModified: post.dateModified || post.datePublished,
     inLanguage: 'hu-HU',

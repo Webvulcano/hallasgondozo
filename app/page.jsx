@@ -1,6 +1,5 @@
 import Splash from '../components/Splash'
 import Nav from '../components/Nav'
-import Hero from '../components/Hero'
 import HeroVideo from '../components/HeroVideo'
 import Partners from '../components/Partners'
 import Services from '../components/Services'
@@ -19,7 +18,6 @@ export default function Home() {
       <Splash />
       <Nav overlay />
       <span id="top" />
-      {/* <Hero /> — régi hero kikommentezve, ideiglenes videó-hero fut helyette */}
       <HeroVideo />
       <Services />
       {/* <Offer /> — nyári ajánlat kikommentezve */}

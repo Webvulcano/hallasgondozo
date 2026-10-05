@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="logo foot-logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/pic/logo.png"
+                src="/pic/logo.webp"
                 alt=""
                 aria-hidden="true"
                 className="logo-img logo-img--inverted"

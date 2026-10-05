@@ -1,77 +1,8 @@
-/* Hero section */
+/* Hero section (videó-hero) */
 
-.hero{padding:40px 0 76px;position:relative;overflow:hidden;}
-.hero::before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(900px 520px at 88% -10%, rgba(121,185,68,.06), transparent 60%),
-    radial-gradient(600px 420px at -5% 110%, rgba(245,195,0,.07), transparent 60%);
-  pointer-events:none;
-}
-.hero-grid{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
-}
-.hero h1{font-size:var(--fs-hero);text-wrap:balance;}
-.hero .sub{
-  font-size:var(--fs-xl);color:var(--ink-soft);
-  margin-top:22px;max-width:560px;text-wrap:pretty;
-}
-
-.reassure{
-  display:inline-flex;align-items:center;gap:11px;margin-top:24px;
-  background:#fff;border:1px solid var(--line);border-radius:999px;
-  padding:11px 20px;font-weight:600;font-size:var(--fs-base);box-shadow:var(--shadow-sm);
-}
-.reassure .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex:0 0 auto;}
-
-.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
-
+/* Trust-sor (pipa + szöveg) — Services és a termékoldali TrustRow használja */
 .trust-row{display:flex;flex-wrap:wrap;gap:14px 26px;margin-top:34px;}
 .trust-item{display:flex;align-items:center;gap:11px;font-weight:600;font-size:var(--fs-base);color:var(--ink);}
-
-.hero-img-wrap{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/4.3;}
-.hero-img{width:100%;height:100%;object-fit:cover;display:block;object-position:calc(50% - 200px) center;transform-origin:center center;}
-.hero-badge{
-  position:absolute;left:18px;bottom:18px;z-index:2;
-  background:#fff;border-radius:16px;box-shadow:var(--shadow-md);
-  padding:14px 18px;display:flex;align-items:center;gap:13px;
-}
-.hero-badge .big{
-  font-family:var(--font-playfair),"Playfair Display",serif;
-  font-size:var(--fs-stat);font-weight:700;color:var(--teal-deep);line-height:1;
-}
-.hero-badge .lbl{font-size:var(--fs-sm);color:var(--ink-soft);font-weight:600;line-height:1.25;}
-
-/* Kép + Google-értékelés blokk egymás alatt */
-.hero-right{display:flex;flex-direction:column;gap:16px;}
-
-/* Desktop: nav (78px) + hero = max. 100vh — a hero pontosan a maradék foldot
-   tölti, align-items center függőlegesen középre, a kép max-height-je és az
-   overflow:hidden megakadályozza hogy túlnyúljon a képernyőn. */
-@media (min-width:1001px){
-  .hero{
-    height:calc(100svh - 78px);
-    display:flex;align-items:center;
-    padding:40px 0;
-  }
-  .hero > .wrap{width:100%;}
-  .hero-img-wrap{max-height:calc(100svh - 78px - 80px);}
-}
-
-/* Google értékelés - egysoros kattintható pill: G · csillagok · 250+ értékelés */
-.hero-google{
-  display:inline-flex;align-items:center;gap:10px;align-self:center;
-  background:#fff;border:1px solid var(--line);border-radius:999px;
-  padding:9px 16px;box-shadow:var(--shadow-sm);
-  text-decoration:none;color:var(--ink);
-  transition:box-shadow .2s ease,transform .2s ease;
-}
-.hero-google:hover{box-shadow:var(--shadow-md);}
-.hero-google-logo{flex:0 0 auto;}
-.hero-google-stars{color:var(--gold);font-size:var(--fs-base);letter-spacing:2px;}
-.hero-google-meta{font-size:var(--fs-md);color:var(--ink-soft);font-weight:600;white-space:nowrap;}
-.hero-google-meta b{color:var(--teal-deep);font-weight:800;}
 
 /* Ideiglenes videó-hero */
 .hero-video{
@@ -155,6 +86,6 @@
   .hero-logo-corner-img{height:40px;}
   .hero-video-cta{gap:12px;margin-top:16px;}
   .hero-video-cta{flex-direction:column;align-items:stretch;}
-  .hero-video-cta .btn{width:100%;justify-content:center;}
+  .hero-video-cta .btn{width:100%;}
   .hero-video-phone-btn{display:none;}
 }

@@ -52,7 +52,6 @@
   line-height:1;margin:4px 0 2px;
 }
 .offer-card .unit{color:var(--ink-soft);font-size:var(--fs-base);margin-bottom:22px;}
-.offer-card .btn{width:100%;}
 
 /* Másodlagos CTA - zöld gomb (btn-teal), kapu a teljes kínálat felé */
 .offer-card .offer-secondary{margin-top:12px;}

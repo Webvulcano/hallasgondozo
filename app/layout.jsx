@@ -37,13 +37,13 @@ export const metadata = {
     siteName: `${COMPANY.brand} ${COMPANY.brandSub}`,
     title: SITE.title,
     description: SITE.description,
-    images: [{ url: '/pic/logo.png', width: 512, height: 512, alt: COMPANY.brand }],
+    images: [{ url: '/pic/logo/logo.png', width: 435, height: 434, alt: COMPANY.brand }],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE.title,
     description: SITE.description,
-    images: ['/pic/logo.png'],
+    images: ['/pic/logo/logo.png'],
   },
   robots: {
     index: true,
@@ -51,8 +51,8 @@ export const metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   icons: {
-    icon: '/pic/tiny_logo.png',
-    apple: '/pic/tiny_logo.png',
+    icon: '/pic/logo/tiny_logo.png',
+    apple: '/pic/logo/tiny_logo.png',
   },
 }
 
@@ -63,8 +63,8 @@ const jsonLd = {
   name: COMPANY.fullName,
   legalName: COMPANY.legalName,
   url: SITE.url,
-  logo: `${SITE.url}/pic/logo.png`,
-  image: `${SITE.url}/pic/logo.png`,
+  logo: `${SITE.url}/pic/logo/logo.png`,
+  image: `${SITE.url}/pic/logo/logo.png`,
   telephone: PHONE.display,
   email: EMAIL,
   foundingDate: String(COMPANY.yearFounded),

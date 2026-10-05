@@ -1,8 +1,10 @@
+import Link from 'next/link'
 import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL, WEEK_HOURS } from '../lib/constants'
 import Button from './Button'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
 const contactLinks = [
+  { icon: <MapPin size={17} />, href: MAPS_URL, label: COMPANY.address, external: true },
   { icon: <Phone size={17} />, href: PHONE.href, label: PHONE.display, external: false },
   { icon: <Email size={17} />, href: `mailto:${EMAIL}`, label: EMAIL, external: false },
   { icon: <Facebook size={17} />, href: SOCIAL.facebook, label: SOCIAL.facebookHandle, external: true },
@@ -19,32 +21,20 @@ export default function Footer() {
         <div className="foot-grid">
           {/* Col 1 - Brand */}
           <div className="foot-col-brand">
-            <div className="logo foot-logo">
+            {/* Ugyanaz a fehér feliratos logó, mint a hero sarkában */}
+            <div className="foot-logo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/pic/logo.webp"
-                alt=""
-                aria-hidden="true"
-                className="logo-img logo-img--inverted"
+                src="/pic/logo/logo_felirattal_black.webp"
+                alt={`${COMPANY.brand} ${COMPANY.brandSub}`}
+                className="foot-logo-img"
+                width="1600"
+                height="523"
               />
-              <span className="logo-text">
-                <b>{COMPANY.brand}</b>
-                <span>{COMPANY.brandSub}</span>
-              </span>
             </div>
             <p className="foot-address">
               {COMPANY.fullName}<br />
-              {COMPANY.legalName}<br />
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="foot-address-link"
-                aria-label={`${COMPANY.address} megnyitása a Google Térképen`}
-              >
-                <MapPin size={16} className="foot-address-ic" />
-                {COMPANY.address}
-              </a>
+              {COMPANY.legalName}
             </p>
           </div>
 
@@ -98,8 +88,15 @@ export default function Footer() {
 
         <div className="foot-bottom">
           <span>© {year} {COMPANY.legalName} - Minden jog fenntartva.</span>
-          {/* TEMP: Adatvédelmi Szabályzat gomb ideiglenesen elrejtve */}
-          {/* <a href="/adatvedelem">Adatvédelmi Szabályzat</a> */}
+          <span className="foot-bottom-links">
+            <Link href="/adatvedelem">Adatvédelmi Szabályzat</Link>
+            <span>
+              Készítette:{' '}
+              <a href="https://webvulcano.hu" target="_blank" rel="noopener">
+                webvulcano.hu
+              </a>
+            </span>
+          </span>
         </div>
       </div>
     </footer>

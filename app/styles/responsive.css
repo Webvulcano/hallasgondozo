@@ -26,14 +26,19 @@
   section.block{padding:64px 0;}
   .book-grid{gap:18px;}
 
-  /* Tablet: Elérhetőség + Nyitvatartás egymás mellett, Brand/CTA teljes szélességben */
-  .foot-grid{grid-template-columns:1fr 1fr;gap:34px;}
-  .foot-col-brand,.foot-col-cta{grid-column:1 / -1;}
+  /* Tablet: 1. sor Brand + Foglalás (a logó melletti üres helyre), 2. sor Elérhetőség + Nyitvatartás */
+  .foot-grid{
+    grid-template-columns:1fr 1fr;gap:34px;
+    grid-template-areas:"brand cta" "contact hours";
+  }
+  .foot-col-brand{grid-area:brand;}
+  .foot-col-cta{grid-area:cta;}
+  .foot-col-contact{grid-area:contact;}
+  .foot-col-hours{grid-area:hours;}
 }
 
 @media (max-width:640px){
-  .foot-grid{grid-template-columns:1fr;}
-  .foot-col-brand,.foot-col-cta{grid-column:auto;}
+  .foot-grid{grid-template-columns:1fr;grid-template-areas:"brand" "contact" "hours" "cta";}
 }
 
 @media (max-width:560px){

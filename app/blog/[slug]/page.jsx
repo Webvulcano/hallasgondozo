@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }) {
       '@type': 'MedicalBusiness',
       name: COMPANY.fullName,
       url: SITE.url,
-      logo: { '@type': 'ImageObject', url: `${SITE.url}/pic/logo.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE.url}/pic/logo/logo.png` },
       telephone: PHONE.display,
       email: EMAIL,
       address: {

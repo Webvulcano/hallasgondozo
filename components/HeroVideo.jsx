@@ -33,7 +33,7 @@ export default function HeroVideo() {
         </div>
         <div className="hero-logo-corner" id="hero-logo-target">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/pic/logo_felirattal_black.webp" alt="ÉRTED Hallásgondozó" className="hero-logo-corner-img" />
+          <img src="/pic/logo/logo_felirattal_black.webp" alt="ÉRTED Hallásgondozó" className="hero-logo-corner-img" />
         </div>
       </div>
     </section>

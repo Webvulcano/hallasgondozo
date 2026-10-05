@@ -12,12 +12,16 @@ export default function Nav({ overlay = false }) {
       <header className={`nav${overlay ? ' nav-overlay' : ''}`} id="nav">
         <div className="wrap nav-inner">
           <Link href="/" className="logo" aria-label={`${COMPANY.brand} ${COMPANY.brandSub} főoldal`}>
+            {/* Feliratos logó (ikon + „ÉRTED Hallásgondozó") — a link aria-labelje adja a nevet */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/pic/logo.webp" alt="" aria-hidden="true" className="logo-img" />
-            <span className="logo-text">
-              <b>{COMPANY.brand}</b>
-              <span>{COMPANY.brandSub}</span>
-            </span>
+            <img
+              src="/pic/logo/logo-atlatszo-felirattal.webp"
+              alt=""
+              aria-hidden="true"
+              className="logo-img logo-img--wordmark"
+              width="597"
+              height="180"
+            />
           </Link>
           <NavLinks />
           <div className="nav-right">

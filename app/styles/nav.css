@@ -21,22 +21,7 @@ header.nav.nav-overlay.scrolled{
 /* Logo */
 .logo{display:flex;align-items:center;gap:12px;}
 .logo-img{height:46px;width:auto;display:block;}
-.logo-img--inverted{background:#fff;border-radius:10px;padding:4px;}
-.logo-mark{
-  width:46px;height:46px;border-radius:13px;background:var(--teal);
-  display:grid;place-items:center;flex:0 0 auto;
-  box-shadow:0 6px 16px rgba(121,185,68,.3);
-}
-.logo-mark svg{width:26px;height:26px;}
-.logo-text{display:flex;flex-direction:column;line-height:1;}
-.logo-text b{
-  font-family:var(--font-playfair),"Playfair Display",serif;
-  font-size:var(--fs-2xl);font-weight:700;color:var(--teal-deep);letter-spacing:.02em;
-}
-.logo-text span{
-  font-size:var(--fs-2xs);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ink-soft);font-weight:600;margin-top:3px;
-}
+.logo-img--wordmark{height:50px;}
 
 /* Nav CTA felirat - mobilon rövid */
 .cta-short{display:none;}

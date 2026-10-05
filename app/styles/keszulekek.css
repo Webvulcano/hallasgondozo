@@ -36,9 +36,18 @@
 .kbrand-card-foot{margin-top:auto;padding:14px 12px 12px;}
 .kbrand-card--link:hover .kbrand-card-btn{background:var(--teal-deep);color:#fff;}
 
-/* Termékfotós márkakártya: fehér panel, a fehér hátterű fotó multiply-jal beleolvad */
-.kbrand-card-ph:has(.kbrand-card-img[src*="-termek."]){margin:12px 12px 0;border-radius:12px;background:#fff;}
-.kbrand-card-img[src*="-termek."]{object-fit:contain;mix-blend-mode:multiply;box-sizing:border-box;padding:0;width:72%;height:72%;margin:14%;}
+/* Márkakártya-termékfotó (<marka>1.webp): fehér panel, a fehér hátterű fotó multiply-jal
+   beleolvad, a kép a panel 72%-a (ne töltse ki a kártyát) */
+.kbrand-card-ph{margin:12px 12px 0;border-radius:12px;background:#fff;}
+.kbrand-card-img{object-fit:contain;mix-blend-mode:multiply;box-sizing:border-box;padding:0;width:72%;height:72%;margin:14%;}
+/* Telefonon kisebbek a kártyák → a kép a panel 90%-a */
+/* A gomb felirata („Megnézem →") ne törjön két sorba */
+.kbrand-card-btn{white-space:nowrap;}
+
+@media (max-width:640px){
+  .kbrand-card-img{width:90%;height:90%;margin:5%;}
+  .kbrand-card-btn{padding:0 10px;}
+}
 
 @media (max-width:640px){
   .kbrand-row{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -60,11 +69,19 @@
 /* Kategória-grid: 5 kártya 3+2 elosztásban, a 2. sor középre igazítva.
    6 oszlopos rács, minden kártya 2-t fog át - a 4-5. kártya eltolva középre.
    (A .services alap 4 oszlopa 4+1-re tördelné, az csúnya volt.) */
-@media (min-width:1081px){
+@media (min-width:801px){
   #kategoriak .cards{grid-template-columns:repeat(6,minmax(0,1fr));}
   #kategoriak .card{grid-column:span 2;}
   #kategoriak .card:nth-child(4){grid-column:2 / span 2;}
   #kategoriak .card:nth-child(5){grid-column:4 / span 2;}
+}
+
+/* 641–800px: 2 oszlop — az 5. (páratlan utolsó) kártya középen, a többivel azonos
+   szélességben (24px = .cards gap). ≤640px-en ugyanez 14px-es gap-pel, lent. */
+@media (min-width:641px) and (max-width:800px){
+  #kategoriak .card:last-child:nth-child(odd){
+    grid-column:1 / -1;justify-self:center;width:calc(50% - 12px);
+  }
 }
 
 /* Kategória-kártya mobil rövid szövege — desktopon a teljes leírás látszik */

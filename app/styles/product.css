@@ -30,7 +30,7 @@
 
 /* Infó-oszlop */
 .kp-info h1{font-size:var(--fs-page-title);margin-bottom:18px;text-wrap:balance;}
-.kp-lead{font-size:var(--fs-base);color:var(--ink-soft);margin:14px 0 28px;text-wrap:pretty;}
+.kp-lead{font-size:var(--fs-base);color:var(--ink);margin:14px 0 28px;text-wrap:pretty;}
 
 /* Tabok - pill-szegmens */
 .kp-tablist{
@@ -49,7 +49,7 @@
 .kp-checklist{list-style:none;padding:0;margin:0;display:grid;gap:13px;}
 .kp-checklist li{display:flex;align-items:flex-start;gap:12px;font-size:var(--fs-base);line-height:var(--lh-snug);}
 .kp-checklist .check{width:24px;height:24px;}
-.kp-desc p{color:var(--ink-soft);margin-bottom:12px;text-wrap:pretty;}
+.kp-desc p{color:var(--ink);margin-bottom:12px;text-wrap:pretty;}
 .kp-desc p:last-child{margin-bottom:0;}
 
 /* Vélemény-doboz */
@@ -125,10 +125,16 @@
 .kp-related-row .kbrand-card-ph{aspect-ratio:4/3;}
 
 /* ---------- Responsive ---------- */
+/* Tablet-desktop határ (901–1080px): keskenyebb thumb-oszlop, hogy a fő kép ne
+   legyen kicsi a szöveges oszlophoz képest (a galéria-oszlop már eleve szélesebb) */
+@media (min-width:901px) and (max-width:1080px){
+  .kp-gallery{grid-template-columns:minmax(0,1fr) 84px;}
+}
+
 @media (max-width:1000px){
   .kp-hero-grid{gap:40px;}
-  .kp-trust-row{grid-template-columns:repeat(2,1fr);row-gap:28px;}
-  .kp-trust-row li + li{border-left:0;}
+  /* Tableten is mind a 4 ikon egy sorban, a desktopos elválasztó vonalakkal */
+  .kp-trust-row li{padding:4px 10px;}
 }
 
 @media (max-width:900px){
@@ -137,7 +143,15 @@
      A két oszlop kibontva (display:contents), így a gyerekeik a rács elemei és
      order-rel átrendezhetők — a DOM nem változik (a h1 egyszer szerepel, SEO). */
   .kp-hero-media,.kp-info{display:contents;}
-  .kp-gallery{margin-bottom:28px;}
+  /* Galéria mobil-elrendezése már tableten is: négyzetes fő kép, alatta vízszintes
+     thumb-sor; 560px-re korlátozva, középen — ne töltse ki a teljes képernyőt */
+  .kp-gallery{
+    margin-bottom:28px;grid-template-columns:minmax(0,1fr);
+    width:100%;max-width:560px;justify-self:center;
+  }
+  .kp-gallery-main{aspect-ratio:1/1;}
+  .kp-thumbs{grid-template-rows:none;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .kp-thumb{aspect-ratio:1/1;}
   .kp-info h1{order:-1;}
   .kp-hero-grid .kp-review{order:1;}
   .kp-hero-grid .kp-next{order:2;}
@@ -145,18 +159,17 @@
 
 @media (max-width:640px){
   .kp-hero.block{padding-bottom:48px;}
-  .kp-gallery{grid-template-columns:minmax(0,1fr);}
-  .kp-gallery-main{aspect-ratio:1/1;}
-  .kp-thumbs{grid-template-rows:none;grid-template-columns:repeat(4,1fr);gap:6px;}
-  .kp-thumb{aspect-ratio:1/1;}
   .kp-tab{padding:0 6px;line-height:1.15;}
   .kp-review{grid-template-columns:auto 1fr;padding:20px;}
   .kp-review-nav{grid-column:1 / -1;justify-content:flex-end;}
   .kp-next-more{display:none;}
 
-  /* Kapcsolódó márkák: vízszintes kártya (kép balra, név jobbra) */
-  /* Ikonsor fehér sávon, hogy elváljon a krém szekcióktól */
+  /* Ikonsor fehér sávon, hogy elváljon a krém szekcióktól; mobilon 2×2 */
   .kp-trust{background:var(--white);padding:40px 0;}
+  .kp-trust-row{grid-template-columns:repeat(2,1fr);row-gap:28px;}
+  .kp-trust-row li + li{border-left:0;}
+
+  /* Kapcsolódó márkák: vízszintes kártya (kép balra, név jobbra) */
   .kp-related-row{grid-template-columns:1fr;gap:14px;}
   .kp-related-row .kbrand-card{
     display:grid;grid-template-columns:96px 1fr;grid-template-rows:1fr auto auto 1fr;

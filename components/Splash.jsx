@@ -92,7 +92,7 @@ export default function Splash() {
     <>
       <div id="splash" className={`splash${phase === 'moving' ? ' splash-fade' : ''}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img ref={logoRef} src="/pic/logo_felirattal.webp" alt="" aria-hidden="true" className="splash-logo" />
+        <img ref={logoRef} src="/pic/logo/logo_felirattal.webp" alt="" aria-hidden="true" className="splash-logo" />
       </div>
       <noscript>
         <style>{`#splash{display:none!important}#hero-logo-target{opacity:1!important}`}</style>

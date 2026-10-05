@@ -23,7 +23,9 @@ const nextConfig = {
       { source: '/szolgaltatasok', destination: '/', permanent: true },
       { source: '/rolunk', destination: '/', permanent: true },
       { source: '/kapcsolat', destination: '/', permanent: true },
-      { source: '/de', destination: '/', permanent: true },
+      // /de: IDEIGLENES (307) - a német verzió később ide jön; a permanent (308) redirectet a
+      // böngészők örökre cache-elnék, és a német indulás után is a főoldalra dobnák a látogatót.
+      { source: '/de', destination: '/', permanent: false },
       {
         source: '/blog/2023-12-07/rosszul-hall-egy-csaladtagom-segit-e-a-hallokeszulek',
         destination: '/blog/rosszul-hall-egy-csaladtagom-segit-a-hallokeszulek',

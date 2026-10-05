@@ -33,6 +33,12 @@
   height:100%;
   object-fit:cover;
   display:block;
+  /* Rejtve, amíg az első kocka le nem játszódik (HeroVideoPlayer) — addig a poszter látszik */
+  opacity:0;transition:opacity .6s ease;
+}
+.hero-video-el.is-playing{opacity:1;}
+@media (prefers-reduced-motion:reduce){
+  .hero-video-el{transition:none;}
 }
 .hero-video-overlay{
   position:absolute;inset:0;

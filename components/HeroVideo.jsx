@@ -1,14 +1,13 @@
 import { BOOKING_URL, PHONE } from '../lib/constants'
 import Button from './Button'
+import HeroVideoPlayer from './HeroVideoPlayer'
 import { Calendar, Phone } from './icons'
 
 export default function HeroVideo() {
   return (
     <section className="hero-video">
       <div className="hero-video-frame">
-        {/* 1080p, hang nélkül. A böngésző az első lejátszhatót választja:
-            1) HEVC (hvc1, 1,6 MB) — Safari, és a HEVC-t ismerő Chrome/Edge;
-            2) H.264 tartalék (2,6 MB) — Firefox és minden más.
+        {/* Videó: HeroVideoPlayer (késleltetve, az oldal betöltése után indul).
             Poszter: <img> a videó MÖGÖTT (nem a video poster-attribútuma, mert az nem tud
             srcset-et) — a HTML-ben azonnal felfedezhető, fetchPriority=high, mobilon 960px,
             desktopon 1920px. LCP-elemként mérhető; a betöltött videó eltakarja. */}
@@ -23,12 +22,8 @@ export default function HeroVideo() {
           alt=""
           aria-hidden="true"
           fetchPriority="high"
-          decoding="async"
         />
-        <video className="hero-video-el" autoPlay muted loop playsInline preload="auto">
-          <source src="/pic/hero/hero.mp4" type='video/mp4; codecs="hvc1"' />
-          <source src="/pic/hero/hero_h264.mp4" type="video/mp4" />
-        </video>
+        <HeroVideoPlayer />
         <div className="hero-video-overlay">
           <span className="hero-video-eyebrow">ÉRTED Hallásgondozó</span>
           <h1 className="hero-video-title">Hallókészülékek és hallásvizsgálat Győrben</h1>

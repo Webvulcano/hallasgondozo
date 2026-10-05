@@ -6,14 +6,14 @@ export default function HeroVideo() {
   return (
     <section className="hero-video">
       <div className="hero-video-frame">
-        <video
-          className="hero-video-el"
-          src="/pic/hero/hero_video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
+        {/* 1080p, hang nélkül. A böngésző az első lejátszhatót választja:
+            1) HEVC (hvc1, 1,6 MB) — Safari, és a HEVC-t ismerő Chrome/Edge;
+            2) H.264 tartalék (2,6 MB) — Firefox és minden más.
+            Poszter: a keret CSS-háttere (hero_poster.webp), amíg a videó betölt. */}
+        <video className="hero-video-el" autoPlay muted loop playsInline preload="auto">
+          <source src="/pic/hero/hero.mp4" type='video/mp4; codecs="hvc1"' />
+          <source src="/pic/hero/hero_h264.mp4" type="video/mp4" />
+        </video>
         <div className="hero-video-overlay">
           <span className="hero-video-eyebrow">ÉRTED Hallásgondozó</span>
           <h1 className="hero-video-title">Hallókészülékek és hallásvizsgálat Győrben</h1>

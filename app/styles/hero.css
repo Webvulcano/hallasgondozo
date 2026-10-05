@@ -14,6 +14,8 @@
 }
 .hero-video-frame{
   position:relative;
+  /* Poszter (rendelői fotó), amíg a videó betölt */
+  background:#1f2a14 url(/pic/hero/hero_poster.webp) center/cover no-repeat;
   width:100%;
   aspect-ratio:16/9;
   min-height:60svh;

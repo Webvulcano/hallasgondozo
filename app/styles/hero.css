@@ -61,7 +61,9 @@
 }
 .hero-logo-corner{
   position:absolute;top:24px;left:24px;z-index:3;
-  opacity:0;transition:opacity .2s ease;
+  /* Splash kikapcsolva → a sarok-logó rögtön látszik. Splash visszakapcsolásakor: opacity:0
+     (a Splash teszi rá az .is-visible-t az animáció végén). */
+  opacity:1;transition:opacity .2s ease;
   pointer-events:none;
 }
 .hero-logo-corner.is-visible{opacity:1;}

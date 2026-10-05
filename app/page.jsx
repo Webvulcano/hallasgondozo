@@ -1,4 +1,6 @@
-import Splash from '../components/Splash'
+// Nyitó logó-animáció KIKAPCSOLVA (2026-10-05): a fehér takaróréteg miatt az LCP 4,2 mp volt
+// (PageSpeed mobil). Visszakapcsoláshoz: import + <Splash /> vissza, és hero.css .hero-logo-corner opacity:0.
+// import Splash from '../components/Splash'
 import Nav from '../components/Nav'
 import HeroVideo from '../components/HeroVideo'
 import Partners from '../components/Partners'
@@ -15,7 +17,7 @@ import PromoPopup from '../components/PromoPopup'
 export default function Home() {
   return (
     <>
-      <Splash />
+      {/* <Splash /> — kikapcsolva, ld. fent */}
       <Nav overlay />
       <span id="top" />
       <HeroVideo />

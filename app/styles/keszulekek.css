@@ -12,7 +12,7 @@
   text-wrap:balance;margin-bottom:18px;
 }
 .kpage-hero .lead{
-  font-size:var(--fs-xl);color:var(--ink-soft);
+  font-size:var(--fs-lead);color:var(--ink-soft);
   max-width:680px;margin:0 auto 28px;text-wrap:pretty;
 }
 
@@ -55,7 +55,7 @@
   background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));
 }
 .kcta h2{color:#fff;font-size:var(--fs-section);margin-bottom:14px;}
-.kcta p{color:rgba(255,255,255,.92);font-size:var(--fs-xl);max-width:620px;margin:0 auto 26px;text-wrap:pretty;}
+.kcta p{color:rgba(255,255,255,.92);font-size:var(--fs-lead);max-width:620px;margin:0 auto 26px;text-wrap:pretty;}
 
 /* Kategória-grid: 5 kártya 3+2 elosztásban, a 2. sor középre igazítva.
    6 oszlopos rács, minden kártya 2-t fog át - a 4-5. kártya eltolva középre.
@@ -65,6 +65,22 @@
   #kategoriak .card{grid-column:span 2;}
   #kategoriak .card:nth-child(4){grid-column:2 / span 2;}
   #kategoriak .card:nth-child(5){grid-column:4 / span 2;}
+}
+
+/* Kategória-kártya mobil rövid szövege — desktopon a teljes leírás látszik */
+#kategoriak .card-desc-short{display:none;}
+
+@media (max-width:640px){
+  /* Cím egy lépcsővel a szöveg fölött (20 / 16px) — felülírja a .services mobil
+     --fs-base címét; a főoldali Services kártyákat nem érinti */
+  #kategoriak .card h3{font-size:var(--fs-xl);}
+  #kategoriak .card-desc{display:none;}
+  #kategoriak .card-desc-short{display:block;}
+  /* Páratlan utolsó kártya (2 oszlopban egyedül a sorában) vízszintesen középen,
+     a többivel azonos szélességben (14px = .services .cards mobil gap) */
+  #kategoriak .card:last-child:nth-child(odd){
+    grid-column:1 / -1;justify-self:center;width:calc(50% - 7px);
+  }
 }
 
 

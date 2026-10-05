@@ -12,7 +12,7 @@ export const metadata = {
   // absolute: a layout template („%s | ÉRTED Hallásgondozó") ne fűzze hozzá még egyszer
   title: { absolute: 'Hallókészülék Győr: Phonak, Signia, Oticon, Starkey | ÉRTED' },
   description:
-    'Teljes hallókészülék- és termékkínálat Győrben: Phonak, Signia, Oticon, Starkey. Hallókészülékek minden fokú halláscsökkenésre, vízálló és tölthető kivitel, egyedi fülillesztékek. Ingyenes hallásvizsgálat.',
+    'Teljes hallókészülék-kínálat Győrben: Phonak, Signia, Oticon, Starkey, tölthető és vízálló kivitel, egyedi fülillesztékek. Ingyenes hallásvizsgálat.',
   // saját canonical - különben a layout '/' canonical-ját örökölné (főoldalnak hinné a Google)
   alternates: { canonical: '/hallokeszulekek' },
   robots: { index: true, follow: true },
@@ -90,7 +90,8 @@ export default function DevicesPage() {
                     <Icon name={c.iconName} size={32} />
                   </div>
                   <h3>{c.title}</h3>
-                  <p>{c.desc}</p>
+                  <p className="card-desc">{c.desc}</p>
+                  <p className="card-desc-short">{c.descShort}</p>
                 </Reveal>
               ))}
             </div>

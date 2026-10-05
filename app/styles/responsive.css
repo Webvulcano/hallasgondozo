@@ -11,6 +11,7 @@
     --fs-subsection:  1.25rem;   /* 20px    (desktop: 1.953rem / 31.25px) */
     --fs-stat:        1.5625rem; /* 25px    (desktop: 1.953rem / 31.25px) */
     --fs-display-num: 1.953rem;  /* 31.25px (desktop: 2.441rem / 39.06px) */
+    --fs-lead:        1rem;      /* 16px    (desktop: 1.25rem / 20px) */
   }
 }
 

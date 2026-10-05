@@ -73,36 +73,66 @@ header.nav.nav-overlay.scrolled{
 /* Hamburger - desktopon rejtett */
 .nav-burger{display:none;}
 
-/* Lenyíló mobil panel + backdrop (a header.nav sticky → pozícionált ős) */
-.nav-mobile-panel{
-  position:absolute;top:100%;left:0;right:0;z-index:55;
-  background:rgba(250,248,245,.97);backdrop-filter:blur(10px);
-  border-top:1px solid var(--line);box-shadow:var(--shadow-md);
-  padding:12px 18px 18px;display:flex;flex-direction:column;gap:4px;
-  opacity:0;visibility:hidden;transform:translateY(-10px);
-  transition:opacity .22s ease,transform .22s ease,visibility .22s ease;
+/* Teljes képernyős mobil menü (Mooira-stílus) — portállal a <body>-ban, a header
+   (z-index 50: logó + X) alatt. Linkek középen, lépcsőzetes beúszással. */
+.nav-mobile-menu{
+  position:fixed;inset:0;z-index:49;
+  background:var(--cream);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:78px 24px 0;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease,visibility .4s ease;
 }
-.nav-mobile-panel.open{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}
+.nav-mobile-links{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;}
 .nav-mlink{
-  align-self:center;position:relative;
-  padding:14px 6px;font-weight:700;font-size:var(--fs-base);color:var(--teal-deep);
-  text-align:center;
+  position:relative;padding:6px 4px;
+  font-family:var(--font-playfair),"Playfair Display",Georgia,serif;
+  font-size:var(--fs-2xl);font-weight:600;line-height:1.15;
+  color:var(--teal-deep);text-align:center;
+  opacity:0;transform:translateY(24px);
 }
 .nav-mlink::after{
-  content:"";position:absolute;left:6px;right:6px;bottom:8px;height:2px;
-  background:var(--teal-deep);transform:scaleX(0);transform-origin:center;
+  content:"";position:absolute;left:4px;right:4px;bottom:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:center;
   transition:transform .2s ease;
 }
 .nav-mlink:hover::after,
 .nav-mlink.active::after{transform:scaleX(1);}
-.nav-mcta,.nav-mphone{margin-top:8px;}
+.nav-mobile-menu.open .nav-mlink{animation:navMenuIn .55s cubic-bezier(.22,.61,.36,1) forwards;}
+.nav-mobile-menu.open .nav-mlink:nth-child(1){animation-delay:.15s;}
+.nav-mobile-menu.open .nav-mlink:nth-child(2){animation-delay:.24s;}
+.nav-mobile-menu.open .nav-mlink:nth-child(3){animation-delay:.33s;}
+.nav-mobile-menu.open .nav-mlink:nth-child(4){animation-delay:.42s;}
+.nav-mobile-menu.open .nav-mlink:nth-child(5){animation-delay:.51s;}
 
-.nav-backdrop{
-  position:absolute;top:100%;left:0;right:0;height:100vh;z-index:54;
-  background:rgba(20,30,10,.18);
-  opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;
+.nav-mobile-footer{
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  opacity:0;transform:translateY(24px);
 }
-.nav-backdrop.open{opacity:1;visibility:visible;}
+.nav-mobile-menu.open .nav-mobile-footer{animation:navMenuIn .55s cubic-bezier(.22,.61,.36,1) .6s forwards;}
+.nav-mobile-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;}
+.nav-mobile-contact a{font-size:var(--fs-base);color:var(--ink-soft);transition:color .2s ease;}
+.nav-mobile-contact a:hover{color:var(--teal-deep);}
+
+@keyframes navMenuIn{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:none;}
+}
+
+/* Nyitott menü: header tömör háttér, árnyék nélkül (egybeolvad az overlay-jel) */
+/* A zárolás a <html>-en: body{overflow:hidden} a html overflow-x:clip miatt a body-t
+   tenné görgető konténerré, és a sticky header elcsúszna. */
+html.menu-open{overflow:hidden;}
+html.menu-open header.nav{background:var(--cream);box-shadow:none;border-color:transparent;}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-mobile-menu{transition:none;}
+  .nav-mlink,.nav-mobile-footer{opacity:1;transform:none;animation:none !important;}
+}
+@media (min-width:901px){
+  .nav-mobile-menu{display:none;}
+}
 
 @media (max-width:900px){
   .nav-right{display:none;}
@@ -112,7 +142,7 @@ header.nav.nav-overlay.scrolled{
   }
   /* Abszolút sávok - szekvenciált átmenet (előbb csúszás, utána forgás), nincs keresztezés */
   .nav-burger span{
-    position:absolute;left:10px;right:10px;height:2.5px;border-radius:2px;
+    position:absolute;left:11px;right:11px;height:2px;border-radius:2px;
     background:var(--teal-deep);
     transition:top .2s ease .2s,transform .2s ease,opacity .15s ease;
   }

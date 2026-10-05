@@ -26,11 +26,11 @@ export async function generateMetadata({ params }) {
   const url = `${SITE.url}/hallokeszulekek/${p.slug}`
   return {
     title: `${p.productName} Győrben`,
-    description: `${p.lead} Ingyenes hallásvizsgálat és 15 nap próbahordás Győrben.`,
+    description: p.metaDescription,
     alternates: { canonical: url },
     openGraph: {
       title: `${p.productName} | ÉRTED Hallásgondozó Győr`,
-      description: p.desc,
+      description: p.metaDescription,
       url,
       images: [{ url: `${SITE.url}${p.gallery[0].src}` }],
       locale: 'hu_HU',
@@ -50,17 +50,9 @@ export default async function ProductPage({ params }) {
   const related = brandBoxes.filter((b) => b.slug !== p.slug)
   const url = `${SITE.url}/hallokeszulekek/${p.slug}`
 
-  // SEO/AEO: Product (ár nélkül - nincs offers), Breadcrumb, FAQPage
+  // SEO/AEO: Breadcrumb + FAQPage. Product schema szándékosan NINCS: ár (offers) és
+  // értékelés nélkül a Google érvénytelen termékként jelezné (Search Console hiba).
   const schema = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: p.productName,
-      brand: { '@type': 'Brand', name: p.name },
-      description: p.lead,
-      image: p.gallery.map((g) => `${SITE.url}${g.src}`),
-      url,
-    },
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -101,7 +93,6 @@ export default async function ProductPage({ params }) {
               </div>
 
               <div className="kp-info">
-                <div className="eyebrow kp-brand">{p.name}</div>
                 <h1>{p.productName}</h1>
                 <p className="kp-lead">{p.lead}</p>
 
@@ -134,10 +125,6 @@ export default async function ProductPage({ params }) {
             <div className="sec-head">
               <div className="eyebrow">További márkák</div>
               <h2>Hasonlítsa össze a lehetőségeket</h2>
-              <p>
-                Minden márkának más az erőssége. A hallásvizsgálaton segítünk kiválasztani, melyik
-                illik leginkább az Ön hallásához és mindennapjaihoz.
-              </p>
             </div>
             <div className="kbrand-row kp-related-row">
               {related.map((b) => (
@@ -164,8 +151,7 @@ export default async function ProductPage({ params }) {
             <Reveal>
               <h2>Kíváncsi, Önnek is ez a megoldás való?</h2>
               <p>
-                Foglaljon ingyenes hallásvizsgálatot, és 15 napig a saját mindennapjaiban
-                próbálhatja ki - kötelezettség nélkül.
+                Foglaljon ingyenes hallásvizsgálatot, és próbálja ki 15 napig kötelezettség nélkül.
               </p>
               <Button variant="gold" href={BOOKING_URL}>
                 Ingyenes hallásvizsgálatot foglalok

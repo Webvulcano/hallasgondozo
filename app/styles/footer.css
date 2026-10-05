@@ -41,3 +41,13 @@ footer a:hover{color:var(--gold);}
   font-size:var(--fs-sm);color:rgba(255,255,255,.55);
 }
 .foot-bottom a:hover{color:var(--gold);}
+
+/* Mobil: minden blokk középre; a nyitvatartás a teljes szélességet kitölti
+   (a .wrap paddingje adja az egyforma bal-jobb teret), nap balra, idő jobbra */
+@media (max-width:640px){
+  .foot-grid{text-align:center;}
+  .foot-logo{justify-content:center;}
+  .foot-list{justify-items:center;}
+  .foot-hours-list{max-width:none;text-align:left;}
+  .foot-bottom{justify-content:center;text-align:center;}
+}

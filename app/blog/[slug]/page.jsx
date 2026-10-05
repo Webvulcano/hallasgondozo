@@ -17,7 +17,8 @@ export async function generateMetadata({ params }) {
   if (!post) return {}
   const url = `${SITE.url}/blog/${post.slug}`
   return {
-    title: post.title,
+    // metaTitle: ≤60 karakteres <title> saját rövid utótaggal (a template nélkül)
+    title: post.metaTitle ? { absolute: post.metaTitle } : post.title,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {

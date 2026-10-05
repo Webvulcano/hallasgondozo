@@ -6,7 +6,8 @@ import { getAllPosts } from '../../lib/content/posts'
 import { SITE, COMPANY } from '../../lib/constants'
 
 export const metadata = {
-  title: 'Blog — hallás, hallókészülék, hallásgondozás | ÉRTED Győr',
+  // absolute: a layout template ne fűzze hozzá még egyszer a márkanevet
+  title: { absolute: 'Blog — hallás, hallókészülék, hallásgondozás | ÉRTED Győr' },
   description:
     'Hasznos cikkek a hallásról, hallókészülékekről és a hallásgondozásról az ÉRTED Hallásgondozó győri szakembereitől. Tippek, válaszok, döntéstámogatás.',
   alternates: { canonical: '/blog' },

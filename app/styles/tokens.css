@@ -61,6 +61,9 @@
   --fs-xl:   1.25rem;        /* 20px — sec-head p, intro, ÉS lead/listaelem (korábbi --fs-lg) */
   --fs-lg:   var(--fs-xl);   /* kompat-alias — lead/listaelem eggyel feljebb került; a
                                  body-alap szerepét átvette --fs-base (ld. base.css) */
+  --fs-lead: var(--fs-xl);   /* 20px desktop → 16px ≤1000px (responsive.css) — bevezető/lead
+                                 bekezdés (CTA-szöveg, oldal-lead, cikk első bekezdése).
+                                 Törzsszöveg SOHA ne ezen legyen, hanem --fs-base-en. */
   --fs-2xl:  1.5625rem;      /* 25px — kártya-/lépéscím h3 */
   --fs-3xl:  var(--fs-2xl);  /* kompat-alias — korábbi 26px ugyanide olvad */
 

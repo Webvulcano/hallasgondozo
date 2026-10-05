@@ -29,7 +29,6 @@
 .kp-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 
 /* Infó-oszlop */
-.kp-brand{margin:0 0 8px;}
 .kp-info h1{font-size:var(--fs-page-title);margin-bottom:18px;text-wrap:balance;}
 .kp-lead{font-size:var(--fs-base);color:var(--ink-soft);margin:14px 0 28px;text-wrap:pretty;}
 
@@ -107,7 +106,7 @@
 .kp-trust{padding:8px 0 72px;}
 .kp-trust-row{
   list-style:none;margin:0;padding:0;
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);
 }
 .kp-trust-row li{
   display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
@@ -120,19 +119,28 @@
 }
 
 /* ---------- Kapcsolódó márkák ---------- */
+/* Fejléc: eyebrow + cím, leíró szöveg nélkül — kisebb rés a kártyákig */
+.kp-related .sec-head{margin-bottom:32px;}
 .kp-related-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:960px;margin-inline:auto;}
 .kp-related-row .kbrand-card-ph{aspect-ratio:4/3;}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1000px){
   .kp-hero-grid{gap:40px;}
-  .kp-trust-row{grid-template-columns:repeat(3,1fr);row-gap:28px;}
+  .kp-trust-row{grid-template-columns:repeat(2,1fr);row-gap:28px;}
   .kp-trust-row li + li{border-left:0;}
 }
 
 @media (max-width:900px){
-  .kp-hero-grid{grid-template-columns:minmax(0,1fr);}
-  .kp-hero-media{position:static;}
+  .kp-hero-grid{grid-template-columns:minmax(0,1fr);row-gap:0;}
+  /* Mobil sorrend: cím → galéria → leírás (tabok) → vélemény → „Ezt is érdemes".
+     A két oszlop kibontva (display:contents), így a gyerekeik a rács elemei és
+     order-rel átrendezhetők — a DOM nem változik (a h1 egyszer szerepel, SEO). */
+  .kp-hero-media,.kp-info{display:contents;}
+  .kp-gallery{margin-bottom:28px;}
+  .kp-info h1{order:-1;}
+  .kp-hero-grid .kp-review{order:1;}
+  .kp-hero-grid .kp-next{order:2;}
 }
 
 @media (max-width:640px){
@@ -145,10 +153,10 @@
   .kp-review{grid-template-columns:auto 1fr;padding:20px;}
   .kp-review-nav{grid-column:1 / -1;justify-content:flex-end;}
   .kp-next-more{display:none;}
-  .kp-trust-row{grid-template-columns:repeat(2,1fr);}
-  .kp-trust-row li:last-child{grid-column:1 / -1;}
 
   /* Kapcsolódó márkák: vízszintes kártya (kép balra, név jobbra) */
+  /* Ikonsor fehér sávon, hogy elváljon a krém szekcióktól */
+  .kp-trust{background:var(--white);padding:40px 0;}
   .kp-related-row{grid-template-columns:1fr;gap:14px;}
   .kp-related-row .kbrand-card{
     display:grid;grid-template-columns:96px 1fr;grid-template-rows:1fr auto auto 1fr;

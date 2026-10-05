@@ -39,8 +39,8 @@
 .article-media img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
 
 /* MDX próza */
-.prose{font-size:var(--fs-lg);line-height:1.72;color:var(--ink);hyphens:auto;}
-.prose > p:first-child{font-size:var(--fs-xl);color:var(--ink-soft);}
+.prose{font-size:var(--fs-base);line-height:var(--lh-base);color:var(--ink);hyphens:auto;}
+.prose > p:first-child{font-size:var(--fs-lead);color:var(--ink-soft);}
 .prose h2{
   font-size:var(--fs-subsection);color:var(--teal-deep);
   margin:38px 0 14px;text-wrap:balance;scroll-margin-top:90px;
@@ -69,7 +69,7 @@
   background:linear-gradient(135deg,#1a3e0a,var(--teal-deep));box-shadow:var(--shadow-lg);
 }
 .article-cta h2{color:#fff;font-size:var(--fs-subsection);margin-bottom:12px;}
-.article-cta p{color:rgba(255,255,255,.92);font-size:var(--fs-lg);max-width:520px;margin:0 auto 22px;text-wrap:pretty;}
+.article-cta p{color:rgba(255,255,255,.92);font-size:var(--fs-lead);max-width:520px;margin:0 auto 22px;text-wrap:pretty;}
 .article-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 
 @media (max-width:760px){

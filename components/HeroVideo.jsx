@@ -9,13 +9,16 @@ export default function HeroVideo() {
       <div className="hero-video-frame">
         {/* Videó: HeroVideoPlayer (késleltetve, az oldal betöltése után indul).
             Poszter: <img> a videó MÖGÖTT — a HTML-ben azonnal felfedezhető, fetchPriority=high,
-            LCP-elem. Mobilon is 1920px SZÁNDÉKOSAN (nincs srcset): kisebb poszternél a Chrome a
-            felnagyított képet „kisebbnek" számolja, és a később induló 1920px-es videó első
-            kockája lenne az LCP (PageSpeed mobil: 4,3 mp). */}
+            LCP-elem. Legkisebb változat 1280px SZÁNDÉKOSAN: ennél kisebb poszter a mobil
+            kivágásban (~1000 CSS px széles) felnagyított lenne, a Chrome „kisebbnek" számolná,
+            és a később induló 1920px-es videó első kockája lenne az LCP (PageSpeed mobil: 4,3 mp).
+            A React a fetchPriority=high + srcSet képet magától előtölti a <head>-ben. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="hero-video-poster"
           src="/pic/hero/hero_poster.webp"
+          srcSet="/pic/hero/hero_poster_1280.webp 1280w, /pic/hero/hero_poster.webp 1920w"
+          sizes="100vw"
           width="1920"
           height="1079"
           alt=""

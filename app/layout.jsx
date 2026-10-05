@@ -1,24 +1,52 @@
 import './globals.css'
-import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
+import localFont from 'next/font/local'
 import { SITE, COMPANY, PHONE, EMAIL, SOCIAL, MAPS_URL, DOCTOR_URL, GEO } from '../lib/constants'
 import ScrollReset from '../components/ScrollReset'
 
-// Teljesítmény (PageSpeed mobil): a dőlt stílus nincs használva → nem kérjük le; a Playfair
-// (csak címek) nincs előtöltve, így nem versenyez az LCP-poszterrel — swap-pel érkezik.
-const playfair = Playfair_Display({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['500', '600', '700'],
-  variable: '--font-playfair',
+// Betűtípusok — SAJÁT, magyar karakterkészletre szűkített változó fontok (app/fonts/).
+// Teljesítmény (PageSpeed mobil): a Google latin + latin-ext fájljai 143 KB voltak, és az
+// első kirajzolás előtt letöltődtek (LCP +0,9 mp). A szűkítés: latin-hu = alap latin +
+// Latin-1 (áéíóöúü…) + a használt írásjelek; hu-ext = csak Ő ő Ű ű — ez külön, kis fájl,
+// unicode-range-dzsel, így csak akkor töltődik, ha ilyen betű van az oldalon. Összesen 55 KB.
+// Forrás: Google Fonts (OFL), pyftsubset. Új karakter (pl. ő/ű-n túli ékezet) → újra-szűkítés.
+const playfairLatin = localFont({
+  src: './fonts/playfair-display-latin-hu.woff2',
+  weight: '400 900',
+  display: 'swap',
+  preload: false, // csak címek — swap-pel érkezik, ne versenyezzen az LCP-poszterrel
+  adjustFontFallback: 'Times New Roman',
+})
+const playfairExt = localFont({
+  src: './fonts/playfair-display-hu-ext.woff2',
+  weight: '400 900',
   display: 'swap',
   preload: false,
+  adjustFontFallback: false,
+  declarations: [{ prop: 'unicode-range', value: 'U+0150-0151, U+0170-0171' }],
+})
+const sourceSansLatin = localFont({
+  src: './fonts/source-sans-3-latin-hu.woff2',
+  weight: '200 900',
+  display: 'swap',
+  preload: true,
+  adjustFontFallback: 'Arial',
+})
+const sourceSansExt = localFont({
+  src: './fonts/source-sans-3-hu-ext.woff2',
+  weight: '200 900',
+  display: 'swap',
+  preload: false,
+  adjustFontFallback: false,
+  declarations: [{ prop: 'unicode-range', value: 'U+0150-0151, U+0170-0171' }],
 })
 
-const sourceSans = Source_Sans_3({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-source-sans',
-  display: 'swap',
-})
+// A CSS mindenhol var(--font-playfair) / var(--font-source-sans)-t használ. Az ext család
+// áll ELÖL: a unicode-range miatt csak az Ő ő Ű ű-re vonatkozik, minden más betű a latin
+// fájlból (illetve annak méretre igazított tartalék-betűjéből) jön.
+const fontVars = {
+  '--font-playfair': `${playfairExt.style.fontFamily}, ${playfairLatin.style.fontFamily}`,
+  '--font-source-sans': `${sourceSansExt.style.fontFamily}, ${sourceSansLatin.style.fontFamily}`,
+}
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -108,7 +136,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="hu" className={`${playfair.variable} ${sourceSans.variable}`}>
+    <html lang="hu" style={fontVars}>
       <body>
         <script
           type="application/ld+json"

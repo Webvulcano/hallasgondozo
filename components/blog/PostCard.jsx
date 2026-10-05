@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { formatHuDate } from '../../lib/content/posts'
+import { getDictionary, formatDate } from '../../lib/i18n'
+import { routePath } from '../../lib/i18n/routes'
 import SkeletonImage from '../SkeletonImage'
 
 // Blog lista-kártya: cím, kivonat, dátum → cikk-oldal.
-export default function PostCard({ post }) {
-  const href = `/blog/${post.slug}`
+export default function PostCard({ post, locale }) {
+  const href = routePath('post', locale, post.slug)
   return (
     <article className="postcard">
       <div className="postcard-media">
@@ -12,14 +13,14 @@ export default function PostCard({ post }) {
       </div>
       <div className="postcard-body">
         <time className="postcard-date" dateTime={post.datePublished}>
-          {formatHuDate(post.datePublished)}
+          {formatDate(post.datePublished, locale)}
         </time>
         <h2 className="postcard-title">
           <Link href={href}>{post.title}</Link>
         </h2>
         <p className="postcard-excerpt">{post.excerpt}</p>
         <Link href={href} className="postcard-more">
-          Tovább olvasom →
+          {getDictionary(locale).blog.readMore}
         </Link>
       </div>
     </article>

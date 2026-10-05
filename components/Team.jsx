@@ -1,13 +1,16 @@
-import { team } from '../lib/content/team'
+import { getContent } from '../lib/content'
+import { getDictionary } from '../lib/i18n'
 import SkeletonImage from './SkeletonImage'
 
-export default function Team() {
+export default function Team({ locale }) {
+  const t = getDictionary(locale).team
+  const { team } = getContent(locale)
   return (
     <section className="block team" id="csapat">
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">Akikre rábízhatja magát</div>
-          <h2>Orvos, audiológus, hallásakusztikus - egy csapatban</h2>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
           {/*<p>
             Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően -
             orvosi szakzsargon nélkül - kapja meg a választ.
@@ -15,7 +18,7 @@ export default function Team() {
         </div>
         <div className="cards">
           {team.map((m) => (
-            <div key={m.name} className="tcard">
+            <div key={m.id} className="tcard">
               <div className="ph">
                 <SkeletonImage src={m.img} alt={m.imgAlt} className="tcard-img" loading="lazy" />
               </div>

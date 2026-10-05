@@ -1,9 +1,11 @@
-import { BOOKING_URL, PHONE } from '../lib/constants'
+import { PHONE, bookingUrls } from '../lib/constants'
+import { getDictionary } from '../lib/i18n'
 import Button from './Button'
 import HeroVideoPlayer from './HeroVideoPlayer'
 import { Calendar, Phone } from './icons'
 
-export default function HeroVideo() {
+export default function HeroVideo({ locale }) {
+  const t = getDictionary(locale)
   return (
     <section className="hero-video">
       <div className="hero-video-frame">
@@ -28,10 +30,10 @@ export default function HeroVideo() {
         <HeroVideoPlayer />
         <div className="hero-video-overlay">
           <span className="hero-video-eyebrow">ÉRTED Hallásgondozó</span>
-          <h1 className="hero-video-title">Hallókészülékek és hallásvizsgálat Győrben</h1>
+          <h1 className="hero-video-title">{t.hero.title}</h1>
           <div className="hero-video-cta">
-            <Button variant="gold" href={BOOKING_URL} icon={<Calendar size={20} stroke="#3a1c00" />}>
-              Ingyenes időpontot foglalok
+            <Button variant="gold" href={bookingUrls(locale).adult} icon={<Calendar size={20} stroke="#3a1c00" />}>
+              {t.cta.bookAppointment}
             </Button>
             <Button
               variant="ghost-light"

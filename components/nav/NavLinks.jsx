@@ -1,14 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
-export default function NavLinks() {
-  const pathname = usePathname()
-  const onHome = pathname === '/'
-  const onPrices = pathname.startsWith('/hallokeszulekek/arak')
-  const onProducts = pathname.startsWith('/hallokeszulekek') && !onPrices
-  const onBlog = pathname.startsWith('/blog')
+// items: [{ key, href, label }] a Nav-ból (nyelvfüggő href + felirat).
+// current: a szerver által megadott route-kulcs → aktív menüpont (nincs pathname-parszolás,
+// így a lokalizált URL-eken - /en/hearing-aids, /de/hoergeraete - is pontos).
+export default function NavLinks({ items, current, ariaLabel }) {
+  const onHome = current === 'home'
+  const onPrices = current === 'prices'
+  const onProducts = current === 'devices' || current === 'brand'
+  const onBlog = current === 'blog' || current === 'post'
 
   // Scroll-spy a főoldalon: a Kapcsolat (#idopont) szekció a nézet közepén van-e
   const [spy, setSpy] = useState('fooldal') // 'fooldal' | 'kapcsolat'
@@ -36,27 +37,30 @@ export default function NavLinks() {
     el.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const links = [
-    { href: '/', label: 'Főoldal', active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
-    { href: '/hallokeszulekek', label: 'Termékek', active: onProducts, onClick: onProducts ? scrollTop : undefined },
-    // ár-oldal kikapcsolva (2026-10-04): { href: '/hallokeszulekek/arak', label: 'Árak', active: onPrices, onClick: onPrices ? scrollTop : undefined },
-    { href: '/#idopont', label: 'Kapcsolat', active: onHome && spy === 'kapcsolat', onClick: onKapcsolat },
-    { href: '/blog', label: 'Blog', active: onBlog, onClick: onBlog ? scrollTop : undefined },
-  ]
+  const state = {
+    home: { active: onHome && spy === 'fooldal', onClick: onHome ? scrollTop : undefined },
+    devices: { active: onProducts, onClick: onProducts ? scrollTop : undefined },
+    prices: { active: onPrices, onClick: onPrices ? scrollTop : undefined },
+    contact: { active: onHome && spy === 'kapcsolat', onClick: onKapcsolat },
+    blog: { active: onBlog, onClick: onBlog ? scrollTop : undefined },
+  }
 
   return (
-    <nav className="nav-menu" aria-label="Fő menü">
-      {links.map((l) => (
-        <Link
-          key={l.label}
-          href={l.href}
-          className={`nav-link${l.active ? ' active' : ''}`}
-          aria-current={l.active ? 'page' : undefined}
-          onClick={l.onClick}
-        >
-          {l.label}
-        </Link>
-      ))}
+    <nav className="nav-menu" aria-label={ariaLabel}>
+      {items.map((l) => {
+        const s = state[l.key] || {}
+        return (
+          <Link
+            key={l.key}
+            href={l.href}
+            className={`nav-link${s.active ? ' active' : ''}`}
+            aria-current={s.active ? 'page' : undefined}
+            onClick={s.onClick}
+          >
+            {l.label}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

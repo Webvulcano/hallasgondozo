@@ -23,9 +23,6 @@ const nextConfig = {
       { source: '/szolgaltatasok', destination: '/', permanent: true },
       { source: '/rolunk', destination: '/', permanent: true },
       { source: '/kapcsolat', destination: '/', permanent: true },
-      // /de: IDEIGLENES (307) - a német verzió később ide jön; a permanent (308) redirectet a
-      // böngészők örökre cache-elnék, és a német indulás után is a főoldalra dobnák a látogatót.
-      { source: '/de', destination: '/', permanent: false },
       {
         source: '/blog/2023-12-07/rosszul-hall-egy-csaladtagom-segit-e-a-hallokeszulek',
         destination: '/blog/rosszul-hall-egy-csaladtagom-segit-a-hallokeszulek',
@@ -33,6 +30,13 @@ const nextConfig = {
       },
       { source: '/blog/2026-04-22/oticon-zeal', destination: '/blog/oticon-zeal', permanent: true },
     ]
+    // /de: a régi oldal (nem működő) német kapcsolója. Amíg a német nem élő (LIVE_LOCALES, ld.
+    // lib/i18n/config.js - itt külön olvassuk, mert a next.config nem importál a lib-ből), IDEIGLENES (307)
+    // átirányítás a főoldalra. Permanent (308) TILOS: a böngészők örökre cache-elnék, és a német
+    // indulás után is a főoldalra dobnák a látogatót. Élő németnél nincs szabály → /de a német főoldal.
+    const live = (process.env.LIVE_LOCALES || 'hu').split(',').map((s) => s.trim())
+    if (!live.includes('de')) legacy.push({ source: '/de', destination: '/', permanent: false })
+
     const base = process.env.DASHBOARD_URL
     if (!base) return legacy
     return [

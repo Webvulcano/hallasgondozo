@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { promo } from '../lib/content/promo'
 import Button from './Button'
 import { Check } from './icons'
 import SkeletonImage from './SkeletonImage'
 
 // Akció popup: promo.delayMs után felugrik, session-enként egyszer.
+// Props (a HomeView adja, nyelvenként): promo = alap + szöveg (lib/content), ctaHref, closeLabel.
 // Teszteléshez: ?promo=1 → azonnal megnyílik, a seen-flaget figyelmen kívül hagyja.
 const SESSION_KEY = 'erted-promo-seen'
 
@@ -17,7 +17,7 @@ function safeSessionSet(key, value) {
   try { sessionStorage.setItem(key, value) } catch { /* noop */ }
 }
 
-export default function PromoPopup() {
+export default function PromoPopup({ promo, ctaHref, closeLabel }) {
   const [open, setOpen] = useState(false)
   const closeRef = useRef(null)
 
@@ -27,7 +27,7 @@ export default function PromoPopup() {
     if (!force && safeSessionGet(SESSION_KEY)) return
     const t = setTimeout(() => setOpen(true), force ? 300 : promo.delayMs)
     return () => clearTimeout(t)
-  }, [])
+  }, [promo.enabled, promo.delayMs])
 
   useEffect(() => {
     if (!open) return
@@ -56,7 +56,7 @@ export default function PromoPopup() {
         aria-labelledby="promo-title"
         onClick={(e) => e.stopPropagation()}
       >
-        <button ref={closeRef} type="button" className="promo-close" onClick={close} aria-label="Bezárás">
+        <button ref={closeRef} type="button" className="promo-close" onClick={close} aria-label={closeLabel}>
           ×
         </button>
         <div className="promo-media">
@@ -74,7 +74,7 @@ export default function PromoPopup() {
               </li>
             ))}
           </ul>
-          <Button variant="gold" href={promo.ctaHref} fullWidth onClick={close}>
+          <Button variant="gold" href={ctaHref} fullWidth onClick={close}>
             {promo.cta}
           </Button>
           <button type="button" className="promo-dismiss" onClick={close}>

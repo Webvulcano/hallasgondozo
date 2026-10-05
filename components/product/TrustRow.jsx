@@ -1,16 +1,15 @@
+import { getDictionary } from '../../lib/i18n'
 import { Icon } from '../icons'
 
 // Termékoldali ikonsor - a szolgáltatás garanciái, márkától független.
-const ITEMS = [
-  { iconName: 'Calendar', label: '15 nap ingyenes próbahordás' },
-  { iconName: 'Shield', label: 'Egészségpénztárral is elszámolható' },
-  { iconName: 'Doctor', label: 'Szakorvos és audiológus egy helyen' },
-  { iconName: 'EarAid', label: 'Ingyenes utánkövetés és beállítás' },
-]
+// Ikonok itt; a feliratok a szótárban (product.trust), ugyanebben a sorrendben.
+const ICONS = ['Calendar', 'Shield', 'Doctor', 'EarAid']
 
-export default function TrustRow() {
+export default function TrustRow({ locale }) {
+  const t = getDictionary(locale).product
+  const ITEMS = ICONS.map((iconName, i) => ({ iconName, label: t.trust[i] }))
   return (
-    <section className="kp-trust" aria-label="Amit minden készülékhez adunk">
+    <section className="kp-trust" aria-label={t.trustAria}>
       <div className="wrap">
         <ul className="kp-trust-row">
           {ITEMS.map((it) => (

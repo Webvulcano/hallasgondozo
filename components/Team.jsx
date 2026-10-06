@@ -23,11 +23,11 @@ export default function Team() {
                 <h3>{m.name}</h3>
                 <div className="role">{m.role}</div>
                 <p>{m.desc}</p>
-                {m.url && (
+                {/*m.url && (
                   <a href={m.url} className="tcard-link" target="_blank" rel="noopener">
                     {m.urlLabel}&nbsp;→
                   </a>
-                )}
+                )*/}
               </div>
             </div>
           ))}

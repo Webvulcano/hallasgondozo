@@ -38,8 +38,8 @@ export default function Testimonials() {
     <section className="block testi" id="velemenyek">
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">Győri páciensek - valódi tapasztalatok</div>
-          <h2>Valódi életek, tisztább hangokkal</h2>
+          <div className="eyebrow">Vélemények</div>
+          <h2>Amit a pácienseink mondanak</h2>
           <p>
             {GOOGLE_RATING.count} db {GOOGLE_RATING.score} csillagos Google-értékelés - Győr egyik
             legjobban értékelt hallásgondozója.

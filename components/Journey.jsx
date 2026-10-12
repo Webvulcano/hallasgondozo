@@ -1,32 +1,13 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { journeySteps } from '../lib/content/journey'
 import Button from './Button'
 import SkeletonImage from './SkeletonImage'
 // Régi verzió (accordion-timeline, kép nélkül) lent kikommentezve — ld. fájl vége.
 // import { Accordion, AccordionItem } from './Accordion'
 
-// HowTo JSON-LD — AEO / AI-keresők (seo-geo-aeo-fokusz.md 🟡).
-// A fő lépéseket adjuk meg; a desc + al-lépések szövege a text mezőbe fűzve.
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'Így jut el a megfelelő hallókészülékig',
-  description:
-    'Lépésről lépésre az ÉRTED Hallásgondozónál: időpontfoglalás, konzultáció és hallásvizsgálat, ingyenes próbahordás, kontroll és hosszú távú gondozás.',
-  step: journeySteps.map((s) => ({
-    '@type': 'HowToStep',
-    position: s.n,
-    name: s.title,
-    text: s.sub ? `${s.desc} ${s.sub.map((x) => x.title).join('; ')}.` : s.desc,
-  })),
-}
-
-// 2-nek nincs "A" verziója, marad a sima számozott fájl.
-const STEP_IMG_FILE = { 1: '1', 2: '2', 3: '4A', 4: '3A', 5: '5' }
-const stepImg = (n) => `/pic/lepesrol_lepesre/${STEP_IMG_FILE[n]}.webp`
-
-export default function Journey() {
+// Props (a HomeView adja, nyelvenként): steps = lépések (alap + szöveg, lib/content), t = szekció-szövegek,
+// schema = HowTo JSON-LD (szerveren épül ugyanebből a tömbből — AEO / AI-keresők).
+export default function Journey({ steps, t, schema }) {
   // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a
   // felhasználó a szekció közepéig görget (IntersectionObserver, lent).
   const [openStep, setOpenStep] = useState(-1)
@@ -64,22 +45,19 @@ export default function Journey() {
       }, 370)
     }
   }
-  const stepsDesc = journeySteps
+  const stepsDesc = steps
 
   return (
     <section className="block journey" id="folyamat">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">Lépésről lépésre</div>
-          <h2>Így jut el a megfelelő hallókészülékig</h2>
-          <p>
-            A hallókészülék vásárlás nálunk nem egyetlen alkalom, hanem egy átlátható, végigkísért út —
-            az időpontfoglalástól a hosszú távú hallásgondozásig.
-          </p>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
+          <p>{t.lead}</p>
         </div>
 
         <ol className="jdeck">
@@ -127,7 +105,7 @@ export default function Journey() {
                     </div>
                     <div className="jcard-media">
                       <div className="ph">
-                        <SkeletonImage src={stepImg(s.n)} alt={s.title} className="jcard-img" loading="lazy" />
+                        <SkeletonImage src={s.img} alt={s.title} className="jcard-img" loading="lazy" />
                       </div>
                     </div>
                   </div>
@@ -139,7 +117,7 @@ export default function Journey() {
 
         <div className="journey-cta">
           <Button variant="gold" href="#idopont">
-            Foglaljon ingyenes hallásvizsgálatot
+            {t.cta}
           </Button>
         </div>
         <div ref={bottomRef} className="journey-bottom-sentinel" aria-hidden="true" />
@@ -155,13 +133,12 @@ export default function Journey() {
    ============================================================
 
 'use client'
-import { journeySteps } from '../lib/content/journey'
 import Button from './Button'
 import { Accordion, AccordionItem } from './Accordion'
 
 const howToSchema = { ... — ld. fent, változatlan }
 
-export default function Journey() {
+export default function Journey({ steps, t, schema }) {
   return (
     <section className="block journey" id="folyamat">
       <script

@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import SkeletonImage from '../SkeletonImage'
+import { fmt } from '../../lib/i18n/fmt'
 
 // Termékoldali galéria: nagy fő kép + mellette függőleges thumbnail-oszlop
 // (mobilon a fő kép alá kerül, vízszintes sorba). Thumb kattintás → fő kép csere.
-export default function ProductGallery({ images }) {
+// showLabel: a thumb-gombok aria-labelje, pl. 'Kép megjelenítése: {alt}' (nyelvi szöveg)
+export default function ProductGallery({ images, showLabel }) {
   const [active, setActive] = useState(0)
   const main = images[active]
 
@@ -24,7 +26,7 @@ export default function ProductGallery({ images }) {
               role="listitem"
               className={`kp-thumb${i === active ? ' is-active' : ''}`}
               onClick={() => setActive(i)}
-              aria-label={`Kép megjelenítése: ${img.alt}`}
+              aria-label={fmt(showLabel, { alt: img.alt })}
               aria-current={i === active}
             >
               <SkeletonImage src={img.src} alt="" className="kp-thumb-img" loading="lazy" />

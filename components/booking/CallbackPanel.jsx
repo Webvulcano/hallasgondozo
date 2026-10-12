@@ -5,28 +5,30 @@ import Button from '../Button'
 import Reveal from '../Reveal'
 import { Check } from '../icons'
 
-export default function CallbackPanel() {
-  const { submitted, submitting, error, fieldErrors, handleSubmit } = useCallbackForm()
+// t: a nyelvi szótár form-objektuma (címkék, placeholderek, hibaszövegek) - a Booking adja.
+// locale: rejtett mezőként megy a server actionnek (nem magyarnál [DE]/[EN] az értesítő email tárgyában).
+export default function CallbackPanel({ t, locale, privacyHref }) {
+  const { submitted, submitting, error, fieldErrors, handleSubmit } = useCallbackForm(t.errors)
 
   return (
     <Reveal direction="right" className="book-panel">
-      <h3>Inkább felhívjuk Önt</h3>
-      <p className="small">Adja meg telefonszámát - kollégánk munkaidőben hamarosan visszahívja.</p>
+      <h3>{t.title}</h3>
+      <p className="small">{t.lead}</p>
 
       {submitted ? (
         <div className="form-success show" role="status" aria-live="polite">
           <span className="check"><Check size={22} stroke="#fff" /></span>
-          Köszönjük! Kollégánk munkaidőben hamarosan hívja Önt.
+          {t.success}
         </div>
       ) : (
         <form noValidate onSubmit={handleSubmit}>
           <div className="field">
-            <label htmlFor="cf-name">Az Ön neve</label>
+            <label htmlFor="cf-name">{t.nameLabel}</label>
             <input
               id="cf-name"
               name="name"
               type="text"
-              placeholder="Pl. Kovács Mária"
+              placeholder={t.namePlaceholder}
               required
               autoComplete="name"
               aria-invalid={!!fieldErrors.name}
@@ -34,12 +36,12 @@ export default function CallbackPanel() {
             {fieldErrors.name && <p className="field-error">{fieldErrors.name}</p>}
           </div>
           <div className="field">
-            <label htmlFor="cf-phone">Telefonszám</label>
+            <label htmlFor="cf-phone">{t.phoneLabel}</label>
             <input
               id="cf-phone"
               name="phone"
               type="tel"
-              placeholder="+36 30 123 4567"
+              placeholder={t.phonePlaceholder}
               required
               autoComplete="tel"
               aria-invalid={!!fieldErrors.phone}
@@ -47,15 +49,17 @@ export default function CallbackPanel() {
             {fieldErrors.phone && <p className="field-error">{fieldErrors.phone}</p>}
           </div>
           <div className="field">
-            <label htmlFor="cf-note">Megjegyzés (opcionális)</label>
+            <label htmlFor="cf-note">{t.noteLabel}</label>
             <textarea
               id="cf-note"
               name="note"
-              placeholder="Pl. mikor hívjuk legszívesebben?"
+              placeholder={t.notePlaceholder}
               aria-invalid={!!fieldErrors.note}
             />
             {fieldErrors.note && <p className="field-error">{fieldErrors.note}</p>}
           </div>
+          {/* Nyelv: a magyar az alapértelmezés, csak nem magyar űrlapnál küldjük */}
+          {locale !== 'hu' && <input type="hidden" name="locale" value={locale} />}
           {/* Honeypot anti-spam */}
           <input
             type="text"
@@ -75,18 +79,18 @@ export default function CallbackPanel() {
                 aria-invalid={!!fieldErrors.consent}
               />
               <span>
-                Elolvastam és elfogadom az{' '}
-                <Link href="/adatvedelem" target="_blank" rel="noopener noreferrer">
-                  Adatvédelmi Szabályzatot
+                {t.consentBefore}{' '}
+                <Link href={privacyHref} target="_blank" rel="noopener noreferrer">
+                  {t.consentLink}
                 </Link>
-                , beleértve hogy a megjegyzés mezőben esetlegesen megadott egészségügyi jellegű adatot is kezelhetjük.
+                {t.consentAfter}
               </span>
             </label>
             {fieldErrors.consent && <p className="field-error">{fieldErrors.consent}</p>}
           </div>
           {error && <p className="form-error" role="alert">{error}</p>}
           <Button variant="gold" type="submit" fullWidth disabled={submitting}>
-            {submitting ? 'Küldés…' : 'Visszahívást kérek'}
+            {submitting ? t.submitting : t.submit}
           </Button>
         </form>
       )}

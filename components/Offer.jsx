@@ -1,10 +1,12 @@
-import { BOOKING_URL } from '../lib/constants'
-import { offer, offerFeatures } from '../lib/content/offer'
+import { bookingUrls } from '../lib/constants'
+import { getContent } from '../lib/content'
+import { routePath } from '../lib/i18n/routes'
 import Button from './Button'
 import { Check } from './icons'
 import SkeletonImage from './SkeletonImage'
 
-export default function Offer() {
+export default function Offer({ locale }) {
+  const { offer, offerFeatures } = getContent(locale)
   const leadParts = offer.lead.split('{price}')
 
   return (
@@ -43,11 +45,11 @@ export default function Offer() {
             <div className="was">{offer.priceListLabel}</div>
             <div className="now">{offer.price}</div>
             <div className="unit">{offer.unit}</div>
-            <Button variant="gold" href={BOOKING_URL} fullWidth>
+            <Button variant="gold" href={bookingUrls(locale).adult} fullWidth>
               {offer.cta}
             </Button>
             {/* Másodlagos - a teljes készülék-/termékkínálat aloldala */}
-            <Button variant="outline" fullWidth className="offer-secondary" href="/hallokeszulekek">
+            <Button variant="outline" fullWidth className="offer-secondary" href={routePath('devices', locale)}>
               {offer.ctaSecondary}
             </Button>
             <p className="offer-secondary-note">{offer.ctaSecondaryNote}</p>

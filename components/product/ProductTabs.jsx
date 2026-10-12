@@ -20,12 +20,13 @@ function CheckList({ items }) {
   )
 }
 
-export default function ProductTabs({ product }) {
+// labels: { aria, benefits, description } - nyelvi szöveg (a BrandView adja). A tab-id-k nyelvfüggetlenek.
+export default function ProductTabs({ product, labels }) {
   const tabs = [
-    { id: 'elonyok', label: 'Előnyök', body: <CheckList items={product.benefits} /> },
+    { id: 'elonyok', label: labels.benefits, body: <CheckList items={product.benefits} /> },
     {
       id: 'leiras',
-      label: 'Leírás',
+      label: labels.description,
       body: (
         <div className="kp-desc">
           {product.description.map((p) => (
@@ -49,7 +50,7 @@ export default function ProductTabs({ product }) {
 
   return (
     <div className="kp-tabs">
-      <div className="kp-tablist" role="tablist" aria-label="Termékinformációk" onKeyDown={onKeyDown}>
+      <div className="kp-tablist" role="tablist" aria-label={labels.aria} onKeyDown={onKeyDown}>
         {tabs.map((t, i) => (
           <button
             key={t.id}

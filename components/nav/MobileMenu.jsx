@@ -3,23 +3,24 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BOOKING_URL, PHONE, EMAIL } from '../../lib/constants'
+import { PHONE, EMAIL } from '../../lib/constants'
 import Button from '../Button'
 
 // Hamburger-menü ≤900px-en - teljes képernyős overlay (Mooira-stílus): középen nagy
 // serif linkek lépcsőzetes beúszással, alul CTA + elérhetőség.
 // Az overlay portállal a <body>-ba kerül: a header backdrop-filtere miatt a
 // position:fixed különben a headerhez tapadna. A header (logó + X) fölötte marad.
-export default function MobileMenu() {
+// items/current/labels/cta: a Nav-ból (nyelvfüggő); langSwitch: szerveren renderelt LangSwitcher (vagy null).
+export default function MobileMenu({ items, current, labels, cta, langSwitch }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const menuRef = useRef(null)
   const close = () => setOpen(false)
   const pathname = usePathname()
-  const isHome = pathname === '/'
-  const isPrices = pathname.startsWith('/hallokeszulekek/arak')
-  const isProducts = pathname.startsWith('/hallokeszulekek') && !isPrices
-  const isBlog = pathname.startsWith('/blog')
+  const isHome = current === 'home'
+  const isPrices = current === 'prices'
+  const isProducts = current === 'devices' || current === 'brand'
+  const isBlog = current === 'blog' || current === 'post'
 
   // Scroll-spy a főoldalon (mint desktopon): a Kapcsolat (#idopont) a nézet közepén van-e
   const [spy, setSpy] = useState('fooldal') // 'fooldal' | 'kapcsolat'
@@ -51,6 +52,19 @@ export default function MobileMenu() {
     close()
   }
 
+  // Menüpontonként: aktív-e + kattintás (a saját oldalán a tetejére görget, majd zár)
+  const scrollIfHere = (here) => () => {
+    if (here) window.scrollTo({ top: 0, behavior: 'smooth' })
+    close()
+  }
+  const itemState = {
+    home: { active: homeActive, onClick: scrollIfHere(isHome) },
+    devices: { active: isProducts, onClick: scrollIfHere(isProducts) },
+    prices: { active: isPrices, onClick: scrollIfHere(isPrices) },
+    contact: { active: kapcsolatActive, onClick: onKapcsolat },
+    blog: { active: isBlog, onClick: scrollIfHere(isBlog) },
+  }
+
   useEffect(() => setMounted(true), [])
 
   // Zárva: inert (nem fókuszálható, Tab nem jut be) — DOM-propként, React-verziófüggetlenül
@@ -80,7 +94,7 @@ export default function MobileMenu() {
       <button
         type="button"
         className={`nav-burger${open ? ' open' : ''}`}
-        aria-label={open ? 'Menü bezárása' : 'Menü'}
+        aria-label={open ? labels.close : labels.open}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
@@ -97,63 +111,32 @@ export default function MobileMenu() {
           ref={menuRef}
           aria-hidden={!open}
         >
-          <nav className="nav-mobile-links" role="menu" aria-label="Mobil menü">
-            <Link
-              href="/"
-              className={`nav-mlink${homeActive ? ' active' : ''}`}
-              role="menuitem"
-              aria-current={homeActive ? 'page' : undefined}
-              onClick={() => { if (isHome) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
-            >
-              Főoldal
-            </Link>
-            <Link
-              href="/hallokeszulekek"
-              className={`nav-mlink${isProducts ? ' active' : ''}`}
-              role="menuitem"
-              aria-current={isProducts ? 'page' : undefined}
-              onClick={() => { if (isProducts) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
-            >
-              Termékek
-            </Link>
-            {/* ár-oldal kikapcsolva (2026-10-04) - visszakapcsoláshoz vedd ki a kommentből
-            <Link
-              href="/hallokeszulekek/arak"
-              className={`nav-mlink${isPrices ? ' active' : ''}`}
-              role="menuitem"
-              aria-current={isPrices ? 'page' : undefined}
-              onClick={() => { if (isPrices) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
-            >
-              Árak
-            </Link>
-            */}
-            <Link
-              href="/#idopont"
-              className={`nav-mlink${kapcsolatActive ? ' active' : ''}`}
-              role="menuitem"
-              aria-current={kapcsolatActive ? 'page' : undefined}
-              onClick={onKapcsolat}
-            >
-              Kapcsolat
-            </Link>
-            <Link
-              href="/blog"
-              className={`nav-mlink${isBlog ? ' active' : ''}`}
-              role="menuitem"
-              aria-current={isBlog ? 'page' : undefined}
-              onClick={() => { if (isBlog) window.scrollTo({ top: 0, behavior: 'smooth' }); close() }}
-            >
-              Blog
-            </Link>
+          <nav className="nav-mobile-links" role="menu" aria-label={labels.aria}>
+            {items.map((l) => {
+              const st = itemState[l.key] || {}
+              return (
+                <Link
+                  key={l.key}
+                  href={l.href}
+                  className={`nav-mlink${st.active ? ' active' : ''}`}
+                  role="menuitem"
+                  aria-current={st.active ? 'page' : undefined}
+                  onClick={st.onClick}
+                >
+                  {l.label}
+                </Link>
+              )
+            })}
           </nav>
           <div className="nav-mobile-footer">
-            <Button variant="gold" href={BOOKING_URL} onClick={close}>
-              Ingyenes vizsgálatot foglalok
+            <Button variant="gold" href={cta.href} onClick={close}>
+              {cta.label}
             </Button>
             <div className="nav-mobile-contact">
               <a href={PHONE.href}>{PHONE.display}</a>
               <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </div>
+            {langSwitch}
           </div>
         </div>,
         document.body

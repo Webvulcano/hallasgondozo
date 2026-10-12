@@ -1,39 +1,27 @@
 'use client'
 import { useState } from 'react'
-import { faqs, FAQ_VISIBLE } from '../lib/content/faq'
+import { fmt } from '../lib/i18n/fmt'
 import { Accordion, AccordionItem } from './Accordion'
 import Button from './Button'
 
-// FAQPage JSON-LD - ugyanabból a faqs tömbből, hogy ne csússzon szét a tartalom
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-}
-
-export default function Faq() {
+// Props (a HomeView adja, nyelvenként): faqs = [{ q, a }], visible = alapból látszó db,
+// schema = FAQPage JSON-LD (szerveren, ugyanabból a tömbből → nem csúszik szét), t = szekció-szövegek.
+export default function Faq({ faqs, visible, schema, t }) {
   // A rejtett kérdések a DOM-ban maradnak (csak CSS rejti) → SEO-ban indexelhetők.
   const [expanded, setExpanded] = useState(false)
-  const hiddenCount = faqs.length - FAQ_VISIBLE
+  const hiddenCount = faqs.length - visible
 
   return (
     <section className="block faq" id="gyik">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">GYIK</div>
-          <h2>Gyakori kérdések a hallásvizsgálatról és a hallókészülékekről</h2>
-          <p>
-            Ha úgy érzi, hogy Ön vagy hozzátartozója nehezebben hall, ne halogassa a kivizsgálást -
-            tegye meg az első lépést a tisztább beszédértés és a magabiztosabb mindennapok felé.
-          </p>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
+          <p>{t.lead}</p>
         </div>
         <Accordion defaultOpenIndex={0}>
           {({ isOpen, toggle }) => (
@@ -45,7 +33,7 @@ export default function Faq() {
                   open={isOpen(i)}
                   onToggle={() => toggle(i)}
                   title={<span>{item.q}</span>}
-                  className={i >= FAQ_VISIBLE ? 'faq-extra' : ''}
+                  className={i >= visible ? 'faq-extra' : ''}
                 >
                   <p>{item.a}</p>
                 </AccordionItem>
@@ -61,7 +49,7 @@ export default function Faq() {
               aria-expanded={expanded}
               aria-controls="faq-list"
             >
-              További kérdések ({hiddenCount})
+              {fmt(t.more, { n: hiddenCount })}
             </Button>
           </div>
         )}

@@ -15,7 +15,8 @@ Megnyitás: http://localhost:3000
 ## Scripts
 
 - `npm run dev` - fejlesztői szerver
-- `npm run build` - production build
+- `npm run build` - production build (előtte automatikusan: `i18n:check`)
+- `npm run i18n:check` - nyelvi minőségkapu (ld. Többnyelvűség)
 - `npm run start` - production szerver
 - `npm run lint` - ESLint
 
@@ -23,19 +24,21 @@ Megnyitás: http://localhost:3000
 
 ```
 app/
-├── layout.jsx             - root layout, metadata, fontok, MedicalBusiness JSON-LD
-├── page.jsx               - főoldal
+├── (hu)/                  - MAGYAR route group: saját root layout (<html lang="hu">), prefix nélkül
+│   ├── layout.jsx, page.jsx, not-found.jsx, [...missing]/ (nyelvhelyes 404)
+│   ├── hallokeszulekek/   - márkák, [slug] márkaoldalak, arak/ ár-oldal (csak magyar, kikapcsolva)
+│   ├── blog/, adatvedelem/
+├── (en)/en/…, (de)/de/…   - angol / német route group (hearing-aids, hoergeraete, privacy-policy, datenschutz…)
+│                            A route-fájlok 5-10 soros wrapperek → törzs: components/views/
 ├── globals.css            - csak @import-ok (styles/* sorrendben; responsive.css UTOLSÓ)
-├── styles/                - szekciónkénti CSS (tokens, base, buttons, nav, hero, services,
-│                            team, journey, testimonials, booking, faq, footer, keszulekek,
-│                            product, blog, promo, offer, partners, reveal, skeleton, splash…)
-├── hallokeszulekek/       - márkák (page.jsx), [slug] márkaoldalak, arak/ ár-oldal
-├── blog/                  - lista + [slug] cikk (MDX)
-├── adatvedelem/           - adatvédelmi szabályzat
+├── styles/                - szekciónkénti CSS (… + i18n.css: nyelvválasztó, javaslat-sáv)
 ├── actions/submitCallback.js - visszahívás form (SimplyForms)
-├── sitemap.js, robots.js, not-found.jsx
+├── sitemap.js, robots.js, fonts/
 
 components/
+├── views/                 - oldaltörzsek nyelvfüggetlenül (HomeView, DevicesView, BrandView,
+│                            BlogIndexView, PostView, PrivacyView, NotFoundView, RootDocument)
+├── LangSwitcher (0 JS), LangSuggest (nyelvjavaslat-sáv)
 ├── Button, PhoneLink, Reveal, SkeletonImage, Accordion - primitívek
 ├── Nav (+ nav/: NavLinks, MobileMenu, ScrollEffect), Footer, Splash, PromoPopup
 ├── HeroVideo (aktív) / Hero (régi, kikommentezve), Services, Team, Partners,
@@ -45,19 +48,24 @@ components/
 └── icons/                 - SVG ikonok (Icon = név szerinti lookup)
 
 lib/
-├── constants.js           - BOOKING_URL, PHONE, EMAIL, COMPANY, SITE, GOOGLE_RATING, GEO…
-├── content/               - minden szöveg adatként (faq, services, team, devices, prices,
-│                            posts, journey, testimonials, partners, offer, promo…)
-├── validation.js, hooks/useCallbackForm.js
+├── constants.js           - bookingUrls(locale), PHONE, EMAIL, COMPANY, SITE, GOOGLE_RATING, GEO…
+├── i18n/                  - config (nyelvek, LIVE_LOCALES), routes (URL-térkép), alternates
+│                            (nyelvi párok), dictionaries/{hu,en,de}.js (UI-szövegek), fmt
+├── seo.js, fonts.js       - metadata/hreflang/JSON-LD builderek; közös fontok
+├── content/               - *.js = nyelvfüggetlen alap (id, ikon, kép);
+│                            locales/<nyelv>/ = szövegek (home, devices, faq, privacy.jsx);
+│                            index.js → getContent(locale); posts.js; prices.js (csak magyar)
+├── validation.js (hibakódok), hooks/useCallbackForm.js
 
-content/blog/*.mdx         - blogcikkek
+content/blog/<nyelv>/*.mdx - blogcikkek (nyelvi párok: meta.translationKey)
+scripts/i18n-check.mjs     - nyelvi minőségkapu (+ font-charset.json)
 public/pic/                - képek (arak/, hallokeszulekek/, munkatarsak/, lepesrol_lepesre/, blog/, hero/)
 ```
 
 ## Architektúra elvek
 
 - **Egy adat - egy hely.** Üzleti adat (telefonszám, URL, cím) `lib/constants.js`-ben.
-- **Szöveg = adat.** Minden szekció tartalma `lib/content/*` fájlokban - copy-edit nem érinti JSX-et.
+- **Szöveg = adat.** Minden szöveg szótárban (`lib/i18n/dictionaries`) vagy `lib/content/locales/*` fájlokban - copy-edit / fordítás nem érinti JSX-et.
 - **Komponens primitívek.** `Button`, `PhoneLink`, `Reveal`, `Icon` - duplikáció helyett.
 - **Server-first.** Csak az tölt JS-t kliensoldalra, ami interakciót igényel.
 
@@ -73,24 +81,52 @@ Honeypot mező a botok kiszűrésére.
 
 | Útvonal | Tartalom |
 |---|---|
-| `/` | főoldal (szolgáltatások, csapat, folyamat, vélemények, időpont, GYIK) |
-| `/hallokeszulekek` | márkák + termékkategóriák |
-| `/hallokeszulekek/[slug]` | márkaoldalak (Phonak, Signia, Oticon, Starkey) - adat: `lib/content/devices.js` |
-| `/hallokeszulekek/arak` | árak és TB-támogatás - adat: `lib/content/prices.js` |
-| `/blog`, `/blog/[slug]` | MDX cikkek (`content/blog/`) |
-| `/adatvedelem` | adatvédelmi szabályzat |
+| Magyar | Angol | Német | Tartalom |
+|---|---|---|---|
+| `/` | `/en` | `/de` | főoldal (szolgáltatások, csapat, folyamat, vélemények, időpont, GYIK) |
+| `/hallokeszulekek` | `/en/hearing-aids` | `/de/hoergeraete` | márkák + termékkategóriák |
+| `/hallokeszulekek/[slug]` | `/en/hearing-aids/[slug]` | `/de/hoergeraete/[slug]` | márkaoldalak - alap: `lib/content/devices.js`, szöveg: `locales/<nyelv>/devices.js` |
+| `/hallokeszulekek/arak` | - | - | árak és TB-támogatás (kikapcsolva) - `lib/content/prices.js` |
+| `/blog`, `/blog/[slug]` | `/en/blog/…` | `/de/blog/…` | MDX cikkek (`content/blog/<nyelv>/`) |
+| `/adatvedelem` | `/en/privacy-policy` | `/de/datenschutz` | adatvédelmi szabályzat (a magyar az irányadó) |
 
 Régi (Apache-os) hallasgondozo.hu URL-ek → 308 átirányítás a `next.config.mjs`-ben.
 
 ## SEO
 
-- Title/meta a `lib/constants.js` (`SITE`) + oldalankénti `metadata`
+- Title/meta: szótár (`meta.*`) + oldalankénti metadata a view-kban (`lib/seo.js` builderek)
+- Minden nyelvi oldal saját canonical + `hreflang` (hu/en/de + `x-default` → magyar), sitemap xhtml:link-ekkel
 - MedicalBusiness (layout), FAQPage, HowTo, BreadcrumbList, Product JSON-LD
 - Automatikus `sitemap.xml` és `robots.txt`
 - Saját canonical minden aloldalon (a layout `/` canonical-ját NEM szabad örökölni)
 - Kulcsszó-háttér és checklist: `../../seo-geo-aeo-fokusz.md`
 
+## Többnyelvűség (HU / EN / DE)
+
+- **URL:** a magyar a gyökérben (változatlan URL-ek), EN/DE prefixszel és lokalizált slugokkal.
+  Forrás: `lib/i18n/routes.js` (+ a megfelelő `app/(nyelv)/…/page.jsx` wrapper).
+- **Nyelvenként külön root layout** (route group) → statikusan helyes `<html lang>`, nincs proxy/middleware.
+- **Élesítési kapu: `LIVE_LOCALES`** (build-időben olvasva). Alapérték: csak `hu`.
+  Nem élő nyelv: oldalai 404, nincs sitemapben / hreflang-ben / nyelvválasztóban; `/de` → 307 a főoldalra.
+  Lokálisan és Vercel **Preview**-n: `LIVE_LOCALES=hu,en,de`. **Production**: nincs beállítva, amíg a fordítás nincs jóváhagyva.
+- **Nyelvi párok egy helyen:** `lib/i18n/alternates.js` → nyelvválasztó, `<link rel="alternate">`, sitemap.
+  Márkák: közös `id`; cikkek: `meta.translationKey`. Ha nincs pár, a váltó a szülő-oldalra esik vissza (hreflang nélkül).
+- **Nyelvválasztó:** desktop navban `HU · EN · DE`, mobil menüben + footerben teljes névvel; valódi `<a hreflang>` linkek.
+  **Nyelvjavaslat-sáv:** ha a böngésző nyelve egy másik élő nyelv - automatikus átirányítás NINCS.
+- **Form:** nem magyar űrlapnál az értesítő email tárgya `[DE]` / `[EN]` + „Nyelv" mező.
+
+### Fordítás beemelése (amikor megjön)
+
+1. UI-szövegek: `lib/i18n/dictionaries/en.js`, `de.js` (most Claude-vázlat, `DRAFT` jelöléssel).
+2. Tartalom: `lib/content/locales/en|de/home.js`, `devices.js` (slug is!), `faq.js`, `privacy.jsx` - most a magyar másolata, `TODO fordítás` fejléccel. Kulcsonként cserélj, a kulcsokat ne változtasd.
+3. Blog: `content/blog/en|de/*.mdx` - lokalizált `slug`, a `translationKey` marad.
+4. A kész fájlokból töröld a `TODO fordítás` / `DRAFT` jelölést → `npm run i18n:check` (Productionön ezek nélkül nem megy át a build élő nyelvvel).
+5. Vercel Production env: `LIVE_LOCALES=hu,en,de` → redeploy → Search Console: sitemap újraküldése, hreflang-riport.
+
+Új UI-szöveg: kulcs mindhárom szótárba (az `i18n-check` hibát ad, ha hiányzik). Új nyelv: `LOCALES` + szótár + `locales/<nyelv>/` + `app/(<nyelv>)/` wrapperek + `routes.js`.
+Font: a saját fontok Latin-1-et fednek (ä ö ü ß OK); más írás → újra-szűkítés + `scripts/font-charset.json`.
+
 ## Deployment
 
 Vercel ajánlott (zero-config Next.js).
-Env változókat a Vercel projektbeállításnál add meg.
+Env változókat a Vercel projektbeállításnál add meg: `SIMPLYFORMS_FORM_ID`, és Preview-ra `LIVE_LOCALES=hu,en,de`.

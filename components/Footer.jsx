@@ -1,6 +1,9 @@
 import Link from 'next/link'
-import { BOOKING_URL, PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL, WEEK_HOURS } from '../lib/constants'
+import { PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL, WEEK_HOURS, bookingUrls } from '../lib/constants'
+import { getDictionary } from '../lib/i18n'
+import { routePath } from '../lib/i18n/routes'
 import Button from './Button'
+import LangSwitcher from './LangSwitcher'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
 const contactLinks = [
@@ -11,7 +14,10 @@ const contactLinks = [
   { icon: <Instagram size={17} />, href: SOCIAL.instagram, label: SOCIAL.instagramHandle, external: true },
 ]
 
-export default function Footer() {
+// Props: locale, alternates (getAlternates() - a footer nyelvi linkjeihez)
+export default function Footer({ locale, alternates }) {
+  const dict = getDictionary(locale)
+  const t = dict.footer
   const year = new Date().getFullYear()
   const today = new Date().getDay()
 
@@ -41,7 +47,7 @@ export default function Footer() {
 
           {/* Col 2 - Contact */}
           <div className="foot-col-contact">
-            <h5>Elérhetőség</h5>
+            <h5>{t.contact}</h5>
             <ul className="foot-list">
               {contactLinks.map((l) => (
                 <li key={l.label}>
@@ -59,14 +65,14 @@ export default function Footer() {
 
           {/* Col 3 - Nyitvatartás */}
           <div className="foot-col-hours">
-            <h5>Nyitvatartás</h5>
+            <h5>{t.hours}</h5>
             <ul className="foot-hours-list">
               {WEEK_HOURS.map((d) => {
                 const isToday = d.day === today
                 return (
                   <li key={d.day} className={isToday ? 'is-today' : undefined}>
-                    <span>{isToday ? 'Ma' : d.label}</span>
-                    <span>{d.open ? `${d.open} - ${d.close}` : 'Zárva'}</span>
+                    <span>{isToday ? t.today : t.days[d.day]}</span>
+                    <span>{d.open ? `${d.open} - ${d.close}` : t.closed}</span>
                   </li>
                 )
               })}
@@ -75,10 +81,10 @@ export default function Footer() {
 
           {/* Col 4 - CTA */}
           <div className="foot-col-cta">
-            <h5>Foglaljon időpontot</h5>
+            <h5>{t.book}</h5>
             <div className="foot-cta">
-              <Button variant="gold" href={BOOKING_URL}>
-                Ingyenes vizsgálatot foglalok
+              <Button variant="gold" href={bookingUrls(locale).adult}>
+                {dict.cta.bookExam}
               </Button>
               <Button variant="ghost-light" href={PHONE.href}>
                 {PHONE.display}
@@ -88,11 +94,12 @@ export default function Footer() {
         </div>
 
         <div className="foot-bottom">
-          <span>© {year} {COMPANY.legalName} - Minden jog fenntartva.</span>
+          <span>© {year} {COMPANY.legalName} - {t.rights}</span>
           <span className="foot-bottom-links">
-            <Link href="/adatvedelem">Adatvédelmi Szabályzat</Link>
+            <LangSwitcher links={alternates?.links} current={locale} label={dict.langSwitch.aria} variant="footer" />
+            <Link href={routePath('privacy', locale)}>{t.privacy}</Link>
             <span>
-              Készítette:{' '}
+              {t.madeBy}{' '}
               <a href="https://webvulcano.hu" target="_blank" rel="noopener">
                 webvulcano.hu
               </a>

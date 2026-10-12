@@ -1,21 +1,21 @@
-import { services, servicesTrust } from '../lib/content/services'
+import { getContent } from '../lib/content'
+import { getDictionary } from '../lib/i18n'
 import { Icon, Check } from './icons'
 
-export default function Services() {
+export default function Services({ locale }) {
+  const t = getDictionary(locale).services
+  const { services, servicesTrust } = getContent(locale)
   return (
     <section className="block services" id="szolgaltatasok">
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">Minden egy helyen</div>
-          <h2>Hallásvizsgálat, szakorvos, hallókészülék</h2>
-          <p>
-            Győrben nem kell audiológushoz, fül-orr-gégészhez és hallókészülék-szaküzletbe külön-külön
-            menni. Nálunk mindez egy helyen elérhető.
-          </p>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
+          <p>{t.lead}</p>
         </div>
         <div className="cards">
           {services.map((s) => (
-            <div key={s.title} className="card">
+            <div key={s.id} className="card">
               <div className="ic-badge">
                 <Icon name={s.iconName} size={24} />
               </div>

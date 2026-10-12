@@ -1,6 +1,10 @@
-// Blogcikk (/blog/[slug], /en/blog/[slug], /de/blog/[slug]). A nyelvi változatokat a meta.translationKey köti össze.
+// Blogcikk (/blog/[slug], /en/blog/[slug], /de/blog/[slug]) - a cikk az Ügyfél Adminból (CMS) jön.
+// Előnézet: az admin „Előnézet" linkje (app/api/preview) draft mode-ot kapcsol, és sütiben adja a cikk id-ját
+// + titkos tokenjét → itt a piszkozat jelenik meg, „Előnézet" sávval; a látogatók ezt nem látják.
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { cookies, draftMode } from 'next/headers'
+import RichText from '../cms/RichText'
 import Nav from '../Nav'
 import Footer from '../Footer'
 import Button from '../Button'
@@ -10,21 +14,44 @@ import { formatDate } from '../../lib/i18n'
 import { loadSite } from '../../lib/site'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { getPosts, getPost } from '../../lib/content/posts'
+import { getPosts, getPost, getPostPreview, postSlugsByLocale } from '../../lib/content/posts'
 import { SITE, COMPANY, SOCIAL } from '../../lib/constants'
 import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
 
-export function postStaticParams(locale) {
+export async function postStaticParams(locale) {
   if (!isLive(locale)) return []
-  return getPosts(locale).map((p) => ({ slug: p.slug }))
+  return (await getPosts(locale)).map((p) => ({ slug: p.slug }))
 }
+
+// Draft mode-ban (admin előnézet) a sütiben lévő cikk, ha ehhez az útvonalhoz tartozik; különben a közzétett.
+async function loadPost(locale, slug) {
+  if ((await draftMode()).isEnabled) {
+    try {
+      const { id, token } = JSON.parse((await cookies()).get('cms_preview')?.value ?? '{}')
+      const draft = id && token ? await getPostPreview(id, token) : null
+      if (draft && draft.locale === locale && draft.slug === slug) return { post: draft, preview: true }
+    } catch {
+      // hibás süti → a közzétett cikk
+    }
+  }
+  return { post: await getPost(locale, slug), preview: false }
+}
+
+// Abszolút kép-URL (a CMS-képek már abszolútak, a régiek /pic/... útvonalak)
+const abs = (src) => (!src ? null : /^https?:\/\//.test(src) ? src : `${SITE.url}${src}`)
 
 export async function postMetadata(locale, { params }) {
   const { slug } = await params
-  const post = getPost(locale, slug)
+  const { post, preview } = await loadPost(locale, slug)
   if (!post) return {}
+  const { site } = await loadSite(locale)
   const path = routePath('post', locale, post.slug)
-  const { hreflang } = getAlternates('post', post.translationKey)
+  const { hreflang } = getAlternates('post', null, { blogLocales: site.blogLocales, postSlugs: postSlugsByLocale(post) })
+  const ogImage = post.ogImage
+    ? { url: post.ogImage, width: 1200, height: 630, alt: post.imageAlt }
+    : post.image
+      ? { url: abs(post.image), alt: post.imageAlt }
+      : null
   return {
     // metaTitle: ≤60 karakteres <title> saját rövid utótaggal (a template nélkül)
     title: post.metaTitle ? { absolute: post.metaTitle } : post.title,
@@ -39,33 +66,29 @@ export async function postMetadata(locale, { params }) {
       publishedTime: post.datePublished,
       modifiedTime: post.dateModified || post.datePublished,
       authors: [post.author],
-      images: [
-        post.ogImage
-          ? { url: post.ogImage, width: 1200, height: 630, alt: post.imageAlt }
-          : { url: post.image, alt: post.imageAlt },
-      ],
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [post.ogImage ?? post.image],
+      ...(ogImage ? { images: [ogImage.url] } : {}),
     },
-    robots: { index: true, follow: true },
+    // az előnézet (piszkozat) sosem indexelhető
+    robots: preview ? { index: false, follow: false } : { index: true, follow: true },
   }
 }
 
 export default async function PostView({ locale, params }) {
   if (!isLive(locale)) notFound()
   const { slug } = await params
-  const post = getPost(locale, slug)
+  const { post, preview } = await loadPost(locale, slug)
   if (!post) notFound()
 
   const { t, site, a } = await loadSite(locale)
-  const { Post } = post
   const url = absUrl(routePath('post', locale, post.slug))
   const blogUrl = absUrl(routePath('blog', locale))
-  const alternates = getAlternates('post', post.translationKey)
+  const alternates = getAlternates('post', null, { blogLocales: site.blogLocales, postSlugs: postSlugsByLocale(post) })
 
   // Article (BlogPosting) JSON-LD — E-E-A-T: author + publisher (MedicalBusiness)
   const articleLd = {
@@ -73,7 +96,7 @@ export default async function PostView({ locale, params }) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
-    image: `${SITE.url}${post.ogImage ?? post.image}`,
+    ...(post.ogImage || post.image ? { image: abs(post.ogImage ?? post.image) } : {}),
     datePublished: post.datePublished,
     dateModified: post.dateModified || post.datePublished,
     inLanguage: LOCALE_META[locale].intl,
@@ -123,6 +146,12 @@ export default async function PostView({ locale, params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
+      {preview && (
+        <div className="preview-bar" role="status">
+          Előnézet - ez a változat nem nyilvános{post.status !== 'published' ? ' (a cikk még nincs közzétéve)' : ''}.{' '}
+          <a href={`/api/preview/exit?to=${encodeURIComponent(routePath('blog', locale))}`}>Kilépés az előnézetből</a>
+        </div>
+      )}
       <Nav locale={locale} current="post" alternates={alternates} />
       <span id="top" />
       <main className="article">
@@ -136,18 +165,20 @@ export default async function PostView({ locale, params }) {
           <header className="article-head">
             <h1>{post.title}</h1>
             <p className="article-meta">
-              <time dateTime={post.datePublished}>{formatDate(post.datePublished, locale)}</time>
-              <span aria-hidden="true"> · </span>
-              <span>{post.author}</span>
+              {post.datePublished && <time dateTime={post.datePublished}>{formatDate(post.datePublished, locale)}</time>}
+              {post.datePublished && post.author && <span aria-hidden="true"> · </span>}
+              {post.author && <span>{post.author}</span>}
             </p>
           </header>
 
-          <div className="article-media">
-            <SkeletonImage src={post.image} alt={post.imageAlt} />
-          </div>
+          {post.image && (
+            <div className="article-media">
+              <SkeletonImage src={post.image} alt={post.imageAlt} />
+            </div>
+          )}
 
           <article className="prose">
-            <Post />
+            <RichText value={post.body} />
           </article>
 
           {post.faq?.length > 0 && (

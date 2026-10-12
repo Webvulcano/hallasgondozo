@@ -7,7 +7,6 @@ import { getDictionary, fmt } from '../lib/i18n'
 import { loadSite } from '../lib/site'
 import { LIVE_LOCALES } from '../lib/i18n/config'
 import { routePath, contactPath } from '../lib/i18n/routes'
-import { getPosts } from '../lib/content/posts'
 import Button from './Button'
 import ScrollEffect from './nav/ScrollEffect'
 import MobileMenu from './nav/MobileMenu'
@@ -28,8 +27,8 @@ export default async function Nav({ locale, current, alternates, overlay = false
     { key: 'devices', href: routePath('devices', locale), label: t.nav.products, attr: ta.products },
     // ár-oldal kikapcsolva (2026-10-04): { key: 'prices', href: routePath('prices', locale), label: t.nav.prices },
     { key: 'contact', href: contactPath(locale), label: t.nav.contact, attr: ta.contact },
-    // Blog csak ha az adott nyelven van cikk
-    ...(getPosts(locale).length ? [{ key: 'blog', href: routePath('blog', locale), label: t.nav.blog, attr: ta.blog }] : []),
+    // Blog csak ha az adott nyelven van közzétett cikk (CMS)
+    ...(site.blogLocales.includes(locale) ? [{ key: 'blog', href: routePath('blog', locale), label: t.nav.blog, attr: ta.blog }] : []),
   ]
 
   // Nyelvjavaslat-sáv: a többi élő nyelv szövege a SAJÁT nyelvén (pl. „Diese Seite gibt es auch auf Deutsch")

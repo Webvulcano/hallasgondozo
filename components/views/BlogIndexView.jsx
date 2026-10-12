@@ -14,13 +14,14 @@ import { SITE, COMPANY } from '../../lib/constants'
 import { metaAlternates, absUrl, breadcrumbJsonLd } from '../../lib/seo'
 
 export async function blogIndexMetadata(locale) {
-  const t = (await loadSite(locale)).t.meta
+  const { t: dict, site } = await loadSite(locale)
+  const t = dict.meta
   const path = routePath('blog', locale)
   return {
     // absolute: a layout template ne fűzze hozzá még egyszer a márkanevet
     title: { absolute: t.blogTitle },
     description: t.blogDescription,
-    alternates: metaAlternates(path, getAlternates('blog').hreflang),
+    alternates: metaAlternates(path, getAlternates('blog', null, { blogLocales: site.blogLocales }).hreflang),
     openGraph: {
       type: 'website',
       url: absUrl(path),
@@ -33,11 +34,11 @@ export async function blogIndexMetadata(locale) {
 
 export default async function BlogIndexView({ locale }) {
   if (!isLive(locale)) notFound()
-  const posts = getPosts(locale)
+  const posts = await getPosts(locale)
   if (!posts.length) notFound()
-  const { t, a } = await loadSite(locale)
+  const { t, site, a } = await loadSite(locale)
   const path = routePath('blog', locale)
-  const alternates = getAlternates('blog')
+  const alternates = getAlternates('blog', null, { blogLocales: site.blogLocales })
 
   // Blog (CollectionPage) + BreadcrumbList JSON-LD
   const blogLd = {

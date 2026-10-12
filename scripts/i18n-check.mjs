@@ -107,21 +107,16 @@ function filesUnder(dir, re) {
     e.isDirectory() ? filesUnder(`${dir}/${e.name}`, re) : re.test(e.name) ? [`${dir}/${e.name}`] : []
   )
 }
-// MDX renderelt szövege közelítőleg: a JSX- és JS-kommentek nélkül (azok nem jelennek meg)
-const mdxText = (f) => read(f).replace(/\{\/\*[\s\S]*?\*\/\}/g, '').replace(/^\s*\/\/.*$/gm, '')
 
 for (const l of OTHERS) {
   const files = [
     `lib/i18n/dictionaries/${l}.js`,
     ...filesUnder(`lib/content/locales/${l}`, /\.(js|jsx)$/),
-    ...filesUnder(`content/blog/${l}`, /\.mdx$/),
   ]
   const marked = files.filter((f) => exists(f) && /TODO fordítás|\bDRAFT\b/.test(read(f)))
   if (marked.length) soft(l, `[${l}] ${marked.length} fájl még fordításra/lektorálásra vár (TODO fordítás / DRAFT): ${marked.join(', ')}`)
-  // MDX-szöveg a glyph-ellenőrzéshez
-  for (const f of filesUnder(`content/blog/${l}`, /\.mdx$/)) textByLocale[l].push(mdxText(f))
 }
-for (const f of filesUnder(`content/blog/${DEFAULT_LOCALE}`, /\.mdx$/)) textByLocale[DEFAULT_LOCALE].push(mdxText(f))
+// A blog-cikkek (és az admin-mentett szövegek) a CMS-ben vannak, buildkor nem ellenőrizhetők.
 
 // ---------- 4. glyph-ellenőrzés ----------
 const { ranges } = JSON.parse(read('scripts/font-charset.json'))
@@ -141,14 +136,6 @@ for (const [route, byLocale] of Object.entries(ROUTES)) {
     const file = `app/(${l})${p === '/' ? '' : p}/page.jsx`
     if (!exists(file)) errors.push(`routes.js: ${route}.${l} = '${p}', de nincs ${file}`)
   }
-}
-
-// ---------- 6. blog-párok (tájékoztatás) ----------
-const keys = (l) => new Set(filesUnder(`content/blog/${l}`, /\.mdx$/).map((f) => read(f).match(/translationKey:\s*'([^']+)'/)?.[1]).filter(Boolean))
-const huKeys = keys(DEFAULT_LOCALE)
-for (const l of OTHERS) {
-  const missing = [...huKeys].filter((k) => !keys(l).has(k))
-  if (missing.length) infos.push(`[${l}] lefordítatlan cikk(ek): ${missing.join(', ')} (a nyelvválasztó a blogra / főoldalra esik vissza)`)
 }
 
 // ---------- kimenet ----------

@@ -1,5 +1,4 @@
 // next.config.mjs
-import createMDX from '@next/mdx'
 
 // Csak az Ügyfél Admin (CMS, projektek/analytics-site) framelheti az oldalt (vizuális szerkesztő).
 const adminOrigins = (process.env.NEXT_PUBLIC_CMS_ADMIN_ORIGIN ?? '')
@@ -9,8 +8,6 @@ const adminOrigins = (process.env.NEXT_PUBLIC_CMS_ADMIN_ORIGIN ?? '')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // .mdx oldal-/komponens-kiterjesztés is renderelhető
-  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   allowedDevOrigins: ['192.168.0.150', '192.168.0.151'],
   async headers() {
     return [
@@ -61,13 +58,4 @@ const nextConfig = {
   },
 }
 
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [],
-    // Turbopack: a plugineket STRING-névként kell megadni (nem importált fn),
-    // hogy szerializálható legyen. H2/H3 id-k → anchor + AEO ugrópont.
-    rehypePlugins: [['rehype-slug']],
-  },
-})
-
-export default withMDX(nextConfig)
+export default nextConfig

@@ -35,6 +35,14 @@ const manifest = {
   // Az ügyfél Google-fiókja(i) - egyelőre üres (belépés módja nyitott kérdés), a superadmin mindent lát.
   members: [],
   analytics: {},
+  // Blog-modul (admin → Blog menü). EN/DE-n nincs blog (Lehel, 2026-10-12) → csak magyar.
+  blog: {
+    label: 'Blog',
+    locales: ['hu'],
+    path: { hu: '/blog' },
+    postPath: { hu: '/blog/{slug}' },
+    author: 'ÉRTED Hallásgondozó szakmai csapata',
+  },
   pages: CMS_PAGES.map((page) => ({
     ...page,
     sections: page.sections.map((s) => ({ ...s, fields: s.fields.map(field), images: (s.images ?? []).map(imageSlot) })),

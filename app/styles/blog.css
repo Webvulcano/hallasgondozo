@@ -40,7 +40,8 @@
 
 /* MDX próza */
 .prose{font-size:var(--fs-base);line-height:var(--lh-base);color:var(--ink);hyphens:auto;}
-.prose > p:first-child{font-size:var(--fs-lead);color:var(--ink-soft);}
+/* a CMS-szöveg (RichText) egy [data-cms-rich] div-be kerül → a bevezető bekezdés ott is lead */
+.prose > p:first-child,.prose > [data-cms-rich] > p:first-child{font-size:var(--fs-lead);color:var(--ink-soft);}
 .prose h2{
   font-size:var(--fs-subsection);color:var(--teal-deep);
   margin:38px 0 14px;text-wrap:balance;scroll-margin-top:90px;
@@ -49,6 +50,7 @@
 .prose p{margin:0 0 18px;text-align:justify;}
 .prose ul,.prose ol{margin:0 0 18px;padding-left:24px;}
 .prose li{margin:0 0 8px;}
+.prose li > p{margin:0;text-align:left;} /* a szerkesztő a lista-elemet bekezdésbe teszi */
 .prose strong{color:var(--ink);font-weight:700;}
 .prose a{color:var(--teal-deep);font-weight:600;text-decoration:underline;text-underline-offset:2px;}
 .prose a:hover{color:var(--teal);}
@@ -82,4 +84,21 @@
 @media (max-width:1000px){
   .prose h2{font-size:var(--fs-section);}
   .prose h3{font-size:var(--fs-xl);}
+}
+
+/* Admin-előnézet sáv (draft mode) - a látogatók nem látják */
+.preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #3a1c00;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 16px;
+}
+.preview-bar a {
+  color: #ffd27a;
+  text-decoration: underline;
+  font-weight: 600;
 }

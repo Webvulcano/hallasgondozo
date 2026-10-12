@@ -8,9 +8,11 @@ export default function PostCard({ post, locale }) {
   const href = routePath('post', locale, post.slug)
   return (
     <article className="postcard">
-      <div className="postcard-media">
-        <SkeletonImage src={post.image} alt={post.imageAlt} loading="lazy" />
-      </div>
+      {post.image && (
+        <div className="postcard-media">
+          <SkeletonImage src={post.image} alt={post.imageAlt} loading="lazy" />
+        </div>
+      )}
       <div className="postcard-body">
         <time className="postcard-date" dateTime={post.datePublished}>
           {formatDate(post.datePublished, locale)}

@@ -68,7 +68,6 @@ export default async function Nav({ locale, current, alternates, overlay = false
             current={current}
             labels={{ aria: t.nav.mobileAria, open: t.nav.menuOpen, close: t.nav.menuClose }}
             cta={{ href: booking.adult, label: t.cta.bookExam, attr: a.dict.cta.bookExam }}
-            contact={{ phone: site.phone, email: site.email, phoneAttr: a.const.phone, emailAttr: a.const.email }}
             langSwitch={<LangSwitcher links={links} current={locale} label={t.langSwitch.aria} variant="menu" />}
           />
         </div>

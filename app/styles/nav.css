@@ -63,13 +63,14 @@ header.nav.nav-overlay.scrolled{
 .nav-mobile-menu{
   position:fixed;inset:0;z-index:49;
   background:var(--cream);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;
   padding:78px 24px 0;
   opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .4s ease,visibility .4s ease;
 }
 .nav-mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;}
-.nav-mobile-links{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;}
+/* margin auto (linkek fölött + CTA alatt): a blokk középen marad, a nyelvválasztó a képernyő aljára kerül */
+.nav-mobile-links{display:flex;flex-direction:column;align-items:center;gap:14px;margin:auto 0 48px;}
 .nav-mlink{
   position:relative;padding:6px 4px;
   font-family:var(--font-playfair),"Playfair Display",Georgia,serif;
@@ -84,21 +85,24 @@ header.nav.nav-overlay.scrolled{
 }
 .nav-mlink:hover::after,
 .nav-mlink.active::after{transform:scaleX(1);}
-.nav-mobile-menu.open .nav-mlink{animation:navMenuIn .55s cubic-bezier(.22,.61,.36,1) forwards;}
-.nav-mobile-menu.open .nav-mlink:nth-child(1){animation-delay:.15s;}
-.nav-mobile-menu.open .nav-mlink:nth-child(2){animation-delay:.24s;}
-.nav-mobile-menu.open .nav-mlink:nth-child(3){animation-delay:.33s;}
-.nav-mobile-menu.open .nav-mlink:nth-child(4){animation-delay:.42s;}
-.nav-mobile-menu.open .nav-mlink:nth-child(5){animation-delay:.51s;}
+/* Lépcsőzetes beúszás: linkek → CTA → nyelvválasztó, egyenletes lépcsővel (--menu-step).
+   A sorszám (--i) a MobileMenu-ből jön, így a lépcső a menüpontok számától (pl. Blog) független. */
+.nav-mobile-menu{--menu-step:.12s;}
+.nav-mobile-menu.open :is(.nav-mlink,.nav-mobile-footer,.nav-mobile-lang){
+  animation:navMenuIn .55s cubic-bezier(.22,.61,.36,1) calc(.15s + var(--i, 0) * var(--menu-step)) forwards;
+}
+/* A nyelvválasztó messze van a CTA-tól (képernyő alja) → egy lépcső különbség ott egyidejűnek hat;
+   +1 lépcsővel később indul, hogy külön ütemként érzékelődjön. */
+.nav-mobile-menu.open .nav-mobile-lang{animation-delay:calc(.15s + (var(--i, 0) + 1) * var(--menu-step));}
 
 .nav-mobile-footer{
-  display:flex;flex-direction:column;align-items:center;gap:18px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:auto;
   opacity:0;transform:translateY(24px);
 }
-.nav-mobile-menu.open .nav-mobile-footer{animation:navMenuIn .55s cubic-bezier(.22,.61,.36,1) .6s forwards;}
-.nav-mobile-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;}
-.nav-mobile-contact a{font-size:var(--fs-base);color:var(--ink-soft);transition:color .2s ease;}
-.nav-mobile-contact a:hover{color:var(--teal-deep);}
+.nav-mobile-lang{
+  padding:32px 0 calc(24px + env(safe-area-inset-bottom));
+  opacity:0;
+}
 
 @keyframes navMenuIn{
   from{opacity:0;transform:translateY(24px);}
@@ -113,7 +117,7 @@ html.menu-open header.nav{background:var(--cream);box-shadow:none;border-color:t
 
 @media (prefers-reduced-motion:reduce){
   .nav-mobile-menu{transition:none;}
-  .nav-mlink,.nav-mobile-footer{opacity:1;transform:none;animation:none !important;}
+  .nav-mlink,.nav-mobile-footer,.nav-mobile-lang{opacity:1;transform:none;animation:none !important;}
 }
 @media (min-width:901px){
   .nav-mobile-menu{display:none;}

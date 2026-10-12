@@ -44,8 +44,11 @@
      oszlopot a viewporton túlra (grid alap-min automatikusan max-content) */
   .services .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
   .services .card{padding:16px 14px;}
-  /* 3 kártya 2 oszlopban → a páratlan utolsó teljes szélességű, ne lógjon egyedül */
-  .services .card:last-child:nth-child(odd){grid-column:1 / -1;}
+  /* 3 kártya 2 oszlopban → a páratlan utolsó középen, a többivel azonos szélességben
+     (14px = a gap; mint a #kategoriak kártyáknál) */
+  .services .card:last-child:nth-child(odd){
+    grid-column:1 / -1;justify-self:center;width:calc(50% - 7px);
+  }
   .services .ic-badge{width:44px;height:44px;border-radius:12px;margin-bottom:12px;}
   .services .ic-badge svg{width:22px;height:22px;}
   /* Alap méret (--fs-base, mint a leírás-szöveg) — nem a normál --fs-2xl

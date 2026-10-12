@@ -10,6 +10,9 @@
 /* ---- Nyelvválasztó (components/LangSwitcher.jsx) ---- */
 .lang-switch{display:flex;align-items:center;}
 .lang-switch-link{font-weight:600;color:var(--teal-deep);transition:color .18s ease,background .18s ease,border-color .18s ease;}
+.lang-switch-link{display:inline-flex;align-items:center;gap:6px;}
+/* Zászló: lekerekített, vékony keret (a fehér sáv a krémszínű háttéren is látsszon) */
+.lang-flag{flex:none;width:18px;height:auto;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12);}
 .lang-switch-link:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;border-radius:4px;}
 
 /* Desktop nav: HU · EN · DE kódok, a CTA mellett. Aktív = a .nav-link aláhúzása. */
@@ -35,14 +38,24 @@
   .nav-right:has(.lang-switch) .cta-short{display:inline;}
 }
 
-/* Mobil menü: pill-sor teljes nevekkel, 44px érintési cél */
-.lang-switch--menu{flex-wrap:wrap;justify-content:center;gap:8px;}
+/* Mobil menü (a képernyő alján): a desktop HU · EN · DE kinézete, 44px magas érintési céllal */
+.lang-switch--menu{justify-content:center;}
 .lang-switch--menu .lang-switch-link{
-  display:inline-flex;align-items:center;min-height:44px;padding:0 16px;
-  font-size:var(--fs-base);color:var(--ink-soft);
-  background:var(--white);border:1px solid var(--line);border-radius:999px;
+  position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;
+  font-size:var(--fs-base);letter-spacing:.06em;color:var(--ink-soft);
 }
-.lang-switch--menu .lang-switch-link.is-active{color:var(--teal-deep);background:var(--teal-soft);border-color:var(--teal-deep);}
+.lang-switch--menu .lang-switch-link + .lang-switch-link::before{
+  content:"";position:absolute;left:0;top:12px;bottom:12px;width:1px;background:var(--line);
+}
+.lang-switch--menu .lang-switch-link::after{
+  content:"";position:absolute;left:16px;right:16px;bottom:8px;height:2px;
+  background:var(--teal-deep);transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.lang-switch--menu .lang-switch-link:hover,
+.lang-switch--menu .lang-switch-link.is-active{color:var(--teal-deep);}
+.lang-switch--menu .lang-switch-link:hover::after,
+.lang-switch--menu .lang-switch-link.is-active::after{transform:scaleX(1);}
 
 /* Footer: a foot-bottom sor linkjeinek stílusában */
 .lang-switch--footer{flex-wrap:wrap;gap:0 12px;}

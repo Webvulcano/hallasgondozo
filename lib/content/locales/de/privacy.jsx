@@ -1,76 +1,75 @@
-// TODO fordítás - DEUTSCH: Adatvédelmi Szabályzat. Jelenleg a MAGYAR szöveg másolata (placeholder).
-// Jogi szöveg → fordítás + jogi/anyanyelvi ellenőrzés. A magyar változat az irányadó (záradék lent, DRAFT).
+// DRAFT - DEUTSCH, Datenschutzerklärung. Claude-Übersetzung der ungarischen Fassung (2026-10-12).
+// Rechtstext → vor dem Livegang vom Kunden / einem Juristen freigeben lassen. Maßgeblich ist die ungarische
+// Fassung (Klausel unten - beibehalten). DRAFT-Markierung nach Freigabe entfernen.
+// PrivacyView (components/views) liefert Rahmen und Zurück-Link.
 import { COMPANY, EMAIL, PHONE } from '../../../constants'
 
 export default function PrivacyBody() {
   return (
     <>
-      <h1 style={{ fontSize: 'var(--fs-section)', marginBottom: '20px' }}>Adatvédelmi Szabályzat</h1>
+      <h1 style={{ fontSize: 'var(--fs-section)', marginBottom: '20px' }}>Datenschutzerklärung</h1>
       <p style={{ color: 'var(--ink-soft)', marginBottom: '32px' }}>
-        Hatályos: {new Date().getFullYear()}. január 1-től
+        Gültig ab 1. Januar {new Date().getFullYear()}
       </p>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>1. Adatkezelő</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>1. Verantwortlicher</h2>
       <p>
         {COMPANY.fullName} ({COMPANY.legalName})<br />
-        Cím: {COMPANY.address}<br />
+        Adresse: {COMPANY.address}, Ungarn<br />
         Telefon: {PHONE.display}<br />
-        E-mail: {EMAIL}
+        E-Mail: {EMAIL}
       </p>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>2. Kezelt adatok köre</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>2. Verarbeitete Daten</h2>
       <p>
-        A weboldal visszahívási űrlapján megadott név, telefonszám és opcionális megjegyzés.
-        Az adatokat kizárólag a kérelmező visszahívása céljából használjuk fel.
+        Name, Telefonnummer und optionale Anmerkung, die Sie im Rückruf-Formular dieser Website angeben.
+        Wir verwenden diese Daten ausschließlich, um Sie zurückzurufen.
       </p>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>3. Adatkezelés célja és jogalapja</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>3. Zweck und Rechtsgrundlage</h2>
       <p>
-        Visszahívás kezdeményezése, időpontfoglalás egyeztetése. Az adatkezelés jogalapja az
-        Ön önkéntes hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), amelyet az űrlap
-        elküldésével, a jelölőnégyzet bejelölésével ad meg.
+        Rückruf und Terminabstimmung. Rechtsgrundlage der Verarbeitung ist Ihre freiwillige
+        Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch Ankreuzen des Kontrollkästchens
+        und Absenden des Formulars erteilen.
       </p>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Adatfeldolgozók</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Auftragsverarbeiter</h2>
       <p>
-        Az űrlapon megadott adatokat az alábbi adatfeldolgozók közreműködésével kezeljük:
+        Die im Formular angegebenen Daten verarbeiten wir unter Mitwirkung des folgenden Auftragsverarbeiters:
       </p>
       <ul style={{ paddingLeft: '20px', marginBottom: '12px' }}>
         <li>
-          <strong>SimplyForms</strong> (üzemeltető: Adam Todt, Csehország, simplyforms.app) —
-          az űrlapon megadott adatok fogadására és e-mailben történő továbbítására
-          részünkre. A szolgáltatás szerverei az Európai Unióban (Németország) találhatók,
-          az adatok nem kerülnek továbbításra az EU-n kívülre. Az űrlap tartalmát (név,
-          telefonszám, megjegyzés) a SimplyForms nem tárolja: az e-mail kézbesítése után
-          törli. A beküldéshez kapcsolódó technikai adatokat (IP-cím, böngésző típusa,
-          hivatkozó oldal) legfeljebb 90 napig őrzi meg.
+          <strong>SimplyForms</strong> (Betreiber: Adam Todt, Tschechien, simplyforms.app) —
+          zum Empfang der im Formular angegebenen Daten und zu deren Weiterleitung per E-Mail an uns.
+          Die Server des Dienstes befinden sich in der Europäischen Union (Deutschland); die Daten
+          werden nicht außerhalb der EU übermittelt. Den Inhalt des Formulars (Name, Telefonnummer,
+          Anmerkung) speichert SimplyForms nicht, sondern löscht ihn nach Zustellung der E-Mail.
+          Technische Daten zur Übermittlung (IP-Adresse, Browsertyp, verweisende Seite) werden
+          höchstens 90 Tage aufbewahrt.
         </li>
       </ul>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Adatkezelés időtartama</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Speicherdauer</h2>
       <p>
-        Az űrlapon megadott adatok (név, telefonszám, megjegyzés) e-mailben érkeznek
-        hozzánk. Ezeket a beérkezéstől számított legfeljebb 1 évig őrizzük meg, hogy
-        sikertelen elérés vagy későbbi érdeklődés esetén fel tudjuk venni Önnel a
-        kapcsolatot; ezt követően töröljük. Hozzájárulását bármikor visszavonhatja,
-        ebben az esetben adatait haladéktalanul töröljük. A SimplyForms által kezelt technikai adatok
-        legfeljebb 90 napig maradnak meg (lásd 4. pont).
+        Die im Formular angegebenen Daten (Name, Telefonnummer, Anmerkung) erreichen uns per E-Mail.
+        Wir bewahren sie ab Eingang höchstens 1 Jahr auf, damit wir Sie kontaktieren können, falls
+        wir Sie nicht erreicht haben oder Sie später Interesse haben; danach löschen wir sie. Sie
+        können Ihre Einwilligung jederzeit widerrufen; in diesem Fall löschen wir Ihre Daten
+        unverzüglich. Die von SimplyForms verarbeiteten technischen Daten werden höchstens 90 Tage
+        aufbewahrt (siehe Punkt 4).
       </p>
 
-      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>6. Érintetti jogok</h2>
+      <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>6. Ihre Rechte</h2>
       <p>
-        Ön bármikor kérheti adatainak helyesbítését, törlését vagy az adatkezelés korlátozását
-        a fenti e-mail címen, valamint panasszal élhet a Nemzeti Adatvédelmi és
-        Információszabadság Hatóságnál (NAIH, naih.hu).
+        Sie können jederzeit unter der oben genannten E-Mail-Adresse die Berichtigung oder Löschung
+        Ihrer Daten oder die Einschränkung der Verarbeitung verlangen. Zudem können Sie Beschwerde bei
+        der ungarischen Nationalen Behörde für Datenschutz und Informationsfreiheit (NAIH, naih.hu)
+        einlegen.
       </p>
 
-      <p style={{ marginTop: '40px', padding: '20px', background: 'var(--teal-soft)', borderRadius: '12px', color: 'var(--teal-deep)' }}>
-        <strong>Megjegyzés:</strong> Jogi szakember általi ellenjegyzés javasolt éles
-        használat előtt.
+      <p style={{ marginTop: '40px', color: 'var(--ink-soft)' }}>
+        Dies ist eine Übersetzung. Maßgeblich ist die ungarische Fassung dieser Datenschutzerklärung.
       </p>
-
-      {/* DRAFT: irányadó-nyelv záradék (fordítás után is maradjon) */}
-      <p style={{ marginTop: '16px', color: 'var(--ink-soft)' }}>Maßgeblich ist die ungarische Fassung dieser Datenschutzerklärung.</p>
     </>
   )
 }

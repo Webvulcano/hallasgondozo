@@ -5,6 +5,7 @@ import { cookies, draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { getPostPreview } from '@/lib/content/posts'
 import { routePath } from '@/lib/i18n/routes'
+import { previewCookieOptions } from './cookie-options'
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 
@@ -26,12 +27,14 @@ export async function GET(request) {
   }
 
   ;(await draftMode()).enable()
-  ;(await cookies()).set('cms_preview', JSON.stringify({ id, token }), {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    maxAge: 60 * 60,
-  })
+  const jar = await cookies()
+  const opts = previewCookieOptions(request)
+  // A Next draft-mode sütije élesben Secure + SameSite=None; helyi http-n (pl. Safari) ezt a böngésző
+  // eldobná → ugyanazzal az értékkel újra beállítjuk Secure nélkül.
+  if (!opts.secure) {
+    const bypass = jar.get('__prerender_bypass')?.value
+    if (bypass) jar.set('__prerender_bypass', bypass, { ...opts, maxAge: undefined })
+  }
+  jar.set('cms_preview', JSON.stringify({ id, token }), { ...opts, maxAge: 60 * 60 })
   redirect(path)
 }

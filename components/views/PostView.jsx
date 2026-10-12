@@ -24,12 +24,16 @@ export async function postStaticParams(locale) {
 }
 
 // Draft mode-ban (admin előnézet) a sütiben lévő cikk, ha ehhez az útvonalhoz tartozik; különben a közzétett.
+// Közzétett cikknél nincs előnézet (a mentés úgyis azonnal él): a süti még 1 óráig megvan az
+// „Előnézet" után, és a már közzétett cikk különben „nem nyilvános" sávval jelenne meg.
 async function loadPost(locale, slug) {
   if ((await draftMode()).isEnabled) {
     try {
       const { id, token } = JSON.parse((await cookies()).get('cms_preview')?.value ?? '{}')
       const draft = id && token ? await getPostPreview(id, token) : null
-      if (draft && draft.locale === locale && draft.slug === slug) return { post: draft, preview: true }
+      if (draft && draft.status !== 'published' && draft.locale === locale && draft.slug === slug) {
+        return { post: draft, preview: true }
+      }
     } catch {
       // hibás süti → a közzétett cikk
     }

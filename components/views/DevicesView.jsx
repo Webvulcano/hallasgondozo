@@ -55,7 +55,7 @@ export default async function DevicesView({ locale }) {
                 const card = (
                   <>
                     <div className="kbrand-card-name">{b.name}</div>
-                    <div className="kbrand-card-ph">
+                    <div className="kbrand-card-ph" {...a.img.brands[b.id]?.image}>
                       {b.image ? (
                         <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" />
                       ) : (

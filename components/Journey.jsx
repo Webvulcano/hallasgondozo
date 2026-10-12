@@ -7,7 +7,8 @@ import SkeletonImage from './SkeletonImage'
 
 // Props (a HomeView adja, nyelvenként): steps = lépések (alap + szöveg, lib/content), t = szekció-szövegek,
 // schema = HowTo JSON-LD (szerveren épül ugyanebből a tömbből — AEO / AI-keresők).
-// a = szerkesztő-jelölések (lib/site.js): a.eyebrow/title/lead/cta + a.steps[n].title/desc/highlight/sub[i].
+// a = szerkesztő-jelölések (lib/site.js): a.eyebrow/title/lead/cta + a.steps[n].title/desc/highlight/sub[i]
+// + a.images[n].img (lépés-kép). A kép alt-ja: s.imgAlt (CMS), ennek híján a lépés címe.
 export default function Journey({ steps, t, schema, a = {} }) {
   // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a
   // felhasználó a szekció közepéig görget (IntersectionObserver, lent).
@@ -106,8 +107,8 @@ export default function Journey({ steps, t, schema, a = {} }) {
                       )}
                     </div>
                     <div className="jcard-media">
-                      <div className="ph">
-                        <SkeletonImage src={s.img} alt={s.title} className="jcard-img" loading="lazy" />
+                      <div className="ph" {...a.images?.[s.n]?.img}>
+                        <SkeletonImage src={s.img} alt={s.imgAlt || s.title} className="jcard-img" loading="lazy" />
                       </div>
                     </div>
                   </div>

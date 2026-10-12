@@ -43,7 +43,7 @@ export async function brandMetadata(locale, { params }) {
       title: fmt(t.brandOgTitle, { name: p.productName }),
       description: p.metaDescription,
       url: absUrl(path),
-      images: [{ url: `${SITE.url}${p.gallery[0].src}` }],
+      images: [{ url: p.gallery[0].src.startsWith('http') ? p.gallery[0].src : `${SITE.url}${p.gallery[0].src}` }],
       ...ogLocale(locale, hreflang),
       type: 'website',
     },
@@ -92,7 +92,7 @@ export default async function BrandView({ locale, params }) {
             </Link>
             <div className="kp-hero-grid">
               <div className="kp-hero-media">
-                <ProductGallery images={p.gallery} showLabel={t.product.galleryShow} />
+                <ProductGallery images={p.gallery} showLabel={t.product.galleryShow} attrs={a.img.brands[p.id]?.gallery} />
                 {/* Vélemények a képnézegető alatt (sticky oszloppal együtt mozog) */}
                 <ReviewSlider
                   testimonials={testimonials}
@@ -115,7 +115,7 @@ export default async function BrandView({ locale, params }) {
                 <div className="kp-next">
                   <div className="kp-next-label" {...ta.nextLabel}>{t.product.nextLabel}</div>
                   <Link href={brandHref(next)} className="kp-next-card">
-                    <span className="kp-next-img">
+                    <span className="kp-next-img" {...a.img.brands[next.id]?.gallery?.[0]}>
                       <SkeletonImage src={next.gallery[0].src} alt="" loading="lazy" />
                     </span>
                     <span className="kp-next-text">
@@ -144,7 +144,7 @@ export default async function BrandView({ locale, params }) {
                 <Reveal key={b.id} className="kbrand-card-wrap">
                   <Link href={brandHref(b)} className="kbrand-card kbrand-card--link">
                     <div className="kbrand-card-name" {...a.text.brands[b.id].productName}>{b.productName}</div>
-                    <div className="kbrand-card-ph">
+                    <div className="kbrand-card-ph" {...a.img.brands[b.id]?.image}>
                       <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" loading="lazy" />
                     </div>
                     <div className="kbrand-card-foot">

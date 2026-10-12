@@ -56,12 +56,12 @@ export default async function HomeView({ locale }) {
       {/* <Offer locale={locale} /> — nyári ajánlat kikommentezve */}
       <Team locale={locale} />
       <Partners locale={locale} />
-      <Journey steps={c.journey} t={t.journey} schema={howToSchema} a={{ steps: a.text.journey, ...a.dict.journey }} />
+      <Journey steps={c.journey} t={t.journey} schema={howToSchema} a={{ steps: a.text.journey, images: a.img.journey, ...a.dict.journey }} />
       <Testimonials locale={locale} />
       <Booking locale={locale} />
       <Faq faqs={c.faqs} visible={c.faqVisible} schema={faqJsonLd(c.faqs)} t={t.faq} a={{ items: a.text.faqs, ...a.dict.faq }} />
       <Footer locale={locale} alternates={alternates} />
-      <PromoPopup promo={c.promo} ctaHref={site.booking.adult} closeLabel={t.promo.close} a={a.text.promo} />
+      <PromoPopup promo={c.promo} ctaHref={site.booking.adult} closeLabel={t.promo.close} a={{ ...a.text.promo, image: a.img.promo.image }} />
     </>
   )
 }

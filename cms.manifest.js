@@ -6,7 +6,7 @@
 // site.url: amíg az oldal nincs bekötve élesben, a helyi dev szerver (npm run dev → 3100).
 // Élesítéskor: url = https://hallasgondozo.hu, previewUrl = a nem élő nyelveket mutató előnézeti deploy.
 
-import { CMS_LOCALES, CMS_PAGES, sourceValue } from './lib/cms-schema.js'
+import { CMS_LOCALES, CMS_PAGES, sourceValue, imageDefault } from './lib/cms-schema.js'
 
 const TRANSLATIONS = CMS_LOCALES.slice(1).map((l) => l.code)
 
@@ -18,6 +18,10 @@ function field({ src, ids, ...f }) {
     )
   }
   return out
+}
+
+function imageSlot({ ref, ...img }) {
+  return { ...img, default: imageDefault(ref) }
 }
 
 const manifest = {
@@ -33,7 +37,7 @@ const manifest = {
   analytics: {},
   pages: CMS_PAGES.map((page) => ({
     ...page,
-    sections: page.sections.map((s) => ({ ...s, fields: s.fields.map(field) })),
+    sections: page.sections.map((s) => ({ ...s, fields: s.fields.map(field), images: (s.images ?? []).map(imageSlot) })),
   })),
 }
 

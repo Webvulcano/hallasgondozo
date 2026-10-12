@@ -19,7 +19,7 @@ export default async function Team({ locale }) {
         <div className="cards">
           {team.map((m) => (
             <div key={m.id} className="tcard">
-              <div className="ph">
+              <div className="ph" {...a.img.team[m.id]?.img}>
                 <SkeletonImage src={m.img} alt={m.imgAlt} className="tcard-img" loading="lazy" />
               </div>
               <div className="body">

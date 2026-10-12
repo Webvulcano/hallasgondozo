@@ -60,7 +60,7 @@ export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
         <button ref={closeRef} type="button" className="promo-close" onClick={close} aria-label={closeLabel}>
           ×
         </button>
-        <div className="promo-media">
+        <div className="promo-media" {...a.image}>
           <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-img" loading="lazy" />
         </div>
         <div className="promo-body">

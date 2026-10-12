@@ -2,7 +2,9 @@
 import PostView, { postStaticParams, postMetadata } from '@/components/views/PostView'
 
 const locale = 'en'
-export const dynamicParams = false
+// true: a CMS-mentés utáni azonnali lejáratáskor (revalidateTag expire:0) a Next újragenerálja az oldalt;
+// false-szal ilyenkor 404 lenne (NoFallbackError). Ismeretlen slug → a view notFound()-ja (404).
+export const dynamicParams = true
 export const generateStaticParams = () => postStaticParams(locale)
 export const generateMetadata = (props) => postMetadata(locale, props)
 

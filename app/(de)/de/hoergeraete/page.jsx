@@ -2,7 +2,7 @@
 import DevicesView, { devicesMetadata } from '@/components/views/DevicesView'
 
 const locale = 'de'
-export const metadata = devicesMetadata(locale)
+export const generateMetadata = () => devicesMetadata(locale)
 
 export default function Page() {
   return <DevicesView locale={locale} />

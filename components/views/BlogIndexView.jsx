@@ -5,15 +5,16 @@ import Footer from '../Footer'
 import Reveal from '../Reveal'
 import PostCard from '../blog/PostCard'
 import { isLive, LOCALE_META } from '../../lib/i18n/config'
-import { getDictionary, fmt } from '../../lib/i18n'
+import { fmt } from '../../lib/i18n'
+import { loadSite } from '../../lib/site'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
 import { getPosts } from '../../lib/content/posts'
 import { SITE, COMPANY } from '../../lib/constants'
 import { metaAlternates, absUrl, breadcrumbJsonLd } from '../../lib/seo'
 
-export function blogIndexMetadata(locale) {
-  const t = getDictionary(locale).meta
+export async function blogIndexMetadata(locale) {
+  const t = (await loadSite(locale)).t.meta
   const path = routePath('blog', locale)
   return {
     // absolute: a layout template ne fűzze hozzá még egyszer a márkanevet
@@ -30,11 +31,11 @@ export function blogIndexMetadata(locale) {
   }
 }
 
-export default function BlogIndexView({ locale }) {
+export default async function BlogIndexView({ locale }) {
   if (!isLive(locale)) notFound()
   const posts = getPosts(locale)
   if (!posts.length) notFound()
-  const t = getDictionary(locale)
+  const { t, a } = await loadSite(locale)
   const path = routePath('blog', locale)
   const alternates = getAlternates('blog')
 
@@ -75,8 +76,8 @@ export default function BlogIndexView({ locale }) {
         <section className="block kpage-hero">
           <div className="wrap">
             <Reveal>
-              <h1>{t.blog.title}</h1>
-              <p className="lead">{t.blog.lead}</p>
+              <h1 {...a.dict.blog.title}>{t.blog.title}</h1>
+              <p className="lead" {...a.dict.blog.lead}>{t.blog.lead}</p>
             </Reveal>
           </div>
         </section>

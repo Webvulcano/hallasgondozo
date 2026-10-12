@@ -1,11 +1,10 @@
-import { PHONE, bookingUrls } from '../lib/constants'
-import { getDictionary } from '../lib/i18n'
+import { loadSite } from '../lib/site'
 import Button from './Button'
 import HeroVideoPlayer from './HeroVideoPlayer'
 import { Calendar, Phone } from './icons'
 
-export default function HeroVideo({ locale }) {
-  const t = getDictionary(locale)
+export default async function HeroVideo({ locale }) {
+  const { t, site, a } = await loadSite(locale)
   return (
     <section className="hero-video">
       <div className="hero-video-frame">
@@ -30,18 +29,18 @@ export default function HeroVideo({ locale }) {
         <HeroVideoPlayer />
         <div className="hero-video-overlay">
           <span className="hero-video-eyebrow">ÉRTED Hallásgondozó</span>
-          <h1 className="hero-video-title">{t.hero.title}</h1>
+          <h1 className="hero-video-title" {...a.dict.hero.title}>{t.hero.title}</h1>
           <div className="hero-video-cta">
-            <Button variant="gold" href={bookingUrls(locale).adult} icon={<Calendar size={20} stroke="#3a1c00" />}>
-              {t.cta.bookAppointment}
+            <Button variant="gold" href={site.booking.adult} icon={<Calendar size={20} stroke="#3a1c00" />}>
+              <span {...a.dict.cta.bookAppointment}>{t.cta.bookAppointment}</span>
             </Button>
             <Button
               variant="ghost-light"
-              href={PHONE.href}
+              href={site.phone.href}
               icon={<Phone size={18} stroke="#fff" />}
               className="hero-video-phone-btn"
             >
-              {PHONE.display}
+              <span {...a.const.phone}>{site.phone.display}</span>
             </Button>
           </div>
         </div>

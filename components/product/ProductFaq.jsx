@@ -4,7 +4,8 @@ import { Accordion, AccordionItem } from '../Accordion'
 
 // Termék-specifikus GYIK - a főoldali Faq vizuálja (.faq / .faq-list) és a közös Accordion.
 // A FAQPage JSON-LD a view-ban készül ugyanebből a tömbből. eyebrow/title: nyelvi szöveg (a hívó adja).
-export default function ProductFaq({ eyebrow, title, items }) {
+// a.items[i].q/a: szerkesztő-jelölések (lib/site.js).
+export default function ProductFaq({ eyebrow, title, items, a = {} }) {
   return (
     <section className="block faq kp-faq" id="gyik">
       <div className="wrap">
@@ -17,13 +18,13 @@ export default function ProductFaq({ eyebrow, title, items }) {
             <div className="faq-list">
               {items.map((item, i) => (
                 <AccordionItem
-                  key={item.q}
+                  key={i}
                   id={`kp-faq-a-${i}`}
                   open={isOpen(i)}
                   onToggle={() => toggle(i)}
-                  title={<span>{item.q}</span>}
+                  title={<span {...a.items?.[i]?.q}>{item.q}</span>}
                 >
-                  <p>{item.a}</p>
+                  <p {...a.items?.[i]?.a}>{item.a}</p>
                 </AccordionItem>
               ))}
             </div>

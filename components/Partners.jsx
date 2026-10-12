@@ -1,5 +1,4 @@
-import { getContent } from '../lib/content'
-import { getDictionary } from '../lib/i18n'
+import { loadSite } from '../lib/site'
 import Reveal from './Reveal'
 import TestiTicker from './TestiTicker'
 
@@ -13,8 +12,9 @@ function PBadge({ name, hidden }) {
   )
 }
 
-export default function Partners({ locale }) {
-  const { partners } = getContent(locale)
+export default async function Partners({ locale }) {
+  const { t, c, a } = await loadSite(locale)
+  const { partners } = c
   // A tartalmat duplázzuk a zökkenőmentes loophoz; a második fél aria-hidden.
   const allBadges = [
     ...partners.map((name) => <PBadge key={`a-${name}`} name={name} />),
@@ -23,7 +23,7 @@ export default function Partners({ locale }) {
   return (
     <Reveal as="div" className="partners">
       <div className="wrap">
-        <h4>{getDictionary(locale).partners.title}</h4>
+        <h4 {...a.dict.partners.title}>{t.partners.title}</h4>
       </div>
       <div className="pmarquee-wrap">
         <TestiTicker cls="pmarquee">{allBadges}</TestiTicker>

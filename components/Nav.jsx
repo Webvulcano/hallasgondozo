@@ -2,8 +2,9 @@
 // Props: locale, current (route-kulcs: 'home' | 'devices' | 'brand' | 'prices' | 'blog' | 'post'),
 // alternates (lib/i18n/alternates.js → getAlternates()), overlay.
 import Link from 'next/link'
-import { COMPANY, bookingUrls } from '../lib/constants'
+import { COMPANY } from '../lib/constants'
 import { getDictionary, fmt } from '../lib/i18n'
+import { loadSite } from '../lib/site'
 import { LIVE_LOCALES } from '../lib/i18n/config'
 import { routePath, contactPath } from '../lib/i18n/routes'
 import { getPosts } from '../lib/content/posts'
@@ -14,19 +15,21 @@ import NavLinks from './nav/NavLinks'
 import LangSwitcher from './LangSwitcher'
 import LangSuggest from './LangSuggest'
 
-export default function Nav({ locale, current, alternates, overlay = false }) {
-  const t = getDictionary(locale)
+export default async function Nav({ locale, current, alternates, overlay = false }) {
+  const { t, site, a } = await loadSite(locale)
+  const ta = a.dict.nav
   const home = routePath('home', locale)
-  const booking = bookingUrls(locale)
+  const booking = site.booking
   const links = alternates?.links || {}
 
+  // attr: szerkesztő-jelölés (Ügyfél Admin), látogatónál ártalmatlan data-attribútum
   const items = [
-    { key: 'home', href: home, label: t.nav.home },
-    { key: 'devices', href: routePath('devices', locale), label: t.nav.products },
+    { key: 'home', href: home, label: t.nav.home, attr: ta.home },
+    { key: 'devices', href: routePath('devices', locale), label: t.nav.products, attr: ta.products },
     // ár-oldal kikapcsolva (2026-10-04): { key: 'prices', href: routePath('prices', locale), label: t.nav.prices },
-    { key: 'contact', href: contactPath(locale), label: t.nav.contact },
+    { key: 'contact', href: contactPath(locale), label: t.nav.contact, attr: ta.contact },
     // Blog csak ha az adott nyelven van cikk
-    ...(getPosts(locale).length ? [{ key: 'blog', href: routePath('blog', locale), label: t.nav.blog }] : []),
+    ...(getPosts(locale).length ? [{ key: 'blog', href: routePath('blog', locale), label: t.nav.blog, attr: ta.blog }] : []),
   ]
 
   // Nyelvjavaslat-sáv: a többi élő nyelv szövege a SAJÁT nyelvén (pl. „Diese Seite gibt es auch auf Deutsch")
@@ -57,15 +60,16 @@ export default function Nav({ locale, current, alternates, overlay = false }) {
           <div className="nav-right">
             <LangSwitcher links={links} current={locale} label={t.langSwitch.aria} variant="nav" />
             <Button variant="gold" href={booking.adult}>
-              <span className="cta-full">{t.nav.ctaFull}</span>
-              <span className="cta-short">{t.nav.ctaShort}</span>
+              <span className="cta-full" {...ta.ctaFull}>{t.nav.ctaFull}</span>
+              <span className="cta-short" {...ta.ctaShort}>{t.nav.ctaShort}</span>
             </Button>
           </div>
           <MobileMenu
             items={items}
             current={current}
             labels={{ aria: t.nav.mobileAria, open: t.nav.menuOpen, close: t.nav.menuClose }}
-            cta={{ href: booking.adult, label: t.cta.bookExam }}
+            cta={{ href: booking.adult, label: t.cta.bookExam, attr: a.dict.cta.bookExam }}
+            contact={{ phone: site.phone, email: site.email, phoneAttr: a.const.phone, emailAttr: a.const.email }}
             langSwitch={<LangSwitcher links={links} current={locale} label={t.langSwitch.aria} variant="menu" />}
           />
         </div>

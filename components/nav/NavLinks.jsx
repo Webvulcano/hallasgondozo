@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-// items: [{ key, href, label }] a Nav-ból (nyelvfüggő href + felirat).
+// items: [{ key, href, label, attr }] a Nav-ból (nyelvfüggő href + felirat + szerkesztő-jelölés).
 // current: a szerver által megadott route-kulcs → aktív menüpont (nincs pathname-parszolás,
 // így a lokalizált URL-eken - /en/hearing-aids, /de/hoergeraete - is pontos).
 export default function NavLinks({ items, current, ariaLabel }) {
@@ -56,6 +56,7 @@ export default function NavLinks({ items, current, ariaLabel }) {
             className={`nav-link${s.active ? ' active' : ''}`}
             aria-current={s.active ? 'page' : undefined}
             onClick={s.onClick}
+            {...l.attr}
           >
             {l.label}
           </Link>

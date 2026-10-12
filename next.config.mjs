@@ -1,12 +1,26 @@
 // next.config.mjs
 import createMDX from '@next/mdx'
 
+// Csak az Ügyfél Admin (CMS, projektek/analytics-site) framelheti az oldalt (vizuális szerkesztő).
+const adminOrigins = (process.env.NEXT_PUBLIC_CMS_ADMIN_ORIGIN ?? '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // .mdx oldal-/komponens-kiterjesztés is renderelhető
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   allowedDevOrigins: ['192.168.0.150', '192.168.0.151'],
-  // /admin → átirányít a központi analytics-dashboard erted-tenantjára.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [{ key: 'Content-Security-Policy', value: `frame-ancestors 'self' ${adminOrigins.join(' ')}`.trim() }],
+      },
+    ]
+  },
+  // /admin → átirányít a központi adminra (DASHBOARD_URL = az Ügyfél Admin originje, élesítéskor).
   // Redirect (nem proxy) → a dashboard a saját domainjén nyílik meg, így a
   // Google login tisztán működik. Csak ha DASHBOARD_URL be van állítva
   // (pl. https://<dashboard>.vercel.app) → deploy előtt no-op, nem törik.

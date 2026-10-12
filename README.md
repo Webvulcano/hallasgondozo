@@ -126,6 +126,17 @@ Régi (Apache-os) hallasgondozo.hu URL-ek → 308 átirányítás a `next.config
 Új UI-szöveg: kulcs mindhárom szótárba (az `i18n-check` hibát ad, ha hiányzik). Új nyelv: `LOCALES` + szótár + `locales/<nyelv>/` + `app/(<nyelv>)/` wrapperek + `routes.js`.
 Font: a saját fontok Latin-1-et fednek (ä ö ü ß OK); más írás → újra-szűkítés + `scripts/font-charset.json`.
 
+## Tartalomkezelés (Ügyfél Admin / CMS)
+Az ügyfél a szövegeket a közös Ügyfél Adminban szerkeszti (`projektek/analytics-site`), kattintással az oldal előnézetén.
+- **Mi szerkeszthető:** `lib/cms-schema.js` - egyetlen térkép: admin-mező ↔ meglévő szövegforrás (`lib/i18n/dictionaries`, `lib/content/locales`, alapadatok a `lib/constants`-ból). A `cms.manifest.js` ebből épül; a fájlokban lévő szöveg az **alapérték**, a CMS-ben mentett érték felülírja.
+- **Renderelés:** `const { t, c, site, a } = await loadSite(locale)` (`lib/site.js`) - ugyanaz az alak, mint a szótár / `getContent`, + `site` (telefon, e-mail, foglalási linkek, nyitvatartás, értékelésszám) + `a` (szerkesztő-jelölések: `<h2 {...a.dict.services.title}>`). Kliens-komponens propként kapja a szöveget és a jelölést.
+- `getDictionary` / `getContent` = a fájlok alapszövege CMS nélkül (slugok, statikus paraméterek, sitemap, alternates).
+- **Kulcsok véglegesek** (`oldal.szekció.mező`): átnevezés = új mező, a régi archiválódik a benne mentett ügyfél-szöveggel együtt.
+- **Új mező / szöveg-változás a fájlban** → sync az admin repóból: `npx tsx scripts/sync-manifest.mjs <ez a repo>/cms.manifest.js`. A sync az alapértékeket frissíti, az ügyfél mentett szövegét soha nem írja felül.
+- **Frissítés:** mentéskor az admin POST-ol a `/api/revalidate`-re (Bearer `CMS_REVALIDATE_SECRET`) → az oldalak pár másodpercen belül frissek (stale-while-revalidate: ha a CMS nem elérhető, a legutóbbi jó oldal marad).
+- **Env:** `CMS_SITE_SLUG`, `CMS_SUPABASE_URL`, `CMS_SUPABASE_PUBLISHABLE_KEY`, `CMS_REVALIDATE_SECRET`, `NEXT_PUBLIC_CMS_ADMIN_ORIGIN` (csak ezek framelhetik az oldalt: `frame-ancestors`). Build közben a CMS-nek elérhetőnek kell lennie; CMS nélküli helyi fejlesztés: `CMS_OFFLINE=1`.
+- A client-kit fájlokat (`lib/cms*.js`, `components/cms/*`, `app/api/revalidate`) az admin repó `scripts/copy-client-kit.mjs`-e másolja - ne itt javítsd őket.
+
 ## Deployment
 
 Vercel ajánlott (zero-config Next.js).

@@ -7,7 +7,8 @@ import SkeletonImage from './SkeletonImage'
 
 // Props (a HomeView adja, nyelvenként): steps = lépések (alap + szöveg, lib/content), t = szekció-szövegek,
 // schema = HowTo JSON-LD (szerveren épül ugyanebből a tömbből — AEO / AI-keresők).
-export default function Journey({ steps, t, schema }) {
+// a = szerkesztő-jelölések (lib/site.js): a.eyebrow/title/lead/cta + a.steps[n].title/desc/highlight/sub[i].
+export default function Journey({ steps, t, schema, a = {} }) {
   // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a
   // felhasználó a szekció közepéig görget (IntersectionObserver, lent).
   const [openStep, setOpenStep] = useState(-1)
@@ -55,14 +56,15 @@ export default function Journey({ steps, t, schema }) {
       />
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">{t.eyebrow}</div>
-          <h2>{t.title}</h2>
-          <p>{t.lead}</p>
+          <div className="eyebrow" {...a.eyebrow}>{t.eyebrow}</div>
+          <h2 {...a.title}>{t.title}</h2>
+          <p {...a.lead}>{t.lead}</p>
         </div>
 
         <ol className="jdeck">
           {stepsDesc.map((s) => {
             const open = isOpen(s.n)
+            const sa = a.steps?.[s.n] ?? {}
             return (
               <li
                 key={s.n}
@@ -77,12 +79,12 @@ export default function Journey({ steps, t, schema }) {
                   onClick={() => toggle(s.n)}
                 >
                   <span className="jcard-num">{s.n}</span>
-                  <span className="jcard-title">{s.title}</span>
+                  <span className="jcard-title" {...sa.title}>{s.title}</span>
                   {s.highlight && (
                     <>
                       {/* Mobilon kényszerített sortörés a badge elé — ld. journey.css .jcard-break */}
                       <span className="jcard-break" aria-hidden="true" />
-                      <span className="jcard-badge">{s.highlight}</span>
+                      <span className="jcard-badge" {...sa.highlight}>{s.highlight}</span>
                     </>
                   )}
                   <span className="jcard-plus" aria-hidden="true">{open ? '−' : '+'}</span>
@@ -91,13 +93,13 @@ export default function Journey({ steps, t, schema }) {
                 <div className="jcard-panel-wrap" id={`jpanel-${s.n}`} role="region">
                   <div className="jcard-panel">
                     <div className="jcard-text">
-                      <p>{s.desc}</p>
+                      <p {...sa.desc}>{s.desc}</p>
                       {s.sub && (
                         <ul className="jsub">
-                          {s.sub.map((x) => (
-                            <li key={x.title}>
-                              <b>{x.title}</b>
-                              <span>{x.desc}</span>
+                          {s.sub.map((x, i) => (
+                            <li key={i}>
+                              <b {...sa.sub?.[i]?.title}>{x.title}</b>
+                              <span {...sa.sub?.[i]?.desc}>{x.desc}</span>
                             </li>
                           ))}
                         </ul>
@@ -117,7 +119,7 @@ export default function Journey({ steps, t, schema }) {
 
         <div className="journey-cta">
           <Button variant="gold" href="#idopont">
-            {t.cta}
+            <span {...a.cta}>{t.cta}</span>
           </Button>
         </div>
         <div ref={bottomRef} className="journey-bottom-sentinel" aria-hidden="true" />

@@ -17,7 +17,8 @@ function safeSessionSet(key, value) {
   try { sessionStorage.setItem(key, value) } catch { /* noop */ }
 }
 
-export default function PromoPopup({ promo, ctaHref, closeLabel }) {
+// a = szerkesztő-jelölések (lib/site.js → a.text.promo).
+export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
   const [open, setOpen] = useState(false)
   const closeRef = useRef(null)
 
@@ -63,22 +64,22 @@ export default function PromoPopup({ promo, ctaHref, closeLabel }) {
           <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-img" loading="lazy" />
         </div>
         <div className="promo-body">
-          <span className="promo-tag">{promo.tag}</span>
-          <h2 id="promo-title">{promo.title}</h2>
-          <p className="promo-text">{promo.text}</p>
-          <ul className="promo-list">
+          <span className="promo-tag" {...a.tag}>{promo.tag}</span>
+          <h2 id="promo-title" {...a.title}>{promo.title}</h2>
+          <p className="promo-text" {...a.text}>{promo.text}</p>
+          <ul className="promo-list" {...a.features}>
             {promo.features.map((f) => (
               <li key={f}>
                 <span className="check"><Check size={14} stroke="#3a1c00" /></span>
-                {f}
+                <span>{f}</span>
               </li>
             ))}
           </ul>
           <Button variant="gold" href={ctaHref} fullWidth onClick={close}>
-            {promo.cta}
+            <span {...a.cta}>{promo.cta}</span>
           </Button>
           <button type="button" className="promo-dismiss" onClick={close}>
-            {promo.dismiss}
+            <span {...a.dismiss}>{promo.dismiss}</span>
           </button>
         </div>
       </div>

@@ -5,7 +5,7 @@ import RootDocument from '@/components/views/RootDocument'
 import { rootMetadata } from '@/lib/seo'
 
 const locale = 'hu'
-export const metadata = rootMetadata(locale)
+export const generateMetadata = () => rootMetadata(locale)
 
 export default function Layout({ children }) {
   return <RootDocument locale={locale}>{children}</RootDocument>

@@ -3,15 +3,15 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { PHONE, EMAIL } from '../../lib/constants'
 import Button from '../Button'
 
 // Hamburger-menü ≤900px-en - teljes képernyős overlay (Mooira-stílus): középen nagy
 // serif linkek lépcsőzetes beúszással, alul CTA + elérhetőség.
 // Az overlay portállal a <body>-ba kerül: a header backdrop-filtere miatt a
 // position:fixed különben a headerhez tapadna. A header (logó + X) fölötte marad.
-// items/current/labels/cta: a Nav-ból (nyelvfüggő); langSwitch: szerveren renderelt LangSwitcher (vagy null).
-export default function MobileMenu({ items, current, labels, cta, langSwitch }) {
+// items/current/labels/cta: a Nav-ból (nyelvfüggő); contact: { phone, email } a CMS alapadataiból;
+// langSwitch: szerveren renderelt LangSwitcher (vagy null). *attr: szerkesztő-jelölések (lib/site.js).
+export default function MobileMenu({ items, current, labels, cta, contact, langSwitch }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const menuRef = useRef(null)
@@ -122,6 +122,7 @@ export default function MobileMenu({ items, current, labels, cta, langSwitch }) 
                   role="menuitem"
                   aria-current={st.active ? 'page' : undefined}
                   onClick={st.onClick}
+                  {...l.attr}
                 >
                   {l.label}
                 </Link>
@@ -130,11 +131,11 @@ export default function MobileMenu({ items, current, labels, cta, langSwitch }) 
           </nav>
           <div className="nav-mobile-footer">
             <Button variant="gold" href={cta.href} onClick={close}>
-              {cta.label}
+              <span {...cta.attr}>{cta.label}</span>
             </Button>
             <div className="nav-mobile-contact">
-              <a href={PHONE.href}>{PHONE.display}</a>
-              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              <a href={contact.phone.href} {...contact.phoneAttr}>{contact.phone.display}</a>
+              <a href={`mailto:${contact.email}`} {...contact.emailAttr}>{contact.email}</a>
             </div>
             {langSwitch}
           </div>

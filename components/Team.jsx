@@ -1,16 +1,16 @@
-import { getContent } from '../lib/content'
-import { getDictionary } from '../lib/i18n'
+import { loadSite } from '../lib/site'
 import SkeletonImage from './SkeletonImage'
 
-export default function Team({ locale }) {
-  const t = getDictionary(locale).team
-  const { team } = getContent(locale)
+export default async function Team({ locale }) {
+  const { t: dict, c, a } = await loadSite(locale)
+  const t = dict.team
+  const { team } = c
   return (
     <section className="block team" id="csapat">
       <div className="wrap">
         <div className="sec-head">
-          <div className="eyebrow">{t.eyebrow}</div>
-          <h2>{t.title}</h2>
+          <div className="eyebrow" {...a.dict.team.eyebrow}>{t.eyebrow}</div>
+          <h2 {...a.dict.team.title}>{t.title}</h2>
           {/*<p>
             Nem kell előre tudnia semmit a hallásról. Minden kérdésre türelmesen, érthetően -
             orvosi szakzsargon nélkül - kapja meg a választ.
@@ -24,8 +24,8 @@ export default function Team({ locale }) {
               </div>
               <div className="body">
                 <h3>{m.name}</h3>
-                <div className="role">{m.role}</div>
-                <p>{m.desc}</p>
+                <div className="role" {...a.text.team[m.id]?.role}>{m.role}</div>
+                <p {...a.text.team[m.id]?.desc}>{m.desc}</p>
                 {/*m.url && (
                   <a href={m.url} className="tcard-link" target="_blank" rel="noopener">
                     {m.urlLabel}&nbsp;→

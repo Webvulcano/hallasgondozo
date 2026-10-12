@@ -6,11 +6,12 @@ import Footer from '../Footer'
 import Button from '../Button'
 import SkeletonImage from '../SkeletonImage'
 import { isLive, LOCALE_META } from '../../lib/i18n/config'
-import { getDictionary, formatDate } from '../../lib/i18n'
+import { formatDate } from '../../lib/i18n'
+import { loadSite } from '../../lib/site'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
 import { getPosts, getPost } from '../../lib/content/posts'
-import { SITE, COMPANY, PHONE, EMAIL, SOCIAL, bookingUrls } from '../../lib/constants'
+import { SITE, COMPANY, SOCIAL } from '../../lib/constants'
 import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
 
 export function postStaticParams(locale) {
@@ -60,7 +61,7 @@ export default async function PostView({ locale, params }) {
   const post = getPost(locale, slug)
   if (!post) notFound()
 
-  const t = getDictionary(locale)
+  const { t, site, a } = await loadSite(locale)
   const { Post } = post
   const url = absUrl(routePath('post', locale, post.slug))
   const blogUrl = absUrl(routePath('blog', locale))
@@ -83,8 +84,8 @@ export default async function PostView({ locale, params }) {
       name: COMPANY.fullName,
       url: SITE.url,
       logo: { '@type': 'ImageObject', url: `${SITE.url}/pic/logo/logo.png` },
-      telephone: PHONE.display,
-      email: EMAIL,
+      telephone: site.phone.display,
+      email: site.email,
       address: {
         '@type': 'PostalAddress',
         streetAddress: COMPANY.street,
@@ -164,14 +165,14 @@ export default async function PostView({ locale, params }) {
           )}
 
           <section className="article-cta">
-            <h2>{t.blog.ctaTitle}</h2>
-            <p>{t.blog.ctaLead}</p>
+            <h2 {...a.dict.blog.ctaTitle}>{t.blog.ctaTitle}</h2>
+            <p {...a.dict.blog.ctaLead}>{t.blog.ctaLead}</p>
             <div className="article-cta-btns">
-              <Button variant="gold" href={bookingUrls(locale).adult}>
-                {t.cta.bookHearingTest}
+              <Button variant="gold" href={site.booking.adult}>
+                <span {...a.dict.cta.bookHearingTest}>{t.cta.bookHearingTest}</span>
               </Button>
-              <Button variant="ghost-light" href={PHONE.href}>
-                {PHONE.display}
+              <Button variant="ghost-light" href={site.phone.href}>
+                <span {...a.const.phone}>{site.phone.display}</span>
               </Button>
             </div>
           </section>

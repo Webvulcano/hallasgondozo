@@ -6,19 +6,20 @@ import Reveal from '../Reveal'
 import { Check } from '../icons'
 
 // t: a nyelvi szótár form-objektuma (címkék, placeholderek, hibaszövegek) - a Booking adja.
+// a: a szerkesztő-jelölések ugyanehhez (lib/site.js; látogatónál ártalmatlan data-attribútumok).
 // locale: rejtett mezőként megy a server actionnek (nem magyarnál [DE]/[EN] az értesítő email tárgyában).
-export default function CallbackPanel({ t, locale, privacyHref }) {
+export default function CallbackPanel({ t, a = {}, locale, privacyHref }) {
   const { submitted, submitting, error, fieldErrors, handleSubmit } = useCallbackForm(t.errors)
 
   return (
     <Reveal direction="right" className="book-panel">
-      <h3>{t.title}</h3>
-      <p className="small">{t.lead}</p>
+      <h3 {...a.title}>{t.title}</h3>
+      <p className="small" {...a.lead}>{t.lead}</p>
 
       {submitted ? (
         <div className="form-success show" role="status" aria-live="polite">
           <span className="check"><Check size={22} stroke="#fff" /></span>
-          {t.success}
+          <span {...a.success}>{t.success}</span>
         </div>
       ) : (
         <form noValidate onSubmit={handleSubmit}>
@@ -90,7 +91,7 @@ export default function CallbackPanel({ t, locale, privacyHref }) {
           </div>
           {error && <p className="form-error" role="alert">{error}</p>}
           <Button variant="gold" type="submit" fullWidth disabled={submitting}>
-            {submitting ? t.submitting : t.submit}
+            {submitting ? t.submitting : <span {...a.submit}>{t.submit}</span>}
           </Button>
         </form>
       )}

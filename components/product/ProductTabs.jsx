@@ -5,15 +5,15 @@ import { Check } from '../icons'
 
 // Termék-infó tabok (Előnyök / Leírás; a „Kinek ajánljuk" Lehel kérésére kivéve) - pill-szegmens fejléc.
 // ARIA tablist minta, ← → billentyűvel is váltható.
-function CheckList({ items }) {
+function CheckList({ items, attr }) {
   return (
-    <ul className="kp-checklist">
+    <ul className="kp-checklist" {...attr}>
       {items.map((t) => (
         <li key={t}>
           <span className="check">
             <Check size={14} stroke="#fff" />
           </span>
-          {t}
+          <span>{t}</span>
         </li>
       ))}
     </ul>
@@ -21,14 +21,16 @@ function CheckList({ items }) {
 }
 
 // labels: { aria, benefits, description } - nyelvi szöveg (a BrandView adja). A tab-id-k nyelvfüggetlenek.
-export default function ProductTabs({ product, labels }) {
+// a: szerkesztő-jelölések (lib/site.js): benefits, description, tabBenefits, tabDescription.
+export default function ProductTabs({ product, labels, a = {} }) {
   const tabs = [
-    { id: 'elonyok', label: labels.benefits, body: <CheckList items={product.benefits} /> },
+    { id: 'elonyok', label: labels.benefits, attr: a.tabBenefits, body: <CheckList items={product.benefits} attr={a.benefits} /> },
     {
       id: 'leiras',
       label: labels.description,
+      attr: a.tabDescription,
       body: (
-        <div className="kp-desc">
+        <div className="kp-desc" {...a.description}>
           {product.description.map((p) => (
             <p key={p}>{p}</p>
           ))}
@@ -64,7 +66,7 @@ export default function ProductTabs({ product, labels }) {
             className={`kp-tab${i === active ? ' is-active' : ''}`}
             onClick={() => setActive(i)}
           >
-            {t.label}
+            <span {...t.attr}>{t.label}</span>
           </button>
         ))}
       </div>

@@ -2,7 +2,7 @@
 import BlogIndexView, { blogIndexMetadata } from '@/components/views/BlogIndexView'
 
 const locale = 'de'
-export const metadata = blogIndexMetadata(locale)
+export const generateMetadata = () => blogIndexMetadata(locale)
 
 export default function Page() {
   return <BlogIndexView locale={locale} />

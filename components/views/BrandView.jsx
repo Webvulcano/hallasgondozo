@@ -14,11 +14,12 @@ import ReviewSlider from '../product/ReviewSlider'
 import TrustRow from '../product/TrustRow'
 import ProductFaq from '../product/ProductFaq'
 import { isLive } from '../../lib/i18n/config'
-import { getDictionary, fmt } from '../../lib/i18n'
+import { fmt } from '../../lib/i18n'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { getContent, getBrandBySlug } from '../../lib/content'
-import { SITE, bookingUrls } from '../../lib/constants'
+import { getContent } from '../../lib/content'
+import { loadSite } from '../../lib/site'
+import { SITE } from '../../lib/constants'
 import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
 
 export function brandStaticParams(locale) {
@@ -28,9 +29,10 @@ export function brandStaticParams(locale) {
 
 export async function brandMetadata(locale, { params }) {
   const { slug } = await params
-  const p = getBrandBySlug(locale, slug)
+  const { t: dict, c } = await loadSite(locale)
+  const p = c.brands.find((b) => b.slug === slug)
   if (!p) return {}
-  const t = getDictionary(locale).meta
+  const t = dict.meta
   const { hreflang } = getAlternates('brand', p.id)
   const path = routePath('brand', locale, p.slug)
   return {
@@ -52,11 +54,12 @@ export async function brandMetadata(locale, { params }) {
 export default async function BrandView({ locale, params }) {
   if (!isLive(locale)) notFound()
   const { slug } = await params
-  const p = getBrandBySlug(locale, slug)
+  const { t, c, site, a } = await loadSite(locale)
+  const { brands, testimonials } = c
+  const p = brands.find((b) => b.slug === slug)
   if (!p) notFound()
-
-  const t = getDictionary(locale)
-  const { brands, testimonials } = getContent(locale)
+  const pa = a.text.brands[p.id]
+  const ta = a.dict.product
   const idx = brands.indexOf(p)
   const next = brands[(idx + 1) % brands.length]
   const related = brands.filter((b) => b.slug !== p.slug)
@@ -84,7 +87,7 @@ export default async function BrandView({ locale, params }) {
         {/* Hero: galéria + infó-oszlop */}
         <section className="block kp-hero">
           <div className="wrap">
-            <Link href={routePath('devices', locale)} className="kdetail-back">
+            <Link href={routePath('devices', locale)} className="kdetail-back" {...ta.back}>
               {t.product.back}
             </Link>
             <div className="kp-hero-grid">
@@ -99,24 +102,25 @@ export default async function BrandView({ locale, params }) {
               </div>
 
               <div className="kp-info">
-                <h1>{p.productName}</h1>
-                <p className="kp-lead">{p.lead}</p>
+                <h1 {...pa.productName}>{p.productName}</h1>
+                <p className="kp-lead" {...pa.lead}>{p.lead}</p>
 
 
                 <ProductTabs
                   product={p}
                   labels={{ aria: t.product.tabsAria, benefits: t.product.tabBenefits, description: t.product.tabDescription }}
+                  a={{ benefits: pa.benefits, description: pa.description, tabBenefits: ta.tabBenefits, tabDescription: ta.tabDescription }}
                 />
 
                 <div className="kp-next">
-                  <div className="kp-next-label">{t.product.nextLabel}</div>
+                  <div className="kp-next-label" {...ta.nextLabel}>{t.product.nextLabel}</div>
                   <Link href={brandHref(next)} className="kp-next-card">
                     <span className="kp-next-img">
                       <SkeletonImage src={next.gallery[0].src} alt="" loading="lazy" />
                     </span>
                     <span className="kp-next-text">
-                      <strong>{next.productName}</strong>
-                      <small>{next.desc}</small>
+                      <strong {...a.text.brands[next.id].productName}>{next.productName}</strong>
+                      <small {...a.text.brands[next.id].desc}>{next.desc}</small>
                     </span>
                     <span className="kp-next-more" aria-hidden="true">{t.product.details}</span>
                   </Link>
@@ -126,25 +130,25 @@ export default async function BrandView({ locale, params }) {
           </div>
         </section>
 
-        <TrustRow locale={locale} />
+        <TrustRow t={t.product} a={ta} />
 
         {/* Kapcsolódó termékek - a márkalista kártyái */}
         <section className="block kp-related">
           <div className="wrap">
             <div className="sec-head">
-              <div className="eyebrow">{t.product.relatedEyebrow}</div>
-              <h2>{t.product.relatedTitle}</h2>
+              <div className="eyebrow" {...ta.relatedEyebrow}>{t.product.relatedEyebrow}</div>
+              <h2 {...ta.relatedTitle}>{t.product.relatedTitle}</h2>
             </div>
             <div className="kbrand-row kp-related-row">
               {related.map((b) => (
                 <Reveal key={b.id} className="kbrand-card-wrap">
                   <Link href={brandHref(b)} className="kbrand-card kbrand-card--link">
-                    <div className="kbrand-card-name">{b.productName}</div>
+                    <div className="kbrand-card-name" {...a.text.brands[b.id].productName}>{b.productName}</div>
                     <div className="kbrand-card-ph">
                       <SkeletonImage src={b.image} alt={b.imageAlt} className="kbrand-card-img" loading="lazy" />
                     </div>
                     <div className="kbrand-card-foot">
-                      <span className="btn btn-outline btn-sm btn-full kbrand-card-btn">{t.devices.more}</span>
+                      <span className="btn btn-outline btn-sm btn-full kbrand-card-btn" {...a.dict.devices.more}>{t.devices.more}</span>
                     </div>
                   </Link>
                 </Reveal>
@@ -157,15 +161,16 @@ export default async function BrandView({ locale, params }) {
           eyebrow={t.faq.eyebrow}
           title={fmt(t.faq.productTitle, { name: p.productName })}
           items={p.faq}
+          a={{ items: pa.faq }}
         />
 
         <section className="block kcta">
           <div className="wrap">
             <Reveal>
-              <h2>{t.product.ctaTitle}</h2>
-              <p>{t.product.ctaLead}</p>
-              <Button variant="gold" href={bookingUrls(locale).adult}>
-                {t.cta.bookHearingTest}
+              <h2 {...ta.ctaTitle}>{t.product.ctaTitle}</h2>
+              <p {...ta.ctaLead}>{t.product.ctaLead}</p>
+              <Button variant="gold" href={site.booking.adult}>
+                <span {...a.dict.cta.bookHearingTest}>{t.cta.bookHearingTest}</span>
               </Button>
             </Reveal>
           </div>

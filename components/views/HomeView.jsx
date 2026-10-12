@@ -16,10 +16,8 @@ import Faq from '../Faq'
 import Footer from '../Footer'
 import PromoPopup from '../PromoPopup'
 import { isLive } from '../../lib/i18n/config'
-import { getDictionary } from '../../lib/i18n'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { getContent } from '../../lib/content'
-import { bookingUrls } from '../../lib/constants'
+import { loadSite } from '../../lib/site'
 import { faqJsonLd } from '../../lib/seo'
 
 // HowTo lépés-szöveg: desc (ha van) + al-lépések (cím, vagy cím nélkülinél a leírás). Üres részek kimaradnak.
@@ -28,10 +26,9 @@ function howToText(s) {
   return [s.desc, sub.length ? `${sub.join('; ')}.` : null].filter(Boolean).join(' ')
 }
 
-export default function HomeView({ locale }) {
+export default async function HomeView({ locale }) {
   if (!isLive(locale)) notFound()
-  const t = getDictionary(locale)
-  const c = getContent(locale)
+  const { t, c, site, a } = await loadSite(locale)
   const alternates = getAlternates('home')
 
   // HowTo JSON-LD — AEO / AI-keresők (seo-geo-aeo-fokusz.md 🟡).
@@ -59,12 +56,12 @@ export default function HomeView({ locale }) {
       {/* <Offer locale={locale} /> — nyári ajánlat kikommentezve */}
       <Team locale={locale} />
       <Partners locale={locale} />
-      <Journey steps={c.journey} t={t.journey} schema={howToSchema} />
+      <Journey steps={c.journey} t={t.journey} schema={howToSchema} a={{ steps: a.text.journey, ...a.dict.journey }} />
       <Testimonials locale={locale} />
       <Booking locale={locale} />
-      <Faq faqs={c.faqs} visible={c.faqVisible} schema={faqJsonLd(c.faqs)} t={t.faq} />
+      <Faq faqs={c.faqs} visible={c.faqVisible} schema={faqJsonLd(c.faqs)} t={t.faq} a={{ items: a.text.faqs, ...a.dict.faq }} />
       <Footer locale={locale} alternates={alternates} />
-      <PromoPopup promo={c.promo} ctaHref={bookingUrls(locale).adult} closeLabel={t.promo.close} />
+      <PromoPopup promo={c.promo} ctaHref={site.booking.adult} closeLabel={t.promo.close} a={a.text.promo} />
     </>
   )
 }

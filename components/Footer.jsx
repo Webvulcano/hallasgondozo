@@ -1,23 +1,23 @@
 import Link from 'next/link'
-import { PHONE, EMAIL, COMPANY, SOCIAL, MAPS_URL, WEEK_HOURS, bookingUrls } from '../lib/constants'
-import { getDictionary } from '../lib/i18n'
+import { COMPANY, SOCIAL, MAPS_URL } from '../lib/constants'
+import { loadSite } from '../lib/site'
 import { routePath } from '../lib/i18n/routes'
 import Button from './Button'
 import LangSwitcher from './LangSwitcher'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
-const contactLinks = [
-  { icon: <MapPin size={17} />, href: MAPS_URL, label: COMPANY.address, external: true },
-  { icon: <Phone size={17} />, href: PHONE.href, label: PHONE.display, external: false },
-  { icon: <Email size={17} />, href: `mailto:${EMAIL}`, label: EMAIL, external: false },
-  { icon: <Facebook size={17} />, href: SOCIAL.facebook, label: SOCIAL.facebookHandle, external: true },
-  { icon: <Instagram size={17} />, href: SOCIAL.instagram, label: SOCIAL.instagramHandle, external: true },
-]
-
 // Props: locale, alternates (getAlternates() - a footer nyelvi linkjeihez)
-export default function Footer({ locale, alternates }) {
-  const dict = getDictionary(locale)
+export default async function Footer({ locale, alternates }) {
+  const { t: dict, site, a } = await loadSite(locale)
   const t = dict.footer
+  const ta = a.dict.footer
+  const contactLinks = [
+    { icon: <MapPin size={17} />, href: MAPS_URL, label: COMPANY.address, external: true },
+    { icon: <Phone size={17} />, href: site.phone.href, label: site.phone.display, external: false, attr: a.const.phone },
+    { icon: <Email size={17} />, href: `mailto:${site.email}`, label: site.email, external: false, attr: a.const.email },
+    { icon: <Facebook size={17} />, href: SOCIAL.facebook, label: SOCIAL.facebookHandle, external: true },
+    { icon: <Instagram size={17} />, href: SOCIAL.instagram, label: SOCIAL.instagramHandle, external: true },
+  ]
   const year = new Date().getFullYear()
   const today = new Date().getDay()
 
@@ -47,7 +47,7 @@ export default function Footer({ locale, alternates }) {
 
           {/* Col 2 - Contact */}
           <div className="foot-col-contact">
-            <h5>{t.contact}</h5>
+            <h5 {...ta.contact}>{t.contact}</h5>
             <ul className="foot-list">
               {contactLinks.map((l) => (
                 <li key={l.label}>
@@ -55,6 +55,7 @@ export default function Footer({ locale, alternates }) {
                   <a
                     href={l.href}
                     {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    {...l.attr}
                   >
                     {l.label}
                   </a>
@@ -65,9 +66,9 @@ export default function Footer({ locale, alternates }) {
 
           {/* Col 3 - Nyitvatartás */}
           <div className="foot-col-hours">
-            <h5>{t.hours}</h5>
-            <ul className="foot-hours-list">
-              {WEEK_HOURS.map((d) => {
+            <h5 {...ta.hours}>{t.hours}</h5>
+            <ul className="foot-hours-list" {...a.const.hours_list}>
+              {site.hours.map((d) => {
                 const isToday = d.day === today
                 return (
                   <li key={d.day} className={isToday ? 'is-today' : undefined}>
@@ -81,13 +82,13 @@ export default function Footer({ locale, alternates }) {
 
           {/* Col 4 - CTA */}
           <div className="foot-col-cta">
-            <h5>{t.book}</h5>
+            <h5 {...ta.book}>{t.book}</h5>
             <div className="foot-cta">
-              <Button variant="gold" href={bookingUrls(locale).adult}>
-                {dict.cta.bookExam}
+              <Button variant="gold" href={site.booking.adult}>
+                <span {...a.dict.cta.bookExam}>{dict.cta.bookExam}</span>
               </Button>
-              <Button variant="ghost-light" href={PHONE.href}>
-                {PHONE.display}
+              <Button variant="ghost-light" href={site.phone.href}>
+                <span {...a.const.phone}>{site.phone.display}</span>
               </Button>
             </div>
           </div>

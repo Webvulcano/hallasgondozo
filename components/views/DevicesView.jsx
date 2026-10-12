@@ -8,15 +8,13 @@ import Button from '../Button'
 import { Icon } from '../icons'
 import SkeletonImage from '../SkeletonImage'
 import { isLive } from '../../lib/i18n/config'
-import { getDictionary } from '../../lib/i18n'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { getContent } from '../../lib/content'
-import { bookingUrls } from '../../lib/constants'
+import { loadSite } from '../../lib/site'
 import { metaAlternates } from '../../lib/seo'
 
-export function devicesMetadata(locale) {
-  const t = getDictionary(locale).meta
+export async function devicesMetadata(locale) {
+  const t = (await loadSite(locale)).t.meta
   return {
     // absolute: a layout template („%s | ÉRTED Hallásgondozó") ne fűzze hozzá még egyszer
     title: { absolute: t.devicesTitle },
@@ -27,10 +25,11 @@ export function devicesMetadata(locale) {
   }
 }
 
-export default function DevicesView({ locale }) {
+export default async function DevicesView({ locale }) {
   if (!isLive(locale)) notFound()
-  const t = getDictionary(locale)
-  const { categories, brands } = getContent(locale)
+  const { t, c, site, a } = await loadSite(locale)
+  const ta = a.dict.devices
+  const { categories, brands } = c
   const alternates = getAlternates('devices')
 
   return (
@@ -42,8 +41,8 @@ export default function DevicesView({ locale }) {
         <section className="block kpage-hero">
           <div className="wrap">
             <Reveal>
-              <div className="eyebrow">{t.devices.eyebrow}</div>
-              <h1>{t.devices.title}</h1>
+              <div className="eyebrow" {...ta.eyebrow}>{t.devices.eyebrow}</div>
+              <h1 {...ta.title}>{t.devices.title}</h1>
             </Reveal>
           </div>
         </section>
@@ -65,7 +64,7 @@ export default function DevicesView({ locale }) {
                     </div>
                     {b.slug && (
                       <div className="kbrand-card-foot">
-                        <span className="btn btn-outline btn-sm btn-full kbrand-card-btn">{t.devices.more}</span>
+                        <span className="btn btn-outline btn-sm btn-full kbrand-card-btn" {...ta.more}>{t.devices.more}</span>
                       </div>
                     )}
                   </>
@@ -90,9 +89,9 @@ export default function DevicesView({ locale }) {
         <section className="block services" id="kategoriak">
           <div className="wrap">
             <div className="sec-head">
-              <div className="eyebrow">{t.devices.catEyebrow}</div>
-              <h2>{t.devices.catTitle}</h2>
-              <p>{t.devices.catLead}</p>
+              <div className="eyebrow" {...ta.catEyebrow}>{t.devices.catEyebrow}</div>
+              <h2 {...ta.catTitle}>{t.devices.catTitle}</h2>
+              <p {...ta.catLead}>{t.devices.catLead}</p>
             </div>
             <div className="cards">
               {categories.map((c) => (
@@ -100,9 +99,9 @@ export default function DevicesView({ locale }) {
                   <div className="ic-badge">
                     <Icon name={c.iconName} size={32} />
                   </div>
-                  <h3>{c.title}</h3>
-                  <p className="card-desc">{c.desc}</p>
-                  <p className="card-desc-short">{c.descShort}</p>
+                  <h3 {...a.text.categories[c.id]?.title}>{c.title}</h3>
+                  <p className="card-desc" {...a.text.categories[c.id]?.desc}>{c.desc}</p>
+                  <p className="card-desc-short" {...a.text.categories[c.id]?.descShort}>{c.descShort}</p>
                 </Reveal>
               ))}
             </div>
@@ -113,10 +112,10 @@ export default function DevicesView({ locale }) {
         <section className="block kcta">
           <div className="wrap">
             <Reveal>
-              <h2>{t.devices.ctaTitle}</h2>
-              <p>{t.devices.ctaLead}</p>
-              <Button variant="gold" href={bookingUrls(locale).adult}>
-                {t.cta.bookHearingTest}
+              <h2 {...ta.ctaTitle}>{t.devices.ctaTitle}</h2>
+              <p {...ta.ctaLead}>{t.devices.ctaLead}</p>
+              <Button variant="gold" href={site.booking.adult}>
+                <span {...a.dict.cta.bookHearingTest}>{t.cta.bookHearingTest}</span>
               </Button>
             </Reveal>
           </div>

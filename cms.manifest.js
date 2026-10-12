@@ -33,7 +33,7 @@ const manifest = {
     revalidatePath: '/api/revalidate',
   },
   locales: CMS_LOCALES,
-  // Az ügyfél Google-fiókja(i) - egyelőre üres (belépés módja nyitott kérdés), a superadmin mindent lát.
+  // Az ügyfél Google-fiókjai (belépés az adminba). A superadmin ezen felül mindent lát.
   members: [],
   analytics: {},
   // Blog-modul (admin → Blog menü). EN/DE-n nincs blog (Lehel, 2026-10-12) → csak magyar.

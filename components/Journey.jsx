@@ -23,7 +23,7 @@ const howToSchema = {
 }
 
 // 2-nek nincs "A" verziója, marad a sima számozott fájl.
-const STEP_IMG_FILE = { 1: '1', 2: '2', 3: '3A', 4: '4A', 5: '5' }
+const STEP_IMG_FILE = { 1: '1', 2: '2', 3: '4A', 4: '3A', 5: '5' }
 const stepImg = (n) => `/pic/lepesrol_lepesre/${STEP_IMG_FILE[n]}.webp`
 
 export default function Journey() {
@@ -77,8 +77,8 @@ export default function Journey() {
           <div className="eyebrow">Lépésről lépésre</div>
           <h2>Így jut el a megfelelő hallókészülékig</h2>
           <p>
-            A hallásgondozás nálunk nem egyetlen alkalom, hanem egy átlátható, végigkísért út —
-            az időpontfoglalástól a hosszú távú gondozásig.
+            A hallókészülék vásárlás nálunk nem egyetlen alkalom, hanem egy átlátható, végigkísért út —
+            az időpontfoglalástól a hosszú távú hallásgondozásig.
           </p>
         </div>
 

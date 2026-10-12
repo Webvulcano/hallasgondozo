@@ -7,10 +7,10 @@ export default function Services() {
       <div className="wrap">
         <div className="sec-head">
           <div className="eyebrow">Minden egy helyen</div>
-          <h2>Hallásvizsgálat, szakorvos, hallókészülék - egyetlen látogatással</h2>
+          <h2>Hallásvizsgálat, szakorvos, hallókészülék</h2>
           <p>
             Győrben nem kell audiológushoz, fül-orr-gégészhez és hallókészülék-szaküzletbe külön-külön
-            menni. Nálunk mindez egyetlen időpontban megoldódik.
+            menni. Nálunk mindez egy helyen elérhető.
           </p>
         </div>
         <div className="cards">

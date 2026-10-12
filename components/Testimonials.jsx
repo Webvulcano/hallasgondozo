@@ -38,7 +38,7 @@ export default async function Testimonials({ locale }) {
   const half = Math.ceil(testimonials.length / 2)
   const top = testimonials.slice(0, half)
   const bottom = testimonials.slice(half)
-
+ 
   return (
     <section className="block testi" id="velemenyek">
       <div className="wrap">

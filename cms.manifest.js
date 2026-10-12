@@ -3,8 +3,9 @@
 // Sync (az admin repóból):
 //   npx tsx scripts/sync-manifest.mjs <ez a fájl> [--print-payload] [--print-secret]
 //
-// site.url: amíg az oldal nincs bekötve élesben, a helyi dev szerver (npm run dev → 3100).
-// Élesítéskor: url = https://hallasgondozo.hu, previewUrl = a nem élő nyelveket mutató előnézeti deploy.
+// site.url: a Vercel production deploy (2026-10-12-től). A hallasgondozo.hu domain átállításakor
+// → https://hallasgondozo.hu + újra sync. previewUrl (a nem élő nyelveket mutató előnézeti deploy): még nincs.
+// Helyi fejlesztéshez ideiglenesen: http://localhost:3100 (ne commitold, és élesítés előtt syncelj vissza).
 
 import { CMS_LOCALES, CMS_PAGES, sourceValue, imageDefault } from './lib/cms-schema.js'
 
@@ -28,7 +29,7 @@ const manifest = {
   site: {
     slug: 'hallasgondozo',
     name: 'ÉRTED Hallásgondozó',
-    url: 'http://localhost:3100',
+    url: 'https://hallasgondozo.vercel.app',
     revalidatePath: '/api/revalidate',
   },
   locales: CMS_LOCALES,

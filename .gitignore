@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CMS admin tagok (ügyfél-emailek) - csak lokálisan, sync-manifest.mjs olvassa
+cms.members.local.json

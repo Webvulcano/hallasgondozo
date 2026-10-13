@@ -11,6 +11,7 @@ import { pricePage, priceFaq } from '@/lib/content/prices'
 import { formatDate } from '@/lib/i18n'
 import { getAlternates } from '@/lib/i18n/alternates'
 import { BOOKING_URL, SITE } from '@/lib/constants'
+import JsonLd from '@/components/cms/JsonLd'
 
 // Statikus szegmens → elsőbbséget élvez a /hallokeszulekek/[slug] dinamikus útvonallal szemben.
 // CSAK MAGYAR oldal (nincs EN/DE párja - lib/i18n/routes.js → prices).
@@ -64,7 +65,7 @@ export default function PricesPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <JsonLd data={schema} />
       <Nav locale={locale} current="prices" alternates={getAlternates('prices')} />
       <span id="top" />
       <main className="article kprice-page">

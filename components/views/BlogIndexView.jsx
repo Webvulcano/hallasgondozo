@@ -12,6 +12,7 @@ import { getAlternates } from '../../lib/i18n/alternates'
 import { getPosts } from '../../lib/content/posts'
 import { SITE, COMPANY } from '../../lib/constants'
 import { metaAlternates, absUrl, breadcrumbJsonLd } from '../../lib/seo'
+import JsonLd from '../cms/JsonLd'
 
 export async function blogIndexMetadata(locale) {
   const { t: dict, site } = await loadSite(locale)
@@ -63,14 +64,8 @@ export default async function BlogIndexView({ locale }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLd data={blogLd} />
+      <JsonLd data={breadcrumbLd} />
       <Nav locale={locale} current="blog" alternates={alternates} />
       <span id="top" />
       <main>

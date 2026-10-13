@@ -6,16 +6,14 @@ import { LOCALE_META } from '../../lib/i18n/config'
 import { businessJsonLd } from '../../lib/seo'
 import ScrollReset from '../ScrollReset'
 import CmsBridge from '../cms/CmsBridge'
+import JsonLd from '../cms/JsonLd'
 
 export default async function RootDocument({ locale, children }) {
   const business = await businessJsonLd(locale)
   return (
     <html lang={LOCALE_META[locale].htmlLang} style={fontVars}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }}
-        />
+        <JsonLd data={business} />
         <ScrollReset />
         {children}
         <CmsBridge />

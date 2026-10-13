@@ -1,6 +1,6 @@
-// DRAFT - DEUTSCH, Datenschutzerklärung. Claude-Übersetzung der ungarischen Fassung (2026-10-12).
+// LIVE 2026-10-13 (Lehel jóváhagyta, anyanyelvi lektorálás nélkül) - DEUTSCH, Datenschutzerklärung. Claude-Übersetzung der ungarischen Fassung (2026-10-12).
 // Rechtstext → vor dem Livegang vom Kunden / einem Juristen freigeben lassen. Maßgeblich ist die ungarische
-// Fassung (Klausel unten - beibehalten). DRAFT-Markierung nach Freigabe entfernen.
+// Fassung (Klausel unten - beibehalten).
 // PrivacyView (components/views) liefert Rahmen und Zurück-Link.
 import { COMPANY, EMAIL, PHONE } from '../../../constants'
 

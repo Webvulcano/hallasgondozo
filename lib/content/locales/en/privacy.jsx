@@ -1,6 +1,6 @@
-// DRAFT - ENGLISH Privacy Policy. Claude translation of the Hungarian version (2026-10-12).
+// LIVE 2026-10-13 (Lehel jóváhagyta, anyanyelvi lektorálás nélkül) - ENGLISH Privacy Policy. Claude translation of the Hungarian version (2026-10-12).
 // Legal text → must be approved by the client / a lawyer before go-live. The Hungarian version is legally
-// binding (clause at the bottom - keep it). Remove the DRAFT marker once approved.
+// binding (clause at the bottom - keep it).
 // PrivacyView (components/views) provides the frame and the back link.
 import { COMPANY, EMAIL, PHONE } from '../../../constants'
 

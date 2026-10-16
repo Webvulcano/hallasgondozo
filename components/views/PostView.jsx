@@ -17,6 +17,7 @@ import { getAlternates } from '../../lib/i18n/alternates'
 import { getPosts, getPost, getPostPreview, postSlugsByLocale } from '../../lib/content/posts'
 import { SITE, COMPANY, SOCIAL } from '../../lib/constants'
 import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
+import JsonLd from '../cms/JsonLd'
 
 export async function postStaticParams(locale) {
   if (!isLive(locale)) return []
@@ -135,20 +136,11 @@ export default async function PostView({ locale, params }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-      />
+      <JsonLd data={articleLd} />
       {faqLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
-        />
+        <JsonLd data={faqLd} />
       )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLd data={breadcrumbLd} />
 
       {preview && (
         <div className="preview-bar" role="status">

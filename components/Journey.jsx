@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Button from './Button'
 import SkeletonImage from './SkeletonImage'
+import JsonLd from './cms/JsonLd'
 // Régi verzió (accordion-timeline, kép nélkül) lent kikommentezve — ld. fájl vége.
 // import { Accordion, AccordionItem } from './Accordion'
 
@@ -51,10 +52,7 @@ export default function Journey({ steps, t, schema, a = {} }) {
 
   return (
     <section className="block journey" id="folyamat">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <JsonLd data={schema} />
       <div className="wrap">
         <div className="sec-head">
           <div className="eyebrow" {...a.eyebrow}>{t.eyebrow}</div>
@@ -144,10 +142,7 @@ const howToSchema = { ... — ld. fent, változatlan }
 export default function Journey({ steps, t, schema }) {
   return (
     <section className="block journey" id="folyamat">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
+      <JsonLd data={howToSchema} />
       <div className="wrap">
         <div className="sec-head">
           <div className="eyebrow">Lépésről lépésre</div>

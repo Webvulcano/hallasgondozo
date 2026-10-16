@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { fmt } from '../lib/i18n/fmt'
 import { Accordion, AccordionItem } from './Accordion'
 import Button from './Button'
+import JsonLd from './cms/JsonLd'
 
 // Props (a HomeView adja, nyelvenként): faqs = [{ q, a }], visible = alapból látszó db,
 // schema = FAQPage JSON-LD (szerveren, ugyanabból a tömbből → nem csúszik szét), t = szekció-szövegek,
@@ -14,10 +15,7 @@ export default function Faq({ faqs, visible, schema, t, a = {} }) {
 
   return (
     <section className="block faq" id="gyik">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <JsonLd data={schema} />
       <div className="wrap">
         <div className="sec-head">
           <div className="eyebrow" {...a.eyebrow}>{t.eyebrow}</div>

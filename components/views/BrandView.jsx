@@ -21,6 +21,7 @@ import { getContent } from '../../lib/content'
 import { loadSite } from '../../lib/site'
 import { SITE } from '../../lib/constants'
 import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
+import JsonLd from '../cms/JsonLd'
 
 export function brandStaticParams(locale) {
   if (!isLive(locale)) return []
@@ -80,7 +81,7 @@ export default async function BrandView({ locale, params }) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <JsonLd data={schema} />
       <Nav locale={locale} current="brand" alternates={alternates} />
       <span id="top" />
       <main>

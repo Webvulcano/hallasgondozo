@@ -4,6 +4,7 @@ import { loadSite } from '../lib/site'
 import { routePath } from '../lib/i18n/routes'
 import Button from './Button'
 import LangSwitcher from './LangSwitcher'
+import FooterHours, { CurrentYear } from './FooterHours'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
 // Props: locale, alternates (getAlternates() - a footer nyelvi linkjeihez)
@@ -18,8 +19,8 @@ export default async function Footer({ locale, alternates }) {
     { icon: <Facebook size={17} />, href: SOCIAL.facebook, label: SOCIAL.facebookHandle, external: true },
     { icon: <Instagram size={17} />, href: SOCIAL.instagram, label: SOCIAL.instagramHandle, external: true },
   ]
+  // Build éve: csak tartalék, a böngésző a valódit írja be (CurrentYear)
   const year = new Date().getFullYear()
-  const today = new Date().getDay()
 
   return (
     <footer>
@@ -67,17 +68,7 @@ export default async function Footer({ locale, alternates }) {
           {/* Col 3 - Nyitvatartás */}
           <div className="foot-col-hours">
             <h5 {...ta.hours}>{t.hours}</h5>
-            <ul className="foot-hours-list" {...a.const.hours_list}>
-              {site.hours.map((d) => {
-                const isToday = d.day === today
-                return (
-                  <li key={d.day} className={isToday ? 'is-today' : undefined}>
-                    <span>{isToday ? t.today : t.days[d.day]}</span>
-                    <span>{d.open ? `${d.open} - ${d.close}` : t.closed}</span>
-                  </li>
-                )
-              })}
-            </ul>
+            <FooterHours hours={site.hours} days={t.days} todayLabel={t.today} closed={t.closed} attr={a.const.hours_list} />
           </div>
 
           {/* Col 4 - CTA */}
@@ -95,7 +86,7 @@ export default async function Footer({ locale, alternates }) {
         </div>
 
         <div className="foot-bottom">
-          <span>© {year} {COMPANY.legalName} - {t.rights}</span>
+          <span>© <CurrentYear fallback={year} /> {COMPANY.legalName} - {t.rights}</span>
           <span className="foot-bottom-links">
             <LangSwitcher links={alternates?.links} current={locale} label={dict.langSwitch.aria} variant="footer" />
             <Link href={routePath('privacy', locale)}>{t.privacy}</Link>

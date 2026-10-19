@@ -3,7 +3,7 @@
 // a váltás úgyis teljes oldalbetöltés. Zászló: inline SVG (az emoji-zászló Windowson nem jelenik meg),
 // csak a mobil menüben ('menu'), dekoráció (aria-hidden) - a nyelv nevét a szöveg adja.
 // links: getAlternates().links - nyelvenként a cél (a pár-oldal, ha nincs: a szülő-oldal).
-// variant: 'nav' (HU · EN · DE kódok, desktop) | 'menu' (mobil menü, ugyanazok a kódok) | 'footer' (teljes név).
+// variant: 'nav' (HU · EN · DE kódok, desktop) | 'menu' (mobil menü, ugyanazok a kódok).
 // 1 élő nyelvnél nem renderel semmit.
 import { LOCALES, LOCALE_META } from '../lib/i18n/config'
 
@@ -58,15 +58,9 @@ export default function LangSwitcher({ links = {}, current, label, variant = 'na
             className={`lang-switch-link${active ? ' is-active' : ''}`}
             aria-current={active ? 'true' : undefined}
           >
-            {variant !== 'footer' ? (
-              <>
-                {variant === 'menu' && <Flag locale={l} />}
-                <span aria-hidden="true">{m.short}</span>
-                <span className="sr-only">{m.label}</span>
-              </>
-            ) : (
-              m.label
-            )}
+            {variant === 'menu' && <Flag locale={l} />}
+            <span aria-hidden="true">{m.short}</span>
+            <span className="sr-only">{m.label}</span>
           </a>
         )
       })}

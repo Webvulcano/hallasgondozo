@@ -57,11 +57,6 @@
 .lang-switch--menu .lang-switch-link:hover::after,
 .lang-switch--menu .lang-switch-link.is-active::after{transform:scaleX(1);}
 
-/* Footer: a foot-bottom sor linkjeinek stílusában */
-.lang-switch--footer{flex-wrap:wrap;gap:0 12px;}
-.lang-switch--footer .lang-switch-link{font-weight:inherit;color:inherit;}
-.lang-switch--footer .lang-switch-link.is-active{color:#fff;font-weight:700;}
-
 /* ---- Nyelvjavaslat-sáv (components/LangSuggest.jsx) ----
    Fix pozíció → nem tolja el a tartalmat (CLS 0). z-index: a nav (50) fölött, a promo-popup (1000) alatt. */
 .lang-suggest{

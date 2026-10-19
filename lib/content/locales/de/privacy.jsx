@@ -35,7 +35,7 @@ export default function PrivacyBody() {
 
       <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Auftragsverarbeiter</h2>
       <p>
-        Die im Formular angegebenen Daten verarbeiten wir unter Mitwirkung des folgenden Auftragsverarbeiters:
+        Die im Formular angegebenen Daten verarbeiten wir unter Mitwirkung der folgenden Auftragsverarbeiter:
       </p>
       <ul style={{ paddingLeft: '20px', marginBottom: '12px' }}>
         <li>
@@ -46,6 +46,12 @@ export default function PrivacyBody() {
           Anmerkung) speichert SimplyForms nicht, sondern löscht ihn nach Zustellung der E-Mail.
           Technische Daten zur Übermittlung (IP-Adresse, Browsertyp, verweisende Seite) werden
           höchstens 90 Tage aufbewahrt.
+        </li>
+        <li>
+          <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Irland; Gmail) —
+          E-Mail-Dienst: Empfang und Speicherung der aus dem Formular weitergeleiteten Nachrichten.
+          Daten können auch in die USA übermittelt werden; Grundlage ist das EU-US Data Privacy
+          Framework, unter dem Google zertifiziert ist.
         </li>
       </ul>
 

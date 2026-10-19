@@ -177,7 +177,7 @@ export default async function BrandView({ locale, params }) {
           </div>
         </section>
       </main>
-      <Footer locale={locale} alternates={alternates} />
+      <Footer locale={locale} />
     </>
   )
 }

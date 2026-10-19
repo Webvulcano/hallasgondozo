@@ -90,7 +90,7 @@ export default async function BlogIndexView({ locale }) {
           </div>
         </section>
       </main>
-      <Footer locale={locale} alternates={alternates} />
+      <Footer locale={locale} />
     </>
   )
 }

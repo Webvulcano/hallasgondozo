@@ -159,7 +159,7 @@ export default function PricesPage() {
           </div>
         </section>
       </main>
-      <Footer locale={locale} alternates={getAlternates('prices')} />
+      <Footer locale={locale} />
     </>
   )
 }

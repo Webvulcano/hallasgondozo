@@ -121,7 +121,7 @@ export default async function DevicesView({ locale }) {
           </div>
         </section>
       </main>
-      <Footer locale={locale} alternates={alternates} />
+      <Footer locale={locale} />
     </>
   )
 }

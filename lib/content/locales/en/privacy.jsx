@@ -35,7 +35,7 @@ export default function PrivacyBody() {
 
       <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>4. Data processors</h2>
       <p>
-        We process the data entered in the form with the help of the following data processor:
+        We process the data entered in the form with the help of the following data processors:
       </p>
       <ul style={{ paddingLeft: '20px', marginBottom: '12px' }}>
         <li>
@@ -45,6 +45,12 @@ export default function PrivacyBody() {
           outside the EU. SimplyForms does not store the content of the form (name, phone number,
           comment): it deletes it after the email has been delivered. Technical data related to the
           submission (IP address, browser type, referring page) is kept for no more than 90 days.
+        </li>
+        <li>
+          <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Ireland; Gmail) —
+          e-mail service: receiving and storing the messages forwarded from the form. Data may also be
+          transferred to the United States; the transfer is based on the EU-US Data Privacy Framework,
+          under which Google is certified.
         </li>
       </ul>
 

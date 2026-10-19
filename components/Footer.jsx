@@ -3,12 +3,11 @@ import { COMPANY, SOCIAL, MAPS_URL } from '../lib/constants'
 import { loadSite } from '../lib/site'
 import { routePath } from '../lib/i18n/routes'
 import Button from './Button'
-import LangSwitcher from './LangSwitcher'
 import FooterHours, { CurrentYear } from './FooterHours'
 import { Phone, Email, Facebook, Instagram, MapPin } from './icons'
 
-// Props: locale, alternates (getAlternates() - a footer nyelvi linkjeihez)
-export default async function Footer({ locale, alternates }) {
+// Props: locale (nyelvválasztó csak a fejlécben / mobil menüben van, a footerben nincs)
+export default async function Footer({ locale }) {
   const { t: dict, site, a } = await loadSite(locale)
   const t = dict.footer
   const ta = a.dict.footer
@@ -88,7 +87,7 @@ export default async function Footer({ locale, alternates }) {
         <div className="foot-bottom">
           <span>© <CurrentYear fallback={year} /> {COMPANY.legalName} - {t.rights}</span>
           <span className="foot-bottom-links">
-            <LangSwitcher links={alternates?.links} current={locale} label={dict.langSwitch.aria} variant="footer" />
+            <Link href={routePath('imprint', locale)}>{t.imprint}</Link>
             <Link href={routePath('privacy', locale)}>{t.privacy}</Link>
             <span>
               {t.madeBy}{' '}

@@ -45,6 +45,12 @@ export default function PrivacyBody() {
           törli. A beküldéshez kapcsolódó technikai adatokat (IP-cím, böngésző típusa,
           hivatkozó oldal) legfeljebb 90 napig őrzi meg.
         </li>
+        <li>
+          <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Írország; Gmail) —
+          e-mail szolgáltatás: az űrlapról továbbított üzenetek fogadása és tárolása. Az adatok az
+          Egyesült Államokba is kerülhetnek; a továbbítás alapja az EU-USA adatvédelmi keretrendszer
+          (Data Privacy Framework), amelyben a Google tanúsítottként szerepel.
+        </li>
       </ul>
 
       <h2 style={{ fontSize: 'var(--fs-subsection)', marginTop: '32px', marginBottom: '12px' }}>5. Adatkezelés időtartama</h2>

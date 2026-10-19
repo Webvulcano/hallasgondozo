@@ -68,6 +68,7 @@ export default async function sitemap() {
         : []),
       ...postEntries,
       entry(locale, 'privacy', null, routePath('privacy', locale), { lastModified, changeFrequency: 'yearly', priority: 0.3 }),
+      entry(locale, 'imprint', null, routePath('imprint', locale), { lastModified, changeFrequency: 'yearly', priority: 0.2 }),
     ]
   }))
   return perLocale.flat()

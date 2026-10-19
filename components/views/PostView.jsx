@@ -205,7 +205,7 @@ export default async function PostView({ locale, params }) {
           </section>
         </div>
       </main>
-      <Footer locale={locale} alternates={alternates} />
+      <Footer locale={locale} />
     </>
   )
 }

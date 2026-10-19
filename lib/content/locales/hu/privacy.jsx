@@ -70,10 +70,6 @@ export default function PrivacyBody() {
         Információszabadság Hatóságnál (NAIH, naih.hu).
       </p>
 
-      <p style={{ marginTop: '40px', padding: '20px', background: 'var(--teal-soft)', borderRadius: '12px', color: 'var(--teal-deep)' }}>
-        <strong>Megjegyzés:</strong> Jogi szakember általi ellenjegyzés javasolt éles
-        használat előtt.
-      </p>
     </>
   )
 }

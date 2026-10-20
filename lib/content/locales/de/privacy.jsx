@@ -54,8 +54,6 @@ export default function PrivacyBody() {
       <p>
         <strong>Bitte tragen Sie keine Gesundheitsdaten in das Anmerkungsfeld ein</strong> (z. B. eine
         Diagnose oder ausführliche Beschwerden). Diese besprechen wir bei der persönlichen Untersuchung.
-        Falls Sie dennoch solche Daten angeben, verwenden wir sie nur für den Rückruf und löschen sie
-        wie oben beschrieben.
       </p>
 
       <H2>3. Betrieb der Website (Hosting, Protokolle)</H2>

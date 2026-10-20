@@ -53,8 +53,7 @@ export default function PrivacyBody() {
       </ul>
       <p>
         <strong>Kérjük, a megjegyzés mezőbe ne írjon egészségügyi adatot</strong> (pl. diagnózist, panaszt
-        részletesen). Ezeket a személyes vizsgálaton beszéljük meg. Ha mégis ilyen adatot ad meg, azt
-        kizárólag a visszahíváshoz használjuk, és a fentiek szerint töröljük.
+        részletesen). Ezeket a személyes vizsgálaton beszéljük meg.
       </p>
 
       <H2>3. A weboldal működése (tárhely, naplózás)</H2>

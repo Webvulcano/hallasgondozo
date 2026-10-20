@@ -52,8 +52,7 @@ export default function PrivacyBody() {
       </ul>
       <p>
         <strong>Please do not enter health data in the comment field</strong> (e.g. a diagnosis or detailed
-        symptoms). We discuss these during the personal examination. If you do enter such data, we use it
-        only to call you back and delete it as described above.
+        symptoms). We discuss these during the personal examination.
       </p>
 
       <H2>3. Operation of the website (hosting, logs)</H2>

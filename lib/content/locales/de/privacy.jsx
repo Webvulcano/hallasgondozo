@@ -76,8 +76,13 @@ export default function PrivacyBody() {
 
       <H2>4. Cookies und Browser-Speicher</H2>
       <p>
-        Die Website verwendet <strong>keine</strong> Tracking-, Statistik- oder Werbe-Cookies und misst keine
-        Besucherzahlen. Für Komfortfunktionen nutzen wir den Speicher Ihres Browsers; er enthält keine
+        Die Website verwendet <strong>keine</strong> Tracking-, Statistik- oder Werbe-Cookies. Die
+        Besucherzahlen messen wir mit einer cookiefreien, aggregierten Statistik (Vercel Web Analytics):
+        Erfasst werden die aufgerufene Seite, die verweisende Seite, das Land sowie Browser, Betriebssystem
+        und Gerätetyp. Besucher werden nicht identifiziert: IP-Adressen werden nicht gespeichert, Besuche
+        innerhalb eines Tages werden nur über eine täglich erneuerte, nicht umkehrbare Kennung verknüpft,
+        und die Statistik ist nur zusammengefasst einsehbar. Zweck ist die Verbesserung der Website,
+        Rechtsgrundlage unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO). Für Komfortfunktionen nutzen wir den Speicher Ihres Browsers; er enthält keine
         personenbezogenen Daten und wird nicht an uns übermittelt:
       </p>
       <ul style={ul}>
@@ -95,7 +100,7 @@ export default function PrivacyBody() {
       <ul style={ul}>
         <li>
           <strong>Vercel Inc.</strong> (440 N Barranca Ave #4133, Covina, CA 91723, USA) - Hosting der
-          Website; die unter Punkt 3 beschriebenen Protokolldaten sowie die abgesendeten Formulardaten
+          Website und die unter Punkt 4 beschriebene Besucherstatistik; die unter Punkt 3 beschriebenen Protokolldaten sowie die abgesendeten Formulardaten
           durchlaufen seine Systeme. Daten können in die USA übermittelt werden; Grundlage sind die von der
           Europäischen Kommission erlassenen Standardvertragsklauseln (Art. 46 DSGVO).
         </li>

@@ -73,8 +73,13 @@ export default function PrivacyBody() {
 
       <H2>4. Cookies and browser storage</H2>
       <p>
-        The website <strong>does not use</strong> tracking, analytics or advertising cookies and does not
-        measure traffic. For convenience features we use your browser's own storage; it contains no personal
+        The website <strong>does not use</strong> tracking, analytics or advertising cookies. We measure
+        traffic with cookie-free, aggregated statistics (Vercel Web Analytics): the page visited, the
+        referring page, the country, and the browser, operating system and device type are recorded.
+        Visitors are not identified: IP addresses are not stored, visits within one day are linked only by
+        an irreversible identifier that is renewed daily, and the statistics are available only in
+        aggregate. The purpose is to improve the website; the legal basis is our legitimate interest (GDPR
+        Art. 6(1)(f)). For convenience features we use your browser's own storage; it contains no personal
         data and is never sent to us:
       </p>
       <ul style={ul}>
@@ -91,7 +96,8 @@ export default function PrivacyBody() {
       <p>We process data with the help of the following providers, acting on our behalf:</p>
       <ul style={ul}>
         <li>
-          <strong>Vercel Inc.</strong> (440 N Barranca Ave #4133, Covina, CA 91723, USA) - website hosting;
+          <strong>Vercel Inc.</strong> (440 N Barranca Ave #4133, Covina, CA 91723, USA) - website hosting
+          and the traffic statistics described in section 4;
           the log data described in section 3, and the submitted form data pass through its systems. Data may
           be transferred to the United States; the transfer is based on the standard contractual clauses
           adopted by the European Commission (GDPR Art. 46).

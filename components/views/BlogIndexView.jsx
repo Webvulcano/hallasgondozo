@@ -11,24 +11,20 @@ import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
 import { getPosts } from '../../lib/content/posts'
 import { SITE, COMPANY } from '../../lib/constants'
-import { metaAlternates, absUrl, breadcrumbJsonLd } from '../../lib/seo'
+import { metaAlternates, absUrl, breadcrumbJsonLd, socialMeta } from '../../lib/seo'
 import JsonLd from '../cms/JsonLd'
 
 export async function blogIndexMetadata(locale) {
   const { t: dict, site } = await loadSite(locale)
   const t = dict.meta
   const path = routePath('blog', locale)
+  const { hreflang } = getAlternates('blog', null, { blogLocales: site.blogLocales })
   return {
     // absolute: a layout template ne fűzze hozzá még egyszer a márkanevet
     title: { absolute: t.blogTitle },
     description: t.blogDescription,
-    alternates: metaAlternates(path, getAlternates('blog', null, { blogLocales: site.blogLocales }).hreflang),
-    openGraph: {
-      type: 'website',
-      url: absUrl(path),
-      title: t.blogOgTitle,
-      description: t.blogOgDescription,
-    },
+    alternates: metaAlternates(path, hreflang),
+    ...socialMeta(locale, { path, title: t.blogOgTitle, description: t.blogOgDescription, hreflang }),
     robots: { index: true, follow: true },
   }
 }

@@ -11,16 +11,19 @@ import { isLive } from '../../lib/i18n/config'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
 import { loadSite } from '../../lib/site'
-import { metaAlternates } from '../../lib/seo'
+import { metaAlternates, socialMeta } from '../../lib/seo'
 
 export async function devicesMetadata(locale) {
   const t = (await loadSite(locale)).t.meta
+  const path = routePath('devices', locale)
+  const { hreflang } = getAlternates('devices')
   return {
     // absolute: a layout template („%s | ÉRTED Hallásgondozó") ne fűzze hozzá még egyszer
     title: { absolute: t.devicesTitle },
     description: t.devicesDescription,
     // saját canonical - különben a layout főoldali canonical-ját örökölné (főoldalnak hinné a Google)
-    alternates: metaAlternates(routePath('devices', locale), getAlternates('devices').hreflang),
+    alternates: metaAlternates(path, hreflang),
+    ...socialMeta(locale, { path, title: t.devicesTitle, description: t.devicesDescription, hreflang }),
     robots: { index: true, follow: true },
   }
 }

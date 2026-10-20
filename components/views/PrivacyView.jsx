@@ -1,4 +1,4 @@
-// Adatvédelmi Szabályzat (/adatvedelem, /en/privacy-policy, /de/datenschutz).
+// Adatkezelési tájékoztató (/adatvedelem, /en/privacy-policy, /de/datenschutz) - csak a weboldalra vonatkozik.
 // A jogi szöveg nyelvenként: lib/content/locales/<nyelv>/privacy.jsx (a magyar az irányadó).
 import Link from 'next/link'
 import { notFound } from 'next/navigation'

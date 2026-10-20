@@ -20,7 +20,7 @@ import { getAlternates } from '../../lib/i18n/alternates'
 import { getContent } from '../../lib/content'
 import { loadSite } from '../../lib/site'
 import { SITE } from '../../lib/constants'
-import { metaAlternates, ogLocale, absUrl, breadcrumbJsonLd, faqJsonLd } from '../../lib/seo'
+import { metaAlternates, absUrl, breadcrumbJsonLd, faqJsonLd, socialMeta } from '../../lib/seo'
 import JsonLd from '../cms/JsonLd'
 
 export function brandStaticParams(locale) {
@@ -40,14 +40,14 @@ export async function brandMetadata(locale, { params }) {
     title: fmt(t.brandTitle, { name: p.productName }),
     description: p.metaDescription,
     alternates: metaAlternates(path, hreflang),
-    openGraph: {
+    // saját twitter is (különben a főoldaliét örökli); kép: a márka első galériaképe
+    ...socialMeta(locale, {
+      path,
       title: fmt(t.brandOgTitle, { name: p.productName }),
       description: p.metaDescription,
-      url: absUrl(path),
-      images: [{ url: p.gallery[0].src.startsWith('http') ? p.gallery[0].src : `${SITE.url}${p.gallery[0].src}` }],
-      ...ogLocale(locale, hreflang),
-      type: 'website',
-    },
+      hreflang,
+      image: { url: p.gallery[0].src.startsWith('http') ? p.gallery[0].src : `${SITE.url}${p.gallery[0].src}` },
+    }),
     robots: { index: true, follow: true },
   }
 }

@@ -6,7 +6,7 @@ import { isLive } from '../../lib/i18n/config'
 import { getDictionary } from '../../lib/i18n'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { metaAlternates } from '../../lib/seo'
+import { metaAlternates, socialMeta } from '../../lib/seo'
 import PrivacyHu from '../../lib/content/locales/hu/privacy'
 import PrivacyEn from '../../lib/content/locales/en/privacy'
 import PrivacyDe from '../../lib/content/locales/de/privacy'
@@ -15,10 +15,13 @@ const BODIES = { hu: PrivacyHu, en: PrivacyEn, de: PrivacyDe }
 
 export function privacyMetadata(locale) {
   const t = getDictionary(locale).meta
+  const path = routePath('privacy', locale)
+  const { hreflang } = getAlternates('privacy')
   return {
     title: { absolute: t.privacyTitle },
     description: t.privacyDescription,
-    alternates: metaAlternates(routePath('privacy', locale), getAlternates('privacy').hreflang),
+    alternates: metaAlternates(path, hreflang),
+    ...socialMeta(locale, { path, title: t.privacyTitle, description: t.privacyDescription, hreflang }),
     robots: { index: true, follow: true },
   }
 }

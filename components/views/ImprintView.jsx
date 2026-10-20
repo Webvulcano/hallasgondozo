@@ -6,7 +6,7 @@ import { isLive } from '../../lib/i18n/config'
 import { getDictionary } from '../../lib/i18n'
 import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
-import { metaAlternates } from '../../lib/seo'
+import { metaAlternates, socialMeta } from '../../lib/seo'
 import ImprintHu from '../../lib/content/locales/hu/imprint'
 import ImprintEn from '../../lib/content/locales/en/imprint'
 import ImprintDe from '../../lib/content/locales/de/imprint'
@@ -15,10 +15,13 @@ const BODIES = { hu: ImprintHu, en: ImprintEn, de: ImprintDe }
 
 export function imprintMetadata(locale) {
   const t = getDictionary(locale).meta
+  const path = routePath('imprint', locale)
+  const { hreflang } = getAlternates('imprint')
   return {
     title: { absolute: t.imprintTitle },
     description: t.imprintDescription,
-    alternates: metaAlternates(routePath('imprint', locale), getAlternates('imprint').hreflang),
+    alternates: metaAlternates(path, hreflang),
+    ...socialMeta(locale, { path, title: t.imprintTitle, description: t.imprintDescription, hreflang }),
     robots: { index: true, follow: true },
   }
 }

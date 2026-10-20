@@ -1,8 +1,9 @@
 import { loadSite } from '../lib/site'
 import SkeletonImage from './SkeletonImage'
+import TeamBio from './TeamBio'
 
 export default async function Team({ locale }) {
-  const { t: dict, c, a } = await loadSite(locale)
+  const { t: dict, c, site, a } = await loadSite(locale)
   const t = dict.team
   const { team } = c
   return (
@@ -26,6 +27,14 @@ export default async function Team({ locale }) {
                 <h3>{m.name}</h3>
                 <div className="role" {...a.text.team[m.id]?.role}>{m.role}</div>
                 <p {...a.text.team[m.id]?.desc}>{m.desc}</p>
+                {m.bio && (
+                  <TeamBio
+                    m={m}
+                    labels={{ open: t.bioOpen, close: dict.promo.close, cta: t.bioCta }}
+                    ctaHref={site.booking.adult}
+                    a={a.text.team[m.id]}
+                  />
+                )}
                 {/*m.url && (
                   <a href={m.url} className="tcard-link" target="_blank" rel="noopener">
                     {m.urlLabel}&nbsp;→

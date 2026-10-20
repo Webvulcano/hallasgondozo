@@ -45,10 +45,12 @@ const soft = (locale, msg) => (STRICT && LIVE_LOCALES.includes(locale) ? errors 
 // Tömbök: szótárban (strictArrays) a hossz is kötelező (napok, ikonsor…), kivéve a szabadon bővíthető
 // listákat; tartalomban (előnyök, bekezdések) a fordítás eltérhet → csak figyelmeztetés.
 const FREE_LENGTH = new Set(['meta.keywords', 'schema.knowsAbout'])
+// Szándékosan üresen hagyható (fordításig): a bővebb csapat-bemutatkozás - üresen nincs popup-gomb.
+const MAY_BE_EMPTY = /^team\.[^.]+\.(bio|bioRole|bioHighlights)$/
 function compare(src, dst, where, at = '', strictArrays = false) {
   if (Array.isArray(src)) {
     if (!Array.isArray(dst)) return errors.push(`${where}: '${at}' tömb kellene`)
-    if (src.length !== dst.length && !FREE_LENGTH.has(at)) {
+    if (src.length !== dst.length && !FREE_LENGTH.has(at) && !(MAY_BE_EMPTY.test(at) && !dst.length)) {
       ;(strictArrays ? errors : warnings).push(`${where}: '${at}' elemszám ${dst.length} (magyar: ${src.length})`)
     }
     src.forEach((v, i) => dst[i] !== undefined && typeof v === 'object' && compare(v, dst[i], where, `${at}[${i}]`, strictArrays))
@@ -65,7 +67,7 @@ function compare(src, dst, where, at = '', strictArrays = false) {
     return
   }
   if (typeof src !== typeof dst) errors.push(`${where}: '${at}' típusa ${typeof dst} (magyar: ${typeof src})`)
-  else if (typeof src === 'string' && src && !dst) errors.push(`${where}: '${at}' üres`)
+  else if (typeof src === 'string' && src && !dst && !MAY_BE_EMPTY.test(at)) errors.push(`${where}: '${at}' üres`)
 }
 
 // minden string-levél (a fordítatlanság- és glyph-ellenőrzéshez)

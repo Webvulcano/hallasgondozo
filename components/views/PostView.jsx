@@ -65,7 +65,8 @@ export async function postMetadata(locale, { params }) {
     openGraph: {
       type: 'article',
       url: absUrl(path),
-      ...(Object.keys(hreflang).length > 1 ? ogLocale(locale, hreflang) : {}),
+      ...ogLocale(locale, hreflang),
+      siteName: `${COMPANY.brand} ${COMPANY.brandSub}`,
       title: post.title,
       description: post.description,
       publishedTime: post.datePublished,

@@ -11,6 +11,8 @@ const effective = (locale) => (isLive(locale) ? locale : DEFAULT_LOCALE)
 // absolute: a cím már tartalmazza a márkanevet (a layout-template ne fűzze hozzá még egyszer)
 export const notFoundMetadata = (locale) => ({
   title: { absolute: getDictionary(effective(locale)).meta.notFoundTitle },
+  // felülírja a layout „index, follow"-ját → ne legyen ellentmondó robots-tag a 404-en
+  robots: { index: false, follow: true },
 })
 
 export default function NotFoundView({ locale }) {

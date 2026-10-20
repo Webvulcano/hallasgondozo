@@ -19,7 +19,6 @@ import { routePath } from '../../lib/i18n/routes'
 import { getAlternates } from '../../lib/i18n/alternates'
 import { getContent } from '../../lib/content'
 import { loadSite } from '../../lib/site'
-import { SITE } from '../../lib/constants'
 import { metaAlternates, absUrl, breadcrumbJsonLd, faqJsonLd, socialMeta } from '../../lib/seo'
 import JsonLd from '../cms/JsonLd'
 
@@ -40,13 +39,14 @@ export async function brandMetadata(locale, { params }) {
     title: fmt(t.brandTitle, { name: p.productName }),
     description: p.metaDescription,
     alternates: metaAlternates(path, hreflang),
-    // saját twitter is (különben a főoldaliét örökli); kép: a márka első galériaképe
+    // saját twitter is (különben a főoldaliét örökli). Kép: márkánként + nyelvenként 1200×630 JPG
+    // (termékfotó + „<márka> hallókészülékek Győrben" felirat a nyelv szerint) - public/pic/og/marka/
     ...socialMeta(locale, {
       path,
       title: fmt(t.brandOgTitle, { name: p.productName }),
       description: p.metaDescription,
       hreflang,
-      image: { url: p.gallery[0].src.startsWith('http') ? p.gallery[0].src : `${SITE.url}${p.gallery[0].src}` },
+      image: { url: `/pic/og/marka/${p.id}-${locale}.jpg`, width: 1200, height: 630, alt: p.productName },
     }),
     robots: { index: true, follow: true },
   }

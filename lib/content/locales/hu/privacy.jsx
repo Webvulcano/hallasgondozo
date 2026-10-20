@@ -72,8 +72,13 @@ export default function PrivacyBody() {
 
       <H2>4. Sütik és böngésző-tárhely</H2>
       <p>
-        A weboldal <strong>nem használ</strong> követő, statisztikai vagy hirdetési sütit, és nem méri a
-        látogatottságot. A kényelmi funkciókhoz a böngésző saját tárhelyét használjuk, személyes adatot
+        A weboldal <strong>nem használ</strong> követő, statisztikai vagy hirdetési sütit. A látogatottságot
+        sütimentes, összesített statisztikával mérjük (Vercel Web Analytics): a megnyitott oldal, a
+        hivatkozó oldal, az ország, valamint a böngésző, az operációs rendszer és az eszköz típusa kerül
+        rögzítésre. A látogatót nem azonosítjuk: az IP-címet nem tároljuk, az egy napon belüli
+        látogatásokat csak egy naponta megújuló, visszafejthetetlen azonosító köti össze, és a statisztika
+        csak összesítve érhető el. Célja a weboldal fejlesztése, jogalapja jogos érdekünk (GDPR 6. cikk (1)
+        f) pont). A kényelmi funkciókhoz a böngésző saját tárhelyét használjuk, személyes adatot
         nem tárolunk benne, és nem jut el hozzánk:
       </p>
       <ul style={ul}>
@@ -91,7 +96,7 @@ export default function PrivacyBody() {
       <ul style={ul}>
         <li>
           <strong>Vercel Inc.</strong> (440 N Barranca Ave #4133, Covina, CA 91723, USA) - a weboldal
-          tárhelye; a 3. pontban írt naplóadatok, és az űrlap elküldésekor a beküldött adatok áthaladnak a
+          tárhelye és a 4. pontban írt látogatottsági statisztika; a 3. pontban írt naplóadatok, és az űrlap elküldésekor a beküldött adatok áthaladnak a
           rendszerén. Az adatok az Egyesült Államokba is kerülhetnek; a továbbítás alapja az Európai
           Bizottság által elfogadott általános szerződési feltételek (GDPR 46. cikk).
         </li>

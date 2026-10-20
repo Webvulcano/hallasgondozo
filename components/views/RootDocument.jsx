@@ -6,6 +6,7 @@ import { fontVars } from '../../lib/fonts'
 import { LOCALE_META } from '../../lib/i18n/config'
 import { businessJsonLd } from '../../lib/seo'
 import ScrollReset from '../ScrollReset'
+import ClickTracker from '../ClickTracker'
 import CmsBridge from '../cms/CmsBridge'
 import JsonLd from '../cms/JsonLd'
 
@@ -20,6 +21,7 @@ export default async function RootDocument({ locale, children }) {
         <CmsBridge />
         {/* Vercel Web Analytics - sütimentes látogatottság-mérés (adatkezelési tájékoztató 4. pont) */}
         <Analytics />
+        <ClickTracker />
       </body>
     </html>
   )

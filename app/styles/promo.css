@@ -44,6 +44,17 @@
 }
 .promo-close:focus-visible,.promo-dismiss:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
 
+/* Plakát-változat: kész kép (szöveggel), kattintásra #idopont. Magasság a képernyőhöz igazodik. */
+/* szélesség a magasságból: (képernyő - overlay-padding - keret-padding - elutasító link) * képarány + oldalpadding */
+.promo-frame--poster{max-width:min(440px,calc((100dvh - 32px - 16px - 44px) * 800 / 1562 + 20px));}
+.promo-card--poster{display:block;padding:10px 10px 6px;}
+.promo-poster{display:block;position:relative;overflow:hidden;border-radius:calc(var(--r) - 6px);cursor:pointer;}
+.promo-poster-img{
+  display:block;width:100%;height:auto;aspect-ratio:800/1562;
+}
+.promo-poster:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+.promo-card--poster .promo-dismiss{margin:8px auto 2px;}
+
 @keyframes promo-fade{from{opacity:0}to{opacity:1}}
 @keyframes promo-pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
 

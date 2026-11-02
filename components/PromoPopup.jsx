@@ -21,16 +21,27 @@ function safeSessionSet(key, value) {
 // a = szerkesztő-jelölések (lib/site.js → a.text.promo).
 export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
   const [open, setOpen] = useState(false)
+  const jumpTo = useRef(null)
   const closeRef = useRef(null)
   useScrollLock(open)
+
+  // Plakát-kattintás után görgetés a célszekcióra. Effectben fut, így a scroll-lock feloldása
+  // (ami a régi pozícióra ugrik vissza) garantáltan előtte lefut.
+  useEffect(() => {
+    if (open || !jumpTo.current) return
+    document.querySelector(jumpTo.current)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    jumpTo.current = null
+  }, [open])
 
   useEffect(() => {
     if (!promo.enabled) return
     const force = new URLSearchParams(window.location.search).get('promo') === '1'
     if (!force && safeSessionGet(SESSION_KEY)) return
+    // until: az adott nap végéig él (helyi idő)
+    if (!force && promo.until && new Date() > new Date(`${promo.until}T23:59:59`)) return
     const t = setTimeout(() => setOpen(true), force ? 300 : promo.delayMs)
     return () => clearTimeout(t)
-  }, [promo.enabled, promo.delayMs])
+  }, [promo.enabled, promo.delayMs, promo.until])
 
   useEffect(() => {
     if (!open) return
@@ -44,6 +55,39 @@ export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
   if (!open) return null
 
   const close = () => setOpen(false)
+
+  // Plakát-kattintás: zárás, a görgetést a fenti effect indítja (a lock feloldása után)
+  const goToTarget = (e) => {
+    e.preventDefault()
+    jumpTo.current = promo.target
+    close()
+  }
+
+  if (promo.layout === 'poster') {
+    return (
+      <div className="promo-overlay" onClick={close}>
+        <div
+          className="promo-frame promo-frame--poster"
+          role="dialog"
+          aria-modal="true"
+          aria-label={promo.imageAlt}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button ref={closeRef} type="button" className="promo-close" onClick={close} aria-label={closeLabel}>
+            ×
+          </button>
+          <div className="promo-card promo-card--poster">
+            <a href={promo.target} className="promo-poster" onClick={goToTarget} {...a.image}>
+              <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-poster-img" />
+            </a>
+            <button type="button" className="promo-dismiss" onClick={close}>
+              <span {...a.dismiss}>{promo.dismiss}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="promo-overlay" onClick={close}>

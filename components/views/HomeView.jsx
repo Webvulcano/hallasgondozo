@@ -61,7 +61,7 @@ export default async function HomeView({ locale }) {
       <Booking locale={locale} />
       <Faq faqs={c.faqs} visible={c.faqVisible} schema={faqJsonLd(c.faqs)} t={t.faq} a={{ items: a.text.faqs, ...a.dict.faq }} />
       <Footer locale={locale} />
-      <PromoPopup promo={c.promo} ctaHref={site.booking.adult} closeLabel={t.promo.close} a={{ ...a.text.promo, image: a.img.promo.image }} />
+      <PromoPopup promo={c.promo} ctaHref={site.booking.adult} closeLabel={t.promo.close} a={{ ...a.text.promo, image: a.img.promo.image, poster: a.img.promo.posterImage }} />
     </>
   )
 }

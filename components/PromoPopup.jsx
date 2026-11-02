@@ -70,15 +70,15 @@ export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
           className="promo-frame promo-frame--poster"
           role="dialog"
           aria-modal="true"
-          aria-label={promo.imageAlt}
+          aria-label={promo.posterAlt}
           onClick={(e) => e.stopPropagation()}
         >
           <button ref={closeRef} type="button" className="promo-close" onClick={close} aria-label={closeLabel}>
             ×
           </button>
           <div className="promo-card promo-card--poster">
-            <a href={promo.target} className="promo-poster" onClick={goToTarget} {...a.image}>
-              <SkeletonImage src={promo.image} alt={promo.imageAlt} className="promo-poster-img" />
+            <a href={promo.target} className="promo-poster" onClick={goToTarget} {...a.poster}>
+              <SkeletonImage src={promo.posterImage} alt={promo.posterAlt} className="promo-poster-img" />
             </a>
             <button type="button" className="promo-dismiss" onClick={close}>
               <span {...a.dismiss}>{promo.dismiss}</span>

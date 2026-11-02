@@ -30,6 +30,9 @@ const nextConfig = {
       { source: '/hallokeszulekek/phonak-audeo-sphere', destination: '/hallokeszulekek/phonak-hallokeszulekek', permanent: true },
       { source: '/keszulekek/phonak-audeo-sphere', destination: '/hallokeszulekek/phonak-hallokeszulekek', permanent: true },
       { source: '/keszulekek/:slug', destination: '/hallokeszulekek/:slug', permanent: true },
+      // Régi márkaoldalak - a GSC-ben még indexeltek (/phonak 2. pozíció), 404 helyett a márkaoldalra
+      { source: '/phonak', destination: '/hallokeszulekek/phonak-hallokeszulekek', permanent: true },
+      { source: '/oticon', destination: '/hallokeszulekek/oticon-hallokeszulekek', permanent: true },
       { source: '/termekek', destination: '/hallokeszulekek', permanent: true },
       { source: '/szolgaltatasok', destination: '/', permanent: true },
       { source: '/rolunk', destination: '/', permanent: true },

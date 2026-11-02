@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import Button from './Button'
 import SkeletonImage from './SkeletonImage'
 import JsonLd from './cms/JsonLd'
@@ -11,31 +11,12 @@ import JsonLd from './cms/JsonLd'
 // a = szerkesztő-jelölések (lib/site.js): a.eyebrow/title/lead/cta + a.steps[n].title/desc/highlight/sub[i]
 // + a.images[n].img (lépés-kép). A kép alt-ja: s.imgAlt (CMS), ennek híján a lépés címe.
 export default function Journey({ steps, t, schema, a = {} }) {
-  // Alapból csukva; az 1. lépés akkor nyílik le automatikusan, amikor a
-  // felhasználó a szekció közepéig görget (IntersectionObserver, lent).
-  const [openStep, setOpenStep] = useState(-1)
+  // Az 1. lépés alapból nyitva (már a szerver-renderben). Korábban görgetésre nyílt le, de az
+  // utólagos ~250px-es magasság-ugrás lejjebb tolta a lenti szekciókat → a #idopont-ra ugró
+  // linkek (menü, promo, más oldalról) a cél fölött álltak meg + layout shift (CLS).
+  const [openStep, setOpenStep] = useState(1)
   const isOpen = (n) => openStep === n
   const cardRefs = useRef({})
-  const bottomRef = useRef(null)
-  const autoOpened = useRef(false)
-
-  useEffect(() => {
-    const el = bottomRef.current
-    if (!el) return
-    // Akkor nyíljon az 1. lépés, amikor a nézet leér a szekció aljára
-    // (egy őrszem-elem a szekció végén ér be a viewportba).
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !autoOpened.current) {
-          autoOpened.current = true
-          setOpenStep(1)
-        }
-      },
-      { threshold: 0 }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
   const toggle = (n) => {
     const willOpen = openStep !== n
     setOpenStep((cur) => (cur === n ? -1 : n))
@@ -121,7 +102,6 @@ export default function Journey({ steps, t, schema, a = {} }) {
             <span {...a.cta}>{t.cta}</span>
           </Button>
         </div>
-        <div ref={bottomRef} className="journey-bottom-sentinel" aria-hidden="true" />
       </div>
     </section>
   )

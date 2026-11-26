@@ -21,7 +21,8 @@ export default function TeamBio({ m, labels, ctaHref, a = {} }) {
 
   return (
     <>
-      <button type="button" className="tcard-link tcard-bio-btn" onClick={open} aria-haspopup="dialog">
+      {/* data-cta: az admin CTA-előnézete ezt emeli ki a popupban lévő foglalás-gomb (hely: csapat) helyett */}
+      <button type="button" className="tcard-link tcard-bio-btn" onClick={open} aria-haspopup="dialog" data-cta="Időpontfoglalás@csapat">
         {labels.open}&nbsp;→
       </button>
       <dialog

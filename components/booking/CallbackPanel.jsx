@@ -90,7 +90,7 @@ export default function CallbackPanel({ t, a = {}, locale, privacyHref }) {
             {fieldErrors.consent && <p className="field-error">{fieldErrors.consent}</p>}
           </div>
           {error && <p className="form-error" role="alert">{error}</p>}
-          <Button variant="gold" type="submit" fullWidth disabled={submitting}>
+          <Button variant="gold" type="submit" fullWidth disabled={submitting} data-cta="Visszahívás-kérés">
             {submitting ? t.submitting : <span {...a.submit}>{t.submit}</span>}
           </Button>
         </form>

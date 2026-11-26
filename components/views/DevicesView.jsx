@@ -112,7 +112,7 @@ export default async function DevicesView({ locale }) {
         </section>
 
         {/* Záró CTA */}
-        <section className="block kcta">
+        <section className="block kcta" data-track-place="termékek alsó CTA">
           <div className="wrap">
             <Reveal>
               <h2 {...ta.ctaTitle}>{t.devices.ctaTitle}</h2>

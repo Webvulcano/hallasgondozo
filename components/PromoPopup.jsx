@@ -39,7 +39,13 @@ export default function PromoPopup({ promo, ctaHref, closeLabel, a = {} }) {
     if (!force && safeSessionGet(SESSION_KEY)) return
     // until: az adott nap végéig él (helyi idő)
     if (!force && promo.until && new Date() > new Date(`${promo.until}T23:59:59`)) return
-    const t = setTimeout(() => setOpen(true), force ? 300 : promo.delayMs)
+    // Ügyfél Admin CTA-előnézet (CmsBridge → html.cms-cta): ott a popup eltakarná a kiemelt gombot
+    // és a scroll-lock megakasztaná a görgetést → nem nyílik meg. (A Szerkesztés-nézetet nem érinti.)
+    const show = () => {
+      if (document.documentElement.classList.contains('cms-cta')) return
+      setOpen(true)
+    }
+    const t = setTimeout(show, force ? 300 : promo.delayMs)
     return () => clearTimeout(t)
   }, [promo.enabled, promo.delayMs, promo.until])
 

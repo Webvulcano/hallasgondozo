@@ -15,6 +15,10 @@ const STYLE = `
 html.cms-edit [data-cms] { cursor: pointer; }
 html.cms-edit [data-cms]:hover { outline: 2px dashed #6366f1; outline-offset: 3px; }
 html.cms-edit [data-cms].cms-selected { outline: 2px solid #6366f1; outline-offset: 3px; }
+html.cms-cta { scrollbar-width: none; }
+html.cms-cta::-webkit-scrollbar { display: none; }
+html.cms-cta [data-cta] { opacity: .35; transition: opacity .3s; }
+html.cms-cta [data-cta].cms-cta-hi { opacity: 1; outline: 3px solid var(--cms-cta-color, #16a34a); outline-offset: 4px; box-shadow: 0 0 0 12px color-mix(in srgb, var(--cms-cta-color, #16a34a) 35%, transparent); }
 `;
 
 function selector({ key, i, f }) {
@@ -142,6 +146,7 @@ export default function CmsBridge() {
     let mode = "edit";
     let selected = null;
     let styleEl = null;
+    let ctaFollow = null; // ResizeObserver keeping the highlighted CTA in view
     // Original markup of previewed elements (our own rendered DOM), for "Mégse".
     const originals = new Map();
     // blob: URLs of previewed images, freed on revert.
@@ -189,6 +194,30 @@ export default function CmsBridge() {
         case MSG.RELOAD:
           location.reload();
           break;
+        case MSG.HIGHLIGHT_CTA: {
+          // Admin CTA preview: the first visible button with this event name, in the middle of the screen.
+          document.querySelectorAll(".cms-cta-hi").forEach((el) => el.classList.remove("cms-cta-hi"));
+          const event = typeof msg.event === "string" ? msg.event : null;
+          document.documentElement.classList.toggle("cms-cta", Boolean(event));
+          // Highlight colour from the admin (its "gombnyomás" green); only a plain #rrggbb is accepted.
+          if (typeof msg.color === "string" && /^#[0-9a-f]{6}$/i.test(msg.color)) document.documentElement.style.setProperty("--cms-cta-color", msg.color);
+          if (!event) break;
+          const el = [...document.querySelectorAll(`[data-cta="${CSS.escape(event)}"]`)].find((x) => x.getClientRects().length);
+          el?.classList.add("cms-cta-hi");
+          el?.scrollIntoView({ block: "center" });
+          // Lazy content above the button (images, sections) grows the page after load and pushes the
+          // button away: keep it centred while the page settles (max. 6 s).
+          ctaFollow?.disconnect();
+          if (el) {
+            const until = Date.now() + 6000;
+            ctaFollow = new ResizeObserver(() => {
+              if (Date.now() > until || !el.isConnected) return ctaFollow?.disconnect();
+              el.scrollIntoView({ block: "center" });
+            });
+            ctaFollow.observe(document.body);
+          }
+          break;
+        }
         case MSG.SCROLL_TO: {
           if (typeof msg.key !== "string") break;
           const el = document.querySelector(selector(msg));
@@ -248,7 +277,8 @@ export default function CmsBridge() {
     return () => {
       window.removeEventListener("message", onMessage);
       document.removeEventListener("click", onClick, true);
-      document.documentElement.classList.remove("cms-edit");
+      document.documentElement.classList.remove("cms-edit", "cms-cta");
+      ctaFollow?.disconnect();
       styleEl?.remove();
     };
   }, []);

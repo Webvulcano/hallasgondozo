@@ -165,7 +165,7 @@ export default async function BrandView({ locale, params }) {
           a={{ items: pa.faq }}
         />
 
-        <section className="block kcta">
+        <section className="block kcta" data-track-place="márkaoldal alsó CTA">
           <div className="wrap">
             <Reveal>
               <h2 {...ta.ctaTitle}>{t.product.ctaTitle}</h2>
